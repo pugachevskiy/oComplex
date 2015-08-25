@@ -32,7 +32,6 @@ public class Model {
     public void deleteFractal(Fractal fractal, GLJPanel rootPanel) {
         rootPanel.removeAll();
         fractal.updatePanel();
-        rootPanel.revalidate();
         rootPanel.repaint();
     }
 
