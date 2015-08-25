@@ -3,10 +3,8 @@ package com.openComplex.app;
 import com.openComplex.app.mainWindow.View.MainView;
 
 import javax.swing.*;
+//Test abcd
 
-/**
- * Created by strange on 29/05/15.
- */
 public class App {
     public static MainView gui;
     public static final String versionNumber = "0.01", iconPath = "resources/Icon.png",
