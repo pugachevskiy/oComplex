@@ -20,13 +20,13 @@ public class GUIWolfram {
 
     public GUIWolfram() {
         frame = new JFrame("Wolfram Universe");
-        frame.setMinimumSize(new Dimension(800, 800));
+        frame.setMinimumSize(new Dimension(1000, 1000));
         field = new JPanel();
         frame.setLayout(new BorderLayout());
         frame.add(controlPanel(), BorderLayout.NORTH);
-        createField(33,66,25);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        createField(1,1,2);
         frame.setVisible(true);
     }
     private JPanel controlPanel () {
@@ -70,8 +70,11 @@ public class GUIWolfram {
     }
     public void createField(int rows, int cols, int size){
         field.setLayout(new GridLayout(rows, cols));
-        field.setPreferredSize(new Dimension(rows*size, cols*size));
+        field.setBounds(0,0,size,size);
+        field.setMinimumSize(new Dimension(rows*size, cols*size));
+        field.repaint();
         frame.add(field, BorderLayout.CENTER);
+        frame.revalidate();
 
     }
 

@@ -19,19 +19,23 @@ public class MainWolfram implements ActionListener, ChangeListener, MouseListene
     private int lastCol = 66;
     private int gen = 1;
     private int flag = 0;
+    private int last = 1;
+    private static int MAXCOL = 200;
+    private static int MAXROW = 100;
 
     public MainWolfram() {
         guiWolfram = new GUIWolfram();
-
-        cells = new CoreWolfram[maxGeneration][lastCol];
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[0].length; j++) {
-                cells[i][j] = new CoreWolfram(25);
+        cells = new CoreWolfram[MAXROW][MAXCOL];
+        for (int i = 0; i < MAXROW; i++) {
+            for (int j = 0; j < MAXCOL; j++) {
+                cells[i][j] = new CoreWolfram();
+                if (i == 0){
+                    cells[i][j].addMouseListener(this);
+                }
 
             }
         }
-
-        init(25, 1);
+        init(27, 1);
         addListener();
         setRule(Integer.parseInt(guiWolfram.getRuleFieldText()));
         guiWolfram.getField().revalidate();
@@ -44,25 +48,22 @@ public class MainWolfram implements ActionListener, ChangeListener, MouseListene
 
     public void init(int size, int flag) {
         if (this.flag != flag) {
-            int l = 0;
             guiWolfram.getField().removeAll();
             guiWolfram.createField(maxGeneration, lastCol, size);
-
-            cells = new CoreWolfram[maxGeneration][lastCol];
-            for (int i = 0; i < cells.length; i++) {
-                for (int j = 0; j < cells[0].length; j++) {
-                  guiWolfram.getField().add(cells[i][j] = new CoreWolfram(size));
-                  cells[i][j].addMouseListener(this);
+            for (int i = 0; i < maxGeneration; i++) {
+                for (int j = 0; j < lastCol; j++) {
+                  cells[i][j].setSize(size);
+                  guiWolfram.getField().add(cells[i][j]);
                 }
             }
-            cells[0][lastCol / 2].setCell(true);
             guiWolfram.getField().revalidate();
             this.flag = flag;
+            this.last =1;
         }
     }
 
     private void resetField() {
-        for (int i = 1; i < cells.length; i++) {
+        for (int i = last; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 cells[i][j].setCell(false);
             }
@@ -93,8 +94,8 @@ public class MainWolfram implements ActionListener, ChangeListener, MouseListene
 
     public void createCA() {
         boolean a, b, c;
-        for (int generation = 1; generation < gen; generation++) {
-            for (int i = 0; i < cells[generation].length; i++) {
+        for (int generation = last; generation < gen; generation++) {
+            for (int i = 0; i < lastCol; i++) {
                 b = cells[generation - 1][i].getCell();
                 int neighbourhood = 1;
                 if (i == 0) {
@@ -161,38 +162,37 @@ public class MainWolfram implements ActionListener, ChangeListener, MouseListene
 
     @Override
     public void stateChanged(ChangeEvent e) {
+        last = gen;
         resetField();
         JSlider source = (JSlider) e.getSource();
         gen = source.getValue();
         if (gen >= 0 && gen <= 33) {
             maxGeneration = 33;
             lastCol = 66;
-            init(25, 1);
+            init(27, 1);
             flag = 1;
         } else if (gen > 33 && gen <= 66) {
             maxGeneration = 66;
             lastCol = 132;
             init(20, 2);
             flag = 2;
-        } else if (gen > 66 && gen <= 100) {
-            maxGeneration = 100;
-            lastCol = 200;
+        } else if (gen > 66 && gen <= MAXROW) {
+            maxGeneration = MAXROW;
+            lastCol = MAXCOL;
             init(15, 3);
             flag = 3;
         }
-        int rule = Integer.parseInt(guiWolfram.getRuleFieldText());
-        if (rule >= 0 && rule <= 255) {
-            setRule(rule);
-        }
+        createCA();
         guiWolfram.getField().repaint();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        last = 1;
         CoreWolfram comp = (CoreWolfram) e.getComponent();
         comp.changeCell(comp);
         createCA();
-
+        guiWolfram.getField().repaint();
     }
 
     @Override

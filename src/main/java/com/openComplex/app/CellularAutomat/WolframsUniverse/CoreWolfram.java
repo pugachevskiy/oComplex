@@ -12,9 +12,9 @@ public class CoreWolfram extends JComponent{
     private int size;
     private Color color = Color.GRAY;
 
-    public CoreWolfram(int size){
+    public CoreWolfram(){
         this.cell = false;
-        this.size = size;
+
     }
     public boolean getCell(){
         return cell;
@@ -40,6 +40,13 @@ public class CoreWolfram extends JComponent{
             color = Color.GRAY;
         }
     }
+    public void addCell(JPanel panel){
+        panel.add(this);
+    }
+    public void setSize(int size){
+        this.size = size;
+
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -54,11 +61,11 @@ public class CoreWolfram extends JComponent{
 
     @Override
     public Dimension getMaximumSize() {
-        return getPreferredSize();
+        return new Dimension(size, size);
     }
 
     @Override
     public Dimension getMinimumSize() {
-        return getPreferredSize();
+        return new Dimension(size, size);
     }
 }

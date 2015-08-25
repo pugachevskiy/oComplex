@@ -1,4 +1,4 @@
-package com.openComplex.app;
+package com.openComplex.app.DynamicalSystems.LogicalPictures;
 
 /**
  * Created by strange on 25/08/15.
