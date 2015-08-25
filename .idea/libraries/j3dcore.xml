@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="j3dcore">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/java3d-1_5_1-macosx/lib/ext/j3dcore.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/java3d-1_5_1-macosx/lib/ext/j3dutils.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/java3d-1_5_1-macosx/lib/ext/vecmath.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
