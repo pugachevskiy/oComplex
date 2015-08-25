@@ -3,7 +3,7 @@ package com.openComplex.app;
 import com.openComplex.app.mainWindow.View.MainView;
 
 import javax.swing.*;
-//Test abc
+//Test abcd
 
 public class App {
     public static MainView gui;
