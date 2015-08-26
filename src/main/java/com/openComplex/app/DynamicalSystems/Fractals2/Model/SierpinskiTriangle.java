@@ -49,7 +49,8 @@ public class SierpinskiTriangle extends GLJPanel implements Fractal {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
+        g.setColor(Color.RED);
         doDrawing(g, X1, Y1, X2, Y2, X3, Y3, step);
     }
     @Override

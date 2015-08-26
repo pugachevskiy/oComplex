@@ -6,6 +6,7 @@ import com.openComplex.app.DynamicalSystems.Fractals2.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 
 /**
@@ -73,11 +74,14 @@ public class KochCurve extends GLJPanel implements Fractal {
     }
     @Override
     public void updatePanel() {
+        this.setBackground(Color.GRAY);
        this.repaint();
      }
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
-        doDrawing(g, AX, AY, EX, EY, step);
+        super.paintComponent(g);
+        g.setColor(Color.RED);
+
+        doDrawing(g, AX, AY,  EX, EY, step);
     }
 }

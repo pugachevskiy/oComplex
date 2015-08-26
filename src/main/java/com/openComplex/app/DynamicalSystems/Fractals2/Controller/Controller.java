@@ -11,6 +11,7 @@ import com.openComplex.app.DynamicalSystems.Fractals2.View.View;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,13 +41,15 @@ public class Controller {
 
     public void createFractal() {
         fractal = fractalsCreator.getFractal(model.getBox(gui.getComboBox()), model.getSliderValue(gui.getSlider()));
+        gui.getFractalPanel().setBackground(Color.GRAY);
         model.setDimension(gui.getDimensionLabel(), fractal.getDimension());
         model.setCopy(gui.getCopyLabel(), fractal.getCopy());
         model.setFactor(gui.getFactorLabel(), fractal.getFactor());
         model.setDicription(gui.getDiscriptionLabel(), fractal.getDicription());
         model.addFractal(fractal, gui.getFractalPanel());
-        //gui.getFractalPanel().grabFocus();
-     //   model.updateFractal(gui.getFractalPanel());
+        gui.getFractalPanel().grabFocus();
+
+        model.updateFractal(gui.getFractalPanel());
     }
 
     public void addListener(JSlider slider, JComboBox comboBox) {

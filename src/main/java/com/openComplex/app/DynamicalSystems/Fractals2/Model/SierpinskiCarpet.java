@@ -50,7 +50,8 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
+        g.setColor(Color.RED);
         doDrawing(g, X, Y, DIM, step);
     }
 

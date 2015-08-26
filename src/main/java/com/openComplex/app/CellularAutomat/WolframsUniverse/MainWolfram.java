@@ -151,6 +151,7 @@ public class MainWolfram implements ActionListener, ChangeListener, MouseListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enter")) {
+            last = 1;
             int rule = Integer.parseInt(guiWolfram.getRuleFieldText());
             if (rule >= 0 && rule <= 255) {
                 setRule(rule);
