@@ -31,8 +31,7 @@ public class MFrameListener implements ActionListener {
                 MainWolfram wolf = new MainWolfram();
                 break;
             case "Iterated pictures":
-
-                Lorenz.start();
+                Lorenz lorenz = new Lorenz();
                 break;
             case "Logical pictures with Feigenbaum-diagram":
 
@@ -44,9 +43,7 @@ public class MFrameListener implements ActionListener {
                 fr.add(panel);
                 fb.init();
                 break;
-
             default:
-
                 App.gui.updateGUI(command);
                 break;
         }

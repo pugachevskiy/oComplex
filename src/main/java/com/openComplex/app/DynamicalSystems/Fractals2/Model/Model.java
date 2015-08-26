@@ -32,8 +32,6 @@ public class Model {
     public void deleteFractal(Fractal fractal, GLJPanel rootPanel) {
         rootPanel.removeAll();
         rootPanel.revalidate();
-       // fractal.updatePanel();
-      //  rootPanel.repaint();
     }
 
     public void setDimension(JLabel label, String dim) {
