@@ -1,4 +1,4 @@
-package com.openComplex.app;
+package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 
 import java.awt.*;
@@ -22,14 +22,11 @@ public class Lorenz {
         // Use Euler's method to numerically solve ODE
         new Thread() {
             public void run() {
-
                 try {
                     for (int i = 0; i < 50000; i++) {
-
                         lorenz1.update(dt);
                         gui.draw(lorenz1, Color.BLUE, i,150);
-
-                        sleep(2);
+                        sleep(1);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

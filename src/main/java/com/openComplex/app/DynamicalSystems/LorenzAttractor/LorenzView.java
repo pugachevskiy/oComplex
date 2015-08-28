@@ -1,4 +1,4 @@
-package com.openComplex.app;
+package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 import javax.swing.*;
 import java.awt.*;

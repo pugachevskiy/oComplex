@@ -5,7 +5,8 @@ import com.openComplex.app.CellularAutomat.GameOfLife.Controller.Life;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.MainWolfram;
 import com.openComplex.app.DynamicalSystems.Fractals2.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
-import com.openComplex.app.Lorenz;
+import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
+import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,11 +31,10 @@ public class MFrameListener implements ActionListener {
             case "Wolfram's universe":
                 MainWolfram wolf = new MainWolfram();
                 break;
-            case "Iterated pictures":
+            case "Lorenz Attractor":
                 Lorenz lorenz = new Lorenz();
                 break;
             case "Logical pictures with Feigenbaum-diagram":
-
                 JFrame fr = new JFrame("2");
                 JPanel panel = new JPanel();
                 Feigenbaum fb = new Feigenbaum();
@@ -42,6 +42,9 @@ public class MFrameListener implements ActionListener {
                 fr.setVisible(true);
                 fr.add(panel);
                 fb.init();
+                break;
+            case "Markov chain":
+                Markov markov = new Markov();
                 break;
             default:
                 App.gui.updateGUI(command);

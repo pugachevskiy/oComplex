@@ -1,4 +1,4 @@
-package com.openComplex.app;
+package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 /**
  * Created by strange on 26/08/15.

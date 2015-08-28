@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GraphPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
-    private static final String GRAPHS ="Graphs", SCHULLERNUMBER = "Schuller-number", TREES = "Trees",
+    private static final String GRAPHS ="Markov chain", SCHULLERNUMBER = "Schuller-number", TREES = "Trees",
             LITTLEWORLD = "Little World networks";
     private List<String> BUTTONGRAPH = Arrays.asList(GRAPHS, SCHULLERNUMBER, TREES, LITTLEWORLD);
     public  GraphPanelView() {

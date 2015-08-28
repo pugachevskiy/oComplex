@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DynamicPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
-    private static final String FEIGENBAUM = "Logical pictures with Feigenbaum-diagram", ITERATED = "Iterated pictures",
+    private static final String FEIGENBAUM = "Logical pictures with Feigenbaum-diagram", ITERATED = "Lorenz Attractor",
         LANDAU =  "Landau symbols", FRACTALS = "Fractals";
     private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LANDAU,FRACTALS);
 
