@@ -1,8 +1,8 @@
 package com.openComplex.app.GraphTheory.MarkovKette;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 
 /**
@@ -14,28 +14,63 @@ public class Markov implements ActionListener {
 
     public Markov() {
         markovModel = new MarkovModel();
-        gui = new MarkovView(markovModel.N, markovModel.transition, markovModel.M);
-        gui.init();
+        gui = new MarkovView(markovModel.getN(), markovModel.createArray(true), markovModel.getM());
         addListener();
     }
 
     private void addListener() {
         gui.getSolve().addActionListener(this);
+        gui.getNewTable().addActionListener(this);
+        gui.getSetDefault().addActionListener(this);
         gui.getLengthTextField().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        markovModel.setN(Integer.valueOf(gui.getLengthTextField().getText()));
-        markovModel.setM(Integer.valueOf(gui.getStartPositionTextField().getText()));
+        String command = e.getActionCommand();
+        switch (command) {
+            case "New":
+                markovModel.setN(gui.getLength());
+                markovModel.setM(gui.getStart());
+                gui.clearPanel();
+                gui.setStep("");
+                gui.addTable(gui.getLength(), markovModel.createArray(false));
+                break;
 
-        gui.clearPanel();
-        gui.addTable(Integer.valueOf(gui.getLengthTextField().getText()));
-        gui.setStep(String.valueOf(markovModel.solveChain()));
-        for (int i = 0; i < markovModel.getStateList().size(); i++) {
-            gui.setStateTextField(String.valueOf(markovModel.getStateList().get(i)));
-            System.out.println(markovModel.getStateList().get(i));
+            case "Default":
+                markovModel.setN(7);
+                markovModel.setM(1);
+                gui.setLength(7);
+                gui.setStart(1);
+                gui.clearPanel();
+                gui.setStep("");
+                gui.addTable(gui.getLength(), markovModel.createArray(true));
+                break;
+            case "Solve":
+                markovModel.setN(gui.getLength());
+                markovModel.setM(gui.getStart());
+                gui.clearPanel();
+                gui.setStep("");
+                gui.addTable(gui.getLength(), markovModel.transition);
+                markovModel.setTransition(gui.getTable(markovModel.getN()));
+                gui.setStep(String.valueOf(markovModel.solveChain()));
+                String step = String.valueOf(markovModel.getM());
+                for (int i = 1; i < markovModel.getStateList().size(); i++) {
+                    step = step + " -> " + String.valueOf(markovModel.getStateList().get(i));
+                }
+                gui.setStateTextField(step);
+                markovModel.clearStateList();
+                break;
+            default:
+                break;
+            case "length":
+                gui.clearPanel();
+                markovModel.setN(gui.getLength());
+                markovModel.setM(gui.getStart());
+                gui.setStep("");
+                gui.addTable(gui.getLength(), markovModel.createArray(false));
+                break;
+
         }
     }
-
 }

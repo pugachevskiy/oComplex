@@ -12,16 +12,20 @@ public class MarkovView {
     private JFrame frame;
     private JPanel panel,tablePanel, downPanel ;
     private int length,start;
-    private JButton solve;
+    private JButton solve,newTable, setDefault;
     private JLabel stepLabel,step;
     private JTextArea stateTextField;
     private List<JTextField> transition = new ArrayList<>();
     private JTextField lengthTextField, startPositionTextField;
-    double[][] transitionArray;
+
     public MarkovView(int size, double[][] transitionArray, int start){
         this.length = size;
-        this.transitionArray = transitionArray.clone();
         this.start = start;
+        init();
+        addTopPanel();
+        addTable(size, transitionArray);
+        addBottomPanel();
+        frame.pack();
     }
 
     public void init(){
@@ -29,31 +33,29 @@ public class MarkovView {
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(800,800);
-        panel = new JPanel();
-        solve = new JButton("Solve");
-        panel.add(solve);
         tablePanel = new JPanel();
-        addLength();
-        addTable(length);
-        stepLabel = new JLabel("The number of steps = ");
-        step = new JLabel("");
-
+        panel = new JPanel();
         downPanel = new JPanel();
-        downPanel.add(stepLabel);
-        downPanel.add(step);
-        stateTextField = new JTextArea("");
-        //stateTextField.setPreferredSize(new Dimension(300, 30));
-        stateTextField.setLineWrap(true);
-        downPanel.add(stateTextField);
         frame.add(panel, BorderLayout.NORTH);
         frame.add(tablePanel, BorderLayout.CENTER);
         frame.add(downPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
-    private void addLength(){
+
+    private void addTopPanel(){
+        newTable = new JButton("New");
+        newTable.setActionCommand("New");
+        setDefault = new JButton("Default");
+        setDefault.setActionCommand("Default");
+        solve = new JButton("Solve");
+        solve.setActionCommand("Solve");
+        panel.add(newTable);
+        panel.add(setDefault);
+        panel.add(solve);
         JLabel lengthLabel = new JLabel("Length");
         panel.add(lengthLabel);
         lengthTextField = new JTextField(String.valueOf(length));
+        lengthTextField.setActionCommand("length");
         panel.add(lengthTextField);
         JLabel startPositionLabel = new JLabel("Start position");
         panel.add(startPositionLabel);
@@ -61,40 +63,92 @@ public class MarkovView {
         panel.add(startPositionTextField);
     }
 
-    public void addTable(int length){
+    public void addTable(int length, double[][] transitionArray){
         tablePanel.setLayout(new GridLayout(length,length));
         for (int i = 0; i < length; i++){
             for (int j = 0; j < length; j++){
                 transition.add(new JTextField(String.valueOf(transitionArray[i][j])));
-
             }
         }
+
         for (int i = 0; i < transition.size(); i++){
                 tablePanel.add(transition.get(i));
             }
-
+        tablePanel.updateUI();
+        frame.pack();
     }
+
+
+    private void addBottomPanel(){
+        stepLabel = new JLabel("The number of steps = ");
+        step = new JLabel("");
+        downPanel.setLayout(new BorderLayout());
+        downPanel.add(stepLabel, BorderLayout.CENTER);
+        downPanel.add(step, BorderLayout.EAST);
+        stateTextField = new JTextArea("");
+        stateTextField.setLineWrap(true);
+        stateTextField.setMinimumSize(new Dimension(400,400));
+        downPanel.add(stateTextField,BorderLayout.SOUTH);
+    }
+
     public JButton getSolve(){
         return solve;
     }
+
+    public JButton getNewTable() {return newTable;}
+
+    public JButton getSetDefault(){return setDefault;}
+
     public void clearPanel(){
         tablePanel.removeAll();
         transition.removeAll(transition);
         stateTextField.setText("");
     }
+
     public void setStep(String text){
         step.setText(text);
     }
+
     public JTextField getLengthTextField(){
         return lengthTextField;
     }
-    public JTextField getStartPositionTextField(){
-        return startPositionTextField;
-    }
+
     public void setStateTextField(String step){
-        System.out.println(stateTextField.getText());
-        this.stateTextField.setText(stateTextField.getText() + "->" + step);
+        this.stateTextField.setText(step);
         downPanel.revalidate();
         frame.pack();
+    }
+
+    public int getLength(){
+        return Integer.valueOf(lengthTextField.getText());
+    }
+
+    public int getStart(){
+        return Integer.valueOf(startPositionTextField.getText());
+    }
+
+    public double[][] getTable(int length){
+        double[][] matrix = new double[length][length];
+        int counter = 0;
+        for (int i = 0; i < length; i++){
+            for (int j = 0; j < length; j++) {
+
+                matrix[i][j] = Double.valueOf(transition.get(counter).getText());
+                counter++;
+            }
+        }
+        return matrix;
+    }
+
+    public void setLength(int length){
+        this.length = length;
+        lengthTextField.setText(String.valueOf(length));
+        lengthTextField.updateUI();
+    }
+
+    public void setStart(int start){
+        this.start = start;
+        startPositionTextField.setText(String.valueOf(start));
+        startPositionTextField.updateUI();
     }
 }
