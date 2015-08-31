@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class mainPanelView extends JPanel {
     public static final String nnButtonText = "Neuronal networks", gtButtonText = "Graph theory",
-            caButtonText = "Cellular automat",dsButtonText = "Dynamical systems",mainButtonText = "back";
+            caButtonText = "Cellular automata",dsButtonText = "Dynamical systems",mainButtonText = "back";
     public static final List<String> BUTTONSMAIN = Arrays.asList(nnButtonText, gtButtonText, caButtonText, dsButtonText);
     private ActionListener listener = new MFrameListener();
     private List<JButton> buttonList = new ArrayList<>();
@@ -37,7 +37,7 @@ public class mainPanelView extends JPanel {
 
     //leftPanel contains important information about the program.
     private JPanel createLeftPanel() {
-        leftIcon = Toolkit.getDefaultToolkit().getImage(App.iconPath);
+        leftIcon = Toolkit.getDefaultToolkit().getImage(App.logoPath);
         scaledImage = leftIcon.getScaledInstance(300, 90, Image.SCALE_SMOOTH);
         icon = new ImageIcon(scaledImage);
 

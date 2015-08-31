@@ -6,6 +6,8 @@ import com.openComplex.app.mainWindow.Model.ModelMain;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,6 +25,8 @@ public class DynamicPanelView extends JPanel {
     private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LANDAU,FRACTALS);
 
     public DynamicPanelView() {
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel upperPanel = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
@@ -55,13 +59,23 @@ public class DynamicPanelView extends JPanel {
         ModelMain model = new ModelMain();
         model.createButtons(topicPanel, BUTTONSDYNAMICS);
 
-        this.add(upperPanel);
-        JPanel lowerPanel = new JPanel();
-        lowerPanel.setLayout(new GridLayout(2, 1));
-        lowerPanel.add(new JLabel("<html><body>A dynamical system is a concept in mathematics <br> where a fixed rule describes how a point in a geometrical space depends on time.</body></html>"));
-        lowerPanel.add(topicPanel);
-        this.add(lowerPanel);
+        JTextPane informationText = new JTextPane();
+        informationText.setEditable(false);
+        SimpleAttributeSet set = new SimpleAttributeSet();
+        StyleConstants.setAlignment(set, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setFontFamily(set, "Mono");
+        StyleConstants.setFontSize(set, 12);
+        //StyleConstants.setItalic(set, true);
+        StyleConstants.setBold(set, true);
+        informationText.setParagraphAttributes(set, true);
+        informationText.setBackground(new JLabel().getBackground());
+        informationText.setBounds(100, 100, 300, 300);
+        informationText.setText("A dynamical system is a concept in mathematics\n" +
+                "where a fixed rule describes how a point in a geometrical space depends on time.\n");
 
+        this.add(upperPanel);
+        this.add(informationText);
+        this.add(topicPanel);
     }
 
     static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,

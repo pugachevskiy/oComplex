@@ -13,7 +13,7 @@ public class MenuController {
         Image leftIcon = Toolkit.getDefaultToolkit().getImage(App.overviewPath);
         Image scaledImage = leftIcon.getScaledInstance(1385, 814, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(scaledImage);
-        JOptionPane.showMessageDialog(App.gui, icon, "Hilfe", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(App.gui, icon, "Help", JOptionPane.PLAIN_MESSAGE);
     }
 
 
@@ -29,7 +29,7 @@ public class MenuController {
         area.setBorder(BorderFactory.createEmptyBorder());
         area.setBackground(new JPanel().getBackground());
         area.setEditable(false);
-        JOptionPane.showMessageDialog(App.gui, area, "Hilfe", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(App.gui, area, "Information", JOptionPane.PLAIN_MESSAGE);
     }
 
 
@@ -38,13 +38,13 @@ public class MenuController {
      */
     public void showAbout() {
         String rules = "This tool was and is developed at the Chair of Complex and Intelligent Systems at the University of Passau.\n"
-                + "Matthias Fuchs and Tobias Leis worked and work under the supervision of Shahin Amiriparian on the project.";
+                + "Matthias Fuchs, Sergey Pugachevskiy and Tobias Leis worked and work under the supervision of Shahin Amiriparian on the project.";
 
         JTextArea area = new JTextArea(rules);
         area.setFont(new Font(new JLabel().getFont().getFontName(), Font.PLAIN, 16));
         area.setBorder(BorderFactory.createEmptyBorder());
         area.setBackground(new JPanel().getBackground());
         area.setEditable(false);
-        JOptionPane.showMessageDialog(App.gui, area, "Hilfe", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(App.gui, area, "About", JOptionPane.PLAIN_MESSAGE);
     }
 }

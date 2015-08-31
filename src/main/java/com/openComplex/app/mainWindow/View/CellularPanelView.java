@@ -6,6 +6,8 @@ import com.openComplex.app.mainWindow.Model.ModelMain;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,6 +27,7 @@ public class CellularPanelView extends JPanel {
 
     public CellularPanelView() {
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel upperPanel = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
@@ -43,7 +46,7 @@ public class CellularPanelView extends JPanel {
         while(i<3) {
             addComponent(upperPanel, gbl, new JLabel("                         "), i++, 0, 1, 1);
         }
-        JLabel networksLabel = new JLabel("Cellular automat");
+        JLabel networksLabel = new JLabel("Cellular automata");
         networksLabel.setFont(MainView.HEADINGFONT);
         addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
@@ -58,8 +61,25 @@ public class CellularPanelView extends JPanel {
         ModelMain model = new ModelMain();
         model.createButtons(topicPanel, BUTTONSCELLULAR);
 
+        JTextPane informationText = new JTextPane();
+        informationText.setEditable(false);
+        SimpleAttributeSet set = new SimpleAttributeSet();
+        StyleConstants.setAlignment(set, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setFontFamily(set, "Mono");
+        StyleConstants.setFontSize(set, 12);
+        //StyleConstants.setItalic(set, true);
+        StyleConstants.setBold(set, true);
+        informationText.setParagraphAttributes(set, true);
+        informationText.setBackground(new JLabel().getBackground());
+        informationText.setBounds(100, 100, 300, 300);
+        informationText.setText("Cellular automata consist of a grid of cells,\n" +
+                "\n" +
+                "inspired by biological neural networks (the central nervous systems of animals,\n" +
+                "in particular the brain) and are used to estimate or approximate functions\n" +
+                "that can depend on a large number of inputs and are generally unknown.");
+
         this.add(upperPanel);
-        this.add(new JLabel("Short description about topic."));
+        this.add(informationText);
         this.add(topicPanel);
     }
 

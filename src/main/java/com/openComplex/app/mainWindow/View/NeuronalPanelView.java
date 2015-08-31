@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,6 +22,7 @@ public class NeuronalPanelView extends JPanel{
     private ActionListener listener = new MFrameListener();
     public  NeuronalPanelView() {
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //neuronalMenu.setLayout(new GridLayout(2, 1));
         JPanel upperPanel = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
@@ -65,14 +68,25 @@ public class NeuronalPanelView extends JPanel{
 
 
         this.add(upperPanel);
-        this.add(new JLabel(""
-                + "<html><body>"
-                + "In machine learning and cognitive science, <br>"
-                + "artificial neural networks (ANNs) are a family of statistical learning models<br>"
-                + "inspired by biological neural networks (the central nervous systems of animals,<br> "
-                + "in particular the brain) and are used to estimate or approximate functions <br>"
-                + "that can depend on a large number of inputs and are generally unknown."
-                + "</body></html>"));
+
+        JTextPane informationText = new JTextPane();
+        informationText.setEditable(false);
+        SimpleAttributeSet set = new SimpleAttributeSet();
+        StyleConstants.setAlignment(set, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setFontFamily(set, "Mono");
+        StyleConstants.setFontSize(set, 12);
+        //StyleConstants.setItalic(set, true);
+        StyleConstants.setBold(set, true);
+        informationText.setParagraphAttributes(set, true);
+        informationText.setBackground(new JLabel().getBackground());
+        informationText.setBounds(100, 100, 300, 300);
+        informationText.setText("In machine learning and cognitive science,\n" +
+                "artificial neural networks (ANNs) are a family of statistical learning models\n" +
+                "inspired by biological neural networks (the central nervous systems of animals,\n" +
+                "in particular the brain) and are used to estimate or approximate functions\n" +
+                "that can depend on a large number of inputs and are generally unknown.");
+
+        this.add(informationText);
         this.add(topicPanel);
 
     }

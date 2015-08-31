@@ -6,6 +6,8 @@ import com.openComplex.app.mainWindow.Model.ModelMain;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,6 +25,7 @@ public class GraphPanelView extends JPanel {
     private List<String> BUTTONGRAPH = Arrays.asList(GRAPHS, SCHULLERNUMBER, TREES, LITTLEWORLD);
     public  GraphPanelView() {
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel upperPanel = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
@@ -50,18 +53,31 @@ public class GraphPanelView extends JPanel {
 
 
         JPanel topicPanel = new JPanel();
-        topicPanel.setLayout(new GridLayout(2,2));
+        topicPanel.setLayout(new GridLayout(2, 2));
         TitledBorder title = new TitledBorder("Options");
         topicPanel.setBorder(title);
         ModelMain model = new ModelMain();
         model.createButtons(topicPanel, BUTTONGRAPH);
 
-        JPanel lowerPanel = new JPanel();
-        lowerPanel.setLayout(new GridLayout(2, 1));
-        lowerPanel.add(new JLabel("<html><body>In mathematics and computer science, graph theory is the study of graphs, <br>which are mathematical structures used to model pairwise relations between objects. </body></html>"));
-        lowerPanel.add(topicPanel);
+
+        JTextPane informationText = new JTextPane();
+        informationText.setEditable(false);
+        SimpleAttributeSet set = new SimpleAttributeSet();
+        StyleConstants.setAlignment(set, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setFontFamily(set, "Mono");
+        StyleConstants.setFontSize(set, 12);
+        //StyleConstants.setItalic(set, true);
+        StyleConstants.setBold(set, true);
+        informationText.setParagraphAttributes(set, true);
+        informationText.setBackground(new JLabel().getBackground());
+        informationText.setBounds(100, 100, 300, 300);
+        informationText.setText("In mathematics and computer science, graph theory is the study of graphs,\n" +
+                "which are mathematical structures used to model pairwise relations between objects.\n" +
+                "Generally, graphs consist of nodes and edges. ");
+
         this.add(upperPanel);
-        this.add(lowerPanel);
+        this.add(informationText);
+        this.add(topicPanel);
     }
     static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,
                              int height) {
