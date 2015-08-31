@@ -13,7 +13,7 @@ public class ViewController {
 	private JFrame mainFrame;
 	private JButton stopButton, startButton, nextButton, endButton;
 	private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
-	private static final String[] ANFANGSBEDINGUNGFILL = {"Taube", "blank"}, CELLFORMFILL = { "Quadratisch", "Hexagon" },
+	private static final String[] ANFANGSBEDINGUNGFILL = {"Taube", "blank", "Figure 1", "Gliter"}, CELLFORMFILL = { "Quadratisch"},//, "Hexagon" },
 			CELLGROESSEFILL = { "Klein", "Mittel", "Groß" }, CELLFARBEFILL = { "Schwarz", "Blau", "Grün", "Gelb" },
 			GESCHWINDIGKEITFILL = { "Langsam", "Normal", "Schnell" } ;
 	private JMenuItem speichernItem, exitItem, spielRegelnItem;

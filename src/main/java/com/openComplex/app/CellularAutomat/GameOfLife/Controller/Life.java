@@ -29,6 +29,7 @@ public class Life implements MouseListener{
         gui = new ViewController();
         addListener();
         createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
+        setTaube();
     }
     private void addListener() {
         gui.getSpeichernItem().addActionListener(menuController);
@@ -50,7 +51,7 @@ public class Life implements MouseListener{
             public void run() {
                 try {
                     while (lifegoeson == 1) {
-                        update_game();
+                        updateGame();
                         sleep(gamespeed);
                     }
                 } catch (InterruptedException e) {
@@ -97,14 +98,14 @@ public class Life implements MouseListener{
     }
 
 
-    private void update_game() {
-        get_newstats();
-        play_god();
+    private void updateGame() {
+        getNewStats();
+        playGod();
         colorChange();
     }
 
 
-    public void get_newstats() {
+    public void getNewStats() {
         cells_after = new Cell[length][length];
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
@@ -151,7 +152,7 @@ public class Life implements MouseListener{
         }
     }
 
-    public void play_god() {
+    public void playGod() {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
                 if (cells_after[i][j].getCell()) {
@@ -190,9 +191,6 @@ public class Life implements MouseListener{
                 gui.getFieldPanel().add(field[i][j]);
             }
         }
-
-        // setNeighbours();
-        setTaube();
         colorChange();
         gui.getFieldPanel().revalidate();
 
@@ -221,7 +219,39 @@ public class Life implements MouseListener{
         field[field.length / 2 + 2][field.length / 2 + 3].get_to_life();
         field[field.length / 2 + 1][field.length / 2 + 3].get_to_life();
         field[field.length / 2][field.length / 2 + 3].get_to_life();
+        colorChange();
+        gui.getFieldPanel().revalidate();
     }
+    public void setFigure1() {
+        //up
+        field[field.length / 2 - 1][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 - 2][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 - 3][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 - 3][field.length / 2].get_to_life();
+        field[field.length / 2 - 3][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 - 2][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 - 1][field.length / 2 + 1].get_to_life();
+        //down
+        field[field.length / 2 + 1][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 + 2][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 + 3][field.length / 2 - 1].get_to_life();
+        field[field.length / 2 + 3][field.length / 2].get_to_life();
+        field[field.length / 2 + 3][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 + 2][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 + 1][field.length / 2 + 1].get_to_life();
+        colorChange();
+        gui.getFieldPanel().revalidate();
+    }
+    public void setGliter() {
+        field[field.length / 2 - 1][field.length / 2 ].get_to_life();
+        field[field.length / 2][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 + 1][field.length / 2 + 1].get_to_life();
+        field[field.length / 2 + 1][field.length / 2 ].get_to_life();
+        field[field.length / 2 + 1][field.length / 2 - 1].get_to_life();
+        colorChange();
+        gui.getFieldPanel().revalidate();
+    }
+
 
 
     private ActionListener cListener = new ActionListener() {
@@ -239,8 +269,20 @@ public class Life implements MouseListener{
                 case "Groß":
                     createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
                     break;
+                case "Figure 1":
+                    createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
+                    setFigure1();
+                    break;
                 case "Taube":
+                    createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
                     setTaube();
+                    break;
+                case "Gliter":
+                    createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
+                    setGliter();
+                    break;
+                case "blank":
+                    createFeld(getLength(gui.getCellGroeßeBox().getSelectedIndex()));
                     break;
                 case "Normal":  //4 Hz
                     gamespeed = 250;
@@ -284,7 +326,7 @@ public class Life implements MouseListener{
                     gui.deactivateButtons();
                     break;
                 case "Next":
-                    update_game();
+                    updateGame();
                     break;
                 case "Beenden":
                     gui.frameClose();

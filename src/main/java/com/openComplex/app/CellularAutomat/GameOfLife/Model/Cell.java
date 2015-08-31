@@ -78,5 +78,7 @@ public class Cell extends JComponent {
         return getPreferredSize();
     }
 
+
+
 }
 
