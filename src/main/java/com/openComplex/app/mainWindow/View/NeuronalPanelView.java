@@ -2,10 +2,14 @@ package com.openComplex.app.mainWindow.View;
 
 import com.openComplex.app.mainWindow.Listener.MFrameListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -21,16 +25,25 @@ public class NeuronalPanelView extends JPanel{
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
         int i = 0;
-        JButton backButton = new JButton("back"), hopfieldButton = new JButton("Hopfield networks");
+        JButton backButton = new JButton(), hopfieldButton = new JButton("Hopfield networks");
+        try {
+            backButton.setIcon(new ImageIcon(ImageIO.read(new File(MainView.BACKBUTTONPICTUREPATH))));
+
+        } catch(IOException e) {
+            backButton.setText("BACK");
+        }
         backButton.setActionCommand("back");
         backButton.addActionListener(listener);
+        addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
-            addComponent(upperPanel, gbl, new JLabel("                  "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                         "), i++, 0, 1, 1);
         }
-        addComponent(upperPanel, gbl, new JLabel("Neuronal Networks"), i++, 0, 5, 1);
+        JLabel networksLabel = new JLabel("Neuronal networks");
+        networksLabel.setFont(MainView.HEADINGFONT);
+        addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
-            addComponent(upperPanel, gbl, new JLabel("                                     "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                                        "), i++, 0, 1, 1);
         }
 
         JPanel topicPanel = new JPanel();
@@ -61,7 +74,6 @@ public class NeuronalPanelView extends JPanel{
                 + "that can depend on a large number of inputs and are generally unknown."
                 + "</body></html>"));
         this.add(topicPanel);
-
 
     }
     static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,

@@ -29,10 +29,14 @@ public class MainView extends JFrame {
     public static final String OVERVIEWMENUITEM = "Overview", ABOUTMENUITEM = "About", HELPMENUITEM = "Help";
     private static final List<String> MENUITEM = Arrays.asList(OVERVIEWMENUITEM, ABOUTMENUITEM, HELPMENUITEM);
 
+    public static final String BACKBUTTONPICTUREPATH = "resources/pfeil.png";
+    public static final Font HEADINGFONT = new Font(new JLabel().getFont().getFontName(), new JLabel().getFont().getStyle(), 18);
+
 
     public MainView() {
         initFrame();
         setCentral();
+        System.out.println(HEADINGFONT.getAttributes());
     }
 
     private void initFrame() {
