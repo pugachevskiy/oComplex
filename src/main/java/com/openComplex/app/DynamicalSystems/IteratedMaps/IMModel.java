@@ -42,14 +42,14 @@ public class IMModel {
         double temp, previous, x;
         x = -10;
         previous = compute(coeff, -10);
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 40; i++) {
             temp = compute(coeff, x);
-            if((Math.abs(temp) < zeroApproach || previous*temp < 0) &&
+            if((previous*temp < 0) &&
                     (x > lastEstimateX || lastEstimateX == -Double.MAX_VALUE)) {
                 return x;
             }
             previous = temp;
-            x = x + 0.1;
+            x = x + 0.5;
         }
         return Double.MAX_VALUE;
     }
@@ -123,9 +123,8 @@ public class IMModel {
         int degree;
 
         if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0 && coeff [1] == 0 && coeff[0] == 0) {
-            degree = 0;
             for(int i = 0; i < coeff.length -1; i++) {
-                info[i] = "no fixoint";
+                info[i] = "infinite fixoint";
             }
         } else if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0) {
             degree = 1;
