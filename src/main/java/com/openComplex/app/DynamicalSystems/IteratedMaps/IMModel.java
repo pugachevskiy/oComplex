@@ -124,7 +124,7 @@ public class IMModel {
 
         if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0 && coeff [1] == 0 && coeff[0] == 0) {
             for(int i = 0; i < coeff.length -1; i++) {
-                info[i] = "infinite fixoint";
+                info[i] = "infinite fixpoint";
             }
         } else if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0) {
             degree = 1;
