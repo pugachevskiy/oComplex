@@ -64,7 +64,7 @@ public class MainView extends JFrame {
         mainFrame.setBounds(350, 300, 500, 300);
         Image leftIcon = getDefaultToolkit().getImage(App.iconPath);
         mainFrame.setIconImage(leftIcon);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
 

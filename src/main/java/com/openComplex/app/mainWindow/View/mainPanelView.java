@@ -17,7 +17,7 @@ import java.util.List;
 public class mainPanelView extends JPanel {
     public static final String nnButtonText = "Neuronal networks", gtButtonText = "Graph theory",
             caButtonText = "Cellular automat",dsButtonText = "Dynamical systems",mainButtonText = "back";
-    public static final List<String> BUTTONSMAIN = Arrays.asList(nnButtonText, gtButtonText, caButtonText, dsButtonText);
+    public static final List<String> BUTTONSMAIN = Arrays.asList(dsButtonText, nnButtonText, gtButtonText, caButtonText);
     private ActionListener listener = new MFrameListener();
     private List<JButton> buttonList = new ArrayList<>();
     private JPanel leftPanel, topicPanel;
