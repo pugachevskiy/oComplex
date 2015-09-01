@@ -71,9 +71,11 @@ public class GraphPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("In mathematics and computer science, graph theory is the study of graphs,\n" +
-                "which are mathematical structures used to model pairwise relations between objects.\n" +
-                "Generally, graphs consist of nodes and edges. ");
+        informationText.setText("In mathematics and computer science, graph theory is\n" +
+                "the study of graphs, which are mathematical structures used to model pairwise\n" +
+                " relations between objects. Generally, graphs consist of nodes and edges.\n" +
+                "\n" +
+                "");
 
         this.add(upperPanel);
         this.add(informationText);

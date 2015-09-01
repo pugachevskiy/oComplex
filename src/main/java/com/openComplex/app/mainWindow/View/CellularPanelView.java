@@ -72,11 +72,10 @@ public class CellularPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("Cellular automata consist of a grid of cells,\n" +
-                "\n" +
-                "inspired by biological neural networks (the central nervous systems of animals,\n" +
-                "in particular the brain) and are used to estimate or approximate functions\n" +
-                "that can depend on a large number of inputs and are generally unknown.");
+        informationText.setText("Cellular automata consist of a grid of cells.\n" +
+                "For each cell, a set of cells called neighborhood is defined\n" +
+                "relative to this cell. Those cells influence each other trough\n" +
+                "this defined neighborhood.\n");
 
         this.add(upperPanel);
         this.add(informationText);
