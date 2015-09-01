@@ -18,7 +18,7 @@ public class IMView {
     public void view() {
         frame = new JFrame("Iterated Maps");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setBounds(100, 200, 1000, 500);
+        frame.setBounds(100, 200, 1100, 500);
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout());
