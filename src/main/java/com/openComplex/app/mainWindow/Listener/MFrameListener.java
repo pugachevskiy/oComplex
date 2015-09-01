@@ -4,6 +4,7 @@ import com.openComplex.app.App;
 import com.openComplex.app.CellularAutomat.GameOfLife.Controller.Life;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.MainWolfram;
 import com.openComplex.app.DynamicalSystems.Fractals2.Controller.Controller;
+import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
@@ -46,6 +47,9 @@ public class MFrameListener implements ActionListener {
             case "Markov chain":
                 Markov markov = new Markov();
                 break;
+            case "Iterated maps":
+                IMController controller = new IMController();
+                IMController.start();
             default:
                 App.gui.updateGUI(command);
                 break;
