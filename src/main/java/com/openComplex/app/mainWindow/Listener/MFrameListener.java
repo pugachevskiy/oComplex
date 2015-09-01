@@ -36,20 +36,14 @@ public class MFrameListener implements ActionListener {
                 Lorenz lorenz = new Lorenz();
                 break;
             case "Logical pictures with Feigenbaum-diagram":
-                JFrame fr = new JFrame("2");
-                JPanel panel = new JPanel();
                 Feigenbaum fb = new Feigenbaum();
-                panel.add(fb);
-                fr.setVisible(true);
-                fr.add(panel);
-                fb.init();
                 break;
             case "Markov chain":
                 Markov markov = new Markov();
                 break;
             case "Iterated maps":
                 IMController controller = new IMController();
-                IMController.start();
+                break;
             default:
                 App.gui.updateGUI(command);
                 break;

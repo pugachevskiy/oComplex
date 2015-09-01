@@ -4,25 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class IMController implements ActionListener {
-    private static IMView gui;
-    private static IMModel solver;
+    private IMView gui;
+    private IMModel solver;
 
-    public static IMController control;
-
-    public static void start() {
+    public IMController(){
         gui = new IMView();
         solver = new IMModel();
-        control = new IMController();
-
         gui.view();
-        gui.setActionListener(control);
+        gui.setActionListener(this);
+        start();
+    }
 
-        IMModel.coeff[4] = Double.parseDouble(gui.e.getText());
-        IMModel.coeff[3] = Double.parseDouble(gui.d.getText());
-        IMModel.coeff[2] = Double.parseDouble(gui.c.getText());
-        IMModel.coeff[1] = Double.parseDouble(gui.b.getText());
-        IMModel.coeff[0] = Double.parseDouble(gui.a.getText());
-
+    public void start() {
+        solver.coeff[4] = Double.parseDouble(gui.e.getText());
+        solver.coeff[3] = Double.parseDouble(gui.d.getText());
+        solver.coeff[2] = Double.parseDouble(gui.c.getText());
+        solver.coeff[1] = Double.parseDouble(gui.b.getText());
+        solver.coeff[0] = Double.parseDouble(gui.a.getText());
         solver.solve();
         gui.setFixpoint(solver.getFix(), solver.getType(), solver.getInfo());
 
@@ -32,16 +30,7 @@ public class IMController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String temp = e.getActionCommand();
         if(temp.equals("ok")) {
-
-            IMModel.coeff[4] = Double.parseDouble(gui.e.getText());
-            IMModel.coeff[3] = Double.parseDouble(gui.d.getText());
-            IMModel.coeff[2] = Double.parseDouble(gui.c.getText());
-            IMModel.coeff[1] = Double.parseDouble(gui.b.getText());
-            IMModel.coeff[0] = Double.parseDouble(gui.a.getText());
-
-            solver.solve();
-            gui.setFixpoint(solver.getFix(), solver.getType(), solver.getInfo());
-
+          start();
         }
     }
 }

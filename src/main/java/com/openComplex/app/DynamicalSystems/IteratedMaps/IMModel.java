@@ -2,7 +2,7 @@ package com.openComplex.app.DynamicalSystems.IteratedMaps;
 
 
 public class IMModel {
-    public static double[] coeff = new double[5];
+    public double[] coeff = new double[5];
 
     private double[] fix;
     private String[] type;

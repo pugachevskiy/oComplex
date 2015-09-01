@@ -11,7 +11,7 @@ public class IMView {
     private JLabel[] fix;
     private JLabel[] fixType;
     private JLabel[] fixInfo;
-    public JButton okButton;
+    private JButton okButton;
     public JFormattedTextField a, b, c, d, e;
 
 
@@ -170,6 +170,5 @@ public class IMView {
             fixInfo[i].setText(info[i]);
         }
     }
-
 
 }
