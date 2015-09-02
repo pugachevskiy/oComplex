@@ -16,11 +16,13 @@ public class IMController implements ActionListener {
     }
 
     public void start() {
-        solver.coeff[4] = Double.parseDouble(gui.e.getText());
-        solver.coeff[3] = Double.parseDouble(gui.d.getText());
-        solver.coeff[2] = Double.parseDouble(gui.c.getText());
-        solver.coeff[1] = Double.parseDouble(gui.b.getText());
-        solver.coeff[0] = Double.parseDouble(gui.a.getText());
+
+        for (int i = 0; i < solver.coeff.length; i++) {
+            if(gui.coeff[i].getText().equals("0")) {
+                gui.coeff[i].setText("0.00");
+            }
+            solver.coeff[i] = Double.parseDouble(gui.coeff[i].getText());
+        }
         solver.solve();
         gui.setFixpoint(solver.getFix(), solver.getType(), solver.getInfo());
 

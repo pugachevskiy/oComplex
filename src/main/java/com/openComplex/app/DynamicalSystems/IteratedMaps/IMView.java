@@ -12,7 +12,7 @@ public class IMView {
     private JLabel[] fixType;
     private JLabel[] fixInfo;
     private JButton okButton;
-    public JFormattedTextField a, b, c, d, e;
+    public JFormattedTextField[] coeff;
 
 
     public void view() {
@@ -36,33 +36,28 @@ public class IMView {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        a = new JFormattedTextField(new DecimalFormat("#.##"));
-        b = new JFormattedTextField(new DecimalFormat("#.##"));
-        c = new JFormattedTextField(new DecimalFormat("#.##"));
-        d = new JFormattedTextField(new DecimalFormat("#.##"));
-        e = new JFormattedTextField(new DecimalFormat("#.##"));
 
-        Font font = a.getFont();
-        Font newFont = new Font(font.getName(), font.getStyle(), 25);
-        a.setFont(newFont);
-        b.setFont(newFont);
-        c.setFont(newFont);
-        d.setFont(newFont);
-        e.setFont(newFont);
-
-        a.setText("5.00");
-        b.setText("4.00");
-        c.setText("-4.00");
-        d.setText("4.00");
-        e.setText("4.00");
-
-        a.setPreferredSize(new Dimension(80, 40));
-        b.setPreferredSize(new Dimension(80, 40));
-        c.setPreferredSize(new Dimension(80, 40));
-        d.setPreferredSize(new Dimension(80, 40));
-        e.setPreferredSize(new Dimension(80, 40));
 
         okButton = new JButton("OK");
+        Font font = okButton.getFont();
+        Font newFont = new Font(font.getName(), font.getStyle(), 25);
+
+        coeff = new JFormattedTextField[5];
+
+        for (int i = 0; i < coeff.length; i++) {
+            coeff[i] = new JFormattedTextField(new DecimalFormat("#.##"));
+            coeff[i].setFont(newFont);
+            coeff[i].setPreferredSize(new Dimension(80, 40));
+        }
+
+
+        coeff[0].setText("5.00");
+        coeff[1].setText("4.00");
+        coeff[2].setText("-4.00");
+        coeff[3].setText("4.00");
+        coeff[4].setText("4.00");
+
+
         okButton.setFont(newFont);
         okButton.setBackground(new Color(192, 192, 192));
         okButton.setActionCommand("ok");
@@ -71,27 +66,27 @@ public class IMView {
         newFont = new Font(font.getName(), font.getStyle(), 30);
 
         JLabel equation = new JLabel("Equation: ");
-        JLabel eLabel = new JLabel("\u00b7x\u2074 + ");
-        JLabel dLabel = new JLabel("\u00b7x\u00b3 + ");
-        JLabel cLabel = new JLabel("\u00b7x\u00b2 + ");
-        JLabel bLabel = new JLabel("\u00b7x + ");
+        JLabel coeff4Label = new JLabel("\u00b7x\u2074 + ");
+        JLabel coeff3Label = new JLabel("\u00b7x\u00b3 + ");
+        JLabel coeff2Label = new JLabel("\u00b7x\u00b2 + ");
+        JLabel coeff1Label = new JLabel("\u00b7x + ");
 
         equation.setFont(newFont);
-        eLabel.setFont(newFont);
-        dLabel.setFont(newFont);
-        cLabel.setFont(newFont);
-        bLabel.setFont(newFont);
+        coeff1Label.setFont(newFont);
+        coeff2Label.setFont(newFont);
+        coeff3Label.setFont(newFont);
+        coeff4Label.setFont(newFont);
 
         panel.add(equation);
-        panel.add(e);
-        panel.add(eLabel);
-        panel.add(d);
-        panel.add(dLabel);
-        panel.add(c);
-        panel.add(cLabel);
-        panel.add(b);
-        panel.add(bLabel);
-        panel.add(a);
+        panel.add(coeff[4]);
+        panel.add(coeff4Label);
+        panel.add(coeff[3]);
+        panel.add(coeff3Label);
+        panel.add(coeff[2]);
+        panel.add(coeff2Label);
+        panel.add(coeff[1]);
+        panel.add(coeff1Label);
+        panel.add(coeff[0]);
 
 
         for (int i = 0; i < 3; i++) {

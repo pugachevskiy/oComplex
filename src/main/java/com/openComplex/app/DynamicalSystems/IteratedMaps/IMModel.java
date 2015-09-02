@@ -151,6 +151,7 @@ public class IMModel {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
+                        degree = degree - 1;
                         info[i] = "imaginary fixpoint";
                     }
                 }
@@ -173,6 +174,7 @@ public class IMModel {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
+                        degree = degree - 1;
                         info[i] = "imaginary fixpoint";
                     }
                 }
@@ -201,6 +203,7 @@ public class IMModel {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
+                        degree = degree - 1;
                         info[i] = "imaginary fixpoint";
                     }
                 }
