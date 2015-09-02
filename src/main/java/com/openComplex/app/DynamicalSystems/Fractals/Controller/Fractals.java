@@ -2,7 +2,6 @@ package com.openComplex.app.DynamicalSystems.Fractals.Controller;
 
 import com.openComplex.app.DynamicalSystems.Fractals.Model.*;
 import com.openComplex.app.DynamicalSystems.Fractals.View.viewController;
-import sun.nio.cs.KOI8_R;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
