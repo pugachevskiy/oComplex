@@ -104,6 +104,7 @@ public class View {
 
         //descriptonPanel.add(new JLabel(FractalsCollection.TITEL.get(FractalsCollection.TITEL.size() - 1)));
         //descriptonPanel.add(labels.get(FractalsCollection.TITEL.size() - 2));
+
         descriptonPanel.add(new JLabel(" "));
 
         JTextPane informationText = new JTextPane();
