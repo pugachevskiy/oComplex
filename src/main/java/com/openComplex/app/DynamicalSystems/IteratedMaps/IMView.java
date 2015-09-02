@@ -18,7 +18,7 @@ public class IMView {
     public void view() {
         frame = new JFrame("Iterated Maps");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setBounds(100, 200, 1100, 500);
+        frame.setBounds(100, 200, 800, 400);
         frame.setResizable(false);
 
         frame.setLayout(new BorderLayout());
@@ -40,14 +40,14 @@ public class IMView {
 
         okButton = new JButton("OK");
         Font font = okButton.getFont();
-        Font newFont = new Font(font.getName(), font.getStyle(), 25);
+        Font newFont = new Font(font.getName(), font.getStyle(), 15);
 
         coeff = new JFormattedTextField[5];
 
         for (int i = 0; i < coeff.length; i++) {
             coeff[i] = new JFormattedTextField(new DecimalFormat("#.##"));
             coeff[i].setFont(newFont);
-            coeff[i].setPreferredSize(new Dimension(80, 40));
+            coeff[i].setPreferredSize(new Dimension(60, 25));
         }
 
 
@@ -63,7 +63,7 @@ public class IMView {
         okButton.setActionCommand("ok");
 
 
-        newFont = new Font(font.getName(), font.getStyle(), 30);
+        newFont = new Font(font.getName(), font.getStyle(), 20);
 
         JLabel equation = new JLabel("Equation: ");
         JLabel coeff4Label = new JLabel("\u00b7x\u2074 + ");
@@ -112,7 +112,7 @@ public class IMView {
 
 
         Font font = valueLabel.getFont();
-        Font newFont = new Font(font.getName(), font.getStyle(), 20);
+        Font newFont = new Font(font.getName(), font.getStyle(), 15);
 
         valueLabel.setFont(newFont);
         infoLabel.setFont(newFont);
