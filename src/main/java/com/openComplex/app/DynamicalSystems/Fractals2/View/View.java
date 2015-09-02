@@ -4,6 +4,7 @@ import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
@@ -18,6 +19,9 @@ public class View {
     private GLJPanel fractalPanel;
     private JPanel menuPanel;
     private JSlider stepSlider;
+
+    private JList nameOfFractalsComboBox = new JList(FractalsCollection.FRACTALS_NAMES);
+    private JTextPane description;
     private JComboBox nameOfFractalComboBox = new JComboBox();
     private JLabel name = new JLabel("Choose fractal");
 
@@ -38,6 +42,7 @@ public class View {
 
         mainField.setLayout(new BorderLayout());
         menuPanel = new JPanel();
+        menuPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         fractalPanel = new GLJPanel(null);
         menuPanel.setPreferredSize(new Dimension(250, 500));
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
@@ -76,15 +81,22 @@ public class View {
         //createCombobox();
         JPanel comboPanel = new JPanel();
         comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.Y_AXIS));
+        JPanel namePanel = new JPanel(new GridLayout(1,3));
+        namePanel.add(new JLabel(" "));
+        namePanel.add(name);
+        namePanel.add(new JLabel(" "));
 
-        comboPanel.add(name);
-        comboPanel.add(nameOfFractalComboBox);
+        nameOfFractalsComboBox.setSelectedIndex(0);
+        comboPanel.add(namePanel);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //für JList
+        comboPanel.add(nameOfFractalsComboBox);
+        //für JComboBox
+        //comboPanel.add(nameOfFractalComboBox);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         menuPanel.add(comboPanel);
-
-
-
-
     }
 
 
@@ -102,25 +114,24 @@ public class View {
         JPanel descriptonPanel = new JPanel();
         descriptonPanel.setLayout(new BoxLayout(descriptonPanel, BoxLayout.Y_AXIS));
 
-        //descriptonPanel.add(new JLabel(FractalsCollection.TITEL.get(FractalsCollection.TITEL.size() - 1)));
-        //descriptonPanel.add(labels.get(FractalsCollection.TITEL.size() - 2));
+        TitledBorder title = new TitledBorder("Description");
+        title.setBorder(BorderFactory.createLineBorder(Color.black));
+        descriptonPanel.setBorder(title);
 
-        descriptonPanel.add(new JLabel(" "));
-
-        JTextPane informationText = new JTextPane();
-        informationText.setEditable(false);
+        //Create informationWindow
+        description = new JTextPane();
+        description.setEditable(false);
         SimpleAttributeSet set = new SimpleAttributeSet();
         StyleConstants.setAlignment(set, StyleConstants.ALIGN_CENTER);
         StyleConstants.setFontFamily(set, "Mono");
         StyleConstants.setFontSize(set, 12);
-        //StyleConstants.setItalic(set, true);
         StyleConstants.setBold(set, true);
-        informationText.setParagraphAttributes(set, true);
-        informationText.setBackground(new JLabel().getBackground());
-        informationText.setBounds(100, 100, 300, 300);
-        informationText.setText(FractalsCollection.FRACTALS.get(nameOfFractalComboBox.getSelectedIndex()+1).get(4));
+        description.setParagraphAttributes(set, true);
+        description.setBackground(new JLabel().getBackground());
+        description.setBounds(100, 100, 300, 300);
+        description.setText(FractalsCollection.FRACTALS.get(3).get(4));
 
-        descriptonPanel.add(informationText);
+        descriptonPanel.add(description);
 
         menuPanel.add(descriptonPanel);
     }
@@ -149,10 +160,10 @@ public class View {
         searchPanel.add(searchFactorTextField);
 
         menuPanel.add(searchPanel);
-        menuPanel.add(new JLabel(" "));
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 2));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
         buttonPanel.add(searchButton = new JButton("Search"));
         buttonPanel.add(resetButton = new JButton("Reset"));
 
@@ -191,6 +202,10 @@ public class View {
     public JButton getResetButton(){return this.resetButton;}
     public JFrame getMainField(){return this.mainField;}
 
+
+    public void updateDescription(String text) {
+        description.setText(text);
+    }
 
     static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,
                              int height) {
