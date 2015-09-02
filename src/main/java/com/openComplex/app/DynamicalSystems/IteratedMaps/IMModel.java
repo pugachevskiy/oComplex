@@ -71,21 +71,21 @@ public class IMModel {
                 double [] firstDerivationCoeff = derivate(coeff);
                 double firstDerivationSolution = compute(firstDerivationCoeff, fix[i]);
                 if(Math.abs(firstDerivationSolution) < 1) {
-                    type[i] = "asymptotic stable";
+                    type[i] = "asymptotic stable, hyperbolic";
                 } else if (Math.abs(firstDerivationSolution) > 1) {
-                    type[i] = "unstable";
+                    type[i] = "unstable, hyperbolic";
                 } else {
                     double [] secondDerivationCoeff = derivate(firstDerivationCoeff);
                     double secondDerivationSolution = compute(secondDerivationCoeff, fix[i]);
                     if(secondDerivationSolution != 0) {
-                        type[i] = "semi-asymptotic";
+                        type[i] = "semi-asymptotic, not hyperbolic";
                     } else {
                         double [] thirdDerivationCoeff = derivate(secondDerivationCoeff);
                         double thirdDerivationSolution = compute(thirdDerivationCoeff, fix[i]);
                         if(thirdDerivationSolution < 0) {
-                            type[i] = "asymptotic stable";
+                            type[i] = "asymptotic stable, not hyperbolic";
                         } else if(thirdDerivationSolution > 0) {
-                            type[i] = "unstable";
+                            type[i] = "unstable, not hyperbolic";
                         }
                     }
                 }
