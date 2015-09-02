@@ -70,9 +70,9 @@ public class IMModel {
             if(fix[i] < Double.MAX_VALUE) {
                 double [] firstDerivationCoeff = derivate(coeff);
                 double firstDerivationSolution = compute(firstDerivationCoeff, fix[i]);
-                if(firstDerivationSolution < 1) {
+                if(Math.abs(firstDerivationSolution) < 1) {
                     type[i] = "asymptotic stable";
-                } else if (firstDerivationSolution > 1) {
+                } else if (Math.abs(firstDerivationSolution) > 1) {
                     type[i] = "unstable";
                 } else {
                     double [] secondDerivationCoeff = derivate(firstDerivationCoeff);
