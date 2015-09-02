@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class SierpinskiCarpet extends GLJPanel implements Fractal {
     //Start point
-    private static final int X = 50;
+    private static final int X = 20;
     private static final int Y = 50;
     //Length of side of the rectangle
     private static final int DIM = 486;

@@ -9,7 +9,8 @@ import java.util.List;
  */
 public final class FractalsCollection {
     public static final List<String> TITEL = Arrays.asList("Name", "Copy", "Factor", "Dimension", "Discription");
-    public static final List<String> KOCH_CURVE = Arrays.asList("Koch Curve", "3", "4", "1.2619", "Die Koch-Kurve oder" +
+    public static final List<String> KOCH_CURVE = Arrays.asList("Koch Curve", "3", "4", "1.2619", "Discription\n" +
+            "Die Koch-Kurve oder" +
             " kochsche Kurve ist ein von dem schwedischen Mathematiker Helge von Koch 1904 vorgestelltes Beispiel" +
             " für eine überall stetige, aber nirgends differenzierbare Kurve. Es handelt sich bei ihr ferner" +
             " um eines der ersten formal beschriebenen fraktalen Objekte. Die Koch-Kurve ist" +
