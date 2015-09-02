@@ -44,7 +44,7 @@ public class IMModel {
         previous = compute(coeff, -10);
         for (int i = 0; i < 40; i++) {
             temp = compute(coeff, x);
-            if((previous*temp < 0) &&
+            if((temp == 0 ||(previous*temp < 0)) &&
                     (x > lastEstimateX || lastEstimateX == -Double.MAX_VALUE)) {
                 return x;
             }
