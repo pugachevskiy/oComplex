@@ -2,28 +2,43 @@ package com.openComplex.app.CellularAutomat.GameOfLife.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by strange1 on 17/11/14.
  */
 public class ViewController {
 
-	//private Color backgroundColor = new Color(255,255,255);
 	private JPanel fieldPanel;
 	private JFrame mainFrame;
 	private JButton stopButton, startButton, nextButton, endButton;
 	private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
-	private static final String[] ANFANGSBEDINGUNGFILL = {"Taube", "blank", "Figure 1", "Gliter"}, CELLFORMFILL = { "Quadratisch"},//, "Hexagon" },
-			CELLGROESSEFILL = { "Klein", "Mittel", "Groß" }, CELLFARBEFILL = { "Schwarz", "Blau", "Grün", "Gelb" },
-			GESCHWINDIGKEITFILL = { "Langsam", "Normal", "Schnell" } ;
+	public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon",  "Figure 1", "Gliter", "blank"}, CELLFORMFILL = { "Square"},//, "Hexagon" },
+			CELLGROESSEFILL = { "Small", "Medium", "Large" }, CELLFARBEFILL = { "Black", "Blue", "Green", "Yellow" },
+			GESCHWINDIGKEITFILL = { "Slow", "Normal", "Fast" };
 	private JMenuItem speichernItem, exitItem, spielRegelnItem;
+	public static final String SLOW = "Slow";
+	public static final String NORMAL = "Normal";
+	public static final String FAST = "Fast";
+	public static final String SMALL = "Small";
+	public static final String MEDIUM = "Medium";
+	public static final String LARGE = "Large";
+	public static final String BLACK = "Black";
+	public static final String BLUE = "Blue";
+	public static final String GREEN = "Green";
+	public static final String YELLOW = "Yellow";
+	private JLabel counter;
+	//public static final List<String> GESCHWINDIGKEITFILL = Arrays.asList(SLOW, NORMAL, FAST);
 
 
 	public ViewController() {
 		mainFrame = new JFrame("Conways Game of Life");
+
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+		mainFrame.setMinimumSize(new Dimension(600,600));
+		mainFrame.setMaximumSize(new Dimension(1000,1000));
 		mainFrame.setJMenuBar(addMenu());
 
 		JPanel menuPanel;
@@ -34,7 +49,6 @@ public class ViewController {
 		addComponentsToPane(menuPanel, fieldPanel);
 
 		mainFrame.requestFocus();
-		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
@@ -65,7 +79,7 @@ public class ViewController {
 		addControl(pane, c);
 	}
 	private void addControl(Container pane, GridBagConstraints c) {
-		JLabel anfangsLabel = new JLabel("Anfangsbedingung");
+		JLabel anfangsLabel = new JLabel("Initial model");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -99,7 +113,7 @@ public class ViewController {
 		pane.add(cellFormBox, c);
 
 
-		JLabel cellGroeßeLabel = new JLabel("Zellgröße");
+		JLabel cellGroeßeLabel = new JLabel("Size of cells");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -117,7 +131,7 @@ public class ViewController {
 		pane.add(cellGroeßeBox, c);
 
 
-		JLabel cellFarbeLabel = new JLabel("Zellfarbe");
+		JLabel cellFarbeLabel = new JLabel("Color of cells");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -135,7 +149,7 @@ public class ViewController {
 		pane.add(cellFarbeBox, c);
 
 
-		JLabel geschwindigkeitLabel = new JLabel("Geschwindigkeit");
+		JLabel geschwindigkeitLabel = new JLabel("Speed");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -184,7 +198,7 @@ public class ViewController {
 		pane.add(nextButton, c);
 
 
-		endButton = new JButton("Beenden");
+		endButton = new JButton("Exit");
 		endButton.setEnabled(true);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
@@ -192,6 +206,21 @@ public class ViewController {
 		c.gridy = 14;
 		c.gridwidth = 1;
 		pane.add(endButton, c);
+
+		JLabel label = new JLabel("Step");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 15;
+		c.gridwidth = 1;
+		pane.add(label, c);
+		counter = new JLabel("0");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 16;
+		c.gridwidth = 1;
+		pane.add(counter, c);
 
 
 	}
@@ -203,6 +232,7 @@ public class ViewController {
 		anfangsBedingungBox.setEnabled(false);
 		cellFormBox.setEnabled(false);
 		cellGroeßeBox.setEnabled(false);
+		mainFrame.setResizable(false);
 	}
 	public void deactivateButtons(){
 		stopButton.setEnabled(false);
@@ -211,6 +241,8 @@ public class ViewController {
 		anfangsBedingungBox.setEnabled(true);
 		cellFormBox.setEnabled(true);
 		cellGroeßeBox.setEnabled(true);
+
+		mainFrame.setResizable(true);
 	}
 	//Getters und Setters
 	public Dimension getFieldSize(){
@@ -258,5 +290,10 @@ public class ViewController {
 	public void frameClose(){
 		mainFrame.dispose();
 	}
-	
+	public void setCounter(String text){
+		counter.setText(text);
+	}
+	public String getCounter(){
+		return counter.getText();
+	}
 }

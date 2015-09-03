@@ -11,8 +11,8 @@ public class Cell extends JComponent {
     private int size;
     private Color color = Color.DARK_GRAY;
 
-    public final static int GROSS = 30;
-    public final static int MITTE = 20;
+    public final static int GROSS = 20;
+    public final static int MITTE = 15;
     public final static int KLEIN = 10;
 
     public Cell(int size) {

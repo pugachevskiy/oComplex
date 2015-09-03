@@ -28,7 +28,7 @@ public class MenuController implements ActionListener{
                      }*/
                     break;
                  case "Exit":
-                     System.exit(0);
+                     Life.gui.frameClose();
                     break;
                  case "Spielregeln":
                      JFrame regeln = new JFrame("Regeln");
