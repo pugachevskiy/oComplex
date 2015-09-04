@@ -28,7 +28,7 @@ public class NeuronalPanelView extends JPanel{
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
         int i = 0;
-        JButton backButton = new JButton(), hopfieldButton = new JButton("Hopfield networks");
+        JButton backButton = new JButton();
         try {
             backButton.setIcon(new ImageIcon(ImageIO.read(new File(MainView.BACKBUTTONPICTUREPATH))));
 
@@ -53,10 +53,10 @@ public class NeuronalPanelView extends JPanel{
         topicPanel.setLayout(new GridLayout(2,2));
         TitledBorder title = new TitledBorder("Options");
         topicPanel.setBorder(title);
-        JButton feedforwardButton = new JButton(), recurrentButton = new JButton();
+        JButton feedforwardButton = new JButton(), recurrentButton = new JButton(), hopfieldButton = new JButton();
 
-        List<JButton> buttonList = Arrays.asList(feedforwardButton, recurrentButton);
-        List<String> buttonStrings = Arrays.asList("Feedforward networks", "Recurrent networks");
+        List<JButton> buttonList = Arrays.asList(feedforwardButton, recurrentButton, hopfieldButton);
+        List<String> buttonStrings = Arrays.asList("Feedforward networks", "Recurrent networks", "Hopfield networks");
 
         i = 0;
         for(JButton button : buttonList) {

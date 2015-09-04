@@ -8,6 +8,7 @@ import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,9 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Iterated maps":
                 IMController controller = new IMController();
+                break;
+            case "Hopfield networks":
+                Main main = new Main();
                 break;
             default:
                 App.gui.updateGUI(command);
