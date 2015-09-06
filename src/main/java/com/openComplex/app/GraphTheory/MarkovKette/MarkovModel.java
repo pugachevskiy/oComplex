@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /******************************************************************************
  * Compilation:  javac MarkovChain.java
  * Execution:    java MarkovChain
- * <p/>
+ *
  * Computes the expected time to go from state N-1 to state 0
- * <p/>
+ *
  * Data taken from Glass and Hall (1949) who distinguish 7 states
  * in their social mobility study:
- * <p/>
+ *
  * 1. Professional, high administrative
  * 2. Managerial
  * 3. Inspectional, supervisory, non-manual high grade
@@ -22,11 +22,12 @@ import java.util.ArrayList;
  * 5. Skilled manual
  * 6. Semi-skilled manual
  * 7. Unskilled manual
- * <p/>
+ *
  * See also Happy Harry, 2.39.
  ******************************************************************************/
 
 public class MarkovModel {
+    //default Matrix
     double[][] transition2 = {{0.386, 0.147, 0.202, 0.062, 0.140, 0.047, 0.016},
             {0.107, 0.267, 0.227, 0.120, 0.207, 0.052, 0.020},
             {0.035, 0.101, 0.188, 0.191, 0.357, 0.067, 0.061},
@@ -36,13 +37,21 @@ public class MarkovModel {
             {0.000, 0.008, 0.036, 0.083, 0.364, 0.235, 0.274}
 
     };
+    // Matrix
     double[][] transition;
+    //initial state
     int M = 1;
-    int N = 7;                        // number of states
-    int state = M;                // current state
+    // number of states
+    int N = 7;
+    // current state
+    int state = M;
+    // numbers of steps for coming from initial state to 0 state
     int steps = 0;
+    // Array of steps
     ArrayList stateList = new ArrayList();
-
+    //Create transition Matrix
+    // true = default Matrix
+    // false = clear
     public double[][] createArray(boolean setDefault) {
         if (setDefault) {
             transition = transition2;
@@ -64,7 +73,6 @@ public class MarkovModel {
                 temp += transition[i][j];
             }
             if ((temp - 1) < 0.00001 && temp != 0.0) {
-                System.out.println(temp);
                 temp = 0;
             } else {
                 System.out.println("False statment for transition matrix");
@@ -99,17 +107,16 @@ public class MarkovModel {
                 }
 
             }
-            System.out.println("The number of steps =  " + steps);
             return steps;
         } else {
             return -1;
         }
     }
-
+    //Set length
     public void setN(int n) {
         this.N = n;
     }
-
+    //Set initial state
     public void setM(int m) {
         if (m >= N) {
             System.out.println("Too big start value");
@@ -119,7 +126,7 @@ public class MarkovModel {
         }
 
     }
-
+    //Get length
     public int getN() {
         return N;
     }

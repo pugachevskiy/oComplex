@@ -14,15 +14,50 @@ public class Markov implements ActionListener {
 
     public Markov() {
         markovModel = new MarkovModel();
-        gui = new MarkovView(markovModel.getN(), markovModel.createArray(true), markovModel.getM());
-        addListener();
+        gui = new MarkovView(markovModel.getN(), markovModel.getM());
+        gui.addListener(this);
+        setDefaultMatrix();
     }
 
-    private void addListener() {
-        gui.getSolve().addActionListener(this);
-        gui.getNewTable().addActionListener(this);
-        gui.getSetDefault().addActionListener(this);
-        gui.getLengthTextField().addActionListener(this);
+    private void createNewTable(){
+        markovModel.setN(gui.getLength());
+        markovModel.setM(gui.getStart());
+        gui.clearPanel();
+        gui.setStep("");
+        gui.addTable(gui.getLength(), markovModel.createArray(false));
+    }
+
+
+    private void setDefaultMatrix(){
+        markovModel.setN(7);
+        markovModel.setM(1);
+        gui.setLength(7);
+        gui.setStart(1);
+        gui.clearPanel();
+        gui.setStep("");
+        gui.addTable(gui.getLength(), markovModel.createArray(true));
+    }
+
+    private void solveMatrix() {
+        markovModel.setN(gui.getLength());
+        markovModel.setM(gui.getStart());
+        gui.setStep("");
+        markovModel.setTransition(gui.getTable(markovModel.getN()));
+        gui.setStep(String.valueOf(markovModel.solveChain()));
+        String step = String.valueOf(markovModel.getM());
+        for (int i = 1; i < markovModel.getStateList().size(); i++) {
+            step = step + " -> " + String.valueOf(markovModel.getStateList().get(i));
+        }
+        gui.setStateTextField(step);
+        markovModel.clearStateList();
+    }
+
+    private void newLength(){
+        gui.clearPanel();
+        markovModel.setN(gui.getLength());
+        markovModel.setM(gui.getStart());
+        gui.setStep("");
+        gui.addTable(gui.getLength(), markovModel.createArray(false));
     }
 
     @Override
@@ -30,45 +65,18 @@ public class Markov implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "New":
-                markovModel.setN(gui.getLength());
-                markovModel.setM(gui.getStart());
-                gui.clearPanel();
-                gui.setStep("");
-                gui.addTable(gui.getLength(), markovModel.createArray(false));
+                createNewTable();
                 break;
-
             case "Default":
-                markovModel.setN(7);
-                markovModel.setM(1);
-                gui.setLength(7);
-                gui.setStart(1);
-                gui.clearPanel();
-                gui.setStep("");
-                gui.addTable(gui.getLength(), markovModel.createArray(true));
+                setDefaultMatrix();
                 break;
             case "Solve":
-                markovModel.setN(gui.getLength());
-                markovModel.setM(gui.getStart());
-                gui.clearPanel();
-                gui.setStep("");
-                gui.addTable(gui.getLength(), markovModel.transition);
-                markovModel.setTransition(gui.getTable(markovModel.getN()));
-                gui.setStep(String.valueOf(markovModel.solveChain()));
-                String step = String.valueOf(markovModel.getM());
-                for (int i = 1; i < markovModel.getStateList().size(); i++) {
-                    step = step + " -> " + String.valueOf(markovModel.getStateList().get(i));
-                }
-                gui.setStateTextField(step);
-                markovModel.clearStateList();
+                solveMatrix();
                 break;
             default:
                 break;
             case "length":
-                gui.clearPanel();
-                markovModel.setN(gui.getLength());
-                markovModel.setM(gui.getStart());
-                gui.setStep("");
-                gui.addTable(gui.getLength(), markovModel.createArray(false));
+                newLength();
                 break;
 
         }

@@ -2,6 +2,7 @@ package com.openComplex.app.GraphTheory.MarkovKette;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
@@ -12,18 +13,17 @@ public class MarkovView {
     private JFrame frame;
     private JPanel panel,tablePanel, downPanel ;
     private int length,start;
-    private JButton solve,newTable, setDefault;
-    private JLabel stepLabel,step;
+    private JButton solveButton,newTableButton, setDefaultButton;
+    private JLabel step;
     private JTextArea stateTextField;
     private List<JTextField> transition = new ArrayList<>();
     private JTextField lengthTextField, startPositionTextField;
 
-    public MarkovView(int size, double[][] transitionArray, int start){
+    public MarkovView(int size, int start){
         this.length = size;
         this.start = start;
         init();
         addTopPanel();
-        addTable(size, transitionArray);
         addBottomPanel();
         frame.pack();
     }
@@ -43,23 +43,25 @@ public class MarkovView {
     }
 
     private void addTopPanel(){
-        newTable = new JButton("New");
-        newTable.setActionCommand("New");
-        setDefault = new JButton("Default");
-        setDefault.setActionCommand("Default");
-        solve = new JButton("Solve");
-        solve.setActionCommand("Solve");
-        panel.add(newTable);
-        panel.add(setDefault);
-        panel.add(solve);
+        newTableButton = new JButton("New");
+        newTableButton.setActionCommand("New");
+        setDefaultButton = new JButton("Default");
+        setDefaultButton.setActionCommand("Default");
+        solveButton = new JButton("Solve");
+        solveButton.setActionCommand("Solve");
+        panel.add(newTableButton);
+        panel.add(setDefaultButton);
+        panel.add(solveButton);
         JLabel lengthLabel = new JLabel("Length");
         panel.add(lengthLabel);
         lengthTextField = new JTextField(String.valueOf(length));
+        lengthTextField.setPreferredSize(new Dimension(40, 30));
         lengthTextField.setActionCommand("length");
         panel.add(lengthTextField);
         JLabel startPositionLabel = new JLabel("Start position");
         panel.add(startPositionLabel);
-        startPositionTextField = new JTextField(String.valueOf(length - start));
+        startPositionTextField = new JTextField(String.valueOf(start));
+        startPositionTextField.setPreferredSize(new Dimension(40,30));
         panel.add(startPositionTextField);
     }
 
@@ -70,17 +72,15 @@ public class MarkovView {
                 transition.add(new JTextField(String.valueOf(transitionArray[i][j])));
             }
         }
-
-        for (int i = 0; i < transition.size(); i++){
-                tablePanel.add(transition.get(i));
-            }
+        for (JTextField aTransition : transition) {
+            tablePanel.add(aTransition);
+        }
         tablePanel.updateUI();
         frame.pack();
     }
 
-
     private void addBottomPanel(){
-        stepLabel = new JLabel("The number of steps = ");
+        JLabel stepLabel = new JLabel("The number of steps = ");
         step = new JLabel("");
         downPanel.setLayout(new BorderLayout());
         downPanel.add(stepLabel, BorderLayout.CENTER);
@@ -91,14 +91,6 @@ public class MarkovView {
         downPanel.add(stateTextField,BorderLayout.SOUTH);
     }
 
-    public JButton getSolve(){
-        return solve;
-    }
-
-    public JButton getNewTable() {return newTable;}
-
-    public JButton getSetDefault(){return setDefault;}
-
     public void clearPanel(){
         tablePanel.removeAll();
         transition.removeAll(transition);
@@ -107,10 +99,6 @@ public class MarkovView {
 
     public void setStep(String text){
         step.setText(text);
-    }
-
-    public JTextField getLengthTextField(){
-        return lengthTextField;
     }
 
     public void setStateTextField(String step){
@@ -150,5 +138,12 @@ public class MarkovView {
         this.start = start;
         startPositionTextField.setText(String.valueOf(start));
         startPositionTextField.updateUI();
+    }
+
+    public void addListener(ActionListener listener){
+        solveButton.addActionListener(listener);
+        newTableButton.addActionListener(listener);
+        setDefaultButton.addActionListener(listener);
+        lengthTextField.addActionListener(listener);
     }
 }
