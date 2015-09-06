@@ -1,6 +1,7 @@
 package com.openComplex.app.mainWindow.View;
 
 import com.openComplex.app.App;
+import com.openComplex.app.mainWindow.Listener.MFrameKeyListener;
 import com.openComplex.app.mainWindow.Listener.MenubarListener;
 
 import javax.swing.*;
@@ -30,6 +31,7 @@ public class MainView extends JFrame {
     private static final List<String> MENUITEM = Arrays.asList(OVERVIEWMENUITEM, ABOUTMENUITEM, HELPMENUITEM);
 
     public static final String BACKBUTTONPICTUREPATH = "resources/pfeil.png";
+    public static final String iconPath = "resources/Icon_grau.png";
     public static final Font HEADINGFONT = new Font(new JLabel().getFont().getFontName(), new JLabel().getFont().getStyle(), 18);
 
 
@@ -52,7 +54,6 @@ public class MainView extends JFrame {
         mainPanel.add(new DynamicPanelView(), mainPanelView.dsButtonText);
         mainFrame.add(mainPanel, BorderLayout.CENTER);
         //Adds a cardlayout to the frame to optimize switching between menus.
-       // mainPanel.setLayout(cardLayout = new CardLayout());
         this.updateGUI(mainPanelView.mainButtonText);
 
         //infoField to show various information during program
@@ -62,9 +63,11 @@ public class MainView extends JFrame {
         infoField.setText("Welcome to OpenComplex!");
 
         mainFrame.setBounds(350, 300, 500, 300);
-        Image leftIcon = getDefaultToolkit().getImage(App.iconPath);
+        Image leftIcon = getDefaultToolkit().getImage(iconPath);
         mainFrame.setIconImage(leftIcon);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        mainFrame.addKeyListener(new MFrameKeyListener());
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
 

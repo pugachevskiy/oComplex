@@ -7,8 +7,8 @@ import javax.swing.*;
 
 public class App {
     public static MainView gui;
-    public static final String versionNumber = "0.01", iconPath = "resources/Icon.png",
-            logoPath = "resources/logoUni.png", overviewPath = "resources/Mindmap.png";
+    public static final String versionNumber = "0.01", iconPath = "resources/Icon_braungelb.png",
+            logoPath = "resources/new/blaugelb.png", overviewPath = "resources/Mindmap.png";
 
     public static void main(String[] argv){
         //Try to use Windows Look&Feel for program.
