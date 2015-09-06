@@ -26,8 +26,6 @@ public class mainPanelView extends JPanel {
     private Image scaledImage;
     private ImageIcon icon;
 
-    String logoPath = "resources/braungelb.png";
-
     public mainPanelView() {
         this.setLayout(new BorderLayout());
         this.add(this.createLeftPanel(), BorderLayout.WEST);
@@ -39,7 +37,7 @@ public class mainPanelView extends JPanel {
 
     //leftPanel contains important information about the program.
     private JPanel createLeftPanel() {
-        leftIcon = Toolkit.getDefaultToolkit().getImage(logoPath);
+        leftIcon = Toolkit.getDefaultToolkit().getImage(App.logoPath);
         scaledImage = leftIcon.getScaledInstance(300, 90, Image.SCALE_SMOOTH);
         icon = new ImageIcon(scaledImage);
 

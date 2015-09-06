@@ -31,7 +31,6 @@ public class MainView extends JFrame {
     private static final List<String> MENUITEM = Arrays.asList(OVERVIEWMENUITEM, ABOUTMENUITEM, HELPMENUITEM);
 
     public static final String BACKBUTTONPICTUREPATH = "resources/pfeil.png";
-    public static final String iconPath = "resources/Icon_grau.png";
     public static final Font HEADINGFONT = new Font(new JLabel().getFont().getFontName(), new JLabel().getFont().getStyle(), 18);
 
 
@@ -63,7 +62,7 @@ public class MainView extends JFrame {
         infoField.setText("Welcome to OpenComplex!");
 
         mainFrame.setBounds(350, 300, 500, 300);
-        Image leftIcon = getDefaultToolkit().getImage(iconPath);
+        Image leftIcon = getDefaultToolkit().getImage(App.iconPath);
         mainFrame.setIconImage(leftIcon);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
