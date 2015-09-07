@@ -4,8 +4,6 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals2.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
-
-import javax.swing.*;
 import java.awt.*;
 
 /**

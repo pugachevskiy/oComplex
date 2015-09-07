@@ -11,6 +11,8 @@ import com.openComplex.app.DynamicalSystems.Fractals2.View.View;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,20 +25,25 @@ public class Controller {
     View gui = new View();
     Model model = new Model();
     Fractal fractal;
+    ListSelectionListener listSelectionListener;
+    boolean flag = false;
 
     public Controller() {
         gui.createGui();
-        createCombobox();
         addListener(gui.getSlider(), gui.getComboBox());
+        createCombobox();
         createFractal();
-        addListenerSearch(gui.getSearchCopyTextField(), gui.getSearchFactorTextField(), gui.getSearchButton());
+        addListenerSearch(gui.getSearchButton());
         addListenerReset();
+        addStartButtonListener();
     }
 
     private void createCombobox() {
         for (int i = 0; i < FractalsCollection.FRACTALS.size(); i++) {
-            gui.getComboBox().addItem(FractalsCollection.FRACTALS.get(i).get(0));
+            gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
         }
+        gui.getComboBox().setSelectedIndex(0);
+
     }
 
     public void createFractal() {
@@ -48,80 +55,81 @@ public class Controller {
         model.setDicription(gui.getDiscriptionLabel(), fractal.getDicription());
         model.addFractal(fractal, gui.getFractalPanel());
         gui.getFractalPanel().grabFocus();
-
+        gui.updateDescription(FractalsCollection.FRACTALS.get(gui.getComboBox().getSelectedIndex()).get(4));
         model.updateFractal(gui.getFractalPanel());
+
     }
 
-    public void addListener(JSlider slider, JComboBox comboBox) {
+    private void clearComboBox() {
+        gui.getComboBox().removeListSelectionListener(listSelectionListener);
+        gui.listModel.clear();
+        createCombobox();
+        gui.getComboBox().addListSelectionListener(listSelectionListener);
+    }
+
+    private void addListener(JSlider slider, JList comboBox) {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 model.setIter(gui.getIterLabel(), gui.getSlider());
-                model.deleteFractal(fractal, gui.getFractalPanel());
+                model.deleteFractal(gui.getFractalPanel());
                 createFractal();
                 model.updateFractal(gui.getFractalPanel());
             }
         });
-        comboBox.addActionListener(new ActionListener() {
+
+        comboBox.addListSelectionListener(listSelectionListener = new ListSelectionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                model.deleteFractal(fractal, gui.getFractalPanel());
+            public void valueChanged(ListSelectionEvent e) {
+                model.deleteFractal(gui.getFractalPanel());
                 createFractal();
                 model.updateFractal(gui.getFractalPanel());
             }
         });
     }
 
-    public void addListenerSearch(final JTextField textFieldCopy, final JTextField textFieldFactor, JButton button) {
+    private void addListenerSearch(JButton button) {
         button.addActionListener(new ActionListener() {
                                      @Override
                                      public void actionPerformed(ActionEvent e) {
-                                         String searchCopy = textFieldCopy.getText();
-                                         String searchFactor = textFieldFactor.getText();
-
+                                         String searchCopy = gui.getSearchCopyTextField().getText();
+                                         String searchFactor = gui.getSearchFactorTextField().getText();
                                          int counter = 0;
                                          for (int i = 0; i < FractalsCollection.FRACTALS.size(); i++) {
                                              if ((searchCopy.equals("")) && (searchFactor.equals(""))) {
                                                  createCombobox();
+                                                 break;
                                              }
                                              if ((!searchCopy.equals("")) && (searchFactor.equals(""))) {
                                                  if (FractalsCollection.FRACTALS.get(i).get(1).equals(searchCopy)) {
                                                      counter++;
-                                                     gui.getComboBox().addItem(FractalsCollection.FRACTALS.get(i).get(0));
-                                                     gui.getComboBox().setSelectedIndex(gui.getComboBox().getItemCount() - 1);
+                                                     gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
+                                                     gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
                                              }
                                              if ((searchCopy.equals("")) && (!searchFactor.equals(""))) {
-                                                 System.out.print(searchCopy);
                                                  if (FractalsCollection.FRACTALS.get(i).get(2).equals(searchFactor)) {
                                                      counter++;
-                                                     gui.getComboBox().addItem(FractalsCollection.FRACTALS.get(i).get(0));
-                                                     gui.getComboBox().setSelectedIndex(gui.getComboBox().getItemCount() - 1);
+                                                     gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
+                                                     gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
                                              }
                                              if ((!searchCopy.equals("")) && (!searchFactor.equals(""))) {
-                                                 if (FractalsCollection.FRACTALS.get(i).get(2).equals(searchFactor) && FractalsCollection.FRACTALS.get(i).get(1).equals(searchCopy)) {
+                                                 if (FractalsCollection.FRACTALS.get(i).get(2).equals(searchFactor)
+                                                         && FractalsCollection.FRACTALS.get(i).get(1).equals(searchCopy)) {
                                                      counter++;
-                                                     gui.getComboBox().addItem(FractalsCollection.FRACTALS.get(i).get(0));
-                                                     gui.getComboBox().setSelectedIndex(gui.getComboBox().getItemCount() - 1);
+                                                     gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
+                                                     gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
                                              }
                                          }
 
-                                         if (counter != 0)
-
-                                         {
-                                             int all = gui.getComboBox().getItemCount();
+                                         if (counter != 0) {
+                                             int all = gui.listModel.getSize();
                                              for (int i = 0; i < all - counter; i++)
-                                                 gui.getComboBox().removeItemAt(0);
-                                         } else
-
-                                         {
-                                             createCombobox();
-                                             int all = gui.getComboBox().getItemCount();
-                                             for (int i = 0; i < all - FractalsCollection.FRACTALS.size(); i++)
-                                                 gui.getComboBox().removeItemAt(0);
-
+                                                 gui.listModel.remove(0);
+                                         } else {
+                                             clearComboBox();
                                              JOptionPane.showMessageDialog(null, "Kein Fractal");
                                          }
                                      }
@@ -135,10 +143,40 @@ public class Controller {
         gui.getResetButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createCombobox();
-                int all = gui.getComboBox().getItemCount();
-                for (int i = 0; i < all - FractalsCollection.FRACTALS.size(); i++)
-                    gui.getComboBox().removeItemAt(0);
+                clearComboBox();
+            }
+        });
+    }
+
+    private void addStartButtonListener() {
+        gui.getStopButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flag = false;
+                System.out.print("1");
+            }
+        });
+        gui.getStartButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flag = true;
+                new Thread() {
+                    public void run() {
+                        try {
+                            while (flag) {
+                                if (gui.getSlider().getValue() < 7) {
+                                    gui.getSlider().setValue(gui.getSlider().getValue() + 1);
+                                } else {
+                                    gui.getSlider().setValue(0);
+                                }
+                                sleep(500);
+                            }
+                            System.out.print("2");
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }.start();
             }
         });
     }

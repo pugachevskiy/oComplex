@@ -19,21 +19,20 @@ public class View {
     private GLJPanel fractalPanel;
     private JPanel menuPanel;
     private JSlider stepSlider;
-
-    private JList nameOfFractalsComboBox = new JList(FractalsCollection.FRACTALS_NAMES);
+    public DefaultListModel listModel = new DefaultListModel();
+    private JList nameOfFractalsComboBox = new JList(listModel);
     private JTextPane description;
-    private JComboBox nameOfFractalComboBox = new JComboBox();
     private JLabel name = new JLabel("Choose fractal");
 
-    private JButton searchButton, resetButton;
+    private JButton searchButton, resetButton, startButton, stopButton;
     private JTextField searchFactorTextField, searchCopyTextField;
 
     private static final int MAXSTEP = 7;
     private static final int MINSTEP = 0;
     private static final int STARTSTEP = 2;
 
-    private JLabel iterLabel, dimensionLabel = new JLabel(),factorLabel = new JLabel(),copyLabel = new JLabel(), discriptionLabel = new JLabel();
-    private List<JLabel> labels= Arrays.asList(copyLabel,factorLabel,dimensionLabel,discriptionLabel);
+    private JLabel iterLabel, dimensionLabel = new JLabel(), factorLabel = new JLabel(), copyLabel = new JLabel(), discriptionLabel = new JLabel();
+    private List<JLabel> labels = Arrays.asList(copyLabel, factorLabel, dimensionLabel, discriptionLabel);
 
     public void createGui() {
         mainField = new JFrame("Fractals");
@@ -77,11 +76,16 @@ public class View {
         sliderPanel.add(slider);
 
         menuPanel.add(sliderPanel);
-
+        startButton = new JButton("Start");
+        startButton.setActionCommand("Start");
+        stopButton = new JButton("Stop");
+        stopButton.setActionCommand("Stop");
+        menuPanel.add(startButton);
+        menuPanel.add(stopButton);
         //createCombobox();
         JPanel comboPanel = new JPanel();
         comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.Y_AXIS));
-        JPanel namePanel = new JPanel(new GridLayout(1,3));
+        JPanel namePanel = new JPanel(new GridLayout(1, 3));
         namePanel.add(new JLabel(" "));
         namePanel.add(name);
         namePanel.add(new JLabel(" "));
@@ -100,14 +104,14 @@ public class View {
     }
 
 
-    private void createInfo(){
+    private void createInfo() {
 
         JPanel searchFactorPanel = new JPanel(new GridLayout(3, 3));
 
-        for (int i = 1; i < FractalsCollection.TITEL.size()-1; i++) {
+        for (int i = 1; i < FractalsCollection.TITEL.size() - 1; i++) {
             searchFactorPanel.add(new JLabel(FractalsCollection.TITEL.get(i)));
             searchFactorPanel.add(new JLabel(" "));
-            searchFactorPanel.add(labels.get(i-1));
+            searchFactorPanel.add(labels.get(i - 1));
         }
         menuPanel.add(searchFactorPanel);
 
@@ -136,7 +140,7 @@ public class View {
         menuPanel.add(descriptonPanel);
     }
 
-    private void createSearch(){
+    private void createSearch() {
 
         JPanel searchPanel = new JPanel(new GridLayout(2, 3));
         searchFactorTextField = new JTextField();
@@ -145,7 +149,7 @@ public class View {
         searchCopyTextField.setEditable(true);
         searchFactorTextField.setPreferredSize(new Dimension(50, 20));
         searchFactorTextField.setEditable(true);
-        searchCopyTextField.setName(  "Copy");
+        searchCopyTextField.setName("Copy");
         searchFactorTextField.setName("Factor");
 
         JLabel copy = new JLabel("Copy");
@@ -172,52 +176,79 @@ public class View {
 
     }
 
-    public JComboBox getComboBox(){
-        return this.nameOfFractalComboBox;
+    public JList getComboBox() {
+        return this.nameOfFractalsComboBox;
     }
-    public JSlider getSlider(){
+
+    public JSlider getSlider() {
         return this.stepSlider;
     }
-    public GLJPanel getFractalPanel(){
+
+    public GLJPanel getFractalPanel() {
         return this.fractalPanel;
     }
-    public JLabel getIterLabel(){
+
+    public JLabel getIterLabel() {
         return this.iterLabel;
     }
-    public JLabel getDimensionLabel(){
+
+    public JLabel getDimensionLabel() {
         return this.dimensionLabel;
     }
-    public JLabel getFactorLabel(){
+
+    public JLabel getFactorLabel() {
         return this.factorLabel;
     }
-    public JLabel getCopyLabel(){
+
+    public JLabel getCopyLabel() {
         return this.copyLabel;
     }
-    public JLabel getDiscriptionLabel(){
+
+    public JLabel getDiscriptionLabel() {
         return this.discriptionLabel;
     }
-    public JButton getSearchButton(){ return this.searchButton;}
-    public JTextField getSearchFactorTextField(){return this.searchFactorTextField;}
-    public JTextField getSearchCopyTextField() { return this.searchCopyTextField;}
-    public JButton getResetButton(){return this.resetButton;}
-    public JFrame getMainField(){return this.mainField;}
 
+    public JButton getSearchButton() {
+        return this.searchButton;
+    }
+
+    public JTextField getSearchFactorTextField() {
+        return this.searchFactorTextField;
+    }
+
+    public JTextField getSearchCopyTextField() {
+        return this.searchCopyTextField;
+    }
+
+    public JButton getResetButton() {
+        return this.resetButton;
+    }
+
+    public JButton getStartButton() {
+        return this.startButton;
+    }
+
+    public JButton getStopButton() {
+        return this.stopButton;
+    }
 
     public void updateDescription(String text) {
         description.setText(text);
     }
 
-    static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,
-                             int height) {
+    private void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width,
+                              int height) {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = x; gbc.gridy = y;
-        gbc.gridwidth = width; gbc.gridheight = height;
-        gbc.weightx = 1; gbc.weighty = 1;
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = width;
+        gbc.gridheight = height;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
         gbl.setConstraints(c, gbc);
         cont.add(c);
-
     }
 }
 

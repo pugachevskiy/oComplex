@@ -17,8 +17,8 @@ public class Model {
         label.setText(String.valueOf(getSliderValue(slider)));
     }
 
-    public String getBox(JComboBox comboBox) {
-        return comboBox.getSelectedItem().toString();
+    public String getBox(JList comboBox) {
+        return comboBox.getSelectedValue().toString();
     }
 
     public void addFractal(Fractal fractal, GLJPanel rootPanel) {
@@ -29,7 +29,7 @@ public class Model {
         rootPanel.revalidate();
     }
 
-    public void deleteFractal(Fractal fractal, GLJPanel rootPanel) {
+    public void deleteFractal(GLJPanel rootPanel) {
         rootPanel.removeAll();
         rootPanel.revalidate();
     }
