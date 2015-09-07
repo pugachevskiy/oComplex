@@ -38,7 +38,7 @@ public class mainPanelView extends JPanel {
     //leftPanel contains important information about the program.
     private JPanel createLeftPanel() {
         leftIcon = Toolkit.getDefaultToolkit().getImage(App.logoPath);
-        scaledImage = leftIcon.getScaledInstance(300, 90, Image.SCALE_SMOOTH);
+        scaledImage = leftIcon.getScaledInstance(300, 100, Image.SCALE_SMOOTH);
         icon = new ImageIcon(scaledImage);
 
         leftPanel = new JPanel();

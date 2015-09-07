@@ -22,7 +22,7 @@ public class View {
     public DefaultListModel listModel = new DefaultListModel();
     private JList nameOfFractalsComboBox = new JList(listModel);
     private JTextPane description;
-    private JLabel name = new JLabel("Choose fractal");
+    private JLabel name = new JLabel("Choose fractal"), stepLabel = new JLabel("Step");
 
     private JButton searchButton, resetButton, startButton, stopButton;
     private JTextField searchFactorTextField, searchCopyTextField;
@@ -57,31 +57,31 @@ public class View {
     }
 
     private void createSlider() {
-
         JPanel sliderPanel = new JPanel();
         sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
-
         stepSlider = new JSlider(MINSTEP, MAXSTEP, STARTSTEP);
-        JLabel stepLabel = new JLabel("Step");
         iterLabel = new JLabel(String.valueOf(STARTSTEP));
 
         JPanel slider = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         slider.setLayout(gbl);
-
         addComponent(slider, gbl, stepSlider, 0, 0, 5, 1);
         addComponent(slider, gbl, iterLabel, 5, 0, 1, 1);
 
-        sliderPanel.add(stepLabel);
-        sliderPanel.add(slider);
-
-        menuPanel.add(sliderPanel);
         startButton = new JButton("Start");
         startButton.setActionCommand("Start");
         stopButton = new JButton("Stop");
         stopButton.setActionCommand("Stop");
-        menuPanel.add(startButton);
-        menuPanel.add(stopButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 2));
+        //buttonPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
+        buttonPanel.add(startButton);
+        buttonPanel.add(stopButton);
+
+        sliderPanel.add(stepLabel);
+        sliderPanel.add(slider);
+        sliderPanel.add(buttonPanel);
+
         //createCombobox();
         JPanel comboPanel = new JPanel();
         comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.Y_AXIS));
@@ -92,14 +92,10 @@ public class View {
 
         nameOfFractalsComboBox.setSelectedIndex(0);
         comboPanel.add(namePanel);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //für JList
         comboPanel.add(nameOfFractalsComboBox);
-        //für JComboBox
-        //comboPanel.add(nameOfFractalComboBox);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        menuPanel.add(sliderPanel);
         menuPanel.add(comboPanel);
     }
 
