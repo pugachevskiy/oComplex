@@ -24,7 +24,7 @@ public class Field extends JPanel implements MouseListener {
         this.addMouseListener(this);
         setTaube();
     }
-
+//
     public void nextStep() {
         Cell[][] temp = field;
         for (int i = 1; i < 200; i++) {
