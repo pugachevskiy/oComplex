@@ -21,13 +21,14 @@ public class Cell extends JComponent {
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
     }
 
-    public void get_to_life(){
-         cell = !cell;
-     }
+    public void get_to_life() {
+        cell = !cell;
+    }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.color = color;
     }
+
     public void setColor(int index) {
         switch (index) {
             case 0:
@@ -49,10 +50,11 @@ public class Cell extends JComponent {
 
     }
 
-    public boolean getCell(){
+    public boolean getCell() {
         return cell;
     }
-    public void setCell(boolean cell){
+
+    public void setCell(boolean cell) {
         this.cell = cell;
     }
 
@@ -77,7 +79,6 @@ public class Cell extends JComponent {
     public Dimension getMinimumSize() {
         return getPreferredSize();
     }
-
 
 
 }

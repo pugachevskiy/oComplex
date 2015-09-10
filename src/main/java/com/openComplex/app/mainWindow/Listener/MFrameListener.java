@@ -28,7 +28,8 @@ public class MFrameListener implements ActionListener {
                 Controller fractal = new Controller();
                 break;
             case "Conway's Game of Life":
-                Life gol = new Life();
+               // Life gol = new Life();
+                com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller();
                 break;
             case "Wolfram's universe":
                 MainWolfram wolf = new MainWolfram();
