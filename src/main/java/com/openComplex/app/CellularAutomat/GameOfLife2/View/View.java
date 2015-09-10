@@ -2,6 +2,7 @@ package com.openComplex.app.CellularAutomat.GameOfLife2.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by strange on 10/09/15.
@@ -10,9 +11,9 @@ public class View {
     private JFrame mainFrame;
     private JButton stopButton, startButton, nextButton, endButton;
     private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
-    public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon",  "Figure 1", "Gliter", "blank"}, CELLFORMFILL = { "Square"},//, "Hexagon" },
-            CELLGROESSEFILL = { "Small", "Medium", "Large" }, CELLFARBEFILL = { "Black", "Blue", "Green", "Yellow" },
-            GESCHWINDIGKEITFILL = { "Slow", "Normal", "Fast" };
+    public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon", "Figure 1", "Gliter", "blank"}, CELLFORMFILL = {"Square"},//, "Hexagon" },
+            CELLGROESSEFILL = {"Small", "Medium", "Large"}, CELLFARBEFILL = {"Black", "Blue", "Green", "Yellow"},
+            GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
     private JMenuItem speichernItem, exitItem, spielRegelnItem;
     public static final String SLOW = "Slow";
     public static final String NORMAL = "Normal";
@@ -25,6 +26,7 @@ public class View {
     public static final String GREEN = "Green";
     public static final String YELLOW = "Yellow";
     private JLabel counter;
+
     public void init() {
         mainFrame = new JFrame("Conways Game of Life");
 
@@ -43,12 +45,14 @@ public class View {
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
+
     private void addComponentsToPane(Container pane) {
         pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         addControl(pane, c);
     }
+
     private void addControl(Container pane, GridBagConstraints c) {
         JLabel anfangsLabel = new JLabel("Initial model");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -59,6 +63,7 @@ public class View {
         pane.add(anfangsLabel, c);
         anfangsBedingungBox = new JComboBox<>(ANFANGSBEDINGUNGFILL);
         anfangsBedingungBox.setEnabled(true);
+        anfangsBedingungBox.setActionCommand("Init state");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -76,6 +81,7 @@ public class View {
         pane.add(cellFormLabel, c);
         cellFormBox = new JComboBox<>(CELLFORMFILL);
         cellFormBox.setEnabled(true);
+        cellFormBox.setActionCommand("Cell form");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -93,6 +99,7 @@ public class View {
         pane.add(cellGroeßeLabel, c);
         cellGroeßeBox = new JComboBox<>(CELLGROESSEFILL);
         cellGroeßeBox.setEnabled(true);
+        cellGroeßeBox.setActionCommand("Cell size");
         cellGroeßeBox.setSelectedIndex(1);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
@@ -112,6 +119,7 @@ public class View {
 
 
         cellFarbeBox = new JComboBox<>(CELLFARBEFILL);
+        cellFarbeBox.setActionCommand("Cell color");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -131,6 +139,7 @@ public class View {
 
         geschwindigkeitBox = new JComboBox<>(GESCHWINDIGKEITFILL);
         geschwindigkeitBox.setSelectedIndex(1);
+        geschwindigkeitBox.setActionCommand("Speed");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -141,6 +150,7 @@ public class View {
 
         startButton = new JButton("Start");
         startButton.setEnabled(true);
+        startButton.setActionCommand("Start");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -151,6 +161,7 @@ public class View {
 
         stopButton = new JButton("Stop");
         stopButton.setEnabled(false);
+        stopButton.setActionCommand("Stop");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -161,6 +172,7 @@ public class View {
 
         nextButton = new JButton("Next");
         nextButton.setEnabled(true);
+        nextButton.setActionCommand("Next");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
@@ -170,6 +182,7 @@ public class View {
 
 
         endButton = new JButton("Exit");
+        endButton.setActionCommand("Exit");
         endButton.setEnabled(true);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
@@ -195,8 +208,9 @@ public class View {
 
 
     }
+
     // On/Off buttons on Press start/stop button
-    public void activateButtons(){
+    public void activateButtons() {
         stopButton.setEnabled(true);
         startButton.setEnabled(false);
         nextButton.setEnabled(false);
@@ -205,7 +219,8 @@ public class View {
         cellGroeßeBox.setEnabled(false);
         mainFrame.setResizable(false);
     }
-    public void deactivateButtons(){
+
+    public void deactivateButtons() {
         stopButton.setEnabled(false);
         startButton.setEnabled(true);
         nextButton.setEnabled(true);
@@ -216,8 +231,26 @@ public class View {
         mainFrame.setResizable(true);
     }
 
-    public void addField(JPanel panel){
+    public void addField(JPanel panel) {
         mainFrame.add(panel, BorderLayout.CENTER);
     }
+
+    public void addListener(ActionListener listener) {
+        startButton.addActionListener(listener);
+        stopButton.addActionListener(listener);
+        endButton.addActionListener(listener);
+        nextButton.addActionListener(listener);
+        cellFarbeBox.addActionListener(listener);
+        cellFormBox.addActionListener(listener);
+        cellGroeßeBox.addActionListener(listener);
+        anfangsBedingungBox.addActionListener(listener);
+        geschwindigkeitBox.addActionListener(listener);
+
+    }
+
+    public void frameClose() {
+        mainFrame.dispose();
+    }
+
 
 }

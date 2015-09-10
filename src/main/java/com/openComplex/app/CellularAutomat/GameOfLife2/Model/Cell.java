@@ -1,11 +1,17 @@
 package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
+
 
 /**
  * Created by strange on 10/09/15.
  */
-public class Cell {
+public class Cell{
     private int row;
     private int col;
     private boolean status;
@@ -63,6 +69,4 @@ public class Cell {
     public void addNeighbors(){
         this.neighbors++;
     }
-
-
 }

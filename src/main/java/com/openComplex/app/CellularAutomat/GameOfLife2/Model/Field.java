@@ -2,11 +2,16 @@ package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 /**
  * Created by strange on 10/09/15.
  */
-public class Field extends JPanel {
+public class Field extends JPanel implements MouseListener {
     private int size = 30;
     private Cell[][] field = new Cell[200][200];
 
@@ -16,9 +21,54 @@ public class Field extends JPanel {
                 field[i][j] = new Cell(i, j, false, Color.WHITE);
             }
         }
+        this.addMouseListener(this);
         setTaube();
     }
-//
+
+    public void nextStep() {
+        Cell[][] temp = field;
+        for (int i = 1; i < 200; i++) {
+            for (int j = 1; j < 200; j++) {
+                if (temp[i][j].getStatus()) {
+                    setNeigbors(i, j);
+                }
+            }
+        }
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
+                if (temp[i][j].getNeighbors() == 2 && temp[i][j].getStatus()) {
+                    field[i][j].setStatus(true);
+                } else {
+                    if (temp[i][j].getNeighbors() == 3) {
+                        field[i][j].setStatus(true);
+                    } else {
+                        field[i][j].setStatus(false);
+                    }
+
+                }
+            }
+        }
+        for (int i = 1; i < 200; i++) {
+            for (int j = 1; j < 200; j++) {
+                field[i][j].setNeighbors(0);
+            }
+        }
+        repaint();
+    }
+
+    private void setNeigbors(int row, int col) {
+        field[row - 1][col - 1].addNeighbors();
+        field[row][col - 1].addNeighbors();
+        field[row + 1][col - 1].addNeighbors();
+        field[row - 1][col + 1].addNeighbors();
+        field[row][col + 1].addNeighbors();
+        field[row + 1][col + 1].addNeighbors();
+        field[row - 1][col].addNeighbors();
+        field[row + 1][col].addNeighbors();
+
+
+    }
+
     private void setTaube() {
         int width = 20;
         field[width / 2 - 3][width / 2 - 2].setStatus(true);
@@ -111,4 +161,30 @@ public class Field extends JPanel {
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
+        System.out.print(e.getX() / size);
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
