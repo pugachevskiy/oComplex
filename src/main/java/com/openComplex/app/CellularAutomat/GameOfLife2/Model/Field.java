@@ -18,7 +18,7 @@ public class Field extends JPanel {
         }
         setTaube();
     }
-
+//
     private void setTaube() {
         int width = 20;
         field[width / 2 - 3][width / 2 - 2].setStatus(true);
