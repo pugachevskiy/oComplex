@@ -1,11 +1,6 @@
 package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 
 /**

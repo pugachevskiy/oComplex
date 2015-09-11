@@ -217,7 +217,7 @@ public class View {
         anfangsBedingungBox.setEnabled(false);
         cellFormBox.setEnabled(false);
         cellGroeßeBox.setEnabled(false);
-        mainFrame.setResizable(false);
+  //      mainFrame.setResizable(false);
     }
 
     public void deactivateButtons() {
@@ -227,10 +227,10 @@ public class View {
         anfangsBedingungBox.setEnabled(true);
         cellFormBox.setEnabled(true);
         cellGroeßeBox.setEnabled(true);
-
-        mainFrame.setResizable(true);
+//        mainFrame.setResizable(true);
     }
 
+    // add Field Jpanel to JFrame
     public void addField(JPanel panel) {
         mainFrame.add(panel, BorderLayout.CENTER);
     }
@@ -245,11 +245,14 @@ public class View {
         cellGroeßeBox.addActionListener(listener);
         anfangsBedingungBox.addActionListener(listener);
         geschwindigkeitBox.addActionListener(listener);
-
     }
 
     public void frameClose() {
         mainFrame.dispose();
+    }
+
+    public void setCounter(String text){
+        this.counter.setText(text);
     }
 
 

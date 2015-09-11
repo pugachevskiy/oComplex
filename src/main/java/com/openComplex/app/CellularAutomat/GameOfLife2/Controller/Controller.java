@@ -3,7 +3,6 @@ package com.openComplex.app.CellularAutomat.GameOfLife2.Controller;
 import com.openComplex.app.CellularAutomat.GameOfLife2.Model.Field;
 import com.openComplex.app.CellularAutomat.GameOfLife2.View.View;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +14,7 @@ public class Controller implements ActionListener{
     private View gui;
     private boolean lifegoeson = false;
     private int gamespeed = 100;
+    private int counter = 0;
 
     public Controller(){
         field = new Field();
@@ -28,7 +28,11 @@ public class Controller implements ActionListener{
             public void run() {
                 try {
                     while (lifegoeson) {
-                        field.nextStep();
+                        if(field.nextStep()) {
+                            updateCounter();
+                        } else {
+                            lifegoeson = false;
+                        }
                         sleep(gamespeed);
                     }
                 } catch (InterruptedException e) {
@@ -36,6 +40,10 @@ public class Controller implements ActionListener{
                 }
             }
         }.start();
+    }
+    private void updateCounter(){
+        counter++;
+        gui.setCounter(String.valueOf(counter));
     }
 
     @Override
@@ -52,8 +60,11 @@ public class Controller implements ActionListener{
                 gui.deactivateButtons();
                 break;
             case "Next":
-                field.nextStep();
-                //updateCounter();
+                if(field.nextStep()) {
+                    updateCounter();
+                } else {
+                    lifegoeson = false;
+                }
                 break;
             case "Exit":
                 gui.frameClose();

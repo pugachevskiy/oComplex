@@ -2,11 +2,9 @@ package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 /**
  * Created by strange on 10/09/15.
@@ -24,23 +22,26 @@ public class Field extends JPanel implements MouseListener {
         this.addMouseListener(this);
         setTaube();
     }
-//
-    public void nextStep() {
+
+    public boolean nextStep() {
         Cell[][] temp = field;
-        for (int i = 1; i < 200; i++) {
-            for (int j = 1; j < 200; j++) {
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
                 if (temp[i][j].getStatus()) {
                     setNeigbors(i, j);
                 }
             }
         }
+        boolean isAlive = false;
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
                 if (temp[i][j].getNeighbors() == 2 && temp[i][j].getStatus()) {
                     field[i][j].setStatus(true);
+                    isAlive = true;
                 } else {
                     if (temp[i][j].getNeighbors() == 3) {
                         field[i][j].setStatus(true);
+                        isAlive = true;
                     } else {
                         field[i][j].setStatus(false);
                     }
@@ -48,25 +49,40 @@ public class Field extends JPanel implements MouseListener {
                 }
             }
         }
-        for (int i = 1; i < 200; i++) {
-            for (int j = 1; j < 200; j++) {
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
                 field[i][j].setNeighbors(0);
             }
         }
         repaint();
+        return isAlive;
     }
 
     private void setNeigbors(int row, int col) {
-        field[row - 1][col - 1].addNeighbors();
-        field[row][col - 1].addNeighbors();
-        field[row + 1][col - 1].addNeighbors();
-        field[row - 1][col + 1].addNeighbors();
-        field[row][col + 1].addNeighbors();
-        field[row + 1][col + 1].addNeighbors();
-        field[row - 1][col].addNeighbors();
-        field[row + 1][col].addNeighbors();
-
-
+        if (row != 0) {
+            field[row - 1][col].addNeighbors();
+        }
+        if (col !=0){
+            field[row][col - 1].addNeighbors();
+        }
+        if (col != 0 && row != 0) {
+            field[row - 1][col - 1].addNeighbors();
+        }
+        if (row != 0 && col !=200) {
+            field[row - 1][col + 1].addNeighbors();
+        }
+        if (row != 200 && col !=200) {
+            field[row + 1][col + 1].addNeighbors();
+        }
+        if (row != 200) {
+            field[row + 1][col].addNeighbors();
+        }
+        if (col !=200){
+            field[row][col + 1].addNeighbors();
+        }
+        if (row != 200 && col !=0) {
+            field[row + 1][col - 1].addNeighbors();
+        }
     }
 
     private void setTaube() {
