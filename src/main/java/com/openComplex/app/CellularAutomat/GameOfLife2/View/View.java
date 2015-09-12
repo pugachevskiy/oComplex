@@ -234,6 +234,9 @@ public class View {
     public void addField(JPanel panel) {
         mainFrame.add(panel, BorderLayout.CENTER);
     }
+    public void deleteField (JPanel panel){
+        mainFrame.remove(panel);
+    }
 
     public void addListener(ActionListener listener) {
         startButton.addActionListener(listener);
@@ -255,5 +258,20 @@ public class View {
         this.counter.setText(text);
     }
 
+    public int getFigureBox(){
+        return anfangsBedingungBox.getSelectedIndex();
+    }
 
+    public int  getColorBox(){
+        return cellFarbeBox.getSelectedIndex();
+    }
+
+    public int getSpeedBox(){
+        return geschwindigkeitBox.getSelectedIndex();
+    }
+
+    public int getSizeBox(){
+        return cellGroeßeBox.getSelectedIndex();
+    }
 }
+

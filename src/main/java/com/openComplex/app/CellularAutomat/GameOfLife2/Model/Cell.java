@@ -41,7 +41,11 @@ public class Cell{
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if (status) {
+            this.color = color;
+        } else {
+            this.color = Color.WHITE;
+        }
     }
 
     public int getNeighbors() {
@@ -58,7 +62,6 @@ public class Cell{
 
     public void setStatus(boolean status) {
         this.status = status;
-        this.setColor(Color.BLACK);
     }
 
     public void addNeighbors(){
