@@ -14,17 +14,6 @@ public class View {
     public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon", "Figure 1", "Gliter", "blank"}, CELLFORMFILL = {"Square"},//, "Hexagon" },
             CELLGROESSEFILL = {"Small", "Medium", "Large"}, CELLFARBEFILL = {"Black", "Blue", "Green", "Yellow"},
             GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
-    private JMenuItem speichernItem, exitItem, spielRegelnItem;
-    public static final String SLOW = "Slow";
-    public static final String NORMAL = "Normal";
-    public static final String FAST = "Fast";
-    public static final String SMALL = "Small";
-    public static final String MEDIUM = "Medium";
-    public static final String LARGE = "Large";
-    public static final String BLACK = "Black";
-    public static final String BLUE = "Blue";
-    public static final String GREEN = "Green";
-    public static final String YELLOW = "Yellow";
     private JLabel counter;
 
     public void init() {
@@ -38,9 +27,7 @@ public class View {
 
         JPanel menuPanel;
         mainFrame.add(menuPanel = new JPanel(), BorderLayout.WEST);
-
         addComponentsToPane(menuPanel);
-
         mainFrame.requestFocus();
         mainFrame.pack();
         mainFrame.setVisible(true);
@@ -210,31 +197,30 @@ public class View {
     }
 
     // On/Off buttons on Press start/stop button
-    public void activateButtons() {
+    public void deactivateButtons() {
         stopButton.setEnabled(true);
         startButton.setEnabled(false);
         nextButton.setEnabled(false);
         anfangsBedingungBox.setEnabled(false);
         cellFormBox.setEnabled(false);
         cellGroeßeBox.setEnabled(false);
-  //      mainFrame.setResizable(false);
     }
 
-    public void deactivateButtons() {
+    public void activateButtons() {
         stopButton.setEnabled(false);
         startButton.setEnabled(true);
         nextButton.setEnabled(true);
         anfangsBedingungBox.setEnabled(true);
         cellFormBox.setEnabled(true);
         cellGroeßeBox.setEnabled(true);
-//        mainFrame.setResizable(true);
     }
 
     // add Field Jpanel to JFrame
     public void addField(JPanel panel) {
         mainFrame.add(panel, BorderLayout.CENTER);
     }
-    public void deleteField (JPanel panel){
+
+    public void deleteField(JPanel panel) {
         mainFrame.remove(panel);
     }
 
@@ -254,23 +240,23 @@ public class View {
         mainFrame.dispose();
     }
 
-    public void setCounter(String text){
+    public void setCounter(String text) {
         this.counter.setText(text);
     }
 
-    public int getFigureBox(){
+    public int getFigureBox() {
         return anfangsBedingungBox.getSelectedIndex();
     }
 
-    public int  getColorBox(){
+    public int getColorBox() {
         return cellFarbeBox.getSelectedIndex();
     }
 
-    public int getSpeedBox(){
+    public int getSpeedBox() {
         return geschwindigkeitBox.getSelectedIndex();
     }
 
-    public int getSizeBox(){
+    public int getSizeBox() {
         return cellGroeßeBox.getSelectedIndex();
     }
 }

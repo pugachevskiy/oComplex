@@ -2,6 +2,8 @@ package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,28 +12,54 @@ import java.awt.event.MouseListener;
  * Created by strange on 10/09/15.
  */
 public class Field extends JPanel implements MouseListener {
-    private int size = 30;
+    private int size;
     private Cell[][] field;
-    private int length = 0;
+    private int length;
     private Color cellColor;
 
     public Field(int length, int size, Color color) {
         this.cellColor = color;
         this.size = size;
         this.length = length;
-        field = new Cell[length][length];
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
+        init();
+        this.addMouseListener(this);
+        this.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                Field.this.repaint();
+
+            }
+            @Override
+            public void componentMoved(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
+            }
+        });
+
+    }
+
+    public void init(){
+        field = new Cell[200][200];
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
                 field[i][j] = new Cell(i, j, false, Color.BLACK);
             }
         }
-        this.addMouseListener(this);
-        setTaube();
     }
 
     public void setColor(Color color){
         this.cellColor = color;
         this.repaint();
+
     }
 
     public boolean nextStep() {
@@ -101,6 +129,7 @@ public class Field extends JPanel implements MouseListener {
     }
 
     public void setFigure(int index) {
+        setBlank();
         switch (index) {
             case 0:
                 setTaube();
@@ -121,59 +150,56 @@ public class Field extends JPanel implements MouseListener {
     }
 
     private void setTaube() {
-        int width = 20;
-        field[width / 2 - 3][width / 2 - 2].setStatus(true);
-        field[width / 2 - 2][width / 2 - 2].setStatus(true);
-        field[width / 2 - 3][width / 2 - 1].setStatus(true);
-        field[width / 2 - 2][width / 2 - 1].setStatus(true);
-        field[width / 2 - 1][width / 2 - 1].setStatus(true);
-        field[width / 2][width / 2 - 1].setStatus(true);
-        field[width / 2 + 1][width / 2 - 1].setStatus(true);
-        field[width / 2 + 2][width / 2 - 2].setStatus(true);
-        field[width / 2 + 2][width / 2 - 3].setStatus(true);
-        field[width / 2 + 1][width / 2 - 3].setStatus(true);
-        field[width / 2][width / 2 - 3].setStatus(true);
+        field[length / 2 - 3][length / 2 - 2].setStatus(true);
+        field[length / 2 - 2][length / 2 - 2].setStatus(true);
+        field[length / 2 - 3][length / 2 - 1].setStatus(true);
+        field[length / 2 - 2][length / 2 - 1].setStatus(true);
+        field[length / 2 - 1][length / 2 - 1].setStatus(true);
+        field[length / 2][length / 2 - 1].setStatus(true);
+        field[length / 2 + 1][length / 2 - 1].setStatus(true);
+        field[length / 2 + 2][length / 2 - 2].setStatus(true);
+        field[length / 2 + 2][length / 2 - 3].setStatus(true);
+        field[length / 2 + 1][length / 2 - 3].setStatus(true);
+        field[length / 2][length / 2 - 3].setStatus(true);
 
-        field[width / 2 - 3][width / 2 + 2].setStatus(true);
-        field[width / 2 - 2][width / 2 + 2].setStatus(true);
-        field[width / 2 - 3][width / 2 + 1].setStatus(true);
-        field[width / 2 - 2][width / 2 + 1].setStatus(true);
-        field[width / 2 - 1][width / 2 + 1].setStatus(true);
-        field[width / 2][width / 2 + 1].setStatus(true);
-        field[width / 2 + 1][width / 2 + 1].setStatus(true);
-        field[width / 2 + 2][width / 2 + 2].setStatus(true);
-        field[width / 2 + 2][width / 2 + 3].setStatus(true);
-        field[width / 2 + 1][width / 2 + 3].setStatus(true);
-        field[width / 2][width / 2 + 3].setStatus(true);
+        field[length / 2 - 3][length / 2 + 2].setStatus(true);
+        field[length / 2 - 2][length / 2 + 2].setStatus(true);
+        field[length / 2 - 3][length / 2 + 1].setStatus(true);
+        field[length / 2 - 2][length / 2 + 1].setStatus(true);
+        field[length / 2 - 1][length / 2 + 1].setStatus(true);
+        field[length / 2][length / 2 + 1].setStatus(true);
+        field[length / 2 + 1][length / 2 + 1].setStatus(true);
+        field[length / 2 + 2][length / 2 + 2].setStatus(true);
+        field[length / 2 + 2][length / 2 + 3].setStatus(true);
+        field[length / 2 + 1][length / 2 + 3].setStatus(true);
+        field[length / 2][length / 2 + 3].setStatus(true);
     }
 
     private void setFigure1() {
-        int width = length;
         //up
-        field[width / 2 - 1][width / 2 - 1].setStatus(true);
-        field[width / 2 - 2][width / 2 - 1].setStatus(true);
-        field[width / 2 - 3][width / 2 - 1].setStatus(true);
-        field[width / 2 - 3][width / 2].setStatus(true);
-        field[width / 2 - 3][width / 2 + 1].setStatus(true);
-        field[width / 2 - 2][width / 2 + 1].setStatus(true);
-        field[width / 2 - 1][width / 2 + 1].setStatus(true);
+        field[length / 2 - 1][length / 2 - 1].setStatus(true);
+        field[length / 2 - 2][length / 2 - 1].setStatus(true);
+        field[length / 2 - 3][length / 2 - 1].setStatus(true);
+        field[length / 2 - 3][length / 2].setStatus(true);
+        field[length / 2 - 3][length / 2 + 1].setStatus(true);
+        field[length / 2 - 2][length / 2 + 1].setStatus(true);
+        field[length / 2 - 1][length / 2 + 1].setStatus(true);
         //down
-        field[width / 2 + 1][width / 2 - 1].setStatus(true);
-        field[width / 2 + 2][width / 2 - 1].setStatus(true);
-        field[width / 2 + 3][width / 2 - 1].setStatus(true);
-        field[width / 2 + 3][width / 2].setStatus(true);
-        field[width / 2 + 3][width / 2 + 1].setStatus(true);
-        field[width / 2 + 2][width / 2 + 1].setStatus(true);
-        field[width / 2 + 1][width / 2 + 1].setStatus(true);
+        field[length / 2 + 1][length / 2 - 1].setStatus(true);
+        field[length / 2 + 2][length / 2 - 1].setStatus(true);
+        field[length / 2 + 3][length / 2 - 1].setStatus(true);
+        field[length / 2 + 3][length / 2].setStatus(true);
+        field[length / 2 + 3][length / 2 + 1].setStatus(true);
+        field[length / 2 + 2][length / 2 + 1].setStatus(true);
+        field[length / 2 + 1][length / 2 + 1].setStatus(true);
     }
 
     private void setGliter() {
-        int width = length;
-        field[width / 2 - 1][width / 2].setStatus(true);
-        field[width / 2][width / 2 + 1].setStatus(true);
-        field[width / 2 + 1][width / 2 + 1].setStatus(true);
-        field[width / 2 + 1][width / 2].setStatus(true);
-        field[width / 2 + 1][width / 2 - 1].setStatus(true);
+        field[length / 2 - 1][length / 2].setStatus(true);
+        field[length / 2][length / 2 + 1].setStatus(true);
+        field[length / 2 + 1][length / 2 + 1].setStatus(true);
+        field[length / 2 + 1][length / 2].setStatus(true);
+        field[length / 2 + 1][length / 2 - 1].setStatus(true);
     }
 
     private void setBlank() {
@@ -188,20 +214,31 @@ public class Field extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // paint Box
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
+
         int i;
         int width = getWidth();
         int height = getHeight();
         g.setColor(Color.black);
-        // draw the rows
+        // draw the rows and cols
         int rowHt = height / (size);
         int rowWid = width / (size);
-        for (i = 0; i < rowHt + 1; i++) {
-            g.drawLine(0, i * size, width, i * size);
-            g.drawLine(i * size, 0, i * size, height);
+        if (rowHt >= rowWid) {
+            length = rowHt;
+            for (i = 0; i < rowHt + 1; i++) {
+                g.drawLine(0, i * size, width, i * size);
+                g.drawLine(i * size, 0, i * size, height);
+            }
+        } else {
+            length = rowWid;
+            for (i = 0; i < rowWid + 1; i++) {
+                g.drawLine(0, i * size, width, i * size);
+                g.drawLine(i * size, 0, i * size, height);
+            }
         }
-        // draw the columns
+        // draw field
         g.setColor(cellColor);
         for (i = 0; i < rowHt + 1; i++) {
             for (int j = 0; j < rowWid + 1; j++) {
@@ -215,7 +252,6 @@ public class Field extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
-        System.out.print(e.getX() / size);
         repaint();
     }
 
@@ -225,7 +261,7 @@ public class Field extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {//
+    public void mouseReleased(MouseEvent e) {
 
     }
 

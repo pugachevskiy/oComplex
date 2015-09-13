@@ -1,6 +1,5 @@
 package com.openComplex.app.CellularAutomat.GameOfLife2.Controller;
 
-import com.openComplex.app.CellularAutomat.GameOfLife.View.ViewController;
 import com.openComplex.app.CellularAutomat.GameOfLife2.Model.Field;
 import com.openComplex.app.CellularAutomat.GameOfLife2.View.View;
 
@@ -18,7 +17,7 @@ public class Controller implements ActionListener {
     private int gamespeed = 100;
     private int counter = 0;
     private int size;
-    private int lenght;
+
 
     public final static int LARGESIZE = 20;
     public final static int MEDIUMSIZE = 15;
@@ -27,10 +26,10 @@ public class Controller implements ActionListener {
 
 
     public Controller() {
-
-        field = new Field(200, MEDIUMSIZE, cellColor);
+        field = new Field(36, MEDIUMSIZE, cellColor);
         gui = new View();
         gui.init();
+        field.setFigure(0);
         gui.addField(field);
         gui.addListener(this);
     }
@@ -43,7 +42,7 @@ public class Controller implements ActionListener {
                         if (field.nextStep()) {
                             updateCounter();
                         } else {
-                            lifegoeson = false;
+                            stopThread();
                         }
                         sleep(gamespeed);
                     }
@@ -54,16 +53,28 @@ public class Controller implements ActionListener {
         }.start();
     }
 
+    private void stopThread() {
+        lifegoeson = false;
+        gui.activateButtons();
+    }
+
     private void updateCounter() {
         counter++;
         gui.setCounter(String.valueOf(counter));
     }
 
-    private void createFeld() {
-
+    private void createField() {
+        int length;
+        int rowHt = field.getHeight() / (size);
+        int rowWid = field.getWidth() / (size);
+        if (rowHt >= rowWid) {
+            length = rowHt;
+        } else {
+            length = rowWid;
+        }
         gui.deleteField(field);
         field.remove(field);
-        field = new Field(200, size, cellColor);
+        field = new Field(length, size, cellColor);
         gui.addField(field);
         field.revalidate();
         field.repaint();
@@ -76,12 +87,11 @@ public class Controller implements ActionListener {
             //Buttons
             case "Start":
                 lifegoeson = true;
-                gui.activateButtons();
+                gui.deactivateButtons();
                 start();
                 break;
             case "Stop":
-                lifegoeson = false;
-                gui.deactivateButtons();
+                stopThread();
                 break;
             case "Next":
                 if (field.nextStep()) {
@@ -99,6 +109,8 @@ public class Controller implements ActionListener {
                 break;
             case "Init state":
                 field.setFigure(gui.getFigureBox());
+                counter = 0;
+                gui.setCounter(String.valueOf(counter));
                 break;
             case "Speed":
                 getSpeed();
@@ -157,7 +169,7 @@ public class Controller implements ActionListener {
                 this.size = LARGESIZE;
                 break;
         }
-        createFeld();
+        createField();
         field.setFigure(gui.getFigureBox());
     }
 
