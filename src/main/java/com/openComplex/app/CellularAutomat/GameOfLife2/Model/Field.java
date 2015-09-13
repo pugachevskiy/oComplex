@@ -225,7 +225,7 @@ public class Field extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {//
 
     }
 
