@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.WolframsUniverse;
+package com.openComplex.app.CellularAutomat.WolframsUniverse.Model;
 
 /**
  * Created by strange on 14/09/15.

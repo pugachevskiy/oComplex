@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.WolframsUniverse;
+package com.openComplex.app.CellularAutomat.WolframsUniverse.Model;
 
 import javax.swing.*;
 import java.awt.*;

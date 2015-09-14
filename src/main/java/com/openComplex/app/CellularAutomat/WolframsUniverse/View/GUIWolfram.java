@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.WolframsUniverse;
+package com.openComplex.app.CellularAutomat.WolframsUniverse.View;
 
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ public class GUIWolfram {
 
     private JFormattedTextField ruleField;
     private JSlider generationSlider;
-    private JButton ruleButton;
+    private JButton ruleButton, clearButton,startButton, stopButton;
     private JPanel field;
     private JFrame frame;
 
@@ -45,6 +45,8 @@ public class GUIWolfram {
 
         createRuleButton();
         control.add(ruleButton);
+        control.add(clearButton);
+        control.add(startButton);
 
         control.add(new JLabel("   "));
 
@@ -63,14 +65,23 @@ public class GUIWolfram {
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setAllowsInvalid(false);
         ruleField = new JFormattedTextField(formatter);
-        ruleField.setFont(ruleField.getFont().deriveFont(15.0f));
+        ruleField.setFont(ruleField.getFont().deriveFont(16.0f));
         ruleField.setText("110");
+        ruleField.setPreferredSize(new Dimension(100, 30));
     }
 
     private void createRuleButton() {
         ruleButton = new JButton("Enter");
-        ruleButton.setFont(ruleButton.getFont().deriveFont(15.0f));
-        ruleButton.setActionCommand("enter");
+        ruleButton.setFont(ruleButton.getFont().deriveFont(16.0f));
+        ruleButton.setActionCommand("Enter");
+        clearButton = new JButton("Clear");
+        clearButton.setFont(clearButton.getFont().deriveFont(16.0f));
+        clearButton.setActionCommand("Clear");
+        startButton= new JButton("Start");
+        startButton.setFont(startButton.getFont().deriveFont(16.0f));
+        startButton.setActionCommand("Start");
+        startButton.setPreferredSize(new Dimension(150, 30));
+
     }
 
     public void createField(int rows, int cols, int size) {
@@ -109,9 +120,20 @@ public class GUIWolfram {
 
     public void addActionListener(ActionListener listener) {
         ruleButton.addActionListener(listener);
+        clearButton.addActionListener(listener);
+        startButton.addActionListener(listener);
     }
 
     public void addChangeListener(ChangeListener listener) {
         generationSlider.addChangeListener(listener);
+    }
+
+    public void setGenerationSlider(int value){
+        generationSlider.setValue(value);
+    }
+
+    public void setStartButtonText(String text){
+        startButton.setText(text);
+        startButton.setActionCommand(text);
     }
 }
