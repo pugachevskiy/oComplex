@@ -2,8 +2,10 @@ package com.openComplex.app.CellularAutomat.WolframsUniverse;
 
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.Hashtable;
 
@@ -24,12 +26,12 @@ public class GUIWolfram {
         field = new JPanel();
         frame.setLayout(new BorderLayout());
         frame.add(controlPanel(), BorderLayout.NORTH);
-
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        createField(1,1,2);
+        createField(1, 1, 2);
         frame.setVisible(true);
     }
-    private JPanel controlPanel () {
+
+    private JPanel controlPanel() {
         JPanel control = new JPanel();
         control.setLayout(new FlowLayout());
 
@@ -54,7 +56,8 @@ public class GUIWolfram {
         control.add(generationSlider);
         return control;
     }
-    private void createRuleField(){
+
+    private void createRuleField() {
         NumberFormat format = NumberFormat.getInstance();
         format.setGroupingUsed(false);
         NumberFormatter formatter = new NumberFormatter(format);
@@ -63,39 +66,52 @@ public class GUIWolfram {
         ruleField.setFont(ruleField.getFont().deriveFont(15.0f));
         ruleField.setText("110");
     }
-    private void createRuleButton(){
+
+    private void createRuleButton() {
         ruleButton = new JButton("Enter");
         ruleButton.setFont(ruleButton.getFont().deriveFont(15.0f));
         ruleButton.setActionCommand("enter");
     }
-    public void createField(int rows, int cols, int size){
+
+    public void createField(int rows, int cols, int size) {
         field.setLayout(new GridLayout(rows, cols));
-        field.setBounds(0,0,size,size);
-        field.setMinimumSize(new Dimension(rows*size, cols*size));
+        field.setBounds(0, 0, size, size);
+        field.setMinimumSize(new Dimension(rows * size, cols * size));
         field.repaint();
         frame.add(field, BorderLayout.CENTER);
         frame.revalidate();
 
     }
 
-    private void createSlider(){
-        generationSlider = new JSlider(1, 100, 50);
+    public void addField(JPanel panel) {
+        frame.add(panel, BorderLayout.CENTER);
+    }
+
+    private void createSlider() {
+        generationSlider = new JSlider(1, 200, 50);
         generationSlider.setPaintTicks(true);
-        generationSlider.setMajorTickSpacing(10);
+        generationSlider.setMajorTickSpacing(50);
         Hashtable labelTable = new Hashtable();
         labelTable.put(1, new JLabel("1"));
+        labelTable.put(50, new JLabel("50"));
         labelTable.put(100, new JLabel("100"));
+        labelTable.put(150, new JLabel("150"));
+        labelTable.put(200, new JLabel("200"));
         generationSlider.setLabelTable(labelTable);
         generationSlider.setPaintLabels(true);
         generationSlider.setValue(0);
 
     }
-    public JSlider getGenerationSlider(){return generationSlider;}
-    public String getRuleFieldText(){
+
+    public String getRuleFieldText() {
         return ruleField.getText();
     }
-    public JButton getRuleButton(){
-        return ruleButton;
+
+    public void addActionListener(ActionListener listener) {
+        ruleButton.addActionListener(listener);
     }
-    public JPanel getField(){return field;}
+
+    public void addChangeListener(ChangeListener listener) {
+        generationSlider.addChangeListener(listener);
+    }
 }

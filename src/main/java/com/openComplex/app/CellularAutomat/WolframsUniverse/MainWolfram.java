@@ -3,217 +3,53 @@ package com.openComplex.app.CellularAutomat.WolframsUniverse;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 /**
  * Created by Matthias on 16.06.2015.
  */
-public class MainWolfram implements ActionListener, ChangeListener, MouseListener {
-    public CoreWolfram[][] cells;
-    public boolean[] rule = new boolean[8];
+public class MainWolfram implements ActionListener, ChangeListener {
+    private Field field;
     private GUIWolfram guiWolfram;
-    private int maxGeneration = 33;
-    private int lastCol = 66;
+    private Rule rule;
     private int gen = 1;
-    private int flag = 0;
-    private int last = 1;
-    private static int MAXCOL = 200;
-    private static int MAXROW = 100;
 
     public MainWolfram() {
         guiWolfram = new GUIWolfram();
-        cells = new CoreWolfram[MAXROW][MAXCOL];
-        for (int i = 0; i < MAXROW; i++) {
-            for (int j = 0; j < MAXCOL; j++) {
-                cells[i][j] = new CoreWolfram();
-                if (i == 0){
-                    cells[i][j].addMouseListener(this);
-                }
-
-            }
-        }
-        init(27, 1);
-        addListener();
-        setRule(Integer.parseInt(guiWolfram.getRuleFieldText()));
-        guiWolfram.getField().revalidate();
+        field = new Field(8, Color.BLACK);
+        rule = new Rule();
+        guiWolfram.addField(field);
+        guiWolfram.addActionListener(this);
+        guiWolfram.addChangeListener(this);
+        rule.setRule(Integer.parseInt(guiWolfram.getRuleFieldText()));
+        field.createCA(rule.getRule());
+        field.repaint();
     }
-
-    private void addListener() {
-        guiWolfram.getRuleButton().addActionListener(this);
-        guiWolfram.getGenerationSlider().addChangeListener(this);
-    }
-
-    public void init(int size, int flag) {
-        if (this.flag != flag) {
-            guiWolfram.getField().removeAll();
-            guiWolfram.createField(maxGeneration, lastCol, size);
-            for (int i = 0; i < maxGeneration; i++) {
-                for (int j = 0; j < lastCol; j++) {
-                  cells[i][j].setSize(size);
-                  guiWolfram.getField().add(cells[i][j]);
-                }
-            }
-            guiWolfram.getField().revalidate();
-            this.flag = flag;
-            this.last =1;
-        }
-    }
-
-    private void resetField() {
-        for (int i = last; i < cells.length; i++) {
-            for (int j = 0; j < cells[0].length; j++) {
-                cells[i][j].setCell(false);
-            }
-        }
-    }
-
-    public void setRule(int ruleInt) {
-        String stringBool = Integer.toBinaryString(ruleInt);
-        char[] charBool = {0, 0, 0, 0, 0, 0, 0, 0};
-
-        char[] stringToChar = stringBool.toCharArray();
-
-        int index = 8 - stringToChar.length;
-        for (char aStringToChar : stringToChar) {
-            charBool[index] = aStringToChar;
-            index = index + 1;
-        }
-
-        resetRule();
-
-        for (int i = 0; i < charBool.length; i++) {
-            rule[i] = charBool[i] == '1';
-            System.out.print(rule[i] + " ");
-            System.out.println();
-        }
-        createCA();
-    }
-
-    public void createCA() {
-        boolean a, b, c;
-        for (int generation = last; generation < gen; generation++) {
-            for (int i = 0; i < lastCol; i++) {
-                b = cells[generation - 1][i].getCell();
-                int neighbourhood = 1;
-                if (i == 0) {
-                    a = cells[generation - 1][lastCol - 1].getCell();
-                    c = cells[generation - 1][i + neighbourhood].getCell();
-                } else if (i == lastCol - 1) {
-                    a = cells[generation - 1][i - neighbourhood].getCell();
-                    c = cells[generation - 1][0].getCell();
-                } else {
-                    a = cells[generation - 1][i - neighbourhood].getCell();
-                    c = cells[generation - 1][i + neighbourhood].getCell();
-                }
-                cells[generation][i].setCell(applyRule(a, b, c));
-            }
-        }
-    }
-
-    private void resetRule() {
-        for (int i = 0; i < rule.length; i++) {
-            rule[i] = false;
-        }
-    }
-
-    public boolean applyRule(boolean a, boolean b, boolean c) {
-        if (a && b && c) {
-            return rule[0];
-        }
-        if (a && b && c == false) {
-            return rule[1];
-        }
-        if (a && b == false && c) {
-            return rule[2];
-        }
-        if (a && b == false && c == false) {
-            return rule[3];
-        }
-        if (a == false && b && c) {
-            return rule[4];
-        }
-        if (a == false && b && c == false) {
-            return rule[5];
-        }
-        if (a == false && b == false && c) {
-            return rule[6];
-        }
-        if (a == false && b == false && c == false) {
-            return rule[7];
-        }
-        return false;
-    }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enter")) {
-            last = 1;
-            int rule = Integer.parseInt(guiWolfram.getRuleFieldText());
-            if (rule >= 0 && rule <= 255) {
-                setRule(rule);
+            field.setLast(1);
+            int ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+            if (ruleInt >= 0 && ruleInt <= 255) {
+                rule.setRule(ruleInt);
+                field.createCA(rule.getRule());
             }
-            guiWolfram.getField().repaint();
-
+           field.repaint();
         }
     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        last = gen;
-        resetField();
+        field.setLast(gen);
+        field.resetField();
         JSlider source = (JSlider) e.getSource();
         gen = source.getValue();
-        if (gen >= 0 && gen <= 33) {
-            maxGeneration = 33;
-            lastCol = 66;
-            init(27, 1);
-            flag = 1;
-        } else if (gen > 33 && gen <= 66) {
-            maxGeneration = 66;
-            lastCol = 132;
-            init(20, 2);
-            flag = 2;
-        } else if (gen > 66 && gen <= MAXROW) {
-            maxGeneration = MAXROW;
-            lastCol = MAXCOL;
-            init(15, 3);
-            flag = 3;
-        }
-        createCA();
-        guiWolfram.getField().repaint();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        last = 1;
-        CoreWolfram comp = (CoreWolfram) e.getComponent();
-        comp.changeCell(comp);
-        createCA();
-        guiWolfram.getField().repaint();
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+        field.setGen(gen);
+        field.createCA(rule.getRule());
     }
 }
 
