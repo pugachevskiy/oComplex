@@ -67,15 +67,12 @@ public class Field extends JPanel implements MouseListener {
         if(checkSize(big)) {
             size = big;
             offset = 183;
-            System.out.println("big");
         } else if (checkSize(middle)) {
             size = middle;
             offset = 125;
-            System.out.println("middle");
         } else {
             size = small;
             offset = 0;
-            System.out.println("small");
         }
     }
 
