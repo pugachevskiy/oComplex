@@ -15,10 +15,13 @@ public class Field extends JPanel implements MouseListener {
     private int size;
     private Cell[][] field;
     private Color cellColor;
-    private int lastCol = 200;
+    private int lastCol = 300;
     private int gen = 1;
     private int last = 1;
     private boolean[] rule;
+    private int offset;
+    private int height, width;
+    private final int small = 2, middle = 4, big = 8;
 
     public Field(int size, Color color) {
         this.cellColor = color;
@@ -51,12 +54,43 @@ public class Field extends JPanel implements MouseListener {
     }
 
     public void init() {
+
         field = new Cell[300][300];
         for (int i = 0; i < 300; i++) {
             for (int j = 0; j < 300; j++) {
                 field[i][j] = new Cell(false, Color.BLACK);
             }
         }
+    }
+
+    public void setGridSize() {
+        if(checkSize(big)) {
+            size = big;
+            offset = 183;
+            System.out.println("big");
+        } else if (checkSize(middle)) {
+            size = middle;
+            offset = 125;
+            System.out.println("middle");
+        } else {
+            size = small;
+            offset = 0;
+            System.out.println("small");
+        }
+    }
+
+    private boolean checkSize(int size) {
+        int rowHt = height / (size);
+        int rowWid = width / (size);
+        if (rowHt < gen) {
+            return false;
+        }
+        for (int i = 0; i < rowHt; i++) {
+            if (field[i][0].getStatus() == true || field[i][rowWid-1].getStatus() == true) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setLast(int last){
@@ -126,6 +160,8 @@ public class Field extends JPanel implements MouseListener {
         return false;
     }
 
+
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -134,12 +170,16 @@ public class Field extends JPanel implements MouseListener {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         int i;
-        int width = getWidth();
-        int height = getHeight();
-        g.setColor(Color.black);
-        // draw the rows and cols
+        width = getWidth();
+        height = getHeight();
+
         int rowHt = height / (size);
         int rowWid = width / (size);
+
+
+        g.setColor(Color.black);
+        // draw the rows and cols
+
         if (rowHt >= rowWid) {
             for (i = 0; i < rowHt + 1; i++) {
                 g.drawLine(0, i * size, width, i * size);
@@ -153,8 +193,8 @@ public class Field extends JPanel implements MouseListener {
         }
         // draw field
         g.setColor(cellColor);
-        for (i = 0; i < rowHt + 1; i++) {
-            for (int j = 0; j < rowWid + 1; j++) {
+        for (i = 0; i < rowHt; i++) {
+            for (int j = 0; j < rowWid; j++) {
                 if (field[i][j].getStatus()) {
                     g.fillRect(j * size, i * size, size, size);
                 }

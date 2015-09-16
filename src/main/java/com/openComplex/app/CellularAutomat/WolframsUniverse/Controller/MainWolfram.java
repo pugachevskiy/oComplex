@@ -91,6 +91,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
         gen = source.getValue();
         field.setGen(gen);
         field.createCA(rule.getRule());
+        field.setGridSize();
     }
 }
 
