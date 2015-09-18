@@ -15,11 +15,11 @@ public class Field extends JPanel implements MouseListener {
     private int size;
     private Cell[][] field;
     private Color cellColor;
-    private int lastCol = 300;
+    private int lastCol = 500;
     private int gen = 1;
     private int last = 1;
     private boolean[] rule;
-    private int offset;
+    private int offset = 183;
     private int height, width;
     private final int small = 2, middle = 4, big = 8;
 
@@ -55,9 +55,9 @@ public class Field extends JPanel implements MouseListener {
 
     public void init() {
 
-        field = new Cell[300][300];
-        for (int i = 0; i < 300; i++) {
-            for (int j = 0; j < 300; j++) {
+        field = new Cell[500][500];
+        for (int i = 0; i < 500; i++) {
+            for (int j = 0; j < 500; j++) {
                 field[i][j] = new Cell(false, Color.BLACK);
             }
         }
@@ -77,13 +77,22 @@ public class Field extends JPanel implements MouseListener {
     }
 
     private boolean checkSize(int size) {
+        int offset;
+        if (size == big) {
+            offset = 183;
+        } else if (size == middle) {
+            offset = 125;
+        } else {
+            offset = 0;
+        }
+
         int rowHt = height / (size);
         int rowWid = width / (size);
         if (rowHt < gen) {
             return false;
         }
-        for (int i = 0; i < rowHt; i++) {
-            if (field[i][0].getStatus() == true || field[i][rowWid-1].getStatus() == true) {
+        for (int i = 0; i < rowWid; i++) {
+            if (field[i][0 +offset].getStatus() == true || field[i][rowWid-1+offset].getStatus() == true) {
                 return false;
             }
         }
@@ -192,7 +201,7 @@ public class Field extends JPanel implements MouseListener {
         g.setColor(cellColor);
         for (i = 0; i < rowHt; i++) {
             for (int j = 0; j < rowWid; j++) {
-                if (field[i][j].getStatus()) {
+                if (field[i][j+offset].getStatus()) {
                     g.fillRect(j * size, i * size, size, size);
                 }
             }
@@ -202,7 +211,7 @@ public class Field extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getY()  < size) {
-            field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
+            field[e.getY() / size][(e.getX() / size) + offset].setStatus(!field[e.getY() / size][(e.getX() / size) + offset].getStatus());
             last = 1;
             createCA(rule);
         }

@@ -99,15 +99,16 @@ public class GUIWolfram {
     }
 
     private void createSlider() {
-        generationSlider = new JSlider(1, 200, 50);
+        generationSlider = new JSlider(1, 500, 100);
         generationSlider.setPaintTicks(true);
         generationSlider.setMajorTickSpacing(50);
         Hashtable labelTable = new Hashtable();
         labelTable.put(1, new JLabel("1"));
-        labelTable.put(50, new JLabel("50"));
         labelTable.put(100, new JLabel("100"));
-        labelTable.put(150, new JLabel("150"));
         labelTable.put(200, new JLabel("200"));
+        labelTable.put(300, new JLabel("300"));
+        labelTable.put(400, new JLabel("400"));
+        labelTable.put(500, new JLabel("500"));
         generationSlider.setLabelTable(labelTable);
         generationSlider.setPaintLabels(true);
         generationSlider.setValue(0);
