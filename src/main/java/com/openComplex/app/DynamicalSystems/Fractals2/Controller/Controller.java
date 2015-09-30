@@ -27,12 +27,12 @@ public class Controller {
     Fractal fractal;
     ListSelectionListener listSelectionListener;
     boolean flag = false;
+    boolean search = false;
 
     public Controller() {
         gui.createGui();
         addListener(gui.getSlider(), gui.getComboBox());
         createCombobox();
-        createFractal();
         addListenerSearch(gui.getSearchButton());
         addListenerReset();
         addStartButtonListener();
@@ -81,9 +81,11 @@ public class Controller {
         comboBox.addListSelectionListener(listSelectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                model.deleteFractal(gui.getFractalPanel());
-                createFractal();
-                model.updateFractal(gui.getFractalPanel());
+                if (!search) {
+                    model.deleteFractal(gui.getFractalPanel());
+                    createFractal();
+                    model.updateFractal(gui.getFractalPanel());
+                }
             }
         });
     }
@@ -103,6 +105,7 @@ public class Controller {
                                              if ((!searchCopy.equals("")) && (searchFactor.equals(""))) {
                                                  if (FractalsCollection.FRACTALS.get(i).get(1).equals(searchCopy)) {
                                                      counter++;
+                                                     search = true;
                                                      gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
                                                      gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
@@ -110,6 +113,7 @@ public class Controller {
                                              if ((searchCopy.equals("")) && (!searchFactor.equals(""))) {
                                                  if (FractalsCollection.FRACTALS.get(i).get(2).equals(searchFactor)) {
                                                      counter++;
+                                                     search = true;
                                                      gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
                                                      gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
@@ -118,20 +122,22 @@ public class Controller {
                                                  if (FractalsCollection.FRACTALS.get(i).get(2).equals(searchFactor)
                                                          && FractalsCollection.FRACTALS.get(i).get(1).equals(searchCopy)) {
                                                      counter++;
+                                                     search = true;
                                                      gui.listModel.addElement(FractalsCollection.FRACTALS.get(i).get(0));
                                                      gui.getComboBox().setSelectedIndex(gui.listModel.getSize() - 1);
                                                  }
                                              }
                                          }
-
                                          if (counter != 0) {
                                              int all = gui.listModel.getSize();
-                                             for (int i = 0; i < all - counter; i++)
+                                             for (int i = 0; i < all - counter; i++) {
                                                  gui.listModel.remove(0);
+                                             }
                                          } else {
                                              clearComboBox();
                                              JOptionPane.showMessageDialog(null, "Kein Fractal");
                                          }
+                                         search = false;
                                      }
                                  }
 
@@ -149,17 +155,15 @@ public class Controller {
     }
 
     private void addStartButtonListener() {
-        gui.getStopButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                flag = false;
-                System.out.print("1");
-            }
-        });
         gui.getStartButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                flag = true;
+                flag = !flag;
+                if (flag){
+                    gui.getStartButton().setText("Stop");
+                } else {
+                    gui.getStartButton().setText("Start");
+                }
                 new Thread() {
                     public void run() {
                         try {
@@ -171,7 +175,6 @@ public class Controller {
                                 }
                                 sleep(500);
                             }
-                            System.out.print("2");
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }

@@ -15,6 +15,7 @@ public class View {
             CELLGROESSEFILL = {"Small", "Medium", "Large"}, CELLFARBEFILL = {"Black", "Blue", "Green", "Yellow"},
             GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
     private JLabel counter;
+    private JMenuItem saveItem, exitItem, ruleItem, loadItem;
 
     public void init() {
         mainFrame = new JFrame("Conways Game of Life");
@@ -23,7 +24,7 @@ public class View {
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         mainFrame.setPreferredSize(new Dimension(600, 600));
 
-        //mainFrame.setJMenuBar(addMenu());
+        mainFrame.setJMenuBar(addMenu());
 
         JPanel menuPanel;
         mainFrame.add(menuPanel = new JPanel(), BorderLayout.WEST);
@@ -31,6 +32,30 @@ public class View {
         mainFrame.requestFocus();
         mainFrame.pack();
         mainFrame.setVisible(true);
+    }
+    private JMenuBar addMenu() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu firstMenu = new JMenu("Data");
+        saveItem = new JMenuItem("Save");
+        saveItem.setActionCommand("Save");
+        loadItem = new JMenuItem("Load");
+        loadItem.setActionCommand("Load");
+        exitItem = new JMenuItem("Exit");
+        exitItem.setActionCommand("Exit");
+        firstMenu.add(saveItem);
+        firstMenu.add(loadItem);
+        firstMenu.addSeparator();
+        firstMenu.add(exitItem);
+
+        JMenu secondMenu = new JMenu("Help");
+        ruleItem = new JMenuItem("Rule");
+        ruleItem.setActionCommand("Rule");
+        secondMenu.add(ruleItem);
+
+        menuBar.add(firstMenu);
+        menuBar.add(secondMenu);
+        return menuBar;
     }
 
     private void addComponentsToPane(Container pane) {
@@ -234,6 +259,10 @@ public class View {
         cellGroeßeBox.addActionListener(listener);
         anfangsBedingungBox.addActionListener(listener);
         geschwindigkeitBox.addActionListener(listener);
+        exitItem.addActionListener(listener);
+        ruleItem.addActionListener(listener);
+        saveItem.addActionListener(listener);
+        loadItem.addActionListener(listener);
     }
 
     public void frameClose() {
@@ -258,6 +287,27 @@ public class View {
 
     public int getSizeBox() {
         return cellGroeßeBox.getSelectedIndex();
+    }
+
+    public void getRule(){
+        JFrame regeln = new JFrame("Regeln");
+
+        regeln.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JTextArea text = new JTextArea("Spielregeln\n" +
+                "a) Wenn eine lebende Zelle zwei oder drei lebende Nachbarn hat, dann bleibt sie fu ̈r\n" +
+                "die na ̈chste Generation am Leben.\n" +
+                "b) Wenn eine lebende Zelle weniger als zwei lebende Nachbarn hat, dann stirbt sie\n" +
+                "an Vereinsamung (und ist in der na ̈chsten Generation leer). Nachbarn hat.\n" +
+                "c) Wenn eine lebende Zelle mehr als drei lebende Nachbarn hat, dann stirbt sie wegen U ̈berbevo ̈lkerung.\n" +
+                "d) Wenn eine tote Zelle genau drei Nachbarn hat, dann wird sie neugeboren.");
+        text.setEditable(false);
+        regeln.add(text);
+
+        regeln.requestFocus();
+        regeln.setResizable(false);
+        regeln.pack();
+        regeln.setVisible(true);
     }
 }
 

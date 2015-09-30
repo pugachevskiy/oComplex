@@ -32,9 +32,6 @@ public final class FractalsCollection {
                     "\n\n\n\n\n\n");
     public static final List<String> MINKOWSKI_CURVE = Arrays.asList("Minkowski curve", "4", "8", "1.5000", "Also called Minkowski sausage\n\n\n\n\n\n\n\n\n\n\n");
     public static final List<String> MENGER_SPONGE = Arrays.asList("Menger sponge", "3", "20", "2.7268", "And its surface has a fractal dimension of log_3(20), which is the same as that by volume.\n\n\n\n\n\n\n\n\n");
-    public static final List<List<String>> FRACTALS = Arrays.asList(KOCH_CURVE, SIERPINSKI_CARPET, SIERPINSKI_TRIANGLE, MINKOWSKI_CURVE, MENGER_SPONGE);
-    public static final String[] FRACTALS_NAMES = {KOCH_CURVE.get(0), SIERPINSKI_TRIANGLE.get(0), SIERPINSKI_CARPET.get(0), MINKOWSKI_CURVE.get(0),
-                                                MENGER_SPONGE.get(0)};
-
+    public static final List<List<String>> FRACTALS = Arrays.asList(KOCH_CURVE, SIERPINSKI_CARPET, SIERPINSKI_TRIANGLE, MINKOWSKI_CURVE);//, MENGER_SPONGE);
 
 }

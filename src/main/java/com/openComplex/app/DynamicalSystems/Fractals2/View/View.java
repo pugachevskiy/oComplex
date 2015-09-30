@@ -24,7 +24,7 @@ public class View {
     private JTextPane description;
     private JLabel name = new JLabel("Choose fractal"), stepLabel = new JLabel("Step");
 
-    private JButton searchButton, resetButton, startButton, stopButton;
+    private JButton searchButton, resetButton, startButton;
     private JTextField searchFactorTextField, searchCopyTextField;
 
     private static final int MAXSTEP = 7;
@@ -70,13 +70,10 @@ public class View {
 
         startButton = new JButton("Start");
         startButton.setActionCommand("Start");
-        stopButton = new JButton("Stop");
-        stopButton.setActionCommand("Stop");
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 2));
         //buttonPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
         buttonPanel.add(startButton);
-        buttonPanel.add(stopButton);
 
         sliderPanel.add(stepLabel);
         sliderPanel.add(slider);
@@ -222,10 +219,6 @@ public class View {
 
     public JButton getStartButton() {
         return this.startButton;
-    }
-
-    public JButton getStopButton() {
-        return this.stopButton;
     }
 
     public void updateDescription(String text) {

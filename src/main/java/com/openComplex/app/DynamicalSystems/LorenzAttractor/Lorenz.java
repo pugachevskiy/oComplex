@@ -2,36 +2,80 @@ package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by strange on 25/08/15.
  */
-public class Lorenz {
+public class Lorenz implements ActionListener {
 
     private LorenzView gui;
     LorenzModel lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
     double dt = 0.001;
-  //  LorenzModel lorenz2 = new LorenzModel(20.0, 130.01, 40.0);
-    public Lorenz(){
-        start();
+    private int step = 0;
+    private boolean isActive;
+
+    public Lorenz() {
+        gui = new LorenzView();
+        gui.addListener(this);
+        gui.setTextA(String.valueOf(lorenz1.getA()));
+        gui.setTextB(String.valueOf(lorenz1.getB()));
+        gui.setTextC(String.valueOf(lorenz1.getC()).substring(0, 5));
+
     }
 
     public void start() {
-        gui = new LorenzView();
-        gui.init();
+
         // Use Euler's method to numerically solve ODE
         new Thread() {
             public void run() {
                 try {
-                    for (int i = 0; i < 50000; i++) {
+                    while (isActive && step < 50000) {
+                        step++;
                         lorenz1.update(dt);
-                        gui.draw(lorenz1, Color.BLUE, i,150);
+                        gui.draw(lorenz1, Color.BLUE, step, 150);
                         sleep(1);
+                        gui.repaint();
                     }
+                    stopDraw();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        switch (command) {
+            case "Start":
+                isActive = true;
+                setCoeff();
+                start();
+                gui.setStartButtonText("Stop");
+                break;
+            case "Stop":
+                stopDraw();
+                break;
+            case "Clear":
+                gui.clear();
+                step = 0;
+                break;
+        }
+    }
+
+    private void stopDraw(){
+        isActive = false;
+        step = 0;
+        gui.setStartButtonText("Start");
+        lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
+    }
+
+    private void setCoeff(){
+        lorenz1.setA(gui.getTextA());
+        lorenz1.setB(gui.getTextB());
+        lorenz1.setC(gui.getTextC());
     }
 }

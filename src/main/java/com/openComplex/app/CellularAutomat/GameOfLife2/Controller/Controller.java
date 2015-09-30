@@ -6,6 +6,7 @@ import com.openComplex.app.CellularAutomat.GameOfLife2.View.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Created by strange on 10/09/15.
@@ -118,6 +119,25 @@ public class Controller implements ActionListener {
             case "Cell color":
                 getColor();
                 break;
+            case "Save":
+                try {
+                    field.saveField();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+            case "Rule":
+                gui.getRule();
+                break;
+            case "Load":
+                try {
+                    field.loadField();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                counter = 0;
+                gui.setCounter(String.valueOf(counter));
+                break;
 
         }
     }
@@ -172,5 +192,7 @@ public class Controller implements ActionListener {
         createField();
         field.setFigure(gui.getFigureBox());
     }
+
+
 
 }

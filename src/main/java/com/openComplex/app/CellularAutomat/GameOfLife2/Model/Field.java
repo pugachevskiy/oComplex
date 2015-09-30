@@ -1,11 +1,19 @@
 package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Objects;
 
 
 /**
@@ -33,6 +41,7 @@ public class Field extends JPanel implements MouseListener {
                 Field.this.repaint();
 
             }
+
             @Override
             public void componentMoved(ComponentEvent e) {
 
@@ -51,7 +60,7 @@ public class Field extends JPanel implements MouseListener {
 
     }
 
-    public void init(){
+    public void init() {
         field = new Cell[200][200];
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
@@ -60,7 +69,7 @@ public class Field extends JPanel implements MouseListener {
         }
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.cellColor = color;
         this.repaint();
 
@@ -213,6 +222,55 @@ public class Field extends JPanel implements MouseListener {
                 field[i][j].setNeighbors(0);
             }
         }
+    }
+
+    public void saveField() throws IOException {
+        CSVWriter writer = null;
+        String[] entries = new String[field.length];
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(Field.this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            writer = new CSVWriter(new FileWriter(file), '\t');
+            for (int i = 0; i < field.length; i++) {
+                entries[i] = "";
+                for (int j = 0; j < field[0].length; j++) {
+                    if (field[i][j].getStatus()) {
+                        entries[i] += "1";
+                    } else {
+                        entries[i] += "0";
+                    }
+
+                    if (j != field[0].length - 1) {
+                        entries[i] += ",";
+                    }
+                }
+                writer.writeNext(entries[i].split(","));
+            }
+            writer.close();
+        }
+    }
+
+    public void loadField() throws IOException {
+        setBlank();
+        CSVReader reader;
+        String[] nextLine;
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showOpenDialog(Field.this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            reader = new CSVReader(new FileReader(file), '\t');
+            int counter = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                for (int i = 0; i < field.length; i++) {
+                    if (Integer.valueOf(nextLine[i]) == 1) {
+                        field[counter][i].setStatus(true);
+                    } else {
+                        field[counter][i].setStatus(false);
+                    }
+                }
+                counter++;
+            }
+        }
+        repaint();
     }
 
     @Override

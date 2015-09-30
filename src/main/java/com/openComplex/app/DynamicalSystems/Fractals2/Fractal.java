@@ -15,6 +15,4 @@ public interface Fractal{
     String getCopy();
     String getName();
     GLJPanel getPanel();
-    void updatePanel();
-
 }

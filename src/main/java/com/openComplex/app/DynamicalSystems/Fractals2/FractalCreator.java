@@ -13,7 +13,7 @@ public class FractalCreator implements FractalsCreator{
     private static final String MINKOVSKICURVE = "Minkowski curve";
     private static final String SERPINSKITRIANGE = "Sierpinski triangle";
     private static final String KOCHCURVE = "Koch Curve";
-    private static final String MENGERSPONGE = "Menger sponge";
+   // private static final String MENGERSPONGE = "Menger sponge";
 
     @Override
     public Fractal getFractal(String name, int step){
@@ -23,7 +23,7 @@ public class FractalCreator implements FractalsCreator{
             case KOCHCURVE:return new KochCurve(caps, step);
             case SERPINSKICARPET:return new SierpinskiCarpet(caps, step);
             case SERPINSKITRIANGE: return new SierpinskiTriangle(caps, step);
-            case MENGERSPONGE: return new MengerSponge(caps, step);
+           // case MENGERSPONGE: return new MengerSponge(caps, step);
         }
         return null;
     }
