@@ -12,7 +12,11 @@ import java.awt.event.MouseListener;
  * Created by strange on 10/09/15.
  */
 public class Field extends JPanel implements MouseListener {
-    private int size;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int size;
     private Cell[][] field;
     private int length;
     private Color cellColor;

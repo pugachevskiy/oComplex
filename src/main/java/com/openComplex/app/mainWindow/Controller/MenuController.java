@@ -15,7 +15,7 @@ public class MenuController {
         ImageIcon icon = new ImageIcon(scaledImage);
         JOptionPane.showMessageDialog(App.gui, icon, "Help", JOptionPane.PLAIN_MESSAGE);
     }
-
+ 
 
     /**
      * Creates pop-up window containing various information about the program.

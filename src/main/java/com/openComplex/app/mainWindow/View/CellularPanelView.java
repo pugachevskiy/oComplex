@@ -10,6 +10,9 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -21,8 +24,8 @@ import java.util.List;
 public class CellularPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
     private static final String GOL = "Conway's Game of Life", WOLFRAM = "Wolfram's universe",
-            HEGELMANN = "Model of Hegelmann";
-    private static final List<String> BUTTONSCELLULAR = Arrays.asList(GOL, WOLFRAM, HEGELMANN);
+            HEGELMANN = "Model of Hegelmann", DEFRULE = "Define rules";
+    private static final List<String> BUTTONSCELLULAR = Arrays.asList(GOL, WOLFRAM, HEGELMANN,DEFRULE);
 
 
     public CellularPanelView() {
@@ -41,6 +44,12 @@ public class CellularPanelView extends JPanel {
         }
         backButton.setActionCommand("back");
         backButton.addActionListener(listener);
+        backButton.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+			}
+		});
+        backButton.setMnemonic(KeyEvent.VK_BACK_SPACE);
         addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
