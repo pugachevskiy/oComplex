@@ -211,10 +211,6 @@ public class MengerSponge extends GLJPanel implements KeyListener, GLEventListen
         return this;
     }
 
-    @Override
-    public void updatePanel() {
-        this.repaint();
-    }
 
 
 }

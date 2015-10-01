@@ -101,8 +101,4 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
         return this;
     }
 
-    @Override
-    public void updatePanel() {
-        this.repaint();
-    }
 }

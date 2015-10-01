@@ -79,8 +79,5 @@ public class SierpinskiTriangle extends GLJPanel implements Fractal {
     public GLJPanel getPanel() {
         return this;
     }
-    @Override
-    public void updatePanel() {
-        this.repaint();
-    }
+
 }

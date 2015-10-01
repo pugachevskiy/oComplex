@@ -69,11 +69,7 @@ public class KochCurve extends GLJPanel implements Fractal {
     public GLJPanel getPanel() {
         return this;
     }
-    @Override
-    public void updatePanel() {
-        this.setBackground(Color.GRAY);
-       this.repaint();
-     }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
