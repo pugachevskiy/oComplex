@@ -57,10 +57,10 @@ public class SynchroPanel extends JFrame {
             xValueActive = xValueInput + calculateMaxLength(Main.differencesString)*fontSize + border;
             xValueNext = xValueActive + calculateMaxLength(Main.nextStepListString)*fontSize + border;
 
-            System.out.println("Step: " + xValueStep);
-            System.out.println("Input: " + xValueInput);
-            System.out.println("Active: " + xValueActive);
-            System.out.println("Next: " + xValueNext);
+            //System.out.println("Step: " + xValueStep);
+           // System.out.println("Input: " + xValueInput);
+           // System.out.println("Active: " + xValueActive);
+           // System.out.println("Next: " + xValueNext);
 
 
             //quer

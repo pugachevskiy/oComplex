@@ -287,4 +287,9 @@ public class TablePanel extends JPanel {
         return fieldValues;
     }
 
+
+    public boolean getSynchroState() {
+        return syncronButton.isSelected();
+    }
+
 }

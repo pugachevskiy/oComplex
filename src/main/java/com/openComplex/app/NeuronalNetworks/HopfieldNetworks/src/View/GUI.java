@@ -72,7 +72,7 @@ public class GUI extends JFrame {
 
 
     public boolean getSelectedState() {
-        return true;
+        return tablePanel.getSynchroState();
     }
 
 }

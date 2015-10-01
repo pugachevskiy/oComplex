@@ -82,6 +82,8 @@ public class Main {
             //Calculate nextStep
             int[] tempVector = netinput;
             int[] nextState = normalize(tempVector);
+            for(int i=0; i<tempVector.length; i++)
+                System.out.println(tempVector[i] + " " + nextState[i]);
 
             //Look for differences between old state and current netinput
             similiarVectors = new boolean[netinput.length];
@@ -95,6 +97,7 @@ public class Main {
                 for(int i=0; i<similiarVectors.length; i++) {
                     if(!similiarVectors[i]) {
                         nextState[i] = nextState[i]==-1 ? 1 : -1;
+                        break;
                     }
                 }
 
@@ -186,7 +189,7 @@ public class Main {
     public static void appendArray(java.util.ArrayList<String> updatedList, boolean[] toAppend) {
         String updateString = "";
         for(int i=0; i<toAppend.length; i++) {
-            if(toAppend[i])
+            if(!toAppend[i])
                 updateString += i + ", ";
         }
         updatedList.add(updateString);

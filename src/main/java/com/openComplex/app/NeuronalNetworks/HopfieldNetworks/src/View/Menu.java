@@ -46,7 +46,7 @@ public class Menu extends JMenuBar{
 
         file.setMnemonic(KeyEvent.VK_D);
 
-        String[] sizes = {"Größe  ", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+        String[] sizes = {"Size  ", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
         options.add(createMiniMenu(sizes, 3));
         options.setMnemonic(KeyEvent.VK_O);
 
