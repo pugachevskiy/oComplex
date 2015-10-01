@@ -10,6 +10,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 /**
@@ -79,6 +80,30 @@ public class MainWolfram implements ActionListener, ChangeListener {
             case "Stop":
                 flag = false;
                 guiWolfram.setStartButtonText("Start");
+                break;
+            case "Save":
+                try {
+                    field.saveField();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+            case "Rule":
+              //  gui.getRule();
+                break;
+            case "Load":
+                int gen = 0;
+                try {
+                    gen = field.loadField();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                field.setLast(0);
+                guiWolfram.setGenerationSlider(gen);
+                if (flag) {
+                    flag = !flag;
+                    guiWolfram.setStartButtonText("Start");
+                }
                 break;
         }
     }

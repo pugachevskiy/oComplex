@@ -1,11 +1,14 @@
 package com.openComplex.app.CellularAutomat.WolframsUniverse.Model;
 
+import com.openComplex.app.mainWindow.Controller.CSVFile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 
 /**
@@ -164,6 +167,17 @@ public class Field extends JPanel implements MouseListener {
             return rule[7];
         }
         return false;
+    }
+
+    public void saveField() throws IOException {
+        CSVFile.saveField(field, Field.this);
+    }
+
+    public int loadField() throws IOException {
+        resetField();
+        int temp = CSVFile.loadField(field, Field.this);
+        repaint();
+        return temp;
     }
 
 

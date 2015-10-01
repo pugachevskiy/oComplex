@@ -1,9 +1,12 @@
 package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
 
+import com.openComplex.app.mainWindow.Controller.CSVFile;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -225,51 +228,12 @@ public class Field extends JPanel implements MouseListener {
     }
 
     public void saveField() throws IOException {
-        CSVWriter writer = null;
-        String[] entries = new String[field.length];
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showSaveDialog(Field.this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            writer = new CSVWriter(new FileWriter(file), '\t');
-            for (int i = 0; i < field.length; i++) {
-                entries[i] = "";
-                for (int j = 0; j < field[0].length; j++) {
-                    if (field[i][j].getStatus()) {
-                        entries[i] += "1";
-                    } else {
-                        entries[i] += "0";
-                    }
-
-                    if (j != field[0].length - 1) {
-                        entries[i] += ",";
-                    }
-                }
-                writer.writeNext(entries[i].split(","));
-            }
-            writer.close();
-        }
+        CSVFile.saveField(field, Field.this);
     }
 
     public void loadField() throws IOException {
         setBlank();
-        CSVReader reader;
-        String[] nextLine;
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showOpenDialog(Field.this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            reader = new CSVReader(new FileReader(file), '\t');
-            int counter = 0;
-            while ((nextLine = reader.readNext()) != null) {
-                for (int i = 0; i < field.length; i++) {
-                    if (Integer.valueOf(nextLine[i]) == 1) {
-                        field[counter][i].setStatus(true);
-                    } else {
-                        field[counter][i].setStatus(false);
-                    }
-                }
-                counter++;
-            }
-        }
+        CSVFile.loadField(field, Field.this);
         repaint();
     }
 

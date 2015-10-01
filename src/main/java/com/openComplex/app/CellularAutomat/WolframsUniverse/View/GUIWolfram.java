@@ -19,7 +19,7 @@ public class GUIWolfram {
     private JButton ruleButton, clearButton,startButton, stopButton;
     private JPanel field;
     private JFrame frame;
-
+    private JMenuItem saveItem, exitItem, ruleItem, loadItem;
     public GUIWolfram() {
         frame = new JFrame("Wolfram Universe");
         frame.setMinimumSize(new Dimension(1000, 1000));
@@ -27,8 +27,10 @@ public class GUIWolfram {
         frame.setLayout(new BorderLayout());
         frame.add(controlPanel(), BorderLayout.NORTH);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setJMenuBar(addMenu());
         createField(1, 1, 2);
         frame.setVisible(true);
+
     }
 
     private JPanel controlPanel() {
@@ -57,6 +59,31 @@ public class GUIWolfram {
         createSlider();
         control.add(generationSlider);
         return control;
+    }
+
+    private JMenuBar addMenu() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu firstMenu = new JMenu("Data");
+        saveItem = new JMenuItem("Save");
+        saveItem.setActionCommand("Save");
+        loadItem = new JMenuItem("Load");
+        loadItem.setActionCommand("Load");
+        exitItem = new JMenuItem("Exit");
+        exitItem.setActionCommand("Exit");
+        firstMenu.add(saveItem);
+        firstMenu.add(loadItem);
+        firstMenu.addSeparator();
+        firstMenu.add(exitItem);
+
+        JMenu secondMenu = new JMenu("Help");
+        ruleItem = new JMenuItem("Rule");
+        ruleItem.setActionCommand("Rule");
+        secondMenu.add(ruleItem);
+
+        menuBar.add(firstMenu);
+        menuBar.add(secondMenu);
+        return menuBar;
     }
 
     private void createRuleField() {
@@ -123,6 +150,10 @@ public class GUIWolfram {
         ruleButton.addActionListener(listener);
         clearButton.addActionListener(listener);
         startButton.addActionListener(listener);
+        saveItem.addActionListener(listener);
+        exitItem.addActionListener(listener);
+        ruleItem.addActionListener(listener);
+        loadItem.addActionListener(listener);
     }
 
     public void addChangeListener(ChangeListener listener) {
