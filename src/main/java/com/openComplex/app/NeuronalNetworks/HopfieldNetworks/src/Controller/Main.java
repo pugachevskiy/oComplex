@@ -82,18 +82,15 @@ public class Main {
             //Calculate nextStep
             int[] tempVector = netinput;
             int[] nextState = normalize(tempVector);
-            for(int i=0; i<tempVector.length; i++)
-                System.out.println(tempVector[i] + " " + nextState[i]);
 
             //Look for differences between old state and current netinput
             similiarVectors = new boolean[netinput.length];
             for (int i = 0; i < size; i++) {
                 similiarVectors[i] = Math.signum(oldVector[i]) == Math.signum(netinput[i]);
-                //System.out.print("alter: " + oldVector[i] + " " + stepList.get(steps-1)[i] + " neuer: " + netinput[i] +  " " + similiarVectors[i] + " || ");
             }
 
             //If asynchronized, switch one false vector element
-            if(asynchron)
+            if(!asynchron)
                 for(int i=0; i<similiarVectors.length; i++) {
                     if(!similiarVectors[i]) {
                         nextState[i] = nextState[i]==-1 ? 1 : -1;
@@ -112,9 +109,15 @@ public class Main {
             appendArray(differencesString, similiarVectors);
 
             oldVector = nextState;
+            if(terminationCondition(steps)) {
+                System.out.println("Break");
+                break;
+            }
+
         }
 
 
+        System.out.println("\n\n");
 
         /*
         for(int i=0; i<stepListString.size(); i++) {
@@ -205,4 +208,21 @@ public class Main {
         updateString += ")T";
         updatedList.add(updateString);
     }
+
+    private static boolean terminationCondition(int step) {
+        boolean terminate = false;
+
+        if(step>1) {
+            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-2)))
+                terminate = true;
+        }
+        if(step>2) {
+            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-3)))
+                //terminate = true;
+                System.out.println();
+        }
+
+        return terminate;
+    }
+
 }
