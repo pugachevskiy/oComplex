@@ -63,15 +63,10 @@ public class FeigenbaumModel extends JPanel {
     }
 
     public void getValues(List<JTextField> textFieldList) {
-        String xmins = textFieldList.get(0).getText().trim();
-        String xmaxs = textFieldList.get(1).getText().trim();
-        String rmins = textFieldList.get(2).getText().trim();
-        String rmaxs = textFieldList.get(3).getText().trim();
-        xmin = new Double(xmins);
-        xmax = new Double(xmaxs);
-        rmin = new Double(rmins);
-        rmax = new Double(rmaxs);
-
+        xmin = Double.valueOf(textFieldList.get(0).getText());
+        xmax = Double.valueOf(textFieldList.get(1).getText());
+        rmin = Double.valueOf(textFieldList.get(2).getText());
+        rmax = Double.valueOf(textFieldList.get(3).getText());
     }
 
     public void update() {
@@ -82,10 +77,14 @@ public class FeigenbaumModel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        System.out.println("12");
+        g.setColor(Color.BLACK);
+        g.drawRect(0, 0, 400, 300);
         if (myGo) {
+            System.out.println("1");
             // color for iteration points
             iters++;
-            g.setColor(colorS[iColor]);
+            g.setColor(Color.BLUE);
            // if (checkBox.isSelected()) iColor++;
             if (iColor == 8) iColor = 0;
 

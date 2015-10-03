@@ -33,13 +33,15 @@ public class Feigenbaum implements ActionListener, MouseListener {
     private void start() {
         new Thread() {
             public void run() {
-                try {
-                    while (model.myGo) {
+                while (model.myGo) {
+                    try {
                         model.update();
-                        sleep(50);
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    model.repaint();
                 }
             }
         }.start();
@@ -152,23 +154,23 @@ public class Feigenbaum implements ActionListener, MouseListener {
         String command = e.getActionCommand();
         switch (command){
             case "Start":
-                System.out.println("444");
                 thePressedKey = "n";
                 model.myGo = true;
+                model.initCoord(gui.getTextFieldList());
                 start();
-                model.update();
+              //  model.update();
                 break;
             case "Clear":
                 thePressedKey = "c";
                 model.myGo = true;
                 start();
-                model.update();
+               // model.update();
                 break;
             case "More":
                 thePressedKey = "p";
                 model.myGo = true;
                 start();
-                model.update();
+              //  model.update();
                 break;
             default:
                 break;

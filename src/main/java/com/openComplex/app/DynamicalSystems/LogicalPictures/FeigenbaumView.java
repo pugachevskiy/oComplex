@@ -14,8 +14,8 @@ public class FeigenbaumView {
     private JButton buttonStart, buttonClear, buttonMore;
     private JLabel labelRRange, labelXRange;
     private JCheckBox checkboxColor;
-    private JTextField textFieldrmin, textFieldxmin, textFieldrmax, textFieldxmax;
-    private List<JTextField> textFieldList = Arrays.asList(textFieldxmin,textFieldxmax, textFieldrmin, textFieldrmax);
+    private JTextField textFieldrmin = new JTextField(), textFieldxmin = new JTextField(), textFieldrmax = new JTextField(), textFieldxmax = new JTextField();
+    private List<JTextField> textFieldList = Arrays.asList(textFieldxmin,textFieldxmax,textFieldrmin,textFieldrmax);
 
 
     public FeigenbaumView() {
@@ -30,8 +30,9 @@ public class FeigenbaumView {
 
         frame.add(panelMenu, BorderLayout.NORTH);
 //        frame.add(panelField, BorderLayout.CENTER);
-        frame.setVisible(true);
         init();
+        frame.setVisible(true);
+
     }
 
     public void init() {
@@ -49,19 +50,24 @@ public class FeigenbaumView {
 
         checkboxColor = new JCheckBox("8 color");
 
-        textFieldrmin = new JTextField();
+
         textFieldrmin.setText("0");
 
-        textFieldxmin = new JTextField();
+
         textFieldxmin.setText("0");
 
-        textFieldrmax = new JTextField();
+
         textFieldrmax.setText("4");
 
-        textFieldxmax = new JTextField();
+
         textFieldxmax.setText("1");
 
 
+        System.out.print(textFieldList.get(0).getText());
+       /* textFieldList.add(textFieldxmin);
+        textFieldList.add(textFieldxmax);
+        textFieldList.add(textFieldrmin);
+        textFieldList.add(textFieldrmax);*/
 
         panelMenu.add(buttonStart);
         panelMenu.add(buttonClear);
