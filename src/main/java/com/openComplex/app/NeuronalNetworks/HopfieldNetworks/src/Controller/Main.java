@@ -75,7 +75,7 @@ public class Main {
 
         stepList.add(oldVector);
 
-        while(steps++<10) {
+        while(steps++<30) {
             //Calculate Net-input:
             int netinput[] = matrixMalVector(matrix, oldVector);
             netinput = vectorAdd(netinput, thresholdVector);
@@ -115,23 +115,7 @@ public class Main {
             }
 
         }
-
-
         System.out.println("\n\n");
-
-        /*
-        for(int i=0; i<stepListString.size(); i++) {
-            System.out.println(stepListString.get(i));
-        }
-        System.out.println();
-        for(int i=0; i<nextStepListString.size(); i++) {
-            System.out.println(nextStepListString.get(i));
-        }
-        System.out.println();
-        for(int i=0; i<differencesString.size(); i++) {
-            System.out.println(differencesString.get(i));
-        }
-        */
 
         Main.gui.tablePanel.optionPanel.repaint();
     }
@@ -166,12 +150,9 @@ public class Main {
 
     public static int[] vectorAdd(int[] vector1, int[] vector2) {
 
-        //System.out.println("Fertiger Vektor:");
         for (int i = 0; i < vector1.length; i++) {
             vector1[i] += vector2[i];
-            //System.out.print(netinput[i] + " ");
         }
-        //System.out.println();
         return  vector1;
     }
 
@@ -213,13 +194,19 @@ public class Main {
         boolean terminate = false;
 
         if(step>1) {
-            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-2)))
+            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-2))) {
+                nextStepListString.add("stable state: z" + (step-2) + " = z" + (step-1));
                 terminate = true;
+            }
+
         }
         if(step>2) {
-            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-3)))
-                //terminate = true;
-                System.out.println();
+            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-3))) {
+                nextStepListString.add("dead lock: z" + (step-1) + " = z" + (step-3));
+                terminate = true;
+            }
+
+
         }
 
         return terminate;
