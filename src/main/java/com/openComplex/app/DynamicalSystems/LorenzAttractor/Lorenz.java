@@ -1,7 +1,5 @@
 package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
-
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +12,9 @@ public class Lorenz implements ActionListener {
     LorenzModel lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
     double dt = 0.01;
     private int step = 0;
+    private int stepMax = 5000;
     private boolean isActive;
+    private double[] xArray, yArray, zArray;
 
     public Lorenz() {
         gui = new LorenzView2();
@@ -22,42 +22,35 @@ public class Lorenz implements ActionListener {
         gui.setTextA(String.valueOf(lorenz1.getA()));
         gui.setTextB(String.valueOf(lorenz1.getB()));
         gui.setTextC(String.valueOf(lorenz1.getC()).substring(0, 5));
+        xArray = new double[stepMax+1];
+        zArray = new double[stepMax+1];
+        yArray = new double[stepMax+1];
 
     }
+    public void draw(LorenzModel lorenz, int i) {
+        xArray[i] = lorenz.getX1();
+        yArray[i] = lorenz.getY1();
+        zArray[i] = lorenz.getZ1();
+    }
 
-    public void start() {
-
-        // Use Euler's method to numerically solve ODE
-        new Thread() {
-            public void run() {
-                try {
-                    while (isActive && step < 5000) {
-                        step++;
-                        lorenz1.update(dt);
-                        gui.draw(lorenz1, step);
-                        sleep(1);
-                    }
-                    gui.doPaint();
-                    stopDraw();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+    private void start(){
+        while (step < stepMax) {
+            step++;
+            lorenz1.update(dt);
+            draw(lorenz1, step);
+        }
+        stopDraw();
+        gui.doPaint(xArray,yArray,zArray);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
-            case "Start":
-                isActive = true;
+            case "Draw":
                 setCoeff();
                 start();
-                gui.setStartButtonText("Stop");
-                break;
-            case "Stop":
-                stopDraw();
+                gui.setStartButtonText("Draw");
                 break;
             case "Clear":
                 gui.clear();
@@ -67,9 +60,7 @@ public class Lorenz implements ActionListener {
     }
 
     private void stopDraw(){
-        isActive = false;
         step = 0;
-        gui.setStartButtonText("Start");
         lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
     }
 

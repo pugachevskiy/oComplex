@@ -16,15 +16,13 @@ import java.awt.event.ActionListener;
 public class LorenzView2 {
     private JFrame frame;
     private JPanel menuPanel;
-    private double[] xArray, yArray, zArray;
+
     private JTextField coeffA, coeffB, coeffC;
     private JButton startButton, clearButton;
     private Plot3DPanel plot;
 
     public LorenzView2() {
-        xArray = new double[50001];
-        zArray = new double[50001];
-        yArray = new double[50001];
+
 
         init();
     }
@@ -58,8 +56,8 @@ public class LorenzView2 {
         coeffC = new JTextField("");
         coeffC.setPreferredSize(new Dimension(100, 40));
         menuPanel.add(coeffC);
-        startButton = new JButton("Start");
-        startButton.setActionCommand("Start");
+        startButton = new JButton("Draw");
+        startButton.setActionCommand("Draw");
         menuPanel.add(startButton);
         clearButton = new JButton("Clear");
         clearButton.setActionCommand("Clear");
@@ -95,11 +93,7 @@ public class LorenzView2 {
         clearButton.addActionListener(listener);
     }
 
-    public void draw(LorenzModel lorenz, int i) {
-        xArray[i] = lorenz.getX1();
-        yArray[i] = lorenz.getY1();
-        zArray[i] = lorenz.getZ1();
-    }
+
 
     public void clear() {
         plot.removeAll();
@@ -108,8 +102,9 @@ public class LorenzView2 {
         plot.revalidate();
     }
 
-    public void doPaint() {
+    public void doPaint(double[] xArray, double[] yArray, double[] zArray) {
         plot.addLinePlot("Lorenz", xArray, yArray, zArray);
+        plot.revalidate();
     }
 
 
