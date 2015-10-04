@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
  */
 public class Lorenz implements ActionListener {
 
-    private LorenzView gui;
+    private LorenzView2 gui;
     LorenzModel lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
-    double dt = 0.001;
+    double dt = 0.01;
     private int step = 0;
     private boolean isActive;
 
     public Lorenz() {
-        gui = new LorenzView();
+        gui = new LorenzView2();
         gui.addListener(this);
         gui.setTextA(String.valueOf(lorenz1.getA()));
         gui.setTextB(String.valueOf(lorenz1.getB()));
@@ -31,13 +31,13 @@ public class Lorenz implements ActionListener {
         new Thread() {
             public void run() {
                 try {
-                    while (isActive && step < 50000) {
+                    while (isActive && step < 5000) {
                         step++;
                         lorenz1.update(dt);
-                        gui.draw(lorenz1, Color.BLUE, step, 150);
+                        gui.draw(lorenz1, step);
                         sleep(1);
-                        gui.repaint();
                     }
+                    gui.doPaint();
                     stopDraw();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -1,4 +1,7 @@
-package com.openComplex.app.DynamicalSystems.LorenzAttractor;
+/*package com.openComplex.app.DynamicalSystems.LorenzAttractor;
+
+import org.math.plot.Plot3DPanel;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,25 +10,29 @@ import java.awt.event.ActionListener;
 /**
  * Created by strange on 26/08/15.
  */
-public class LorenzView extends JPanel{
+/*public class LorenzView extends JPanel{
     private JFrame frame;
     private JPanel menuPanel;
     private Color color;
     private int translate;
-    private int[] xArray, zArray;
+    private double[] xArray, yArray, zArray;
     private JTextField coeffA, coeffB, coeffC;
     private JButton startButton, clearButton;
     int nPoint = 50000;
     int X,Y = 0;
+    Plot3DPanel plot = new Plot3DPanel();
 
     public LorenzView(){
-        xArray = new int[50001];
-        zArray = new int[50001];
+        xArray = new double[50001];
+        zArray = new double[50001];
+        yArray = new double[50001];
         init();
     }
 
     public  void init(){
-        frame = new JFrame("Lorenz Attractor");
+        frame = new JFrame("Lorenz");
+
+
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(700, 400));
@@ -34,6 +41,7 @@ public class LorenzView extends JPanel{
         menuPanel.setLayout(new BoxLayout(menuPanel,BoxLayout.Y_AXIS));
         addMenuPanel();
         frame.add(menuPanel, BorderLayout.WEST);
+        frame.add(plot);
         frame.setVisible(true);
 
     }
@@ -89,8 +97,9 @@ public class LorenzView extends JPanel{
     }
 
     public void draw(LorenzModel lorenz, Color color, int i, int translate){
-        xArray[i] = (int) (lorenz.getX1()*4);
-        zArray[i] = (int) (lorenz.getZ1()*4);
+        xArray[i] =  lorenz.getX1()*4;
+        yArray[i] =  lorenz.getY1()*4;
+        zArray[i] = lorenz.getZ1()*4;
         X = (int) lorenz.getX1()*4;
         Y = (int) lorenz.getX1()*4;
         nPoint = i;
@@ -112,7 +121,8 @@ public class LorenzView extends JPanel{
         g.drawString("X", 500, 346);
         g.translate(translate,translate);
         g.setColor(color);
-        g.drawPolygon(xArray, zArray, nPoint);
+        plot.addLinePlot("Lorenz", xArray,yArray,zArray);
+       // g.drawPolygon(xArray, zArray, nPoint);
     }
 
     public void setStartButtonText(String text){
@@ -120,5 +130,5 @@ public class LorenzView extends JPanel{
         startButton.setActionCommand(text);
     }
 }
-
+*/
 
