@@ -104,7 +104,7 @@ public class LorenzView2 {
     public void clear() {
         plot.removeAll();
         plot = new Plot3DPanel();
-        frame.add(plot);L
+        frame.add(plot);
         plot.revalidate();
     }
 
