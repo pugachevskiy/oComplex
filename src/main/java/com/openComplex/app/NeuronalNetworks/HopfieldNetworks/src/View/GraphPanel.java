@@ -23,6 +23,7 @@ public class GraphPanel extends JPanel {
 
 
     public void paintComponent(Graphics g) {
+        updateValueArray(Main.gui.tablePanel.getTextfieldValues());
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
