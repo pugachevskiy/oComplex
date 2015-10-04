@@ -43,6 +43,8 @@ public class LorenzModel {
         return this.z;
     }
 
+    public double getY1() { return  this.y; }
+
     public double getA() {
         return this.a;
     }
