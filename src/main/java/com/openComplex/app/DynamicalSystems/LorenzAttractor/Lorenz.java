@@ -13,7 +13,6 @@ public class Lorenz implements ActionListener {
     double dt = 0.01;
     private int step = 0;
     private int stepMax = 5000;
-    private boolean isActive;
     private double[] xArray, yArray, zArray;
 
     public Lorenz() {
