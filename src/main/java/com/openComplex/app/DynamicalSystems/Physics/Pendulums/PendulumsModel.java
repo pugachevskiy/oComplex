@@ -1,9 +1,13 @@
 package com.openComplex.app.DynamicalSystems.Physics.Pendulums;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created by strange on 05/10/15.
  */
-public class PendulumsModel {
+public class PendulumsModel extends JPanel {
+    public static final int Lx = 260, Ly = 260;
     private static final double grav = 9.81; //gravity
     private static final double dt = 0.0005; //Runge-Kutta-timestep
     private double k1[] = new double[4]; //Runge-Kutta
@@ -16,13 +20,11 @@ public class PendulumsModel {
     private double phi22, omega22; //coordinates and velocities
     private int px11, px12, py11, py12; //pixelcoordinates
     private int px21, px22, py21, py22; //pixelcoordinates
-    private double startwert; //save initial values
+    private double startwert = Math.PI / 180 * 170.; //phi22; //save initial values
     private boolean stop = false; //go/pause
 
 
-    public void startwerte()  //method for setting initial values
-    {
-        startwert = Math.PI / 180 * 170.; //phi22
+    public void startwerte() {  //method for setting initial values
         phi11 = Math.PI / 180 * 130.;
         omega11 = 0.0;
         phi12 = Math.PI / 180 * 170.;
@@ -31,7 +33,6 @@ public class PendulumsModel {
         omega21 = 0.0;
         phi22 = startwert;
         omega22 = 0.0;
-        stop = false;
 
 
     }//startwerte()
@@ -46,6 +47,7 @@ public class PendulumsModel {
 
     public void setStartwert(double wert) {
         this.startwert = wert;
+        repaint();
     }
 
     public double getStartwert() {
@@ -120,6 +122,7 @@ public class PendulumsModel {
         omega11 = omega11 + (l1[0] + 2 * l1[1] + 2 * l1[2] + l1[3]) / 6; //Runge-Kutta
         phi12 = phi12 + (k2[0] + 2 * k2[1] + 2 * k2[2] + k2[3]) / 6; //Runge-Kutta
         omega12 = omega12 + (l2[0] + 2 * l2[1] + 2 * l2[2] + l2[3]) / 6; //Runge-Kutta
+        repaint();
     }
 
     public void solve2() {
@@ -129,7 +132,35 @@ public class PendulumsModel {
         omega21 = omega21 + (l1[0] + 2 * l1[1] + 2 * l1[2] + l1[3]) / 6; //Runge-Kutta
         phi22 = phi22 + (k2[0] + 2 * k2[1] + 2 * k2[2] + k2[3]) / 6; //Runge-Kutta
         omega22 = omega22 + (l2[0] + 2 * l2[1] + 2 * l2[2] + l2[3]) / 6; //Runge-Kutta
+        repaint();
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setFont(new Font("Verdana", Font.BOLD, 10));
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 2 * Lx, Ly + 50);
+
+        g.setColor(Color.blue);
+        g.drawString("Phi_12:", Lx / 2 - 20, Ly + 20);
+        g.drawString("" + Math.round(100 * phi12 * 180 / Math.PI) / 100. + "o", Lx / 2 - 20, Ly + 40);
+        g.drawString("Phi_22:", Lx + Lx / 2 - 20, Ly + 20);
+        g.drawString("" + Math.round(100 * phi22 * 180 / Math.PI) / 100. + "o", Lx + Lx / 2 - 20, Ly + 40);
+
+        g.drawLine(0, Ly / 2, 2 * Lx, Ly / 2);
+        g.drawLine(Lx / 2, 0, Lx / 2, Ly);
+        g.drawLine(Lx + Lx / 2, 0, Lx + Lx / 2, Ly);
+        g.setColor(Color.red);
+        g.drawLine(Lx / 2, Ly / 2, px11, py11);
+        g.drawLine(px11, py11, px12, py12);
+        g.drawLine(Lx + Lx / 2, Ly / 2, px21, py21);
+        g.drawLine(px21, py21, px22, py22);
+        g.setColor(Color.black);
+        g.fillOval(px11 - 6, py11 - 6, 13, 13);
+        g.fillOval(px12 - 6, py12 - 6, 13, 13);
+        g.fillOval(px21 - 6, py21 - 6, 13, 13);
+        g.fillOval(px22 - 6, py22 - 6, 13, 13);
+    } //paintFrame(gr)
 
 }

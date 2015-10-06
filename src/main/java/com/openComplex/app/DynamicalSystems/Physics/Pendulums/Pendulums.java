@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 public class Pendulums implements ActionListener {
 
-
     private PendulumsView gui;
     private PendulumsModel model;
     private int step = 0;
@@ -21,44 +20,30 @@ public class Pendulums implements ActionListener {
         model = new PendulumsModel();
         gui.init();
         gui.addListener(this);
+        gui.addPanel(model);
     }
 
 
     public void start() {
         new Thread() {
             public void run() {
-                try {
-                    sleep(700);
-                } catch (InterruptedException e) {
-                }
-
-                // ghead.drawString("Change Phi_22 by a minimal value ...", 120, 25);
-
                 model.startwerte();
                 step = 0;
                 while (model.getStatus()) {
                     try {
-                        Thread.sleep(40);
+                        sleep(1);
+                        /* pendulum 1 */
+                        model.solve1();
+                        /* pendulum 2 */
+                        model.solve2();
+                        model.pixels(); //calculate pixelcoords
+                        model.repaint(); //paint new frame
+                        step++;
+                        if (step % 15 == 0) ;
                     } catch (InterruptedException e) {
                     }
                 }
 
-	       	/* pendulum 1 */
-                model.solve1();
-
-	       	/* pendulum 2 */
-                model.solve2();
-
-                if (step % 15 == 0) //paint not so often
-                {
-                    try {
-                        Thread.sleep(8);
-                    } catch (InterruptedException e) {
-                    }
-                    model.pixels(); //calculate pixelcoords
-                    gui.repaint(); //paint new frame
-                }
-                step++;
             }
         }.start();
     }
@@ -70,35 +55,31 @@ public class Pendulums implements ActionListener {
         switch (command) {
             case "Go":
                 model.setStatus(!model.getStatus());
+                start();
                 break;
             case "New":
-                //  stop();
+                model.setStatus(false);
                 model.startwerte(); //set initial values
                 step = 0;
                 model.pixels(); //calculate pixelcoords
-                //  update(g); //paint initial state
-                start();
+                model.repaint(); //paint initial state
                 break;
             case "Plus":
-                //    stop();
-                model.setStartwert(model.getStartwert() + Math.PI / 180 * 0.01);
+                model.setStatus(false);
+                model.setStartwert(model.getStartwert() + Math.PI / 180 * 1.00);
                 model.startwerte();
                 step = 0;
                 model.pixels(); //calculate pixelcoords
-                //    update(g); //paint initial state
-                start();
+                model.repaint();
                 break;
             case "Minus":
-                //    stop();
-                model.setStartwert(model.getStartwert() - Math.PI / 180 * 0.01);
+                model.setStatus(false);
+                model.setStartwert(model.getStartwert() - Math.PI / 180 * 1.00);
                 model.startwerte();
                 step = 0;
                 model.pixels(); //calculate pixelcoords
-                //    update(g); //paint initial state
-                start();
+                model.repaint();
                 break;
-
-
         }
     }
 }
