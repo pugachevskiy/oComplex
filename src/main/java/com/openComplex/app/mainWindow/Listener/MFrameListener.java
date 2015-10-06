@@ -8,6 +8,9 @@ import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
+import com.openComplex.app.DynamicalSystems.Physics.DLA.DLA;
+import com.openComplex.app.DynamicalSystems.Physics.Oscillator.Oscillator;
+import com.openComplex.app.DynamicalSystems.Physics.Pendulums.Pendulums;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,6 +52,15 @@ public class MFrameListener implements ActionListener {
                 break;
             default:
                 App.gui.updateGUI(command);
+                break;
+            case "2 Double-Pendulums":
+                Pendulums pendel = new Pendulums();
+                break;
+            case "Diffusion Limited Aggregation":
+                DLA dla = new DLA();
+                break;
+            case "Harmonic oscillator":
+                Oscillator oscillator = new Oscillator();
                 break;
         }
 

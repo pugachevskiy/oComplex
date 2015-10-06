@@ -1,4 +1,4 @@
-package com.openComplex.app.Physics.Pendulums;
+package com.openComplex.app.DynamicalSystems.Physics.Pendulums;
 
 
 import java.awt.event.ActionEvent;
@@ -19,6 +19,7 @@ public class Pendulums implements ActionListener {
     public Pendulums() {
         gui = new PendulumsView();
         model = new PendulumsModel();
+        gui.init();
         gui.addListener(this);
     }
 

@@ -21,8 +21,9 @@ import java.util.List;
 public class DynamicPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
     private static final String FEIGENBAUM = "Logical pictures with Feigenbaum-diagram", ITERATED = "Iterated maps",
-        LORENZ =  "Lorenz Attractor", FRACTALS = "Fractals";
-    private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LORENZ,FRACTALS);
+        LORENZ =  "Lorenz Attractor", FRACTALS = "Fractals", CHAOS = "2 Double-Pendulums", DLA = "Diffusion Limited Aggregation",
+        OSCILLATOR = "Harmonic oscillator";
+    private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LORENZ,FRACTALS,CHAOS,DLA,OSCILLATOR);
 
     public DynamicPanelView() {
 

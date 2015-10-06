@@ -1,4 +1,4 @@
-package com.openComplex.app.Physics.Pendulums;
+package com.openComplex.app.DynamicalSystems.Physics.Pendulums;
 
 /**
  * Created by strange on 05/10/15.

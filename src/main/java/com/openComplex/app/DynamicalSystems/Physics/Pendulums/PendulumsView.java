@@ -1,4 +1,4 @@
-package com.openComplex.app.Physics.Pendulums;
+package com.openComplex.app.DynamicalSystems.Physics.Pendulums;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by strange on 05/10/15.
  */
+
 public class PendulumsView extends JPanel {
     public static final int Lx = 260, Ly = 260; //graphic window
     private JFrame frame;
