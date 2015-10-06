@@ -1,4 +1,4 @@
-package com.openComplex.app.DynamicalSystems.Physics.Oscillator;
+package com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class OscillatorView {
 
     public void init() {
 
-        frame = new JFrame("Oscillator");
+        frame = new JFrame("Oscillators");
         frame.setLayout(new BorderLayout());
         frame.setSize(700, 400);
 

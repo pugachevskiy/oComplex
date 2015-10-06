@@ -1,4 +1,4 @@
-package com.openComplex.app.DynamicalSystems.Physics.DLA;
+package com.openComplex.app.DynamicalSystems.DLA;
 
 import javax.swing.*;
 import java.awt.*;

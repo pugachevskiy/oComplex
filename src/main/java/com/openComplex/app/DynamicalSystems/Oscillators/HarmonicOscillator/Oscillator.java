@@ -1,4 +1,4 @@
-package com.openComplex.app.DynamicalSystems.Physics.Oscillator;
+package com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator;
 
 /**
  * Created by strange on 06/10/15.

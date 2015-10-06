@@ -1,4 +1,4 @@
-package com.openComplex.app.DynamicalSystems.Physics.DLA;
+package com.openComplex.app.DynamicalSystems.DLA;
 
 /**
  * Created by strange on 06/10/15.

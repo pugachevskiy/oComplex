@@ -8,9 +8,9 @@ import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
-import com.openComplex.app.DynamicalSystems.Physics.DLA.DLA;
-import com.openComplex.app.DynamicalSystems.Physics.Oscillator.Oscillator;
-import com.openComplex.app.DynamicalSystems.Physics.Pendulums.Pendulums;
+import com.openComplex.app.DynamicalSystems.DLA.DLA;
+import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscillator;
+import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
