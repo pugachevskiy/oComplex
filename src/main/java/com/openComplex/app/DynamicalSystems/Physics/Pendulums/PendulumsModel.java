@@ -36,21 +36,20 @@ public class PendulumsModel {
 
     }//startwerte()
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.stop;
     }
 
-    public void setStatus(boolean status){
+    public void setStatus(boolean status) {
         this.stop = status;
     }
 
-    public void setStartwert(double wert){
+    public void setStartwert(double wert) {
         this.startwert = wert;
     }
 
-    public double getStartwert(){
+    public double getStartwert() {
         return this.startwert;
-
     }
 
     public void pixels()  //method for calculating pixelcoords
@@ -114,7 +113,7 @@ public class PendulumsModel {
         l2[3] = dt * forcephi2(phi1, omega1, phi2 + k2[2], omega2 + l2[2]);
     }//runge_step_phi2()
 
-    public void solve1(){
+    public void solve1() {
         runge_step_phi1(phi11, omega11, phi12, omega12); //Runge-Kutta
         runge_step_phi2(phi11, omega11, phi12, omega12); //Runge-Kutta
         phi11 = phi11 + (k1[0] + 2 * k1[1] + 2 * k1[2] + k1[3]) / 6; //Runge-Kutta
@@ -123,7 +122,7 @@ public class PendulumsModel {
         omega12 = omega12 + (l2[0] + 2 * l2[1] + 2 * l2[2] + l2[3]) / 6; //Runge-Kutta
     }
 
-    public void solve2(){
+    public void solve2() {
         runge_step_phi1(phi21, omega21, phi22, omega22); //Runge-Kutta
         runge_step_phi2(phi21, omega21, phi22, omega22); //Runge-Kutta
         phi21 = phi21 + (k1[0] + 2 * k1[1] + 2 * k1[2] + k1[3]) / 6; //Runge-Kutta
