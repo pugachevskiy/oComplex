@@ -24,6 +24,7 @@ public class GUI {
         frame = new JFrame("Nash-Model");
         frame.setPreferredSize(new Dimension(800, 800));
         frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
         frame.add(controlPanel(), BorderLayout.NORTH);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
