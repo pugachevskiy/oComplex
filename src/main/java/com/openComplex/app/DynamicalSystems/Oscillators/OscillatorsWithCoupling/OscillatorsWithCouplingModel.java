@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by strange on 07/10/15.
  */
-public class OscillatorsWithCouplingModel extends JPanel{
+public class OscillatorsWithCouplingModel extends JPanel {
     private static final int W = 400, H = 200;
     private int px1, px2; //pixelcoordinates
     private double x1, x1p, x2, x2p; //coordinates and velocities
@@ -33,10 +33,10 @@ public class OscillatorsWithCouplingModel extends JPanel{
     private int startwert_reib; //save initial friction value
     private boolean Choice[] = new boolean[3]; //check for selected item
 
-    public OscillatorsWithCouplingModel(){
+    public OscillatorsWithCouplingModel() {
         Choice[0] = true; //Free
         startwert[0] = 0.15; //x1
-        startwert[1] = 2./3; //x2
+        startwert[1] = 2. / 3; //x2
         startwert[2] = D2; //D2
         startwert_reib = 0; //reib
     }
@@ -172,30 +172,102 @@ public class OscillatorsWithCouplingModel extends JPanel{
     }//runge_step_x2()
 
 
+    public void update() {
+        runge_step_x1(); //Runge-Kutta-calculation
+        runge_step_x2(); //Runge-Kutta-calculation
+        x1 = x1 + (k1[0] + 2 * k1[1] + 2 * k1[2] + k1[3]) / 6; //new x1
+        x1p = x1p + (l1[0] + 2 * l1[1] + 2 * l1[2] + l1[3]) / 6; //new x1p
+        x2 = x2 + (k3[0] + 2 * k3[1] + 2 * k3[2] + k3[3]) / 6; //new x2
+        x2p = x2p + (l3[0] + 2 * l3[1] + 2 * l3[2] + l3[3]) / 6; //new x2p
+        pixels(); //calculate pixelcoordinates
+        repaint(); //paint new frame
+    }
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setFont(new Font("Verdana",Font.BOLD,10));
+        g.setFont(new Font("Verdana", Font.BOLD, 10));
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, W, H+50);
+        g.fillRect(0, 0, W, H + 50);
 
         g.setColor(Color.blue);
-        g.drawString("Energy:",W/2-140,H+20);
-        g.drawString("" +(double)(Math.round(100*energy()))/100,W/2-140,H+40);
-        g.drawString("Coupling:",W/2-30,H+20);
-        g.drawString("" + D2,W/2-30,H+40);
-        g.drawString("Friction:",W/2+80,H+20);
-        g.drawString("" + reib,W/2+80,H+40);
+        g.drawString("Energy:", W / 2 - 140, H + 20);
+        g.drawString("" + (double) (Math.round(100 * energy())) / 100, W / 2 - 140, H + 40);
+        g.drawString("Coupling:", W / 2 - 30, H + 20);
+        g.drawString("" + D2, W / 2 - 30, H + 40);
+        g.drawString("Friction:", W / 2 + 80, H + 20);
+        g.drawString("" + reib, W / 2 + 80, H + 40);
 
-        g.drawLine(0,H/2,W,H/2);
-        g.drawLine(W/2,0,W/2,H);
+        g.drawLine(0, H / 2, W, H / 2);
+        g.drawLine(W / 2, 0, W / 2, H);
         g.setColor(Color.black);
-        g.drawPolyline(xPoints1_int,yPoints1_int,12); //spring_left
-        g.drawPolyline(xPoints2_int,yPoints2_int,12); //spring_right
-        g.setColor(new Color(100,50,10));
-        g.drawPolyline(xPoints3_int,yPoints3_int,12); //spring_middle
+        g.drawPolyline(xPoints1_int, yPoints1_int, 12); //spring_left
+        g.drawPolyline(xPoints2_int, yPoints2_int, 12); //spring_right
+        g.setColor(new Color(100, 50, 10));
+        g.drawPolyline(xPoints3_int, yPoints3_int, 12); //spring_middle
         g.setColor(Color.black);
-        g.fillOval(px1-9,H/2-9,19,19);
-        g.fillOval(px2-9,H/2-9,19,19);
+        g.fillOval(px1 - 9, H / 2 - 9, 19, 19);
+        g.fillOval(px2 - 9, H / 2 - 9, 19, 19);
     } //paintFrame(g)
+
+
+    public void setDPlus() {
+        if (startwert[2] < 4) {
+            startwert[2] = 2 * startwert[2];
+            D2 = startwert[2];
+        }
+        repaint();
+    }
+
+    public void setDMinus() {
+        startwert[2] = startwert[2] / 2;
+        D2 = startwert[2];
+        repaint();
+    }
+
+    public void plusFriction() {
+        startwert_reib++;
+        reib = startwert_reib;
+    }
+
+    public void minusFriction() {
+        if (reib > 0) {
+            startwert_reib--;
+            reib = startwert_reib;
+        }
+    }
+
+    public void setChoiceFree() {
+        Choice[0] = true; //Free
+        Choice[1] = false; //Together
+        Choice[2] = false; //Against
+        startwert[0] = 0.15; //x1
+        startwert[1] = 2. / 3; //x2
+        startwerte();
+        pixels();
+        repaint();
+    }
+
+    public void setChoiceTogether() {
+        Choice[0] = false;
+        Choice[1] = true;
+        Choice[2] = false;
+        startwert[0] = 1. / 3 - 0.2; //x1
+        startwert[1] = 2. / 3 - 0.2; //x2
+        startwerte();
+        pixels();
+        repaint();
+    }
+
+    public void setChoiceAganist() {
+        Choice[0] = false;
+        Choice[1] = false;
+        Choice[2] = true;
+        startwert[0] = 1. / 3 - 0.1; //x1
+        startwert[1] = 2. / 3 + 0.1; //x2
+        startwerte();
+        pixels();
+        repaint();
+    }
 }

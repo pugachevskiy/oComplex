@@ -7,6 +7,7 @@ import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
+import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
@@ -65,6 +66,9 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Anharmonic Oscillator":
                 AnharmonicOscillator anharmonicOscillator = new AnharmonicOscillator();
+                break;
+            case "2 oscillators with coupling":
+                OscillatorsWithCoupling oscillatorsWithCoupling = new OscillatorsWithCoupling();
                 break;
         }
 
