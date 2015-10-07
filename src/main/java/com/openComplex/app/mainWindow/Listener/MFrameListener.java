@@ -78,7 +78,7 @@ public class MFrameListener implements ActionListener {
                 AnharmonicOscillatorsWithCoupling anharmonicOscillatorsWithCoupling = new AnharmonicOscillatorsWithCoupling();
                 break;
             case "Nasch Model":
-                com.openComplex.app.CellularAutomat.NaSchModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaSchModel.Controller.Controller();
+                com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
                 break;
             case "Vibration-Rotator":
                 VibrationRotator vibrationRotator = new VibrationRotator();
