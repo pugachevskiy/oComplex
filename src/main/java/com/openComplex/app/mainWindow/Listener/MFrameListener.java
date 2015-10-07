@@ -9,6 +9,7 @@ import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
+import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
@@ -76,6 +77,10 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Nasch Model":
                 com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
+                break;
+            case "Vibration-Rotator":
+                VibrationRotator vibrationRotator = new VibrationRotator();
+                break;
 
         }
 
