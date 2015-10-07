@@ -1,25 +1,23 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+
+import java.awt.event.*;
 
 /**
  * Created by strange on 07/10/15.
  */
-public class VibrationRotator implements ActionListener, ItemListener {
+public class VibrationRotator implements ActionListener, ItemListener, AdjustmentListener {
 
     private int step;
+    private boolean stop = false;
     private VibrationRotatorView gui;
     private VibrationRotatorModel model;
 
     public VibrationRotator(){
         gui = new VibrationRotatorView();
-        model = new VibrationRotatorModel();
-      //  gui.addListener(this, this);
-     //   gui.addPanel(model);
+        model = new VibrationRotatorModel(gui.getSpeed());
+        gui.addListener(this, this, this);
+        gui.addPanel(model);
     }
 
 
@@ -29,7 +27,7 @@ public class VibrationRotator implements ActionListener, ItemListener {
             public void run() {
                 model.startwerte();
                 step = 0;
-           /*     while (stop) {
+               while (stop) {
                     try {
                         sleep(10);
                         model.update(step);
@@ -37,66 +35,53 @@ public class VibrationRotator implements ActionListener, ItemListener {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }//while*/
+                }//while
             }
         }.start();
     }//run
 
 
-
-   /* public void actionPerformed(ActionEvent evt) {
-        if (evt.getActionCommand() == but_reib_plus.getActionCommand()) {
-            reib++;
-            if (cb_stop.getState()) {
-                update(g);
-            }
-        }
-        if (evt.getActionCommand() == but_reib_min.getActionCommand()) {
-            if (reib > 0) {
-                reib--;
-                if (cb_stop.getState()) {
-                    update(g);
-                }
-            }
-        }
-    }//actionPerformed(evt)
-
-    public void itemStateChanged(ItemEvent evt) //Choice object
-    {
-        if (evt.getItem() == "Values_1") {
-            stop();
-            startwert[0] = 1.; //r
-            startwerte();
-            pixels();
-            update(g);
-            start();
-        }
-        if (evt.getItem() == "Values_2") {
-            stop();
-            startwert[0] = 0.7; //r
-            startwerte();
-            pixels();
-            update(g);
-            start();
-        }
-        if (evt.getItem() == "Values_3") {
-            stop();
-            startwert[0] = 0.5; //r
-            startwerte();
-            pixels();
-            update(g);
-            start();
-        }
-    } //itemStateChanged(evt)*/
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String command = e.getActionCommand();
+        switch (command) {
+            case "Friction ++":
+                model.plusFriction();
+                stop = false;
+                step = 0;
+                model.startwerte();
+                model.repaint();
+                break;
+            case "Friction --":
+                model.minusFriction();
+                stop = false;
+                step = 0;
+                model.startwerte();
+                model.repaint();
+                break;
+            case "Go":
+                stop = !stop;
+                start();
+                break;
+        }
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
+        if (e.getItem() == "Values_1") {
+            model.state1();
+        }
+        if (e.getItem() == "Values_2") {
+            model.state2();
+        }
+        if (e.getItem() == "Values_3") {
+            model.state3();
+        }
+    }
 
+    @Override
+    public void adjustmentValueChanged(AdjustmentEvent e) {
+        model.setSpeedSlider(e.getValue());
     }
 }
 

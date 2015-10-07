@@ -22,9 +22,9 @@ public class VibrationRotatorModel extends JPanel {
     private double startwert[] = new double[2]; //save initial values
 
 
-    public VibrationRotatorModel(){
+    public VibrationRotatorModel(int value){
         startwert[0] = r0; //r
-        //startwert[1] = (60. - (double) speed.getValue()) / 10.; //omega
+        startwert[1] = (60. - (double) value) / 10.; //omega
     }
 
     public void startwerte() {
@@ -131,5 +131,44 @@ public class VibrationRotatorModel extends JPanel {
         pixels();
         repaint();
 
+    }
+
+    public void setSpeedSlider(int value){
+        phi0 = phi; //save the current value for phi
+        startwert[1] = (60. - (double) value) / 10.; //new omega
+        omega = startwert[1];
+        pixels();
+        repaint();
+    }
+
+    public void state1(){
+        startwert[0] = 1.; //r
+        startwerte();
+        pixels();
+        repaint();
+    }
+    public void state2(){
+        startwert[0] = 0.7; //r
+        startwerte();
+        pixels();
+        repaint();
+    }
+    public void state3(){
+        startwert[0] = 0.5; //r
+        startwerte();
+        pixels();
+        repaint();
+    }
+
+    public void plusFriction() {
+        reib++;
+        repaint();
+    }
+
+    public void minusFriction() {
+        if (reib > 0) {
+            reib--;
+        }
+        repaint();
     }
 }
