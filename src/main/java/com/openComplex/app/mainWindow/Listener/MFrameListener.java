@@ -86,12 +86,14 @@ public class MFrameListener implements ActionListener {
             case "Double-Pendulum":
 
                 JFrame fr = new JFrame("Double-Pendulum");
+                fr.setSize(550,400);
                 JPanel panel = new JPanel();
                 Pend pend = new Pend();
                 panel.add(pend);
                 fr.add(panel);
                 fr.setVisible(true);
                 pend.init();
+
                 break;
 
         }

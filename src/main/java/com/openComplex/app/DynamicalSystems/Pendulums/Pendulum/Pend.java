@@ -38,8 +38,8 @@ public class Pend extends Applet implements Runnable, ActionListener {
 
     public void init() {
         super.init();
+        offImage = createImage(400, 300);
         setLayout(null);
-
         Canvas header = new Canvas();
         header.setBounds(1, 1, Lx, 40);
         header.setBackground(Color.white);
@@ -118,8 +118,7 @@ public class Pend extends Applet implements Runnable, ActionListener {
         startwert[3] = 1.0; //m2
         startwert_reib = 0; //reib
 
-        System.out.print("1");
-        paintFrame(g);
+        repaint();
     }//init()
 
     public void startwerte() //initial values
