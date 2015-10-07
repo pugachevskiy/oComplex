@@ -70,6 +70,9 @@ public class MFrameListener implements ActionListener {
             case "2 oscillators with coupling":
                 OscillatorsWithCoupling oscillatorsWithCoupling = new OscillatorsWithCoupling();
                 break;
+            case "Nasch Model":
+                com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
+
         }
 
 

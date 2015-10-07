@@ -24,7 +24,7 @@ import java.util.List;
 public class CellularPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
     private static final String GOL = "Conway's Game of Life", WOLFRAM = "Wolfram's universe",
-            HEGELMANN = "Model of Hegelmann", DEFRULE = "Define rules";
+            HEGELMANN = "Model of Hegelmann", DEFRULE = "Nasch Model";
     private static final List<String> BUTTONSCELLULAR = Arrays.asList(GOL, WOLFRAM, HEGELMANN,DEFRULE);
 
 
