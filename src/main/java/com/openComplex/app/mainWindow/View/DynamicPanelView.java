@@ -74,8 +74,7 @@ public class DynamicPanelView extends JPanel {
         informationText.setText("A dynamical system is a concept in mathematics\n" +
                 "where a fixed rule describes how a point in a geometrical space depends on time.\n" +
                 "The progress depends on the initial state and is defined by a set of real numbers.\n" +
-                "Examples include the mathematic models that describe the swinging of a clock\n" +
-                "pendulum, flow of water in a pipe, ...");
+                "Examples include the mathematic models that describe the swinging of a clock, ...");
 
         this.add(upperPanel);
         this.add(informationText);

@@ -82,10 +82,10 @@ public class OscillatorPanelView extends JPanel{
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("Cellular automata consist of a grid of cells.\n" +
-                "For each cell, a set of cells called neighborhood is defined\n" +
-                "relative to this cell. Those cells influence each other trough\n" +
-                "this defined neighborhood.\n");
+        informationText.setText("An oscillator is a mechanical or electronic device that\n" +
+                "works on the principles of oscillation: a periodic fluctuation between\n" +
+                "two things based on changes in energy. Computers, clocks, watches, radios,\n" +
+                "and metal detectors are among the many devices that use oscillators.\n");
 
         this.add(upperPanel);
         this.add(informationText);
