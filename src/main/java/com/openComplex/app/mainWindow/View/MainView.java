@@ -3,6 +3,10 @@ package com.openComplex.app.mainWindow.View;
 import com.openComplex.app.App;
 import com.openComplex.app.mainWindow.Listener.MFrameKeyListener;
 import com.openComplex.app.mainWindow.Listener.MenubarListener;
+import com.openComplex.app.mainWindow.View.DynamicSubPanels.DeterministicChaosPanelView;
+import com.openComplex.app.mainWindow.View.DynamicSubPanels.NBodySimulationPanelView;
+import com.openComplex.app.mainWindow.View.DynamicSubPanels.OscillatorPanelView;
+import com.openComplex.app.mainWindow.View.DynamicSubPanels.PendulumPanelView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +55,12 @@ public class MainView extends JFrame {
         mainPanel.add(new GraphPanelView(), mainPanelView.gtButtonText);
         mainPanel.add(new CellularPanelView(), mainPanelView.caButtonText);
         mainPanel.add(new DynamicPanelView(), mainPanelView.dsButtonText);
+        //Add Dynamical panels
+        mainPanel.add(new OscillatorPanelView(), mainPanelView.oscillButtonText);
+        mainPanel.add(new PendulumPanelView(), mainPanelView.pendButtonText);
+        mainPanel.add(new DeterministicChaosPanelView(), mainPanelView.determiButtonText);
+        mainPanel.add(new NBodySimulationPanelView(), mainPanelView.nBodyButtonText);
+
         mainFrame.add(mainPanel, BorderLayout.CENTER);
         //Adds a cardlayout to the frame to optimize switching between menus.
         this.updateGUI(mainPanelView.mainButtonText);
@@ -127,23 +137,33 @@ public class MainView extends JFrame {
         switch (menuValue) {
             case mainPanelView.mainButtonText:
                 cardLayout.show(mainPanel, "MAIN");
-                //mainPanel = new mainPanelView();
                 break;
             case mainPanelView.nnButtonText:
                 cardLayout.show(mainPanel, mainPanelView.nnButtonText);
-                //mainPanel = new NeuronalPanelView();
                 break;
             case mainPanelView.gtButtonText:
                 cardLayout.show(mainPanel, mainPanelView.gtButtonText);
-                //mainPanel = new GraphPanelView();
                 break;
             case mainPanelView.caButtonText:
                 cardLayout.show(mainPanel, mainPanelView.caButtonText);
-                //mainPanel = new CellularPanelView();
                 break;
             case mainPanelView.dsButtonText:
                 cardLayout.show(mainPanel, mainPanelView.dsButtonText);
-                //mainPanel = new DynamicPanelView();
+                break;
+            case mainPanelView.oscillButtonText:
+                cardLayout.show(mainPanel, mainPanelView.oscillButtonText);
+                break;
+            case mainPanelView.pendButtonText:
+                cardLayout.show(mainPanel, mainPanelView.pendButtonText);
+                break;
+            case mainPanelView.determiButtonText:
+                cardLayout.show(mainPanel, mainPanelView.determiButtonText);
+                break;
+            case mainPanelView.nBodyButtonText:
+                cardLayout.show(mainPanel, mainPanelView.nBodyButtonText);
+                break;
+            case mainPanelView.dynamicBackButtonText:
+                cardLayout.show(mainPanel, mainPanelView.dsButtonText);
                 break;
             default:
                 break;

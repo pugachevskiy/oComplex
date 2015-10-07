@@ -1,7 +1,8 @@
-package com.openComplex.app.mainWindow.View;
+package com.openComplex.app.mainWindow.View.DynamicSubPanels;
 
 import com.openComplex.app.mainWindow.Listener.MFrameListener;
 import com.openComplex.app.mainWindow.Model.ModelMain;
+import com.openComplex.app.mainWindow.View.MainView;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,55 +11,65 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 29/05/15.
+ * Created by Tobias on 07.10.2015.
  */
-public class DynamicPanelView extends JPanel {
+public class OscillatorPanelView extends JPanel{
     private ActionListener listener = new MFrameListener();
-    private static final String FEIGENBAUM = "Logical pictures with Feigenbaum-diagram", ITERATED = "Iterated maps",
-        LORENZ =  "Lorenz Attractor", FRACTALS = "Fractals", //CHAOS = "2 Double-Pendulums", DLA = "Diffusion Limited Aggregation",
-        OSCILLATORS = "Oscillators", PENDULUMS = "Pendulums", DETERMICHAOS = "Deterministic chaos", NBODYS = "N-Body-Simulations";
-    private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LORENZ,FRACTALS,OSCILLATORS,PENDULUMS,DETERMICHAOS, NBODYS);
+    private static final String HARMONIC = "Harmonic oscillator", ANHARMONIC = "Anharmonic oscillator",
+            TWOOSCILL = "2 oscillators with coupling", TWOANHARM = "2 anharmonic oscillators with coupling", VIBR_ROT = "Vibration-Rotator";
+    private static final List<String> BUTTONSCELLULAR = Arrays.asList(HARMONIC, ANHARMONIC, TWOOSCILL, TWOANHARM, VIBR_ROT);
 
-    public DynamicPanelView() {
+
+    public OscillatorPanelView() {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel upperPanel = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         upperPanel.setLayout(gbl);
         int i = 0;
-        JButton backButton = new JButton(), hopfieldButton = new JButton("Hopfield networks");
+        JButton backButton = new JButton();
         try {
             backButton.setIcon(new ImageIcon(ImageIO.read(new File(MainView.BACKBUTTONPICTUREPATH))));
 
         } catch(IOException e) {
             backButton.setText("BACK");
         }
-        backButton.setActionCommand("back");
+        backButton.setActionCommand("back2Dynamical");
         backButton.addActionListener(listener);
+        backButton.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent arg0) {
+            }
+        });
+        backButton.setMnemonic(KeyEvent.VK_BACK_SPACE);
         addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
-            addComponent(upperPanel, gbl, new JLabel("                              "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                         "), i++, 0, 1, 1);
         }
-        JLabel networksLabel = new JLabel("Dynamical systems");
+        JLabel networksLabel = new JLabel("Oscillators");
         networksLabel.setFont(MainView.HEADINGFONT);
         addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
-            addComponent(upperPanel, gbl, new JLabel("                                      "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                                        "), i++, 0, 1, 1);
         }
+
 
         JPanel topicPanel = new JPanel();
         topicPanel.setLayout(new GridLayout(2, 2));
         TitledBorder title = new TitledBorder("Options");
         topicPanel.setBorder(title);
         ModelMain model = new ModelMain();
-        model.createButtons(topicPanel, BUTTONSDYNAMICS);
+        model.createButtons(topicPanel, BUTTONSCELLULAR);
 
         JTextPane informationText = new JTextPane();
         informationText.setEditable(false);
@@ -71,11 +82,10 @@ public class DynamicPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("A dynamical system is a concept in mathematics\n" +
-                "where a fixed rule describes how a point in a geometrical space depends on time.\n" +
-                "The progress depends on the initial state and is defined by a set of real numbers.\n" +
-                "Examples include the mathematic models that describe the swinging of a clock\n" +
-                "pendulum, flow of water in a pipe, ...");
+        informationText.setText("Cellular automata consist of a grid of cells.\n" +
+                "For each cell, a set of cells called neighborhood is defined\n" +
+                "relative to this cell. Those cells influence each other trough\n" +
+                "this defined neighborhood.\n");
 
         this.add(upperPanel);
         this.add(informationText);
@@ -94,6 +104,5 @@ public class DynamicPanelView extends JPanel {
         cont.add(c);
 
     }
-
 
 }
