@@ -172,6 +172,16 @@ public class MFrameListener implements ActionListener {
                 fr9.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pend9.init();
                 break;
+            case "Triple-Bar-DoublePendulum":
+                JFrame fr10 = new JFrame("Triple-Bar-DoublePendulum");
+                fr10.setSize(800,500);
+                TripBarPend pend10 = new TripBarPend();
+                fr10.add(pend10);
+                fr10.setVisible(true);
+                fr10.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend10.init();
+                break;
+
 
         }
 
