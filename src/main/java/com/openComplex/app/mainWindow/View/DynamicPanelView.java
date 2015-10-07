@@ -44,17 +44,17 @@ public class DynamicPanelView extends JPanel {
         addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
-            addComponent(upperPanel, gbl, new JLabel("                              "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                          "), i++, 0, 1, 1);
         }
         JLabel networksLabel = new JLabel("Dynamical systems");
         networksLabel.setFont(MainView.HEADINGFONT);
         addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
-            addComponent(upperPanel, gbl, new JLabel("                                      "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                                       "), i++, 0, 1, 1);
         }
 
         JPanel topicPanel = new JPanel();
-        topicPanel.setLayout(new GridLayout(2, 2));
+        topicPanel.setLayout(new GridLayout(3, 3));
         TitledBorder title = new TitledBorder("Options");
         topicPanel.setBorder(title);
         ModelMain model = new ModelMain();

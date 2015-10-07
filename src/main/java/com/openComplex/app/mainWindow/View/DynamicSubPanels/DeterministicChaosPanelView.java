@@ -53,13 +53,13 @@ public class DeterministicChaosPanelView extends JPanel {
         addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
-            addComponent(upperPanel, gbl, new JLabel("                         "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                          "), i++, 0, 1, 1);
         }
         JLabel networksLabel = new JLabel("Deterministic chaos");
         networksLabel.setFont(MainView.HEADINGFONT);
         addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
-            addComponent(upperPanel, gbl, new JLabel("                                        "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                                       "), i++, 0, 1, 1);
         }
 
 
@@ -81,10 +81,10 @@ public class DeterministicChaosPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("Cellular automata consist of a grid of cells.\n" +
-                "For each cell, a set of cells called neighborhood is defined\n" +
-                "relative to this cell. Those cells influence each other trough\n" +
-                "this defined neighborhood.\n");
+        informationText.setText("Chaos theory is the field of study in mathematics that\n" +
+                "studies the behavior of dynamical systems that are highly sensitive\n" +
+                "to initial conditions - a response popularly referred to as the\n" +
+                "butterfly effect.\n");
 
         this.add(upperPanel);
         this.add(informationText);

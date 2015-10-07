@@ -53,13 +53,13 @@ public class NBodySimulationPanelView extends JPanel {
         addComponent(upperPanel, gbl, new JLabel(), i++, 0, 1, 1);
         addComponent(upperPanel, gbl, backButton, i++, 0, 1, 1);
         while(i<3) {
-            addComponent(upperPanel, gbl, new JLabel("                         "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                          "), i++, 0, 1, 1);
         }
         JLabel networksLabel = new JLabel("N-Body-Simulations");
         networksLabel.setFont(MainView.HEADINGFONT);
         addComponent(upperPanel, gbl, networksLabel, i++, 0, 5, 1);
         while(i<6) {
-            addComponent(upperPanel, gbl, new JLabel("                                        "), i++, 0, 1, 1);
+            addComponent(upperPanel, gbl, new JLabel("                                       "), i++, 0, 1, 1);
         }
 
 
