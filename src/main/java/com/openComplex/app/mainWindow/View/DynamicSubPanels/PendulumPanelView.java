@@ -83,10 +83,10 @@ public class PendulumPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("Cellular automata consist of a grid of cells.\n" +
-                "For each cell, a set of cells called neighborhood is defined\n" +
-                "relative to this cell. Those cells influence each other trough\n" +
-                "this defined neighborhood.\n");
+        informationText.setText("A pendulum is a weight suspended from a pivot so that\n" +
+                "it can swing freely. When a pendulum is displaced sideways from its\n" +
+                "resting, equilibrium position, it is subject to a restoring force due to gravity\n" +
+                "that will accelerate it back toward the equilibrium position.\n");
 
         this.add(upperPanel);
         this.add(informationText);

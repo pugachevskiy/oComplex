@@ -81,10 +81,10 @@ public class NBodySimulationPanelView extends JPanel {
         informationText.setParagraphAttributes(set, true);
         informationText.setBackground(new JLabel().getBackground());
         informationText.setBounds(100, 100, 300, 300);
-        informationText.setText("Cellular automata consist of a grid of cells.\n" +
-                "For each cell, a set of cells called neighborhood is defined\n" +
-                "relative to this cell. Those cells influence each other trough\n" +
-                "this defined neighborhood.\n");
+        informationText.setText("In physics and astronomy, an N-body simulation is\n" +
+                "a simulation of a dynamical system of particles, usually under the influence\n" +
+                "of physical forces, such as gravity (see n-body problem).\n" +
+                "N-body simulations are widely used tools in astrophysics.\n");
 
         this.add(upperPanel);
         this.add(informationText);
