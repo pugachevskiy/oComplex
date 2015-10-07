@@ -7,6 +7,7 @@ import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
+import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
@@ -69,6 +70,9 @@ public class MFrameListener implements ActionListener {
                 break;
             case "2 oscillators with coupling":
                 OscillatorsWithCoupling oscillatorsWithCoupling = new OscillatorsWithCoupling();
+                break;
+            case "2 anharmonic oscillators with coupling":
+                AnharmonicOscillatorsWithCoupling anharmonicOscillatorsWithCoupling = new AnharmonicOscillatorsWithCoupling();
                 break;
             case "Nasch Model":
                 com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
