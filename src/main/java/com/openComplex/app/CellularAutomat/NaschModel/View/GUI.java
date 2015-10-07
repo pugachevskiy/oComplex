@@ -21,7 +21,7 @@ public class GUI {
             accDec = {"1", "2", "3"};
 
     public GUI() {
-        frame = new JFrame("Nash-Model");
+        frame = new JFrame("Nasch-Model");
         frame.setPreferredSize(new Dimension(800, 800));
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
