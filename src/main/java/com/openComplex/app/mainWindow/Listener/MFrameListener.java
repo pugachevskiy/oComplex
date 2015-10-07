@@ -77,7 +77,7 @@ public class MFrameListener implements ActionListener {
             case "Harmonic oscillator":
                 Oscillator oscillator = new Oscillator();
                 break;
-            case "Anharmonic Oscillator":
+            case "Anharmonic oscillator":
                 AnharmonicOscillator anharmonicOscillator = new AnharmonicOscillator();
                 break;
             case "2 oscillators with coupling":
