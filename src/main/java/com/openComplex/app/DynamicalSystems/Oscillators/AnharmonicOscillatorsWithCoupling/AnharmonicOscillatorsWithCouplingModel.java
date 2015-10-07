@@ -36,7 +36,7 @@ public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
     private int grav = 0; //gravity 0=off 1=on
     private boolean Choice[] = new boolean[3]; //check for selected item
 
-    public AnharmonicOscillatorsWithCouplingModel(){
+    public AnharmonicOscillatorsWithCouplingModel() {
         Choice[0] = true; //Free
         startwert[0] = 0.2; //x1
         startwert[1] = 0.0; //x1p
@@ -65,7 +65,7 @@ public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
         reib = startwert_reib;
     }//startwerte()
 
-      public void pixels()  //method for calculating pixelcoordinates
+    public void pixels()  //method for calculating pixelcoordinates
     {
         px1 = (int) Math.round(W * x1); //x-value left mass
         py1 = H / 2 + (int) Math.round(H * y1); //y-value left mass
@@ -275,7 +275,7 @@ public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
     }//runge_step_y2()
 
 
-    public void update(boolean gravity){
+    public void update(boolean gravity) {
         if (gravity) //gravity
         {
             grav = 1;
@@ -322,5 +322,70 @@ public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
         g.fillOval(px2 - 12, py2 - 12, 24, 24);
     } //paintFrame(gr)
 
+
+    public void setDPlus() {
+        if (startwert[8] < 3) {
+            startwert[8] = 2 * startwert[8];
+            D = startwert[8];
+        }
+        repaint();
+    }
+
+    public void setDMinus() {
+        startwert[8] = startwert[8] / 2;
+        D = startwert[8];
+        repaint();
+    }
+
+    public void plusFriction() {
+        startwert_reib++;
+        reib = startwert_reib;
+    }
+
+    public void minusFriction() {
+        if (reib > 0) {
+            startwert_reib--;
+            reib = startwert_reib;
+        }
+    }
+
+    public void setChoiceFree() {
+        Choice[0] = true; //Free
+        Choice[1] = false; //Together
+        Choice[2] = false; //Against
+        startwert[0] = 0.2; //x1
+        startwert[2] = 0.2; //y1
+        startwert[4] = 0.7; //x2
+        startwert[6] = 0.0; //y2
+        startwerte();
+        pixels();
+        repaint();
+    }
+
+    public void setChoiceTogether() {
+        Choice[0] = false;
+        Choice[1] = true;
+        Choice[2] = false;
+        startwert[0] = 1. / 3 - 0.2; //x1
+        startwert[2] = 0.0; //y1
+        startwert[4] = 2. / 3 - 0.2; //x2
+        startwert[6] = 0.0; //y2
+        startwerte();
+        pixels();
+        repaint();
+    }
+
+    public void setChoiceAganist() {
+        Choice[0] = false;
+        Choice[1] = false;
+        Choice[2] = true;
+        startwert[0] = 1. / 3 - 0.1; //x1
+        startwert[2] = 0.0; //y1
+        startwert[4] = 2. / 3 + 0.1; //x2
+        startwert[6] = 0.0; //y2
+        startwerte();
+        pixels();
+        repaint();
+    }
 
 }
