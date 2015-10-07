@@ -15,7 +15,7 @@ public class PendulumsView extends JPanel {
     private JButton buttonPhi22Plus, buttonPhi22Min;
 
     public void init() {
-        frame = new JFrame("Pendulum");
+        frame = new JFrame("DoublePendulum");
         frame.setSize(700,400);
         frame.setLayout(new BorderLayout());
         Panel pan = new Panel();

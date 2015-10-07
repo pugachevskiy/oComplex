@@ -6,11 +6,20 @@ import com.openComplex.app.DynamicalSystems.Fractals2.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
+import com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.GasApplet;
+import com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.SunEarthApplet;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
-import com.openComplex.app.DynamicalSystems.Pendulums.Pendulum.Pend;
+import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.Pend;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivPend;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivPendY;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulum.Driv3PendY;
+import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.FreePend;
+import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
+import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
+import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TripPend;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
@@ -83,17 +92,85 @@ public class MFrameListener implements ActionListener {
             case "Vibration-Rotator":
                 VibrationRotator vibrationRotator = new VibrationRotator();
                 break;
-            case "Double-Pendulum":
-
-                JFrame fr = new JFrame("Double-Pendulum");
-                fr.setSize(550,400);
-                JPanel panel = new JPanel();
+            case "Double-DoublePendulum":
+                JFrame fr = new JFrame("Double-DoublePendulum");
+                fr.setSize(800,500);
                 Pend pend = new Pend();
-                panel.add(pend);
-                fr.add(panel);
+                fr.add(pend);
                 fr.setVisible(true);
                 pend.init();
-
+                break;
+            case "Triple-DoublePendulum":
+                JFrame fr1 = new JFrame("Triple-DoublePendulum");
+                fr1.setSize(800,500);
+                TripPend pend1 = new TripPend();
+                fr1.add(pend1);
+                fr1.setVisible(true);
+                fr1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend1.init();
+                break;
+            case "Quad-Bar-DoublePendulum":
+                JFrame fr3 = new JFrame("Quad-Bar-DoublePendulum");
+                fr3.setSize(800,500);
+                QuadBarPend pend3 = new QuadBarPend();
+                fr3.add(pend3);
+                fr3.setVisible(true);
+                fr3.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend3.init();
+                break;
+            case "DoublePendulum with free mounting":
+                JFrame fr4 = new JFrame("DoublePendulum with free mounting");
+                fr4.setSize(800,500);
+                FreePend pend4 = new FreePend();
+                fr4.add(pend4);
+                fr4.setVisible(true);
+                fr4.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend4.init();
+                break;
+            case "Driven pendulum":
+                JFrame fr5 = new JFrame("Driven pendulum");
+                fr5.setSize(800,500);
+                DrivPend pend5 = new DrivPend();
+                fr5.add(pend5);
+                fr5.setVisible(true);
+                fr5.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend5.init();
+                break;
+            case "Driven pendulum Y":
+                JFrame fr6 = new JFrame("Driven pendulum Y");
+                fr6.setSize(800,500);
+                DrivPendY pend6 = new DrivPendY();
+                fr6.add(pend6);
+                fr6.setVisible(true);
+                fr6.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend6.init();
+                break;
+            case "Driven triple pendulum":
+                JFrame fr7 = new JFrame("Driven triple pendulum");
+                fr7.setSize(800,500);
+                Driv3PendY pend7 = new Driv3PendY();
+                fr7.add(pend7);
+                fr7.setVisible(true);
+                fr7.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend7.init();
+                break;
+            case "Gas in a 2-dimensional box":
+                JFrame fr8 = new JFrame("Gas in a 2-dimensional box");
+                fr8.setSize(800,500);
+                GasApplet pend8 = new GasApplet();
+                fr8.add(pend8);
+                fr8.setVisible(true);
+                fr8.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend8.init();
+                break;
+            case "Sun-Earth-Sim":
+                JFrame fr9 = new JFrame("Sun-Earth-Sim");
+                fr9.setSize(800,500);
+                SunEarthApplet pend9 = new SunEarthApplet();
+                fr9.add(pend9);
+                fr9.setVisible(true);
+                fr9.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pend9.init();
                 break;
 
         }

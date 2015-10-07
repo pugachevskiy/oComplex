@@ -70,7 +70,7 @@ public class SunEarthApplet extends Applet
         g = can.getGraphics();
         g.setFont(new Font("Verdana",Font.BOLD,10));
 
-        blackstar = getImage(getCodeBase(),"blackstar.gif");
+//        blackstar = getImage(getCodeBase(),"blackstar.gif");
 
         startwert[0] = 6000.0; //dt
         startwert[1] = M; //M
@@ -337,7 +337,7 @@ public class SunEarthApplet extends Applet
     public void stop()
     {
         animator = null;
-        offImage = null;
-        offGraphics = null;
+      //  offImage = null;
+       // offGraphics = null;
     }//stop()
 }

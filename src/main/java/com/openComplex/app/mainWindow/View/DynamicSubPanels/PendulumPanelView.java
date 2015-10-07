@@ -24,8 +24,8 @@ import java.util.List;
  */
 public class PendulumPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
-    private static final String DOUBLE_PEN = "Double-Pendulum", TRIPLE = "Triple-Pendulum", TRIPLE_BAR = "Triple-Bar-Pendulum",
-                                QUAD_BAR = "Quad-Bar-Pendulum", FREE_MOUNT = "Pendulum with free mounting", DRIVEN = "Driven pendulum",
+    private static final String DOUBLE_PEN = "Double-DoublePendulum", TRIPLE = "Triple-DoublePendulum", TRIPLE_BAR = "Triple-Bar-DoublePendulum",
+                                QUAD_BAR = "Quad-Bar-DoublePendulum", FREE_MOUNT = "DoublePendulum with free mounting", DRIVEN = "Driven pendulum",
                                 DRIVEN_Y = "Driven pendulum Y", DRIVEN_TRIPLE = "Driven triple pendulum";
     private static final List<String> BUTTONSCELLULAR = Arrays.asList(DOUBLE_PEN, TRIPLE, TRIPLE_BAR, QUAD_BAR, FREE_MOUNT, DRIVEN, DRIVEN_Y, DRIVEN_TRIPLE);
 
