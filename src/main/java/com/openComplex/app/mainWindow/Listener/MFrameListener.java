@@ -10,12 +10,14 @@ import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.Anh
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulum.Pend;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
 import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscillator;
 import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,7 +35,7 @@ public class MFrameListener implements ActionListener {
                 Controller fractal = new Controller();
                 break;
             case "Conway's Game of Life":
-               // Life gol = new Life();
+                // Life gol = new Life();
                 com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller();
                 break;
             case "Wolfram's universe":
@@ -80,6 +82,16 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Vibration-Rotator":
                 VibrationRotator vibrationRotator = new VibrationRotator();
+                break;
+            case "Double-Pendulum":
+
+                JFrame fr = new JFrame("Double-Pendulum");
+                JPanel panel = new JPanel();
+                Pend pend = new Pend();
+                panel.add(pend);
+                fr.add(panel);
+                fr.setVisible(true);
+                pend.init();
                 break;
 
         }
