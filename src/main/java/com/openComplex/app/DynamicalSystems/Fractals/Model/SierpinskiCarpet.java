@@ -1,39 +1,39 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import javax.swing.*;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import java.awt.*;
 
 /**
- * Created by strange on 22/03/15.
+ * Created by strange on 29/06/15.
  */
-public class SierpinskiCarpet extends JPanel {
+public class SierpinskiCarpet extends GLJPanel implements Fractal {
     //Start point
-    private static final int X = 50;
+    private static final int X = 20;
     private static final int Y = 50;
     //Length of side of the rectangle
-    private static final int DIM = 243;
-    public static final double DIMENSION = 1.8928;
-    public static final int COPY = 3;
-    public static final int FACTOR = 8;
+    private static final int DIM = 486;
 
-    private int step = 1;
 
-    public SierpinskiCarpet(int initStep) {
+    private int step = 0;
+
+    public SierpinskiCarpet(GLCapabilities capabilities,int initStep) {
+        super(capabilities);
         step = initStep;
     }
 
     public void doDrawing(Graphics g, int x, int y, int dim, int n) {
-        g.setColor(Color.BLACK);
         int w = dim / 3;
         int x0, y0;
-
         g.drawRect(X, Y, DIM, DIM);
         if (n == 0)
             return;
 
         if (n == 1 ){
             g.drawRect(x + w, y + w, w, w);
-          //  g.drawRect(x,y,dim,dim);
+
         } else {
             g.drawRect(x+w, y+w, w, w);
             for (int i = 0; i < 9; i++) {
@@ -47,8 +47,37 @@ public class SierpinskiCarpet extends JPanel {
     }
 
     @Override
-    public void paintComponent(final Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.RED);
         doDrawing(g, X, Y, DIM, step);
+    }
+
+    @Override
+    public String getName() {
+        return FractalsCollection.SIERPINSKI_CARPET.get(0);
+    }
+
+    @Override
+    public String getCopy() {
+        return FractalsCollection.SIERPINSKI_CARPET.get(1);
+    }
+
+    @Override
+    public String getFactor() {
+        return FractalsCollection.SIERPINSKI_CARPET.get(2);
+    }
+    @Override
+    public String getDimension() {
+        return FractalsCollection.SIERPINSKI_CARPET.get(3);
+    }
+
+    @Override
+    public String getDicription() {
+        return FractalsCollection.SIERPINSKI_CARPET.get(4);
+    }
+    @Override
+    public GLJPanel getPanel() {
+        return this;
     }
 }

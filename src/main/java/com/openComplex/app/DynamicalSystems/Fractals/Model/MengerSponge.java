@@ -1,16 +1,15 @@
-package com.openComplex.app.DynamicalSystems.Fractals2.Model;
+package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.openComplex.app.DynamicalSystems.Fractals2.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 
 
 import com.jogamp.opengl.*;
 
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.jogamp.opengl.awt.GLJPanel;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 
 public class MengerSponge extends GLJPanel implements KeyListener, GLEventListener, Fractal {
 

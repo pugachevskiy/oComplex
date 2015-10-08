@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class CSVFile {
     // Game of life
-    public static void saveField(com.openComplex.app.CellularAutomat.GameOfLife2.Model.Cell[][] field, JComponent parent) throws IOException {
+    public static void saveField(com.openComplex.app.CellularAutomat.GameOfLife.Model.Cell[][] field, JComponent parent) throws IOException {
         CSVWriter writer;
         String[] entries = new String[field.length];
         JFileChooser fileChooser = new JFileChooser();
@@ -45,7 +45,7 @@ public class CSVFile {
         }
     }
 
-    public static void loadField(com.openComplex.app.CellularAutomat.GameOfLife2.Model.Cell[][] field, JComponent parent) throws IOException {
+    public static void loadField(com.openComplex.app.CellularAutomat.GameOfLife.Model.Cell[][] field, JComponent parent) throws IOException {
         CSVReader reader;
         String[] nextLine;
         JFileChooser fileChooser = new JFileChooser();

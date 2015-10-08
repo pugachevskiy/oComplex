@@ -1,7 +1,7 @@
-package com.openComplex.app.CellularAutomat.GameOfLife2.Controller;
+package com.openComplex.app.CellularAutomat.GameOfLife.Controller;
 
-import com.openComplex.app.CellularAutomat.GameOfLife2.Model.Field;
-import com.openComplex.app.CellularAutomat.GameOfLife2.View.View;
+import com.openComplex.app.CellularAutomat.GameOfLife.Model.Field;
+import com.openComplex.app.CellularAutomat.GameOfLife.View.View;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

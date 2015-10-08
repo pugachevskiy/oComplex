@@ -1,85 +1,70 @@
 package com.openComplex.app.CellularAutomat.GameOfLife.Model;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import java.awt.*;
 
-public class Cell extends JComponent {
-    private boolean cell;
-    private int size;
-    private Color color = Color.DARK_GRAY;
 
-    public final static int GROSS = 20;
-    public final static int MITTE = 15;
-    public final static int KLEIN = 10;
+/**
+ * Created by strange on 10/09/15.
+ */
+public class Cell{
+    private int row;
+    private int col;
+    private boolean status;
+    private Color color;
+    private int neighbors;
 
-    public Cell(int size) {
-        this.size = size;
-        this.cell = false;
-        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-    }
-
-    public void get_to_life() {
-        cell = !cell;
-    }
-
-    public void setColor(Color color) {
+    public Cell(int row, int col, boolean status, Color color) {
+        this.row = row;
+        this.col = col;
+        this.status = status;
         this.color = color;
     }
 
-    public void setColor(int index) {
-        switch (index) {
-            case 0:
-                this.color = Color.BLACK;
-                break;
-            case 1:
-                this.color = Color.BLUE;
-                break;
-            case 2:
-                this.color = Color.GREEN;
-                break;
-            case 3:
-                this.color = Color.YELLOW;
-                break;
-            default:
-                this.color = Color.BLACK;
-                break;
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        if (status) {
+            this.color = color;
+        } else {
+            this.color = Color.WHITE;
         }
-
     }
 
-    public boolean getCell() {
-        return cell;
+    public int getNeighbors() {
+        return neighbors;
     }
 
-    public void setCell(boolean cell) {
-        this.cell = cell;
+    public void setNeighbors(int neighbors) {
+        this.neighbors = neighbors;
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(color);
-        g.fillRect(0, 0, getWidth(), getHeight());
+    public boolean getStatus() {
+        return status;
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(size, size);
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    @Override
-    public Dimension getMaximumSize() {
-        return getPreferredSize();
+    public void addNeighbors(){
+        this.neighbors++;
     }
-
-    @Override
-    public Dimension getMinimumSize() {
-        return getPreferredSize();
-    }
-
-
 }
-

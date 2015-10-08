@@ -1,26 +1,26 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import javax.swing.*;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import java.awt.*;
 
 /**
- * Created by strange on 20/04/15.
+ * Created by laptop on 29.06.2015.
  */
-public class KochCurve extends JPanel {
+public class KochCurve extends GLJPanel implements Fractal {
     //Start point
     private static final int AX = 50;
-    private static final int AY = 150;
+    private static final int AY = 240;
     //End point
-    private static final int EX = 250;
-    private static final int EY = 150;
-    public static final double DIMENSION = 1.2619;
-    public static final int COPY = 3;
-    public static final int FACTOR = 4;
+    private static final int EX = 450;
+    private static final int EY = 240;
 
     private int step = 0;
-
-    public KochCurve(int initStep) {
-        step = initStep;
+    public KochCurve(GLCapabilities capabilities, int initStep) {
+        super(capabilities);
+        this.step = initStep;
     }
 
     public static void doDrawing(Graphics g, int ax, int ay, int ex, int ey, int n) {
@@ -45,10 +45,36 @@ public class KochCurve extends JPanel {
             doDrawing(g, dx, dy, ex, ey, n - 1);
         }
     }
+    @Override
+    public String getName() {
+        return FractalsCollection.KOCH_CURVE.get(0);
+    }
+    @Override
+    public String getCopy() {
+        return FractalsCollection.KOCH_CURVE.get(1);
+    }
+    @Override
+    public String getFactor() {
+        return FractalsCollection.KOCH_CURVE.get(2);
+    }
+    @Override
+    public String getDimension() {
+        return FractalsCollection.KOCH_CURVE.get(3);
+    }
+    @Override
+    public String getDicription() {
+        return FractalsCollection.KOCH_CURVE.get(4);
+    }
+    @Override
+    public GLJPanel getPanel() {
+        return this;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        doDrawing(g, AX, AY, EX, EY, step);
+        g.setColor(Color.RED);
+
+        doDrawing(g, AX, AY,  EX, EY, step);
     }
 }

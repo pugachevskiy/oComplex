@@ -1,12 +1,12 @@
-package com.openComplex.app.DynamicalSystems.Fractals2.Controller;
+package com.openComplex.app.DynamicalSystems.Fractals.Controller;
 
 
-import com.openComplex.app.DynamicalSystems.Fractals2.Fractal;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalCreator;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCreator;
-import com.openComplex.app.DynamicalSystems.Fractals2.Model.Model;
-import com.openComplex.app.DynamicalSystems.Fractals2.View.View;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalCreator;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCreator;
+import com.openComplex.app.DynamicalSystems.Fractals.Model.Model;
+import com.openComplex.app.DynamicalSystems.Fractals.View.View;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

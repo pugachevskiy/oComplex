@@ -1,4 +1,4 @@
-package com.openComplex.app.DynamicalSystems.Fractals2;
+package com.openComplex.app.DynamicalSystems.Fractals;
 
 
 /**

@@ -1,7 +1,7 @@
-package com.openComplex.app.DynamicalSystems.Fractals2.View;
+package com.openComplex.app.DynamicalSystems.Fractals.View;
 
 import com.jogamp.opengl.awt.GLJPanel;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

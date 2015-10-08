@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.GameOfLife2.View;
+package com.openComplex.app.CellularAutomat.GameOfLife.View;
 
 import javax.swing.*;
 import java.awt.*;

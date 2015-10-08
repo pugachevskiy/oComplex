@@ -1,9 +1,9 @@
-package com.openComplex.app.DynamicalSystems.Fractals2.Model;
+package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
-import com.openComplex.app.DynamicalSystems.Fractals2.Fractal;
-import com.openComplex.app.DynamicalSystems.Fractals2.FractalsCollection;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import java.awt.*;
 
 /**

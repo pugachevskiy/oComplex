@@ -1,22 +1,14 @@
-package com.openComplex.app.CellularAutomat.GameOfLife2.Model;
+package com.openComplex.app.CellularAutomat.GameOfLife.Model;
 
 import com.openComplex.app.mainWindow.Controller.CSVFile;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
 
 
 /**

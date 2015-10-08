@@ -2,7 +2,7 @@ package com.openComplex.app.mainWindow.Listener;
 
 import com.openComplex.app.App;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.Controller.MainWolfram;
-import com.openComplex.app.DynamicalSystems.Fractals2.Controller.Controller;
+import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
@@ -12,7 +12,7 @@ import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.Anh
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
-import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.Pend;
+import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.DoublePendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivPendY;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulum.Driv3PendY;
@@ -45,7 +45,7 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Conway's Game of Life":
                 // Life gol = new Life();
-                com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller();
+                com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller();
                 break;
             case "Wolfram's universe":
                 MainWolfram wolf = new MainWolfram();
@@ -93,12 +93,7 @@ public class MFrameListener implements ActionListener {
                 VibrationRotator vibrationRotator = new VibrationRotator();
                 break;
             case "Double-DoublePendulum":
-                JFrame fr = new JFrame("Double-DoublePendulum");
-                fr.setSize(800,500);
-                Pend pend = new Pend();
-                fr.add(pend);
-                fr.setVisible(true);
-                pend.init();
+                DoublePendulum pend = new DoublePendulum();
                 break;
             case "Triple-DoublePendulum":
                 JFrame fr1 = new JFrame("Triple-DoublePendulum");

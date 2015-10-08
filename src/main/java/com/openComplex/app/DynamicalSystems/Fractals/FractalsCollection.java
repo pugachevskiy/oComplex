@@ -1,6 +1,5 @@
-package com.openComplex.app.DynamicalSystems.Fractals2;
+package com.openComplex.app.DynamicalSystems.Fractals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
