@@ -32,7 +32,6 @@ public class DoublePendulum implements ActionListener {
                         sleep(1);
                         model.update();
                         step++;
-                        if (step % 15 == 0) ;
                     } catch (InterruptedException e) {
                     }
                 }

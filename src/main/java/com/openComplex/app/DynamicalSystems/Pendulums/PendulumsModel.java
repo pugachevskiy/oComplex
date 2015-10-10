@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by strange on 09/10/15.
  */
-public abstract  class PendulumsModel extends JPanel {
+public abstract class PendulumsModel extends JPanel {
     public static final int Lx = 500, Ly = 330; //graphic window
     public int px1, px2, py1, py2; //pixelcoordinates
     public double phi1, omega1; //coordinates and velocities
@@ -19,9 +19,13 @@ public abstract  class PendulumsModel extends JPanel {
     public double k2[] = new double[4]; //Runge-Kutta
     public double l1[] = new double[4]; //Runge-Kutta
     public double l2[] = new double[4]; //Runge-Kutta
+    public double k[] = new double[4]; //Runge-Kutta
+    public double l[] = new double[4]; //Runge-Kutta
     public double startwert[] = new double[4]; //save initial values
     public int startwert_reib; //save initial friction
-
+    public double phi, omega; //coordinates and velocities
+    public double a, ap, aforce; //coordinates and velocities
+    public double freq, amp; //frequency and amplitude
 
     public void startwerte() //initial values
     {
@@ -34,6 +38,17 @@ public abstract  class PendulumsModel extends JPanel {
         omega2 = 0.0;
     }//startwerte()
 
+    public void startwerteDriven()  //method for setting initial values
+    {
+        phi = 0.0;
+        omega = 0.0;
+        reib = startwert_reib;
+        amp = startwert[0];
+        freq = startwert[1];
+
+    }//startwerte()
+
+
     public void pixels() //method for calculating pixelcoordinates
     {
         px1 = (int) Math.round((double) (Lx / 2) + 80 * Math.sin(phi1));
@@ -42,7 +57,10 @@ public abstract  class PendulumsModel extends JPanel {
         py2 = (int) Math.round((double) py1 + 80 * Math.cos(phi2));
     }//pixels()
 
-    /* force on Phi_1 */
+    public double forcephi(double phi, double omega) {
+        return -grav * Math.sin(phi) - aforce * Math.cos(phi) - 0.1 * reib * omega;
+    }//forcephi()
+
     public double forcephi1(double phi1, double phi2, double omega1, double omega2) {
         return -(grav * (2 * m1 * Math.sin(phi1)
                 + m2 * Math.sin(phi1)
@@ -71,6 +89,11 @@ public abstract  class PendulumsModel extends JPanel {
                 - grav * (m1 * Math.cos(phi1) + m2 * Math.cos(phi1) + m2 * Math.cos(phi2));
     }//energy()
 
+    public double energyDriven() {
+        return 0.5 * omega * omega + 0.5 * ap * ap + omega * ap * Math.cos(phi)
+                - grav * Math.cos(phi);
+    }//energy()
+
     public void runge_step_phi1() {
         k1[0] = dt * omega1;
         l1[0] = dt * forcephi1(phi1, phi2, omega1, omega2);
@@ -92,6 +115,17 @@ public abstract  class PendulumsModel extends JPanel {
         k2[3] = dt * (omega2 + l2[2]);
         l2[3] = dt * forcephi2(phi1, phi2 + k2[2], omega1, omega2 + l2[2]);
     }//runge_step_phi2()
+
+    public void runge_step_phi() {
+        k[0] = dt * omega;
+        l[0] = dt * forcephi(phi, omega);
+        k[1] = dt * (omega + l[0] / 2);
+        l[1] = dt * forcephi(phi + k[0] / 2, omega + l[0] / 2);
+        k[2] = dt * (omega + l[1] / 2);
+        l[2] = dt * forcephi(phi + k[1] / 2, omega + l[1] / 2);
+        k[3] = dt * (omega + l[2]);
+        l[3] = dt * forcephi(phi + k[2], omega + l[2]);
+    }//runge_step_phi()
 
     public void phi1Plus() {
         startwert[0] = startwert[0] + Math.PI / 180 * 5;
@@ -120,6 +154,13 @@ public abstract  class PendulumsModel extends JPanel {
         pixels();
         repaint();
     }
+
+    public void treibwerte(int step)  //driving values
+    {
+        a = amp * Math.cos(freq * step * dt);
+        ap = -amp * freq * Math.sin(freq * step * dt);
+        aforce = -freq * freq * a;
+    }//treibwerte()
 
     public void frictionPlus() {
         startwert_reib++;
@@ -163,38 +204,6 @@ public abstract  class PendulumsModel extends JPanel {
         repaint();
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setFont(new Font("Verdana", Font.BOLD, 10));
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, Lx, Ly + 50);
-        g.setColor(Color.blue);
-        g.drawString("Energy:", 30, Ly + 20);
-        g.drawString("" + (double) Math.round(10 * energy()) / 10, 30, Ly + 40);
-        g.drawString("Friction:", 120, Ly + 20);
-        g.drawString("" + reib, 120, Ly + 40);
-        g.drawString("m1:", 210, Ly + 20);
-        g.drawString("" + (double) Math.round(100 * m1) / 100, 210, Ly + 40);
-        g.drawString("m2:", 270, Ly + 20);
-        g.drawString("" + (double) Math.round(100 * m2) / 100, 270, Ly + 40);
-        g.drawString("Phi1:", 350, Ly + 20);
-        g.drawString("" + (double) Math.round(10 * phi1 * 180 / Math.PI) / 10 + "o", 350, Ly + 40);
-        g.drawString("Phi2:", 420, Ly + 20);
-        g.drawString("" + (double) Math.round(10 * phi2 * 180 / Math.PI) / 10 + "o", 420, Ly + 40);
-        g.setColor(Color.black);
-        g.drawLine(0, Ly / 2, Lx, Ly / 2);
-        g.drawLine(Lx / 2, 0, Lx / 2, Ly);
-        //g.drawString("Step " + step, 20, 10);
-        g.setColor(Color.red);
-        g.drawLine(Lx / 2, Ly / 2, px1, py1);
-        g.drawLine(px1, py1, px2, py2);
-        g.setColor(Color.black);
-        g.fillOval((int) (px1 - 7 * Math.pow(m1, 1. / 3.)), (int) (py1 - 7 * Math.pow(m1, 1. / 3.)),
-                +(int) (15 * Math.pow(m1, 1. / 3.)), (int) (15 * Math.pow(m1, 1. / 3.)));
-        g.fillOval((int) (px2 - 7 * Math.pow(m2, 1. / 3.)), (int) (py2 - 7 * Math.pow(m2, 1. / 3.)),
-                +(int) (15 * Math.pow(m2, 1. / 3.)), (int) (15 * Math.pow(m2, 1. / 3.)));
-    } //paint()
-
     public abstract void update();
+
 }

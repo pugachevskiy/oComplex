@@ -28,4 +28,37 @@ public class DoublePendulumModel extends PendulumsModel {
         pixels();
         repaint();
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setFont(new Font("Verdana", Font.BOLD, 10));
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, Lx, Ly + 50);
+        g.setColor(Color.blue);
+        g.drawString("Energy:", 30, Ly + 20);
+        g.drawString("" + (double) Math.round(10 * energy()) / 10, 30, Ly + 40);
+        g.drawString("Friction:", 120, Ly + 20);
+        g.drawString("" + reib, 120, Ly + 40);
+        g.drawString("m1:", 210, Ly + 20);
+        g.drawString("" + (double) Math.round(100 * m1) / 100, 210, Ly + 40);
+        g.drawString("m2:", 270, Ly + 20);
+        g.drawString("" + (double) Math.round(100 * m2) / 100, 270, Ly + 40);
+        g.drawString("Phi1:", 350, Ly + 20);
+        g.drawString("" + (double) Math.round(10 * phi1 * 180 / Math.PI) / 10 + "o", 350, Ly + 40);
+        g.drawString("Phi2:", 420, Ly + 20);
+        g.drawString("" + (double) Math.round(10 * phi2 * 180 / Math.PI) / 10 + "o", 420, Ly + 40);
+        g.setColor(Color.black);
+        g.drawLine(0, Ly / 2, Lx, Ly / 2);
+        g.drawLine(Lx / 2, 0, Lx / 2, Ly);
+        //g.drawString("Step " + step, 20, 10);
+        g.setColor(Color.red);
+        g.drawLine(Lx / 2, Ly / 2, px1, py1);
+        g.drawLine(px1, py1, px2, py2);
+        g.setColor(Color.black);
+        g.fillOval((int) (px1 - 7 * Math.pow(m1, 1. / 3.)), (int) (py1 - 7 * Math.pow(m1, 1. / 3.)),
+                +(int) (15 * Math.pow(m1, 1. / 3.)), (int) (15 * Math.pow(m1, 1. / 3.)));
+        g.fillOval((int) (px2 - 7 * Math.pow(m2, 1. / 3.)), (int) (py2 - 7 * Math.pow(m2, 1. / 3.)),
+                +(int) (15 * Math.pow(m2, 1. / 3.)), (int) (15 * Math.pow(m2, 1. / 3.)));
+    } //paint()
 }
