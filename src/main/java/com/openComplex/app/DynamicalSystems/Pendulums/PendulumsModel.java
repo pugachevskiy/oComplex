@@ -10,16 +10,19 @@ public abstract class PendulumsModel extends JPanel {
     public int px1, px2, py1, py2; //pixelcoordinates
     public double phi1, omega1; //coordinates and velocities
     public double phi2, omega2; //coordinates and velocities
+    public double phi3, omega3; //coordinates and velocities
     public double m1, m2; //masses
     public int reib; //friction
     public static final double grav = 9.81; //Gravity
     public static final double dt = 0.0005; //Runge-Kutta-timestep
-    public double k1[] = new double[4]; //Runge-Kutta
-    public double k2[] = new double[4]; //Runge-Kutta
+    public double l[] = new double[4]; //Runge-Kutta
     public double l1[] = new double[4]; //Runge-Kutta
     public double l2[] = new double[4]; //Runge-Kutta
+    public double l3[] = new double[4]; //Runge-Kutta
     public double k[] = new double[4]; //Runge-Kutta
-    public double l[] = new double[4]; //Runge-Kutta
+    public double k1[] = new double[4]; //Runge-Kutta
+    public double k2[] = new double[4]; //Runge-Kutta
+    public double k3[] = new double[4]; //Runge-Kutta
     public double startwert[] = new double[4]; //save initial values
     public int startwert_reib; //save initial friction
     public double phi, omega; //coordinates and velocities
@@ -53,6 +56,15 @@ public abstract class PendulumsModel extends JPanel {
         freq = startwert[1];
         phi = startwert[2];
         omega = 0.0;
+    }//startwerte()
+
+    public void startwerteDrivenTripleY()  //method for setting initial values
+    {
+        amp = startwert[0];
+        freq = startwert[1];
+        omega1 = 0.0;
+        omega2 = 0.0;
+        omega3 = 0.0;
     }//startwerte()
 
     public void pixels() //method for calculating pixelcoordinates
@@ -130,6 +142,8 @@ public abstract class PendulumsModel extends JPanel {
         k2[3] = dt * (omega2 + l2[2]);
         l2[3] = dt * forcephi2(phi1, phi2 + k2[2], omega1, omega2 + l2[2]);
     }//runge_step_phi2()
+
+
 
     public void runge_step_phi() {
         k[0] = dt * omega;

@@ -15,7 +15,7 @@ import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.Vibrati
 import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.DoublePendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivenPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPendulumY;
-import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulum.Driv3PendY;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY.DrivenTriplePendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.FreePend;
 import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
@@ -129,13 +129,7 @@ public class MFrameListener implements ActionListener {
                 DrivenPendulumY pend6 = new DrivenPendulumY();
                 break;
             case "Driven triple pendulum":
-                JFrame fr7 = new JFrame("Driven triple pendulum");
-                fr7.setSize(800,500);
-                Driv3PendY pend7 = new Driv3PendY();
-                fr7.add(pend7);
-                fr7.setVisible(true);
-                fr7.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend7.init();
+                DrivenTriplePendulumY drivenTriplePendulumY = new DrivenTriplePendulumY();
                 break;
             case "Gas in a 2-dimensional box":
                 JFrame fr8 = new JFrame("Gas in a 2-dimensional box");
