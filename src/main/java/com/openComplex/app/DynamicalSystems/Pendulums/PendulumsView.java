@@ -11,9 +11,9 @@ import java.util.List;
  */
 public abstract class PendulumsView {
     private static final int Lx = 500, Ly = 330; //graphic window
-    private JFrame frame;
-    private JPanel pan;
-    private java.util.List<JButton> buttons = new LinkedList<>();
+    public JFrame frame;
+    public JPanel pan;
+    private List<JButton> buttons = new LinkedList<>();
 
     public void init(String name, ActionListener listener, List<String> list) {
 

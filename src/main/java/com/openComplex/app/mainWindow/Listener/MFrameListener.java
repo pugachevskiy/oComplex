@@ -14,7 +14,7 @@ import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.
 import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
 import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.DoublePendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivenPendulum;
-import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivPendY;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulum.Driv3PendY;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.FreePend;
 import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
@@ -126,13 +126,7 @@ public class MFrameListener implements ActionListener {
                 DrivenPendulum pend5 = new DrivenPendulum();
                 break;
             case "Driven pendulum Y":
-                JFrame fr6 = new JFrame("Driven pendulum Y");
-                fr6.setSize(800,500);
-                DrivPendY pend6 = new DrivPendY();
-                fr6.add(pend6);
-                fr6.setVisible(true);
-                fr6.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend6.init();
+                DrivenPendulumY pend6 = new DrivenPendulumY();
                 break;
             case "Driven triple pendulum":
                 JFrame fr7 = new JFrame("Driven triple pendulum");

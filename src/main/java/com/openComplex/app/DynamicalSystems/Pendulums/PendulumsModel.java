@@ -1,7 +1,6 @@
 package com.openComplex.app.DynamicalSystems.Pendulums;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by strange on 09/10/15.
@@ -48,6 +47,13 @@ public abstract class PendulumsModel extends JPanel {
 
     }//startwerte()
 
+    public void startwerteDrivenY()  //method for setting initial values
+    {
+        amp = startwert[0];
+        freq = startwert[1];
+        phi = startwert[2];
+        omega = 0.0;
+    }//startwerte()
 
     public void pixels() //method for calculating pixelcoordinates
     {
@@ -60,6 +66,10 @@ public abstract class PendulumsModel extends JPanel {
     public double forcephi(double phi, double omega) {
         return -grav * Math.sin(phi) - aforce * Math.cos(phi) - 0.1 * reib * omega;
     }//forcephi()
+
+    public double forcephiY(double phi, double omega) {
+        return (-grav + aforce) * Math.sin(phi) - 0.1 * reib * omega;
+    }
 
     public double forcephi1(double phi1, double phi2, double omega1, double omega2) {
         return -(grav * (2 * m1 * Math.sin(phi1)
@@ -94,6 +104,11 @@ public abstract class PendulumsModel extends JPanel {
                 - grav * Math.cos(phi);
     }//energy()
 
+    public double energyDrivenY() {
+        return 0.5 * omega * omega + 0.5 * ap * ap - omega * ap * Math.sin(phi)
+                - grav * Math.cos(phi) - grav * a;
+    }
+
     public void runge_step_phi1() {
         k1[0] = dt * omega1;
         l1[0] = dt * forcephi1(phi1, phi2, omega1, omega2);
@@ -126,6 +141,17 @@ public abstract class PendulumsModel extends JPanel {
         k[3] = dt * (omega + l[2]);
         l[3] = dt * forcephi(phi + k[2], omega + l[2]);
     }//runge_step_phi()
+
+    public void runge_step_phiY() {
+        k[0] = dt * omega;
+        l[0] = dt * forcephiY(phi, omega);
+        k[1] = dt * (omega + l[0] / 2);
+        l[1] = dt * forcephiY(phi + k[0] / 2, omega + l[0] / 2);
+        k[2] = dt * (omega + l[1] / 2);
+        l[2] = dt * forcephiY(phi + k[1] / 2, omega + l[1] / 2);
+        k[3] = dt * (omega + l[2]);
+        l[3] = dt * forcephiY(phi + k[2], omega + l[2]);
+    }
 
     public void phi1Plus() {
         startwert[0] = startwert[0] + Math.PI / 180 * 5;
