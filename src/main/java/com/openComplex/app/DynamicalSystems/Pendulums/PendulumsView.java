@@ -10,7 +10,7 @@ import java.util.List;
  * Created by strange on 09/10/15.
  */
 public abstract class PendulumsView {
-    private static final int Lx = 500, Ly = 330; //graphic window
+    private static final int Lx = 500, Ly = 530; //graphic window
     public JFrame frame;
     public JPanel pan;
     private List<JButton> buttons = new LinkedList<>();

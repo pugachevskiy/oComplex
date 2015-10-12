@@ -33,9 +33,9 @@ public class DoublePendulumModel extends PendulumsModel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("Verdana", Font.BOLD, 10));
-        g.setColor(Color.WHITE);
+        g.setColor(Color.orange);
         g.fillRect(0, 0, Lx, Ly + 50);
-        g.setColor(Color.blue);
+        g.setColor(Color.black);
         g.drawString("Energy:", 30, Ly + 20);
         g.drawString("" + (double) Math.round(10 * energy()) / 10, 30, Ly + 40);
         g.drawString("Friction:", 120, Ly + 20);

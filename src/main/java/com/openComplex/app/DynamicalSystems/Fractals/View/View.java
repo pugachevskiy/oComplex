@@ -35,7 +35,7 @@ public class View {
     private List<JLabel> labels = Arrays.asList(copyLabel, factorLabel, dimensionLabel, discriptionLabel);
 
     public void createGui() {
-        mainField = new JFrame("Fractals");
+        mainField = new JFrame("openCoSy - Fractals");
         mainField.setSize(800, 600);
         mainField.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

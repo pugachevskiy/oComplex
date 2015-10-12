@@ -18,7 +18,7 @@ public class View {
     private JMenuItem saveItem, exitItem, ruleItem, loadItem;
 
     public void init() {
-        mainFrame = new JFrame("Conways Game of Life");
+        mainFrame = new JFrame("openCoSy - Conway's Game of Life");
 
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

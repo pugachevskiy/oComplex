@@ -28,7 +28,7 @@ public class LorenzView2 {
     }
 
     public void init() {
-        frame = new JFrame("Lorenz");
+        frame = new JFrame("openCoSy - Lorenz Attraktor");
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(700, 700));
@@ -43,7 +43,7 @@ public class LorenzView2 {
     }
 
     private void addMenuPanel() {
-        menuPanel.add(new JLabel("Сoefficients"));
+        menuPanel.add(new JLabel("Coefficients"));
         menuPanel.add(new JLabel("A"));
         coeffA = new JTextField("");
         coeffA.setPreferredSize(new Dimension(100, 40));
