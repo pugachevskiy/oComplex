@@ -53,7 +53,7 @@ public class MFrameListener implements ActionListener {
             case "Lorenz Attractor":
                 Lorenz lorenz = new Lorenz();
                 break;
-            case "Logical pictures with Feigenbaum-diagram":
+            case "Logical maps with Feigenbaum-diagram":
                 Feigenbaum fb = new Feigenbaum();
                 break;
             case "Markov chain":
