@@ -28,6 +28,7 @@ public abstract class PendulumsModel extends JPanel {
     public double phi, omega; //coordinates and velocities
     public double a, ap, aforce; //coordinates and velocities
     public double freq, amp; //frequency and amplitude
+    public double mratio; //mass-ratio
 
     public void startwerte() //initial values
     {

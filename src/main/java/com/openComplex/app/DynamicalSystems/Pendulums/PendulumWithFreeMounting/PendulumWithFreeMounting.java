@@ -1,23 +1,21 @@
-package com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY;
+package com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 11/10/15.
+ * Created by strange on 12/10/15.
  */
-public class DrivenTriplePendulumY implements ActionListener, ItemListener {
+public class PendulumWithFreeMounting implements ActionListener {
 
-    private DrivenTriplePendulumYView gui;
-    private DrivenTriplePendulumYModel model;
+    private PendulumWithFreeMountingModel model;
+    private PendulumWithFreeMountingView gui;
     private int step;
     private boolean stop;
 
-    public DrivenTriplePendulumY() {
-        gui = new DrivenTriplePendulumYView(this, this);
-        model = new DrivenTriplePendulumYModel();
+    public PendulumWithFreeMounting() {
+        gui = new PendulumWithFreeMountingView(this);
+        model = new PendulumWithFreeMountingModel();
         gui.addPanel(model);
     }
 
@@ -47,7 +45,7 @@ public class DrivenTriplePendulumY implements ActionListener, ItemListener {
             case "New":
                 stop = false;
                 step = 0;
-                model.startwerteDrivenTripleY(); //set initial values
+                model.startwerte(); //set initial values
                 model.treibwerte(step);
                 model.repaint();
                 break;
@@ -61,22 +59,31 @@ public class DrivenTriplePendulumY implements ActionListener, ItemListener {
             case "Friction --":
                 model.frictionMinus();
                 break;
-        }
-    }
+            case "Phi +":
+                model.phiPlus();
+                break;
+            case "Phi -":
+                model.phiMinus();
+                break;
+            case "m1/m2 +":
+                model.mPlus();
+                break;
+            case "m1/m2 -":
+                model.mMinus();
+                break;
+            case "a +":
+                model.aPlus();
+                break;
+            case "a -":
+                model.aMinus();
+                break;
+            case "Omega +":
+                model.omegaPlus();
+                break;
+            case "Omega -":
+                model.omegaMinus();
+                break;
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        if (e.getItem() == "Values_1") {
-            model.value1();
-        }
-        if (e.getItem() == "Values_2") {
-            model.value2();
-        }
-        if (e.getItem() == "Values_3") {
-            model.value3();
-        }
-        if (e.getItem() == "Values_4") {
-            model.value4();
         }
     }
 }

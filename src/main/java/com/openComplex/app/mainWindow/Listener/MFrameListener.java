@@ -16,7 +16,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.DoublePendu
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivenPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY.DrivenTriplePendulumY;
-import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.FreePend;
+import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.PendulumWithFreeMounting;
 import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TripPend;
@@ -41,62 +41,61 @@ public class MFrameListener implements ActionListener {
         System.out.println(command);
         switch (command) {
             case "Fractals":
-                Controller fractal = new Controller();
+                new Controller();
                 break;
             case "Conway's Game of Life":
-                // Life gol = new Life();
-                com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller();
+                new com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller();
                 break;
             case "Wolfram's universe":
-                MainWolfram wolf = new MainWolfram();
+                new MainWolfram();
                 break;
             case "Lorenz Attractor":
-                Lorenz lorenz = new Lorenz();
+                new Lorenz();
                 break;
             case "Logical maps with Feigenbaum-diagram":
-                Feigenbaum fb = new Feigenbaum();
+                new Feigenbaum();
                 break;
             case "Markov chain":
-                Markov markov = new Markov();
+                new Markov();
                 break;
             case "Iterated maps":
-                IMController controller = new IMController();
+                new IMController();
                 break;
             case "Hopfield networks":
-                Main main = new Main();
+                new Main();
                 break;
             default:
                 App.gui.updateGUI(command);
                 break;
             case "2 Double-Pendulums":
-                Pendulums pendel = new Pendulums();
+                new Pendulums();
                 break;
             case "Diffusion Limited Aggregation":
-                DLA dla = new DLA();
+                new DLA();
                 break;
             case "Harmonic oscillator":
-                Oscillator oscillator = new Oscillator();
+                new Oscillator();
                 break;
             case "Anharmonic oscillator":
-                AnharmonicOscillator anharmonicOscillator = new AnharmonicOscillator();
+                new AnharmonicOscillator();
                 break;
             case "2 oscillators with coupling":
-                OscillatorsWithCoupling oscillatorsWithCoupling = new OscillatorsWithCoupling();
+                new OscillatorsWithCoupling();
                 break;
             case "2 anharmonic oscillators with coupling":
-                AnharmonicOscillatorsWithCoupling anharmonicOscillatorsWithCoupling = new AnharmonicOscillatorsWithCoupling();
+                new AnharmonicOscillatorsWithCoupling();
                 break;
             case "Nasch Model":
-                com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller control = new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
+                new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
                 break;
             case "Vibration-Rotator":
-                VibrationRotator vibrationRotator = new VibrationRotator();
+                new VibrationRotator();
                 break;
-            case "Double-DoublePendulum":
-                DoublePendulum pend = new DoublePendulum();
+            case "Double Pendulum":
+                new DoublePendulum();
                 break;
-            case "Triple-DoublePendulum":
-                JFrame fr1 = new JFrame("Triple-DoublePendulum");
+            case "Triple Pendulum":
+                JFrame fr1 = new JFrame("Triple Pendulum");
                 fr1.setSize(800,500);
                 TripPend pend1 = new TripPend();
                 fr1.add(pend1);
@@ -104,8 +103,8 @@ public class MFrameListener implements ActionListener {
                 fr1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pend1.init();
                 break;
-            case "Quad-Bar-DoublePendulum":
-                JFrame fr3 = new JFrame("Quad-Bar-DoublePendulum");
+            case "Quad Bar Pendulum":
+                JFrame fr3 = new JFrame("Quad-Bar-Pendulum");
                 fr3.setSize(800,500);
                 QuadBarPend pend3 = new QuadBarPend();
                 fr3.add(pend3);
@@ -113,23 +112,17 @@ public class MFrameListener implements ActionListener {
                 fr3.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pend3.init();
                 break;
-            case "DoublePendulum with free mounting":
-                JFrame fr4 = new JFrame("DoublePendulum with free mounting");
-                fr4.setSize(800,500);
-                FreePend pend4 = new FreePend();
-                fr4.add(pend4);
-                fr4.setVisible(true);
-                fr4.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend4.init();
+            case "Pendulum with free mounting":
+                new PendulumWithFreeMounting();
                 break;
             case "Driven pendulum":
-                DrivenPendulum pend5 = new DrivenPendulum();
+                new DrivenPendulum();
                 break;
             case "Driven pendulum Y":
-                DrivenPendulumY pend6 = new DrivenPendulumY();
+                new DrivenPendulumY();
                 break;
             case "Driven triple pendulum":
-                DrivenTriplePendulumY drivenTriplePendulumY = new DrivenTriplePendulumY();
+                new DrivenTriplePendulumY();
                 break;
             case "Gas in a 2-dimensional box":
                 JFrame fr8 = new JFrame("Gas in a 2-dimensional box");
@@ -149,7 +142,7 @@ public class MFrameListener implements ActionListener {
                 fr9.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pend9.init();
                 break;
-            case "Triple-Bar-DoublePendulum":
+            case "Triple Bar Pendulum":
                 JFrame fr10 = new JFrame("Triple-Bar-DoublePendulum");
                 fr10.setSize(800,500);
                 TripBarPend pend10 = new TripBarPend();
