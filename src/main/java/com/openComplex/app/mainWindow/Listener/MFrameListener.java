@@ -2,7 +2,7 @@ package com.openComplex.app.mainWindow.Listener;
 
 import com.openComplex.app.App;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.Controller.MainWolfram;
-import com.openComplex.app.DynamicalSystems.Fractals2.Controller.Controller;
+import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
@@ -12,10 +12,10 @@ import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.Anh
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator.VibrationRotator;
-import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.Pend;
-import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivPend;
-import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivPendY;
-import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulum.Driv3PendY;
+import com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum.DoublePendulum;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivenPendulum;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPendulumY;
+import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY.DrivenTriplePendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.FreePend;
 import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
@@ -45,7 +45,7 @@ public class MFrameListener implements ActionListener {
                 break;
             case "Conway's Game of Life":
                 // Life gol = new Life();
-                com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife2.Controller.Controller();
+                com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller gol = new com.openComplex.app.CellularAutomat.GameOfLife.Controller.Controller();
                 break;
             case "Wolfram's universe":
                 MainWolfram wolf = new MainWolfram();
@@ -93,12 +93,7 @@ public class MFrameListener implements ActionListener {
                 VibrationRotator vibrationRotator = new VibrationRotator();
                 break;
             case "Double-DoublePendulum":
-                JFrame fr = new JFrame("Double-DoublePendulum");
-                fr.setSize(800,500);
-                Pend pend = new Pend();
-                fr.add(pend);
-                fr.setVisible(true);
-                pend.init();
+                DoublePendulum pend = new DoublePendulum();
                 break;
             case "Triple-DoublePendulum":
                 JFrame fr1 = new JFrame("Triple-DoublePendulum");
@@ -128,31 +123,13 @@ public class MFrameListener implements ActionListener {
                 pend4.init();
                 break;
             case "Driven pendulum":
-                JFrame fr5 = new JFrame("Driven pendulum");
-                fr5.setSize(800,500);
-                DrivPend pend5 = new DrivPend();
-                fr5.add(pend5);
-                fr5.setVisible(true);
-                fr5.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend5.init();
+                DrivenPendulum pend5 = new DrivenPendulum();
                 break;
             case "Driven pendulum Y":
-                JFrame fr6 = new JFrame("Driven pendulum Y");
-                fr6.setSize(800,500);
-                DrivPendY pend6 = new DrivPendY();
-                fr6.add(pend6);
-                fr6.setVisible(true);
-                fr6.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend6.init();
+                DrivenPendulumY pend6 = new DrivenPendulumY();
                 break;
             case "Driven triple pendulum":
-                JFrame fr7 = new JFrame("Driven triple pendulum");
-                fr7.setSize(800,500);
-                Driv3PendY pend7 = new Driv3PendY();
-                fr7.add(pend7);
-                fr7.setVisible(true);
-                fr7.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend7.init();
+                DrivenTriplePendulumY drivenTriplePendulumY = new DrivenTriplePendulumY();
                 break;
             case "Gas in a 2-dimensional box":
                 JFrame fr8 = new JFrame("Gas in a 2-dimensional box");

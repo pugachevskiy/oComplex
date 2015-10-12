@@ -1,33 +1,39 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import javax.swing.*;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
+import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import java.awt.*;
 
 /**
- * Created by strange on 19/04/15.
+ * Created by strange on 29/06/15.
  */
-public class SierpinskiTriangle extends JPanel {
+public class SierpinskiTriangle extends GLJPanel implements Fractal {
     //First point of Triange
-    private static final int X1 = 100;
+    private static final int X1 = 250;
     private static final int Y1 = 50;
     //Second point of Triange
-    private static final int X2 = 150;
-    private static final int Y2 = 138;
+    private static final int X2 = 400;
+    private static final int Y2 = 450;
     //Third point of Triange
-    private static final int X3 = 50;
-    private static final int Y3 = 138;
-    public static final double DIMENSION = 1.5849;
-    public static final int COPY = 3;
-    public static final int FACTOR = 2;
+    private static final int X3 = 100;
+    private static final int Y3 = 450;
+
 
     private int step = 0;
 
-    public SierpinskiTriangle(int initStep) {
+    public SierpinskiTriangle(GLCapabilities capabilities, int initStep) {
+        super(capabilities);
         step = initStep;
     }
 
     public static void doDrawing(Graphics g, int x1, int y1, int x2, int y2, int x3, int y3, int step) {
-        if (step > 0) {
+        if (step == 0) {
+            g.drawLine(x1, y1, x2, y2);
+            g.drawLine(x2, y2, x3, y3);
+            g.drawLine(x3, y3, x1, y1);
+        } else {
             int x1n = (x1 + x2) / 2;
             int y1n = (y1 + y2) / 2;
             int x2n = (x2 + x3) / 2;
@@ -44,9 +50,34 @@ public class SierpinskiTriangle extends JPanel {
     }
 
     @Override
-    public void paintComponent(final Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.RED);
         doDrawing(g, X1, Y1, X2, Y2, X3, Y3, step);
     }
-}
+    @Override
+    public String getName() {
+        return FractalsCollection.SIERPINSKI_TRIANGLE.get(0);
+    }
+    @Override
+    public String getCopy() {
+        return FractalsCollection.SIERPINSKI_TRIANGLE.get(1);
+    }
+    @Override
+    public String getFactor() {
+        return FractalsCollection.SIERPINSKI_TRIANGLE.get(2);
+    }
+    @Override
+    public String getDimension() {
+        return FractalsCollection.SIERPINSKI_TRIANGLE.get(3);
+    }
+    @Override
+    public String getDicription() {
+        return FractalsCollection.SIERPINSKI_TRIANGLE.get(4);
+    }
+    @Override
+    public GLJPanel getPanel() {
+        return this;
+    }
 
+}
