@@ -44,7 +44,7 @@ public class MainView extends JFrame {
     }
 
     private void initFrame() {
-        mainFrame = new JFrame("OpenComplex");
+        mainFrame = new JFrame("openCoSy");
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setJMenuBar(createMenuBar());
         mainPanel = new JPanel();
@@ -69,7 +69,7 @@ public class MainView extends JFrame {
         mainFrame.getContentPane().add(infoField = new JTextField(), BorderLayout.SOUTH);
         infoField.setEnabled(false);
         infoField.setBackground(Color.WHITE);
-        infoField.setText("Welcome to OpenComplex!");
+        infoField.setText("Welcome to openCoSy!");
 
         mainFrame.setBounds(350, 300, 500, 300);
         Image leftIcon = getDefaultToolkit().getImage(App.iconPath);

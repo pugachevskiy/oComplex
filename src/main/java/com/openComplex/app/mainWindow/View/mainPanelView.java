@@ -40,7 +40,7 @@ public class mainPanelView extends JPanel {
     //leftPanel contains important information about the program.
     private JPanel createLeftPanel() {
         leftIcon = Toolkit.getDefaultToolkit().getImage(App.logoPath);
-        scaledImage = leftIcon.getScaledInstance(300, 90, Image.SCALE_SMOOTH);
+        scaledImage = leftIcon.getScaledInstance(250, 70, Image.SCALE_SMOOTH);
         icon = new ImageIcon(scaledImage);
 
         leftPanel = new JPanel();
@@ -52,11 +52,15 @@ public class mainPanelView extends JPanel {
         leftPanel.add(iconLabel);
         leftPanel.add(new JLabel(" "));
         leftPanel.add(new JLabel(" "));
-        leftPanel.add(new JLabel("Environment for working with complex systems."));
-        leftPanel.add(new JLabel("Chair of Complex and Intelligent Systems"));
-        leftPanel.add(new JLabel("The University of Passau"));
-        leftPanel.add(new JLabel("Passau, Germany"));
+        leftPanel.add(new JLabel("Environment for working with complex systems"));
         leftPanel.add(new JLabel("Version " + App.versionNumber));
+        leftPanel.add(new JLabel("\u00a9 2015"));
+        leftPanel.add(new JLabel("The University of Passau"));
+        leftPanel.add(new JLabel("Chair of Complex and Intelligent Systems"));
+        leftPanel.add(new JLabel("Passau, Germany"));
+        leftPanel.add(new JLabel("Univ.-Prof. Dr.-Ing. habil. Bj\u00f6rn Schuller"));
+        leftPanel.add(new JLabel("Shahin Amiriparian, M.Sc."));
+        
         return leftPanel;
     }
 
