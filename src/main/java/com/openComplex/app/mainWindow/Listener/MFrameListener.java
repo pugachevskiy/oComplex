@@ -17,7 +17,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum.DrivenPendu
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY.DrivenTriplePendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.PendulumWithFreeMounting;
-import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPend;
+import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
 import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TripPend;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
@@ -104,13 +104,7 @@ public class MFrameListener implements ActionListener {
                 pend1.init();
                 break;
             case "Quad Bar Pendulum":
-                JFrame fr3 = new JFrame("Quad-Bar-Pendulum");
-                fr3.setSize(800,500);
-                QuadBarPend pend3 = new QuadBarPend();
-                fr3.add(pend3);
-                fr3.setVisible(true);
-                fr3.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend3.init();
+                new QuadBarPendulum();
                 break;
             case "Pendulum with free mounting":
                 new PendulumWithFreeMounting();

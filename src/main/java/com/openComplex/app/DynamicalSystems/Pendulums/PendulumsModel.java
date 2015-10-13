@@ -11,6 +11,7 @@ public abstract class PendulumsModel extends JPanel {
     public double phi1, omega1; //coordinates and velocities
     public double phi2, omega2; //coordinates and velocities
     public double phi3, omega3; //coordinates and velocities
+    public double phi4, omega4; //coordinates and velocities
     public double m1, m2; //masses
     public int reib; //friction
     public static final double grav = 9.81; //Gravity
@@ -19,10 +20,12 @@ public abstract class PendulumsModel extends JPanel {
     public double l1[] = new double[4]; //Runge-Kutta
     public double l2[] = new double[4]; //Runge-Kutta
     public double l3[] = new double[4]; //Runge-Kutta
+    public double l4[] = new double[4]; //Runge-Kutta
     public double k[] = new double[4]; //Runge-Kutta
     public double k1[] = new double[4]; //Runge-Kutta
     public double k2[] = new double[4]; //Runge-Kutta
     public double k3[] = new double[4]; //Runge-Kutta
+    public double k4[] = new double[4]; //Runge-Kutta
     public double startwert[] = new double[4]; //save initial values
     public int startwert_reib; //save initial friction
     public double phi, omega; //coordinates and velocities
