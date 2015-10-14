@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public abstract class PendulumsModel extends JPanel {
     public static final int Lx = 500, Ly = 330; //graphic window
-    public int px1, px2, py1, py2; //pixelcoordinates
+    public int px1, px2, px3, py1, py2, py3; //pixelcoordinates
     public double phi1, omega1; //coordinates and velocities
     public double phi2, omega2; //coordinates and velocities
     public double phi3, omega3; //coordinates and velocities

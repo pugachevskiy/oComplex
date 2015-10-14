@@ -127,15 +127,7 @@ public class TripPend extends Applet implements Runnable, ActionListener
             if(cb_stop.getState()) //Stop/Go
             {try{Thread.sleep(10);}catch(InterruptedException e){}continue;}
 
-            runge_step_phi1(); //Runge-Kutta
-            runge_step_phi2(); //Runge-Kutta
-            runge_step_phi3(); //Runge-Kutta
-            phi1 = phi1 + (k1[0]+2*k1[1]+2*k1[2]+k1[3])/6; //Runge-Kutta
-            omega1 = omega1 + (l1[0]+2*l1[1]+2*l1[2]+l1[3])/6; //Runge-Kutta
-            phi2 = phi2 + (k2[0]+2*k2[1]+2*k2[2]+k2[3])/6; //Runge-Kutta
-            omega2 = omega2 + (l2[0]+2*l2[1]+2*l2[2]+l2[3])/6; //Runge-Kutta
-            phi3 = phi3 + (k3[0]+2*k3[1]+2*k3[2]+k3[3])/6; //Runge-Kutta
-            omega3 = omega3 + (l3[0]+2*l3[1]+2*l3[2]+l3[3])/6; //Runge-Kutta
+
 
             if(step % 20 == 0) //paint not so often
             {

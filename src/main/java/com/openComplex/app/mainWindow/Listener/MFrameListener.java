@@ -18,8 +18,8 @@ import com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulumY.DrivenPend
 import com.openComplex.app.DynamicalSystems.Pendulums.DrivenTriplePendulumY.DrivenTriplePendulumY;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting.PendulumWithFreeMounting;
 import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPendulum;
-import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarDoublePendulum.TripBarPend;
-import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TripPend;
+import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarPendulum.TripleBarPendulum;
+import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TriplePendulum;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
 import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
@@ -95,13 +95,7 @@ public class MFrameListener implements ActionListener {
                 new DoublePendulum();
                 break;
             case "Triple Pendulum":
-                JFrame fr1 = new JFrame("Triple Pendulum");
-                fr1.setSize(800,500);
-                TripPend pend1 = new TripPend();
-                fr1.add(pend1);
-                fr1.setVisible(true);
-                fr1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend1.init();
+                new TriplePendulum();
                 break;
             case "Quad Bar Pendulum":
                 new QuadBarPendulum();
@@ -137,13 +131,7 @@ public class MFrameListener implements ActionListener {
                 pend9.init();
                 break;
             case "Triple Bar Pendulum":
-                JFrame fr10 = new JFrame("Triple-Bar-DoublePendulum");
-                fr10.setSize(800,500);
-                TripBarPend pend10 = new TripBarPend();
-                fr10.add(pend10);
-                fr10.setVisible(true);
-                fr10.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend10.init();
+                new TripleBarPendulum();
                 break;
 
 
