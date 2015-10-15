@@ -6,7 +6,6 @@ import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
-import com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.GasApplet;
 import com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.SunEarthApplet;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
@@ -113,13 +112,7 @@ public class MFrameListener implements ActionListener {
                 new DrivenTriplePendulumY();
                 break;
             case "Gas in a 2-dimensional box":
-                JFrame fr8 = new JFrame("Gas in a 2-dimensional box");
-                fr8.setSize(800,500);
-                GasApplet pend8 = new GasApplet();
-                fr8.add(pend8);
-                fr8.setVisible(true);
-                fr8.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend8.init();
+                new com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.Controller();
                 break;
             case "Sun-Earth-Sim":
                 JFrame fr9 = new JFrame("Sun-Earth-Sim");
