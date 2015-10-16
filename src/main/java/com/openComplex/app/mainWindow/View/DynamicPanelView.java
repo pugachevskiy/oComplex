@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class DynamicPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();
-    private static final String FEIGENBAUM = "Logical pictures with Feigenbaum-diagram", ITERATED = "Iterated maps",
+    private static final String FEIGENBAUM = "Logical maps with Feigenbaum-diagram", ITERATED = "Iterated maps",
         LORENZ =  "Lorenz Attractor", FRACTALS = "Fractals", //CHAOS = "2 Double-Pendulums", DLA = "Diffusion Limited Aggregation",
         OSCILLATORS = "Oscillators", PENDULUMS = "Pendulums", DETERMICHAOS = "Deterministic chaos", NBODYS = "N-Body-Simulations";
     private  List<String> BUTTONSDYNAMICS = Arrays.asList(FEIGENBAUM, ITERATED, LORENZ,FRACTALS,OSCILLATORS,PENDULUMS,DETERMICHAOS, NBODYS);

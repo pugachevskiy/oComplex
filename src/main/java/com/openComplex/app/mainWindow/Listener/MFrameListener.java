@@ -6,7 +6,6 @@ import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
 import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
-import com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.SunEarthApplet;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
 import com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling.OscillatorsWithCoupling;
@@ -25,7 +24,6 @@ import com.openComplex.app.DynamicalSystems.DLA.DLA;
 import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscillator;
 import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -115,13 +113,7 @@ public class MFrameListener implements ActionListener {
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.Controller();
                 break;
             case "Sun-Earth-Sim":
-                JFrame fr9 = new JFrame("Sun-Earth-Sim");
-                fr9.setSize(800,500);
-                SunEarthApplet pend9 = new SunEarthApplet();
-                fr9.add(pend9);
-                fr9.setVisible(true);
-                fr9.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pend9.init();
+                new com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.Controller();
                 break;
             case "Triple Bar Pendulum":
                 new TripleBarPendulum();
