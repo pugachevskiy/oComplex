@@ -82,7 +82,7 @@ public class MFrameListener implements ActionListener {
             case "2 anharmonic oscillators with coupling":
                 new AnharmonicOscillatorsWithCoupling();
                 break;
-            case "Nasch Model":
+            case "NaSch Model":
                 new com.openComplex.app.CellularAutomat.NaschModel.Controller.Controller();
                 break;
             case "Vibration-Rotator":

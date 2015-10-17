@@ -20,7 +20,7 @@ Wolframm Rule
 2. Slider for speed change in ms
 
 NaSch
-1. Nasch -> NaSch
++1. Nasch -> NaSch
 
 Tobi
 1. Source of Icon for Photoshop
