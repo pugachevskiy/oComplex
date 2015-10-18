@@ -11,6 +11,7 @@
           <option name="goals">
             <list>
               <option value="generate-resources" />
+              <option value="process-resources" />
               <option value="scm:checkin" />
             </list>
           </option>

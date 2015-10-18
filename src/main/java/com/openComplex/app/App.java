@@ -22,27 +22,26 @@ public class App {
         if (System.getProperty("os.name").contains("Mac")) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
         }
+
         FileInputStream fis;
         Properties property = new Properties();
 
         try {
-            fis = new FileInputStream("src/main/resources/application.properties");
+            fis = new FileInputStream("target/classes/application.properties");
             property.load(fis);
 
             String name = property.getProperty("application.name");
-            versionNumber = property.getProperty("application.version");
-            String build = property.getProperty("application.build");
+            String version = property.getProperty("application.version");
+            versionNumber = property.getProperty("application.build");
 
             System.out.println("name: " + name
-                    + ", version: " + versionNumber
-                    + ", build: " + build);
+                    + ", version: " + version
+                    + ", build: " + versionNumber);
 
         } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+            System.err.println("Error. File not found");
+
         }
-
-    
-
         gui = new MainView();
     }
 }
