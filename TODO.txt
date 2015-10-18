@@ -8,7 +8,7 @@ General
 
 Game of Life
 1. Hexagonal grid
-2. Draw with Mouse Pressed
++2. Draw with Mouse Pressed
 3. CSV delete ""
 4. Menu too small on large screen
 5. Colorbox

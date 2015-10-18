@@ -2,3 +2,4 @@
 Add changelog file
 new command for maven to commite in github
 Version control in format 1.00.00
+ Draw with Mouse Pressed - Game of life

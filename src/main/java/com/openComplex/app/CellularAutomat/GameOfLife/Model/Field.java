@@ -4,25 +4,18 @@ import com.openComplex.app.mainWindow.Controller.CSVFile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
+import java.util.TimerTask;
 
-
-/**
- * Created by strange on 10/09/15.
- */
-public class Field extends JPanel implements MouseListener {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int size;
+public class Field extends JPanel implements MouseListener, MouseMotionListener {
+    private static final long serialVersionUID = 1L;
+    private int size;
     private Cell[][] field;
     private int length;
     private Color cellColor;
+    private int newX;
+    private int newY;
 
     public Field(int length, int size, Color color) {
         this.cellColor = color;
@@ -30,6 +23,7 @@ public class Field extends JPanel implements MouseListener {
         this.length = length;
         init();
         this.addMouseListener(this);
+        this.addMouseMotionListener(this);
         this.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -269,19 +263,34 @@ public class Field extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+
+    }
+
+    @Override
+    public void mousePressed(final MouseEvent e) {
         field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
         repaint();
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
-        repaint();
+    public void mouseDragged(final MouseEvent e) {
+        if (!(newX == e.getX() / size) || !(newY == e.getY() / size)) {
+            field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
+            newX = e.getX() / size;
+            newY = e.getY() / size;
+            repaint();
+        }
+    }
+
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
@@ -291,6 +300,5 @@ public class Field extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }
