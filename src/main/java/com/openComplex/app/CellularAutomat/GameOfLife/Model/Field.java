@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.TimerTask;
 
 public class Field extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
@@ -14,8 +13,8 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private Cell[][] field;
     private int length;
     private Color cellColor;
-    private int newX;
-    private int newY;
+    private int newX = 0;
+    private int newY = 0;
 
     public Field(int length, int size, Color color) {
         this.cellColor = color;
@@ -268,13 +267,13 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     @Override
-    public void mousePressed(final MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
         repaint();
     }
 
     @Override
-    public void mouseDragged(final MouseEvent e) {
+    public void mouseDragged(MouseEvent e) {
         if (!(newX == e.getX() / size) || !(newY == e.getY() / size)) {
             field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
             newX = e.getX() / size;
