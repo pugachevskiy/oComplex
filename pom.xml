@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.openComplex.app.mainWindow</groupId>
-  <artifactId>swingapp</artifactId>
+  <artifactId>openCOSY</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
   <name>openCOSY</name>
@@ -72,7 +72,7 @@
                 <configuration>
                     <connectionType>developerConnection</connectionType>
                     <tag>${project.artifactId}-${project.version}</tag>
-                    <message>${project.artifactId}-${project.version}-${buildNumber}</message>
+                    <message>${project.artifactId}-${buildNumber}</message>
                 </configuration>
             </plugin>
         </plugins>
