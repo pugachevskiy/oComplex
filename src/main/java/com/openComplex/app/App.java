@@ -11,7 +11,7 @@ public class App {
     public static MainView gui;
 //    public static final String versionNumber = "1.01", iconPath = "resources/Icon_braungelb.png",
 //            logoPath = "resources/braungelb.png", overviewPath = "resources/Mindmap.png";
-  public static String versionNumber = "1.01", iconPath = "resources/Icon_braungelb.png",
+  public static String versionNumber = "1.0.", iconPath = "resources/Icon_braungelb.png",
   logoPath = "resources/opencosy-logo.png", overviewPath = "resources/Mindmap.png";
     
     public static void main(String[] argv){
@@ -27,17 +27,10 @@ public class App {
         Properties property = new Properties();
 
         try {
-            fis = new FileInputStream("target/classes/application.properties");
+            fis = new FileInputStream("buildNumber.properties");
             property.load(fis);
-
-            String name = property.getProperty("application.name");
-            String version = property.getProperty("application.version");
-            versionNumber = property.getProperty("application.build");
-
-            System.out.println("name: " + name
-                    + ", version: " + version
-                    + ", build: " + versionNumber);
-
+            versionNumber = versionNumber + property.getProperty("buildNumber0");
+            System.out.println("build: " + versionNumber);
         } catch (IOException e) {
             System.err.println("Error. File not found");
 
