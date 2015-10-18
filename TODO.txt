@@ -1,7 +1,7 @@
 18.10.2015
 
 General
-1. Version control in format 1.00.00
++1. Version control in format 1.00.00
 2. Back Button in focus and hotkey in all Panels
 3. In all frames must be openCOSY logo
 4. All programm must work in Full Screen mode(Size)

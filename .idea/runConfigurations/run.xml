@@ -10,8 +10,6 @@
           </option>
           <option name="goals">
             <list>
-              <option value="resources:resources" />
-              <option value="process-resources" />
               <option value="compiler:compile" />
               <option value="exec:java" />
             </list>
