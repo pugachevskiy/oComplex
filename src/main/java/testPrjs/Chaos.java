@@ -168,9 +168,9 @@ public class Chaos extends Applet implements Runnable, ActionListener
     {
 		gr.setColor(Color.blue);
 		gr.drawString("Phi_12:",Lx/2-20,Ly+20);
-		gr.drawString("" +Math.round(100*phi12*180/Math.PI)/100. +"°",Lx/2-20,Ly+40);
+		gr.drawString("" +Math.round(100*phi12*180/Math.PI)/100. +"o",Lx/2-20,Ly+40);
 		gr.drawString("Phi_22:",Lx+Lx/2-20,Ly+20);
-		gr.drawString("" +Math.round(100*phi22*180/Math.PI)/100. +"°",Lx+Lx/2-20,Ly+40);
+		gr.drawString("" +Math.round(100*phi22*180/Math.PI)/100. +"o",Lx+Lx/2-20,Ly+40);
     }//print(gr)
 
     public void pixels()  //method for calculating pixelcoords
