@@ -16,7 +16,7 @@
     <scm>
         <url>https://github.com/pugachevskiy/oComplex</url>
         <connection>scm:git:git://github.com/pugachevskiy/oComplex.git</connection>
-        <developerConnection>scm:git:https://fuchs84@github.com/pugachevskiy/oComplex.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/pugachevskiy/oComplex.git</developerConnection>
     </scm>
 
     <build>
