@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.NaschModel.Model;
+package com.openComplex.app.CellularAutomat.NaSchModel.Model;
 
 import java.awt.*;
 

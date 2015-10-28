@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.NaschModel.View;
+package com.openComplex.app.CellularAutomat.NaSchModel.View;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
