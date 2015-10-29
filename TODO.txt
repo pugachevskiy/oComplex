@@ -1,5 +1,17 @@
-18.10.2015
-11
+29.10.2015
+#### Comments from Shahin ####
+%%%%To be done till November 2, 2015%%%%%%%
+Some abbreviations: @Tobi -> @T; @Sergey -> @S; @Matthias -> @M; @Shahin -> @Sh; @all -> all members
+@all: where ever we've colors to choose: add some default colors and JColorChooser
+@all: use JSlider for time intervals and give the time unit in ms. E.g. if you reduce the time the sleep() method should be increased. 
+@T: please update GUI asap. 
+@M: update the trajectory of the pendulums (better to have two options: fading and not fading)
+@M: update NaSch rules and improve it.
+@S: see tasks below ;)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+##############################
+
 General
 +1. Version control in format 1.00.00
 2. Back Button in focus and hotkey in all Panels
@@ -24,6 +36,7 @@ NaSch
 
 Tobi
 1. Source of Icon for Photoshop
+(Sh-> update GUI - ASAP)
 
 Fractals
 1. Calculate Hausdorf dimension
