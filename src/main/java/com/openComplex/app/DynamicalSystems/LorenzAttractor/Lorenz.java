@@ -18,12 +18,12 @@ public class Lorenz implements ActionListener {
     public Lorenz() {
         gui = new LorenzView2();
         gui.addListener(this);
-        gui.setTextA(String.valueOf(lorenz1.getA()));
-        gui.setTextB(String.valueOf(lorenz1.getB()));
-        gui.setTextC(String.valueOf(lorenz1.getC()).substring(0, 5));
         xArray = new double[stepMax+1];
         zArray = new double[stepMax+1];
         yArray = new double[stepMax+1];
+        gui.setTextA(String.valueOf(lorenz1.getA()));
+        gui.setTextB(String.valueOf(lorenz1.getB()));
+        gui.setTextC(String.valueOf(lorenz1.getC()).substring(0, 5));
 
     }
     public void draw(LorenzModel lorenz, int i) {

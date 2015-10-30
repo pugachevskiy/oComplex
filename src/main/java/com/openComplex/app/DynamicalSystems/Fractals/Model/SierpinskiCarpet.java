@@ -4,6 +4,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
+
 import java.awt.*;
 
 /**
@@ -11,10 +12,10 @@ import java.awt.*;
  */
 public class SierpinskiCarpet extends GLJPanel implements Fractal {
     //Start point
-    private static final int X = 20;
-    private static final int Y = 50;
+    private static int X = 20;
+    private static int Y = 20;
     //Length of side of the rectangle
-    private static final int DIM = 486;
+    private static int DIM = 486;
 
 
     private int step = 0;
@@ -50,6 +51,26 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
+
+        //Anpassen der Attribute -> Zentriert das Viereck, jedoch Performance-Probleme
+
+        int maxSize;
+        //Change dim dynamically
+        if(this.getWidth() < this.getHeight()) {
+            maxSize = this.getWidth();
+            Y = this.getHeight()/2 - maxSize/2;
+            Y = (Y<20) ? 20 : Y;
+            X = 20;
+        } else {
+            maxSize = this.getHeight();
+            X = this.getWidth()/2 - maxSize/2;
+            X = (X<20) ? 20 : X;
+            Y = 20;
+        }
+        DIM = maxSize - 40;
+
+
+
         doDrawing(g, X, Y, DIM, step);
     }
 

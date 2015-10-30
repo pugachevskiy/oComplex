@@ -4,7 +4,6 @@ import com.openComplex.app.App;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.Controller.MainWolfram;
 import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
-import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
@@ -50,7 +49,7 @@ public class MFrameListener implements ActionListener {
                 new Lorenz();
                 break;
             case "Logical maps with Feigenbaum-diagram":
-                new Feigenbaum();
+                //new Feigenbaum();
                 break;
             case "Markov chain":
                 new Markov();

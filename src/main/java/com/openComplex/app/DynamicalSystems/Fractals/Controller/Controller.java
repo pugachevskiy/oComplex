@@ -28,6 +28,7 @@ public class Controller {
     ListSelectionListener listSelectionListener;
     boolean flag = false;
     boolean search = false;
+    int colorSet = 0;
 
     public Controller() {
         gui.createGui();

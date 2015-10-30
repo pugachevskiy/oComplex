@@ -4,6 +4,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
+
 import java.awt.*;
 
 /**
@@ -11,14 +12,14 @@ import java.awt.*;
  */
 public class SierpinskiTriangle extends GLJPanel implements Fractal {
     //First point of Triange
-    private static final int X1 = 250;
-    private static final int Y1 = 50;
+    private static int X1 = 250;
+    private static int Y1 = 50;
     //Second point of Triange
-    private static final int X2 = 400;
-    private static final int Y2 = 450;
+    private static int X2 = 400;
+    private static int Y2 = 450;
     //Third point of Triange
-    private static final int X3 = 100;
-    private static final int Y3 = 450;
+    private static int X3 = 100;
+    private static int Y3 = 450;
 
 
     private int step = 0;
@@ -53,6 +54,22 @@ public class SierpinskiTriangle extends GLJPanel implements Fractal {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
+
+        //Change size dynamically
+        int height = this.getHeight();
+        int maxWidth = this.getWidth();
+        while(height < maxWidth) {
+            maxWidth -= 30;
+        }
+
+
+        X3 = this.getWidth()/2 - maxWidth/2;
+        Y3 = 9*height/10;
+        X2 =  this.getWidth()/2 + maxWidth/2;
+        Y2 = 9*height/10;
+        X1 = X3 + maxWidth/2;
+        Y1 = Y3 - (int)(0.866*maxWidth);
+
         doDrawing(g, X1, Y1, X2, Y2, X3, Y3, step);
     }
     @Override

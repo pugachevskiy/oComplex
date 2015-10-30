@@ -31,6 +31,9 @@ public final class FractalsCollection {
                     "\n\n\n\n\n\n");
     public static final List<String> MINKOWSKI_CURVE = Arrays.asList("Minkowski curve", "4", "8", "1.5000", "Also called Minkowski sausage\n\n\n\n\n\n\n\n\n\n\n");
     public static final List<String> MENGER_SPONGE = Arrays.asList("Menger sponge", "3", "20", "2.7268", "And its surface has a fractal dimension of log_3(20), which is the same as that by volume.\n\n\n\n\n\n\n\n\n");
-    public static final List<List<String>> FRACTALS = Arrays.asList(KOCH_CURVE, SIERPINSKI_CARPET, SIERPINSKI_TRIANGLE, MINKOWSKI_CURVE);//, MENGER_SPONGE);
+    public static final List<String> Circle_Curve = Arrays.asList("Circle Curve", "1", "2", "1.5000", "Rekursive construction of circles.\n\n\n\n\n\n\n\n\n\n\n");
+    public static final List<String> CIRCLE_SQUARE = Arrays.asList("Circle Square", "1", "2", "1.5000", "Rekursive construction of circles arranged as square.\n\n\n\n\n\n\n\n\n\n\n");
+    public static final List<String> FRACTALS_TREE = Arrays.asList("Tree", "1", "2", "1.5000", "Rekursive construction of a tree.\n\n\n\n\n\n\n\n\n\n\n");
+    public static final List<List<String>> FRACTALS = Arrays.asList(KOCH_CURVE, SIERPINSKI_CARPET, SIERPINSKI_TRIANGLE, MINKOWSKI_CURVE, Circle_Curve, CIRCLE_SQUARE, FRACTALS_TREE);//, MENGER_SPONGE);
 
 }

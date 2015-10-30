@@ -7,6 +7,7 @@ package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 import org.math.plot.Plot3DPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -15,9 +16,8 @@ import java.awt.event.ActionListener;
  */
 public class LorenzView2 {
     private JFrame frame;
-    private JPanel menuPanel;
 
-    private JTextField coeffA, coeffB, coeffC;
+    private JSlider coeffA, coeffB, coeffC;
     private JButton startButton, clearButton;
     private Plot3DPanel plot;
 
@@ -32,61 +32,78 @@ public class LorenzView2 {
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(700, 700));
+
         plot = new Plot3DPanel();
         frame.add(plot, BorderLayout.CENTER);
-        menuPanel = new JPanel();
-        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
-        addMenuPanel();
-        frame.add(menuPanel, BorderLayout.WEST);
+
+        frame.add(createSliderPanel(), BorderLayout.NORTH);
+        frame.add(createStartStopPanel(), BorderLayout.SOUTH);
         frame.setVisible(true);
 
     }
 
-    private void addMenuPanel() {
-        menuPanel.add(new JLabel("Coefficients"));
-        menuPanel.add(new JLabel("A"));
-        coeffA = new JTextField("");
-        coeffA.setPreferredSize(new Dimension(100, 40));
-        menuPanel.add(coeffA);
-        menuPanel.add(new JLabel("B"));
-        coeffB = new JTextField("");
-        coeffB.setPreferredSize(new Dimension(100, 40));
-        menuPanel.add(coeffB);
-        menuPanel.add(new JLabel("C"));
-        coeffC = new JTextField("");
-        coeffC.setPreferredSize(new Dimension(100, 40));
-        menuPanel.add(coeffC);
+
+
+    private JPanel createStartStopPanel() {
+        JPanel startStopPanel = new JPanel();
+        startStopPanel.setLayout(new GridLayout(1, 2));
+        startStopPanel.setBorder(new EmptyBorder(5, 70, 5, 70));
+
         startButton = new JButton("Draw");
         startButton.setActionCommand("Draw");
-        menuPanel.add(startButton);
+        startStopPanel.add(startButton);
         clearButton = new JButton("Clear");
         clearButton.setActionCommand("Clear");
-        menuPanel.add(clearButton);
+        startStopPanel.add(clearButton);
+
+        return startStopPanel;
     }
 
-    public void setTextA(String a) {
-        coeffA.setText(a);
+    private JPanel createSliderPanel() {
+        JPanel sliderPanel = new JPanel();
+
+        sliderPanel.setLayout(new GridLayout(1, 3));
+        sliderPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
+
+        sliderPanel.add(createSingleSlider(coeffA = new JSlider(-40, 40), "A"));
+        sliderPanel.add(createSingleSlider(coeffB = new JSlider(-40, 40), "B"));
+        sliderPanel.add(createSingleSlider(coeffC = new JSlider(-40, 40), "C"));
+
+        return sliderPanel;
     }
 
-    public void setTextB(String b) {
-        coeffB.setText(b);
+    private JPanel createSingleSlider(JSlider slider, String info) {
+        JPanel sliderPanel = new JPanel();
+        sliderPanel.setLayout(new GridLayout(2, 1));
+        sliderPanel.setBorder(new EmptyBorder(0, 3, 0, 3));
+        JLabel sliderLabel = new JLabel(info);
+        sliderLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        sliderPanel.add(sliderLabel);
+
+        slider.setPaintLabels(true);
+        slider.setPaintTicks(true);
+        slider.setMajorTickSpacing(10);
+        slider.setMinorTickSpacing(5);
+        sliderPanel.add(slider);
+
+        slider.setValue(-20);
+
+        return sliderPanel;
     }
 
-    public void setTextC(String c) {
-        coeffC.setText(c);
-    }
+    public void setTextA(String a) {   coeffA.setValue((int)Double.parseDouble(a));    }
+
+    public void setTextB(String b) {   coeffB.setValue((int)Double.parseDouble(b));    }
+
+    public void setTextC(String c) {   coeffC.setValue((int)Double.parseDouble(c));    }
 
     public double getTextA() {
-        return Double.valueOf(coeffA.getText());
+        return Double.valueOf(coeffA.getValue());
     }
 
-    public double getTextB() {
-        return Double.valueOf(coeffB.getText());
-    }
+    public double getTextB() { return Double.valueOf(coeffB.getValue()); }
 
-    public double getTextC() {
-        return Double.valueOf(coeffC.getText());
-    }
+    public double getTextC() { return Double.valueOf(coeffC.getValue()); }
 
     public void addListener(ActionListener listener) {
         startButton.addActionListener(listener);
