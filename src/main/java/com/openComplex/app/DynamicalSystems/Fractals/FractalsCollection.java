@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 29/06/15.
+ *  on 29/06/15.
  */
 public final class FractalsCollection {
     public static final List<String> TITEL = Arrays.asList("Name", "Copy", "Factor", "Dimension", "Discription");

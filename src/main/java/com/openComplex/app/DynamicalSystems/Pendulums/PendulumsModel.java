@@ -3,7 +3,7 @@ package com.openComplex.app.DynamicalSystems.Pendulums;
 import javax.swing.*;
 
 /**
- * Created by strange on 09/10/15.
+ *  on 09/10/15.
  */
 public abstract class PendulumsModel extends JPanel {
     public static final int Lx = 500, Ly = 330; //graphic window

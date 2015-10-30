@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 public class OscillatorView {
     private JButton buttonGo, buttonDplus, buttonDmin;

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 /**
- * Created by strange on 10/09/15.
+ *  on 10/09/15.
  */
 public class Field extends JPanel implements MouseListener {
     private int size;

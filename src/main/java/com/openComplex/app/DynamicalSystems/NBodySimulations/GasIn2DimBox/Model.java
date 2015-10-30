@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 15/10/15.
+ *  on 15/10/15.
  */
 public class Model extends JPanel {
     private static final int D = 256;

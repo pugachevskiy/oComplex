@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 import java.util.Hashtable;
 
 /**
- * Created by Matthias on 16.06.2015.
+ *  on 16.06.2015.
  */
 public class GUIWolfram {
 
@@ -92,6 +92,7 @@ public class GUIWolfram {
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setAllowsInvalid(false);
         ruleField = new JFormattedTextField(formatter);
+        ruleField.setActionCommand("Set rule");
         ruleField.setFont(ruleField.getFont().deriveFont(16.0f));
         ruleField.setText("110");
         ruleField.setPreferredSize(new Dimension(100, 30));
@@ -154,6 +155,7 @@ public class GUIWolfram {
         exitItem.addActionListener(listener);
         ruleItem.addActionListener(listener);
         loadItem.addActionListener(listener);
+        ruleField.addActionListener(listener);
     }
 
     public void addChangeListener(ChangeListener listener) {

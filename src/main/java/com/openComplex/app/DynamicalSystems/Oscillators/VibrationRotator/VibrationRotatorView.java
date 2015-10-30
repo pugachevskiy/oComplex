@@ -7,7 +7,7 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */public class VibrationRotatorView {
     private static final int Lx = 300, Ly = 300; //graphic-window
     private JButton buttonReibPlus, buttonReibMin, buttonGo;

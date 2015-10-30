@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class AnharmonicOscillator implements ActionListener {
 

@@ -21,14 +21,14 @@ General
 Game of Life
 1. Hexagonal grid
 +2. Draw with Mouse Pressed
-3. CSV delete ""
++3. CSV delete ""
 4. Menu too small on large screen
 5. Colorbox
 6. Preview step
 7. Slider for speed change in ms
 
 Wolframm Rule
-1. ActionListener for JTextField(apply Rule by Enter)
++1. ActionListener for JTextField(apply Rule by Enter)
 2. Slider for speed change in ms
 
 NaSch
@@ -41,7 +41,7 @@ Tobi
 Fractals
 1. Calculate Hausdorf dimension
 2. Dynamical coordinates in center
-3. Too much free space between Slider and Label
++3. Too much free space between Slider and Label
 4. C Fractal
 5. new Fractals
 6. Draw Fractal by Copy, Factor or Dimension
@@ -67,9 +67,9 @@ Oscillators
 5. Export Data in csv and Screenshot
 
 Lorentz
-1. Thread
-2. Slider for a,b,c parameters active, when drawing finished.
-3. New graph for new start
++1. Thread
++2. Slider for a,b,c parameters active, when drawing finished.
++3. New graph for new start
 
 Hegselmann
 1. Just do it. :)

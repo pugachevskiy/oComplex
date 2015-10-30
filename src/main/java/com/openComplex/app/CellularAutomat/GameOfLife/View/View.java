@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 10/09/15.
+ *  on 10/09/15.
  */
 public class View {
     private JFrame mainFrame;

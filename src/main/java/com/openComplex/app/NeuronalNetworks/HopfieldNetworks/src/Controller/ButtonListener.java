@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.InterruptedIOException;
 
 /**
- * Created by Admin on 23.06.2015.
+ *  on 23.06.2015.
  */
 public class ButtonListener implements ActionListener {
     @Override

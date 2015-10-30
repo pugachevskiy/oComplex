@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by strange on 29/05/15.
+ *  on 29/05/15.
  */
 public class CellularPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();

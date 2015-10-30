@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class AnharmonicOscillatorView {
     private static final int W = 400, H = 200; //graphic window

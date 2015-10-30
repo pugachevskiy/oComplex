@@ -4,7 +4,7 @@ package com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator;
 import java.awt.event.*;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class VibrationRotator implements ActionListener, ItemListener, AdjustmentListener {
 

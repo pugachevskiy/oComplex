@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 29/05/15.
+ *  on 29/05/15.
  */
 
 public class MFrameListener implements ActionListener {

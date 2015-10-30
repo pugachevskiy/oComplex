@@ -19,7 +19,7 @@ import java.util.List;
 import static java.awt.Toolkit.getDefaultToolkit;
 
 /**
- * Created by strange on 29/05/15.
+ *  on 29/05/15.
  */
 public class MainView extends JFrame {
     private JFrame mainFrame;

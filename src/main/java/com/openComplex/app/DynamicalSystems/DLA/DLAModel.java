@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 public class DLAModel extends JPanel {
     private static final int D = 256; //grid dimension, graphic window dimension

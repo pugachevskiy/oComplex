@@ -7,7 +7,7 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
 /**
- * Created by strange on 15/10/15.
+ *  on 15/10/15.
  */
 public class Controller implements ActionListener, AdjustmentListener {
     private int step = 0;

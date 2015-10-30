@@ -4,3 +4,16 @@ new command for maven to commite in github
 Version control in format 1.00.00
 Draw with Mouse Pressed - Game of life
  ////
+
+ 30.10.2015 Sergey
+ GOL
+ +3. CSV delete ""
+
+
+ Wolframm Rule
+ +1. ActionListener for JTextField(apply Rule by Enter)
+
+ Lorentz
+ +1. Thread
+ +2. Slider for a,b,c parameters active, when drawing finished.
+ +3. New graph for new start

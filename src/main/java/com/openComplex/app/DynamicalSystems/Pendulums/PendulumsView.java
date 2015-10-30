@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by strange on 09/10/15.
+ *  on 09/10/15.
  */
 public abstract class PendulumsView {
     private static final int Lx = 500, Ly = 530; //graphic window

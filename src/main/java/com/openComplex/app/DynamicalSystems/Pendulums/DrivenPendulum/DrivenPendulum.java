@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 09/10/15.
+ *  on 09/10/15.
  */
 public class DrivenPendulum implements ActionListener{
     private int step;

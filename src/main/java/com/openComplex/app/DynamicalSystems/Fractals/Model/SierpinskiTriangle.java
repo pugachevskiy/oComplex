@@ -8,7 +8,7 @@ import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import java.awt.*;
 
 /**
- * Created by strange on 29/06/15.
+ *  on 29/06/15.
  */
 public class SierpinskiTriangle extends GLJPanel implements Fractal {
     //First point of Triange

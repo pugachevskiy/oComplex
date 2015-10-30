@@ -5,7 +5,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 import java.awt.*;
 
 /**
- * Created by strange on 13/10/15.
+ *  on 13/10/15.
  */
 public class TripleBarPendulumModel extends PendulumsModel {
     private int xPoints[] = new int[4]; //pixelcoords

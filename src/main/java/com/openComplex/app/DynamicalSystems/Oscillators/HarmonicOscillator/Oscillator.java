@@ -1,7 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 
 import java.awt.event.*;

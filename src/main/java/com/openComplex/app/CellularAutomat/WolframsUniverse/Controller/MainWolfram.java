@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 /**
- * Created by Matthias on 16.06.2015.
+ *  on 16.06.2015.
  */
 public class MainWolfram implements ActionListener, ChangeListener {
     private Field field;
@@ -23,6 +23,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
     private int gen = 1;
     private boolean flag = false;
     private int speed = 150;
+    private int ruleInt;
 
     public MainWolfram() {
         guiWolfram = new GUIWolfram();
@@ -56,7 +57,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
         switch (command) {
             case "Enter":
                 field.setLast(1);
-                int ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+                ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
                 if (ruleInt >= 0 && ruleInt <= 255) {
                     rule.setRule(ruleInt);
                     field.createCA(rule.getRule());
@@ -103,6 +104,14 @@ public class MainWolfram implements ActionListener, ChangeListener {
                 if (flag) {
                     flag = !flag;
                     guiWolfram.setStartButtonText("Start");
+                }
+                break;
+            case "Set rule":
+                field.setLast(1);
+                ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+                if (ruleInt >= 0 && ruleInt <= 255) {
+                    rule.setRule(ruleInt);
+                    field.createCA(rule.getRule());
                 }
                 break;
         }

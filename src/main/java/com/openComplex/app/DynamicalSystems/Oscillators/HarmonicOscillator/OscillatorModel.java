@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 public class OscillatorModel extends JPanel {
     private int xPoints1[] = new int[10]; //pixelcoordinates for spring1

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Admin on 22.06.2015.
+ *  on 22.06.2015.
  */
 public class Menubar extends JMenuBar implements ActionListener{
 

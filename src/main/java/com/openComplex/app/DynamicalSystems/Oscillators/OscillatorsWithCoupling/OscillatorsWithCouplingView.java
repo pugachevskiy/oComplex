@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class OscillatorsWithCouplingView {
     private static final int W = 400, H = 200; //graphic window

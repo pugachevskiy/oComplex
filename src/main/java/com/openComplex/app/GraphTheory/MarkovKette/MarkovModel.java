@@ -1,7 +1,7 @@
 package com.openComplex.app.GraphTheory.MarkovKette;
 
 /**
- * Created by strange on 27/08/15.
+ *  on 27/08/15.
  */
 
 import java.util.ArrayList;

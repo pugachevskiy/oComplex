@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class VibrationRotatorModel extends JPanel {
     private static final int Lx = 300, Ly = 300; //graphic-window

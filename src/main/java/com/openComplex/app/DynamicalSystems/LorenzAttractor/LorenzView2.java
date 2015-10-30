@@ -1,7 +1,7 @@
 package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 /**
- * Created by strange on 04/10/15.
+ * on 04/10/15.
  */
 
 import org.math.plot.Plot3DPanel;
@@ -11,19 +11,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by strange on 26/08/15.
- */
 public class LorenzView2 {
     private JFrame frame;
-
     private JSlider coeffA, coeffB, coeffC;
     private JButton startButton, clearButton;
     private Plot3DPanel plot;
 
+    int temp = 0;
+
     public LorenzView2() {
-
-
         init();
     }
 
@@ -41,7 +37,6 @@ public class LorenzView2 {
         frame.setVisible(true);
 
     }
-
 
 
     private JPanel createStartStopPanel() {
@@ -91,19 +86,29 @@ public class LorenzView2 {
         return sliderPanel;
     }
 
-    public void setTextA(String a) {   coeffA.setValue((int)Double.parseDouble(a));    }
-
-    public void setTextB(String b) {   coeffB.setValue((int)Double.parseDouble(b));    }
-
-    public void setTextC(String c) {   coeffC.setValue((int)Double.parseDouble(c));    }
-
-    public double getTextA() {
-        return Double.valueOf(coeffA.getValue());
+    public void setTextA(String a) {
+        coeffA.setValue((int) Double.parseDouble(a));
     }
 
-    public double getTextB() { return Double.valueOf(coeffB.getValue()); }
+    public void setTextB(String b) {
+        coeffB.setValue((int) Double.parseDouble(b));
+    }
 
-    public double getTextC() { return Double.valueOf(coeffC.getValue()); }
+    public void setTextC(String c) {
+        coeffC.setValue((int) Double.parseDouble(c));
+    }
+
+    public double getTextA() {
+        return (double) coeffA.getValue();
+    }
+
+    public double getTextB() {
+        return (double) coeffB.getValue();
+    }
+
+    public double getTextC() {
+        return (double) coeffC.getValue();
+    }
 
     public void addListener(ActionListener listener) {
         startButton.addActionListener(listener);
@@ -111,23 +116,36 @@ public class LorenzView2 {
     }
 
 
-
     public void clear() {
         plot.removeAll();
         plot = new Plot3DPanel();
-        frame.add(plot);
+        frame.add(plot, BorderLayout.CENTER);
+        temp = 0;
         plot.revalidate();
     }
 
     public void doPaint(double[] xArray, double[] yArray, double[] zArray) {
+        if (temp > 0)
+        plot.removePlot(0);
         plot.addLinePlot("Lorenz", xArray, yArray, zArray);
+        temp++;
         plot.revalidate();
     }
 
+    public void activateControls(){
+        startButton.setEnabled(true);
+        clearButton.setEnabled(true);
+        coeffA.setEnabled(true);
+        coeffB.setEnabled(true);
+        coeffC.setEnabled(true);
+    }
 
-    public void setStartButtonText(String text) {
-        startButton.setText(text);
-        startButton.setActionCommand(text);
+    public void deactivateControls(){
+        startButton.setEnabled(false);
+        clearButton.setEnabled(false);
+        coeffA.setEnabled(false);
+        coeffB.setEnabled(false);
+        coeffC.setEnabled(false);
     }
 }
 

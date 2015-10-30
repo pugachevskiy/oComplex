@@ -1,7 +1,7 @@
 package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 /**
- * Created by strange on 26/08/15.
+ *  on 26/08/15.
  */
 public class LorenzModel {
     private double x, y, z;

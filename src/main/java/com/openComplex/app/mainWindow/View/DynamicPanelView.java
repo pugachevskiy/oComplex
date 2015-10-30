@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 29/05/15.
+ *  on 29/05/15.
  */
 public class DynamicPanelView extends JPanel {
     private ActionListener listener = new MFrameListener();

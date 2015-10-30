@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
     private static final int W = 400, H = 240; //graphic window

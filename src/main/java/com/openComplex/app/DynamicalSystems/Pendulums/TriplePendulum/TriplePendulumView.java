@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 13/10/15.
+ *  on 13/10/15.
  */
 public class TriplePendulumView extends PendulumsView {
 

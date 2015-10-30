@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Created by Admin on 29.06.2015.
+ *  on 29.06.2015.
  */
 public class GraphListener implements MouseListener {
 

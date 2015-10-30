@@ -1,6 +1,6 @@
 package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Model;
 /**
- * Created by Admin on 22.06.2015.
+ *  on 22.06.2015.
  */
 public class Matrix {
 
