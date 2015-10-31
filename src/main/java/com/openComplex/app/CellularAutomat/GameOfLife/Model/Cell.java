@@ -4,7 +4,7 @@ import java.awt.*;
 
 
 /**
- *  on 10/09/15.
+ * Created by strange on 10/09/15.
  */
 public class Cell{
     private int row;
