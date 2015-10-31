@@ -7,7 +7,7 @@ import java.awt.*;
  *  on 07/10/15.
  */
 public class AnharmonicOscillatorModel extends JPanel {
-    private static final int W = 400, H = 200; //graphic window
+    private static int W = 400, H = 200; //graphic window
     private int px, py; //pixelcoordinates
     private double x, xp, y, yp; //coordinates and velocities
     private double m = 1., D = 1.; //mass, spring
@@ -247,5 +247,10 @@ public class AnharmonicOscillatorModel extends JPanel {
         }
     }
 
+
+    public void updateSize(int width, int height) {
+        this.W = width;
+        this.H = height;
+    }
 
 }

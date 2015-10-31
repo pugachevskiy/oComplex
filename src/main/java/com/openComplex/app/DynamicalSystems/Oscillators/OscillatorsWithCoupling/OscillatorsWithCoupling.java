@@ -1,9 +1,6 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 /**
  *  on 07/10/15.
@@ -19,6 +16,16 @@ public class OscillatorsWithCoupling implements ActionListener, ItemListener {
     public OscillatorsWithCoupling() {
         gui = new OscillatorsWithCouplingView();
         model = new OscillatorsWithCouplingModel();
+        gui.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight()-100);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) { }
+            public void componentShown(ComponentEvent e) { }
+            public void componentHidden(ComponentEvent e) {}
+        });
         gui.addListener(this, this);
         gui.addPanel(model);
     }

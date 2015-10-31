@@ -29,7 +29,7 @@ Game of Life
 
 Wolframm Rule
 +1. ActionListener for JTextField(apply Rule by Enter)
-2. Slider for speed change in ms
++2. Slider for speed change in ms
 
 NaSch
 +1. Nasch -> NaSch

@@ -7,7 +7,7 @@ import java.awt.*;
  *  on 07/10/15.
  */
 public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
-    private static final int W = 400, H = 240; //graphic window
+    private static int W = 400, H = 240; //graphic window
     private int px1, py1, px2, py2; //pixelcoordinates
     private double x1, x1p, y1, y1p; //coordinates and velocities
     private double x2, x2p, y2, y2p; //coordinates and velocities
@@ -388,4 +388,8 @@ public class AnharmonicOscillatorsWithCouplingModel extends JPanel {
         repaint();
     }
 
+    public void updateSize(int width, int height) {
+        this.W = width;
+        this.H = height;
+    }
 }

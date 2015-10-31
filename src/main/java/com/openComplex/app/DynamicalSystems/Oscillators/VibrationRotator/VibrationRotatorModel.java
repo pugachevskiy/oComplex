@@ -7,7 +7,7 @@ import java.awt.*;
  *  on 07/10/15.
  */
 public class VibrationRotatorModel extends JPanel {
-    private static final int Lx = 300, Ly = 300; //graphic-window
+    private static int Lx = 300, Ly = 300; //graphic-window
     private int px, py; //pixelcoordinates
     private double phi, omega; //coordinates and velocities
     private double r, rp; //coordinates and velocities
@@ -170,5 +170,10 @@ public class VibrationRotatorModel extends JPanel {
             reib--;
         }
         repaint();
+    }
+
+    public void updateSize(int width, int height) {
+        this.Lx = width;
+        this.Ly = height;
     }
 }

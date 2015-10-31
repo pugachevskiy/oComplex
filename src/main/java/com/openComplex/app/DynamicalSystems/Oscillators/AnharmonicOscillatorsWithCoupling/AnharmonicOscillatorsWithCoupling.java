@@ -1,9 +1,6 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 /**
  *  on 07/10/15.
@@ -18,6 +15,17 @@ public class AnharmonicOscillatorsWithCoupling implements ActionListener, ItemLi
     public AnharmonicOscillatorsWithCoupling() {
         gui = new AnharmonicOscillatorsWithCouplingView();
         model = new AnharmonicOscillatorsWithCouplingModel();
+
+        gui.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight()-100);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) { }
+            public void componentShown(ComponentEvent e) { }
+            public void componentHidden(ComponentEvent e) {}
+        });
         gui.addListener(this, this);
         gui.addPanel(model);
     }

@@ -27,14 +27,6 @@ public class MainView extends JFrame {
     public static final String OVERVIEWMENUITEM = "Overview", ABOUTMENUITEM = "About", HELPMENUITEM = "Help";
     private static final java.util.List<String> MENUITEM = Arrays.asList(OVERVIEWMENUITEM, ABOUTMENUITEM, HELPMENUITEM);
 
-    public static void main (String [] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) { }
-        if (System.getProperty("os.name").contains("Mac")) {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-        }
-        new MainView();}
 
     public MainView() {
         initFrame();

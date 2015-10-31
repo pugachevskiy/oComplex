@@ -15,14 +15,14 @@ import java.util.Hashtable;
 public class GUIWolfram {
 
     private JFormattedTextField ruleField;
-    private JSlider generationSlider;
-    private JButton ruleButton, clearButton,startButton, stopButton;
+    private JSlider generationSlider, speedSlider;
+    private JButton ruleButton, clearButton,startButton;
     private JPanel field;
     private JFrame frame;
     private JMenuItem saveItem, exitItem, ruleItem, loadItem;
     public GUIWolfram() {
         frame = new JFrame("Wolfram Universe");
-        frame.setMinimumSize(new Dimension(1000, 1000));
+        frame.setMinimumSize(new Dimension(1300, 1000));
         field = new JPanel();
         frame.setLayout(new BorderLayout());
         frame.add(controlPanel(), BorderLayout.NORTH);
@@ -55,9 +55,14 @@ public class GUIWolfram {
         JLabel generationLabel = new JLabel("Generation: ");
         generationLabel.setFont(generationLabel.getFont().deriveFont(15.0f));
         control.add(generationLabel);
+        JLabel speedLabel = new JLabel("Speed: ");
+        speedLabel.setFont(speedLabel.getFont().deriveFont(15.0f));
 
         createSlider();
         control.add(generationSlider);
+
+        control.add(speedLabel);
+        control.add(speedSlider);
         return control;
     }
 
@@ -140,6 +145,24 @@ public class GUIWolfram {
         generationSlider.setLabelTable(labelTable);
         generationSlider.setPaintLabels(true);
         generationSlider.setValue(0);
+        generationSlider.setName("Generation");
+
+
+        speedSlider = new JSlider(1,1000,100);
+        speedSlider.setPaintTicks(true);
+        speedSlider.setMajorTickSpacing(200);
+
+        Hashtable labelTable2 = new Hashtable();
+        labelTable2.put(1, new JLabel("1"));
+        labelTable2.put(200, new JLabel("200"));
+        labelTable2.put(400, new JLabel("400"));
+        labelTable2.put(600, new JLabel("600"));
+        labelTable2.put(800, new JLabel("800"));
+        labelTable2.put(1000, new JLabel("1000"));
+        speedSlider.setName("Speed");
+        speedSlider.setLabelTable(labelTable2);
+        speedSlider.setPaintLabels(true);
+        speedSlider.setValue(100);
 
     }
 
@@ -160,7 +183,11 @@ public class GUIWolfram {
 
     public void addChangeListener(ChangeListener listener) {
         generationSlider.addChangeListener(listener);
+
+
     }
+    public void addChangeListenerSpeed(ChangeListener listener){speedSlider.addChangeListener(listener);}
+
 
     public void setGenerationSlider(int value){
         generationSlider.setValue(value);

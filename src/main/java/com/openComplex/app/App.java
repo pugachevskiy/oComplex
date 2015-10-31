@@ -3,10 +3,13 @@ package com.openComplex.app;
 
 import com.openComplex.app.mainWindow.View.MainView;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.swing.*;
+
+import static java.awt.Toolkit.getDefaultToolkit;
 
 public class App {
     public static MainView gui;
@@ -37,5 +40,13 @@ public class App {
 
         }
         gui = new MainView();
+    }
+
+    public static void setFrameCentral(JFrame frame) {
+        Dimension frameSize = frame.getSize();
+        Dimension screensize = getDefaultToolkit().getScreenSize();
+        int xCoordinate = (int) (screensize.getWidth() / 2 - frameSize.getWidth() / 2);
+        int yCoordinate = (int) (screensize.getHeight() / 2 - frameSize.getHeight() / 2);
+        frame.setLocation(xCoordinate, yCoordinate);
     }
 }

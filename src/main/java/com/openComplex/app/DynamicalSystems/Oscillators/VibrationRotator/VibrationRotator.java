@@ -16,6 +16,16 @@ public class VibrationRotator implements ActionListener, ItemListener, Adjustmen
     public VibrationRotator(){
         gui = new VibrationRotatorView();
         model = new VibrationRotatorModel(gui.getSpeed());
+        gui.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight());
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) { }
+            public void componentShown(ComponentEvent e) { }
+            public void componentHidden(ComponentEvent e) {}
+        });
         gui.addListener(this, this, this);
         gui.addPanel(model);
     }

@@ -1,5 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator;
 
+import com.openComplex.app.App;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -7,12 +9,12 @@ import java.awt.event.ActionListener;
 /**
  *  on 07/10/15.
  */
-public class AnharmonicOscillatorView {
+public class AnharmonicOscillatorView extends JFrame{
     private static final int W = 400, H = 200; //graphic window
     private JButton buttonNew, buttonGo;
     private JButton buttonDplus, buttonDmin;
     private JButton buttonReibPlus, buttonReibMin;
-    private JFrame frame;
+    private JPanel setupPanel;
 
     public AnharmonicOscillatorView() {
         init();
@@ -20,14 +22,14 @@ public class AnharmonicOscillatorView {
 
     public void init() {
 
-        frame = new JFrame("Anharmonic Oscillator");
-        frame.setSize(700,400);
-        frame.setLayout(new BorderLayout());
-        JPanel pan = new JPanel();
+        this.setTitle("Anharmonic Oscillator");
+        this.setSize(700, 400);
+        this.setLayout(new BorderLayout());
+        setupPanel = new JPanel();
 
-        pan.setBounds(W + 1, 1, 100, H + 90);
-        pan.setBackground(new Color(0, 200, 100));
-        pan.setFont(new Font("Verdana", Font.PLAIN, 10));
+        setupPanel.setBounds(W + 1, 1, 100, H + 90);
+        setupPanel.setBackground(new Color(0, 200, 100));
+        setupPanel.setFont(new Font("Verdana", Font.PLAIN, 10));
 
         buttonNew = new JButton("New");
         buttonGo = new JButton("Go/Pause");
@@ -51,14 +53,15 @@ public class AnharmonicOscillatorView {
         buttonReibMin.setBounds(10, H / 2 + 82, 80, 27);
         buttonGo.setBounds(10, H / 2 + 132, 80, 27);
 
-        pan.add(buttonGo);
-        pan.add(buttonNew);
-        pan.add(buttonDplus);
-        pan.add(buttonDmin);
-        pan.add(buttonReibPlus);
-        pan.add(buttonReibMin);
-        frame.add(pan, BorderLayout.NORTH);
-        frame.setVisible(true);
+        setupPanel.add(buttonGo);
+        setupPanel.add(buttonNew);
+        setupPanel.add(buttonDplus);
+        setupPanel.add(buttonDmin);
+        setupPanel.add(buttonReibPlus);
+        setupPanel.add(buttonReibMin);
+        this.add(setupPanel, BorderLayout.NORTH);
+        App.setFrameCentral(this);
+        this.setVisible(true);
 
 
     }//init()
@@ -73,6 +76,10 @@ public class AnharmonicOscillatorView {
     }
 
     public void addPanel(JPanel panel){
-        frame.add(panel, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.CENTER);
+    }
+
+    public int calculatePanelHeight() {
+        return this.getHeight()-setupPanel.getHeight();
     }
 }

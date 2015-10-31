@@ -1,5 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.OscillatorsWithCoupling;
 
+import com.openComplex.app.App;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -8,29 +10,28 @@ import java.awt.event.ItemListener;
 /**
  *  on 07/10/15.
  */
-public class OscillatorsWithCouplingView {
+public class OscillatorsWithCouplingView extends JFrame{
     private static final int W = 400, H = 200; //graphic window
 
     private JButton buttonNew, buttonGo;
     private JButton buttonDplus, buttonDmin;
     private JButton buttonReibPlus, buttonReibMin;
-
+    private JPanel setupPanel;
 
     private Choice Chooser;
-    private JFrame frame;
 
     public OscillatorsWithCouplingView() {
         init();
     }
 
     public void init() {
-        frame = new JFrame("2 Oscillators With Coupling");
-        frame.setSize(800, 500);
-        frame.setLayout(new BorderLayout());
-        JPanel pan = new JPanel();
-        pan.setBounds(W + 1, 1, 100, H + 90);
-        pan.setBackground(new Color(0, 200, 100));
-        pan.setFont(new Font("Verdana", Font.PLAIN, 10));
+        this.setTitle("2 Oscillators With Coupling");
+        this.setSize(800, 500);
+        this.setLayout(new BorderLayout());
+        setupPanel = new JPanel();
+        setupPanel.setBounds(W + 1, 1, 100, H + 90);
+        setupPanel.setBackground(new Color(0, 200, 100));
+        setupPanel.setFont(new Font("Verdana", Font.PLAIN, 10));
 
         buttonNew = new JButton("New");
         buttonDplus = new JButton("Spring +");
@@ -60,15 +61,16 @@ public class OscillatorsWithCouplingView {
         buttonGo.setBounds(10, 250, 70, 30);
         buttonGo.setBackground(new Color(0, 200, 100));
 
-        pan.add(buttonGo);
-        pan.add(Chooser);
-        pan.add(buttonNew);
-        pan.add(buttonDplus);
-        pan.add(buttonDmin);
-        pan.add(buttonReibPlus);
-        pan.add(buttonReibMin);
-        frame.add(pan, BorderLayout.NORTH);
-        frame.setVisible(true);
+        setupPanel.add(buttonGo);
+        setupPanel.add(Chooser);
+        setupPanel.add(buttonNew);
+        setupPanel.add(buttonDplus);
+        setupPanel.add(buttonDmin);
+        setupPanel.add(buttonReibPlus);
+        setupPanel.add(buttonReibMin);
+        this.add(setupPanel, BorderLayout.NORTH);
+        App.setFrameCentral(this);
+        this.setVisible(true);
 
     }//init()
 
@@ -83,7 +85,11 @@ public class OscillatorsWithCouplingView {
     }
 
     public void addPanel(JPanel panel) {
-        frame.add(panel, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.CENTER);
+    }
+
+    public int calculatePanelHeight() {
+        return this.getHeight()-setupPanel.getHeight();
     }
 
 }
