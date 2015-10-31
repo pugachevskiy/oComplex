@@ -43,7 +43,7 @@ public class View {
 
     public void createGui() {
         mainField = new JFrame("openCoSy - Fractals");
-        mainField.setSize(800, 600);
+        mainField.setSize(800, 650);
         mainField.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainField.setJMenuBar(menuBar = new Menubar());
 

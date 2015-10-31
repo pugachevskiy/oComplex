@@ -3,6 +3,8 @@ package com.openComplex.app.DynamicalSystems.DLA;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 
 /**
@@ -46,6 +48,16 @@ public class DLAView {
         startButton = new JButton("Start/Stop");
         startButton.setActionCommand("Start");
         startButton.setBounds(10, D / 2 + 30, 80, 30);
+
+
+        frame.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+
+            }
+            public void componentMoved(ComponentEvent e) {}
+            public void componentShown(ComponentEvent e) {}
+            public void componentHidden(ComponentEvent e) {}
+        });
 
         pan.add(labMaxStep);
         pan.add(tfStep);

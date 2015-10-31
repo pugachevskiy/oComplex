@@ -111,7 +111,7 @@ public class MFrameListener implements ActionListener {
             case "Gas in a 2-dimensional box":
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.Controller();
                 break;
-            case "Sun-Earth-Sim":
+            case "Sun-Earth-Simulation":
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.Controller();
                 break;
             case "Triple Bar Pendulum":
