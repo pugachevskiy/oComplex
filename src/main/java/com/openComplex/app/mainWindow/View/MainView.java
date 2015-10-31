@@ -59,8 +59,8 @@ public class MainView extends JFrame {
 
         this.updateGUI(TopicCollection.menuItems.get(0));
 
-        this.add(new MenuPanel(this), BorderLayout.WEST);
-        this.add(descriptionField, BorderLayout.CENTER);
+        this.add(new MenuPanel(this), BorderLayout.CENTER);
+        this.add(descriptionField, BorderLayout.EAST);
 
 
         //infoField to show various information during program

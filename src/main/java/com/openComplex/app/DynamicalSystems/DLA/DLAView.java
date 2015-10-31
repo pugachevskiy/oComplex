@@ -15,6 +15,7 @@ public class DLAView {
     private JButton buttonReset, startButton;
     private JTextField tfStep;
     private JLabel labMaxStep;
+    private JPanel setupPanel;
     private static final int D = 256;
     private int maxstep = 20000; //run-time
 
@@ -26,12 +27,11 @@ public class DLAView {
 
         frame = new JFrame("DLA");
         frame.setLayout(new BorderLayout());
-        frame.setSize(700,500);
-        Panel pan = new Panel();
-        pan.setLayout(null);
-        pan.setBounds(D + 1, 1, 90, D);
-        pan.setBackground(new Color(0, 200, 100));
-        pan.setFont(new Font("Verdana", Font.PLAIN, 9));
+        frame.setSize(700, 500);
+        setupPanel = new JPanel();
+        setupPanel.setLayout(new GridLayout(1, 6));
+        setupPanel.setBounds(D + 1, 1, 90, D);
+        setupPanel.setFont(new Font("Verdana", Font.PLAIN, 9));
 
         labMaxStep = new JLabel("Run-time");
         labMaxStep.setBounds(10, D / 2 - 60, 70, 20);
@@ -52,18 +52,21 @@ public class DLAView {
 
         frame.addComponentListener(new ComponentListener() {
             public void componentResized(ComponentEvent e) {
-
+                int maxHeight = frame.getHeight()-setupPanel.getHeight();
+                int maxWidth = frame.getWidth();
+                JPanel tempPanel = (JPanel)frame.getContentPane().getComponent(1);
+                //(DLAModel)tempPanel.updateSize(maxHeight<maxWidth ? maxHeight : maxWidth);
             }
             public void componentMoved(ComponentEvent e) {}
             public void componentShown(ComponentEvent e) {}
             public void componentHidden(ComponentEvent e) {}
         });
 
-        pan.add(labMaxStep);
-        pan.add(tfStep);
-        pan.add(buttonReset);
-        pan.add(startButton);
-        frame.add(pan, BorderLayout.EAST);
+        setupPanel.add(labMaxStep);
+        setupPanel.add(tfStep);
+        setupPanel.add(buttonReset);
+        setupPanel.add(startButton);
+        frame.add(setupPanel, BorderLayout.NORTH);
         frame.setVisible(true);
 
     }
@@ -79,7 +82,9 @@ public class DLAView {
         return (int) Double.valueOf(tfStep.getText()).doubleValue();
     }
 
-    public void addPanel(JPanel panel){
+    public void addPanel(DLAModel panel){
         frame.add(panel, BorderLayout.CENTER);
     }
+
+
 }

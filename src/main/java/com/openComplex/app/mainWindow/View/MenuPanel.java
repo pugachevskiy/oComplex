@@ -28,6 +28,9 @@ public class MenuPanel extends JPanel {
         for (int i = 0; i < TopicCollection.menuItems.size(); i++) {
             test[i] = TopicCollection.menuItems.get(i);
         }
+
+
+        JScrollPane scrollPane = new JScrollPane();
         list = new JList(test);
         list.setCellRenderer(new DefaultListCellRenderer() {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -42,7 +45,10 @@ public class MenuPanel extends JPanel {
         });
 
         list.setSelectedIndex(0);
-        this.add(list, BorderLayout.CENTER);
+        scrollPane.setViewportView(list);
+        scrollPane.setSize(this.getWidth()/3, this.getHeight());
+        this.add(scrollPane);
+
 
 
         MouseListener mouseListener = new MouseAdapter() {

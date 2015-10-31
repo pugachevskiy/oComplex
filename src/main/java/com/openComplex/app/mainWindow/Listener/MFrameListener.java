@@ -87,13 +87,13 @@ public class MFrameListener implements ActionListener {
             case "Vibration-Rotator":
                 new VibrationRotator();
                 break;
-            case "Double Pendulum":
+            case "Double-Pendulum":
                 new DoublePendulum();
                 break;
-            case "Triple Pendulum":
+            case "Triple-Pendulum":
                 new TriplePendulum();
                 break;
-            case "Quad Bar Pendulum":
+            case "Quad-Bar-Pendulum":
                 new QuadBarPendulum();
                 break;
             case "Pendulum with free mounting":
@@ -114,7 +114,7 @@ public class MFrameListener implements ActionListener {
             case "Sun-Earth-Simulation":
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.Controller();
                 break;
-            case "Triple Bar Pendulum":
+            case "Triple-Bar-Pendulum":
                 new TripleBarPendulum();
                 break;
 
