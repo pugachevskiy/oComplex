@@ -14,7 +14,7 @@ Some abbreviations: @Tobi -> @T; @Sergey -> @S; @Matthias -> @M; @Shahin -> @Sh;
 
 General
 +1. Version control in format 1.00.00
-2. Back Button in focus and hotkey in all Panels
+//2. Back Button in focus and hotkey in all Panels
 3. In all frames must be openCOSY logo
 4. All programm must work in Full Screen mode(Size)
 
@@ -22,10 +22,10 @@ Game of Life
 1. Hexagonal grid
 +2. Draw with Mouse Pressed
 +3. CSV delete ""
-4. Menu too small on large screen
+4. Menu too small on large screen                               _/
 5. Colorbox
 6. Preview step
-7. Slider for speed change in ms
+7. Slider for speed change in ms                                _/
 
 Wolframm Rule
 +1. ActionListener for JTextField(apply Rule by Enter)
@@ -40,10 +40,10 @@ Tobi
 
 Fractals
 1. Calculate Hausdorf dimension
-2. Dynamical coordinates in center
-+3. Too much free space between Slider and Label
+2. Dynamical coordinates in center                              _/
++3. Too much free space between Slider and Label                _/
 4. C Fractal
-5. new Fractals
+5. new Fractals                                                 _/
 6. Draw Fractal by Copy, Factor or Dimension
 
 Feigenbaum
