@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 /**
- * Created by Matthias on 16.06.2015.
+ * on 16.06.2015.
  */
 public class MainWolfram implements ActionListener, ChangeListener {
     private Field field;
@@ -23,6 +23,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
     private int gen = 1;
     private boolean flag = false;
     private int speed = 150;
+    private int ruleInt;
 
     public MainWolfram() {
         guiWolfram = new GUIWolfram();
@@ -31,6 +32,13 @@ public class MainWolfram implements ActionListener, ChangeListener {
         guiWolfram.addField(field);
         guiWolfram.addActionListener(this);
         guiWolfram.addChangeListener(this);
+        guiWolfram.addChangeListenerSpeed(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JSlider slider = (JSlider) e.getSource();
+                speed = slider.getValue();
+            }
+        });
         rule.setRule(Integer.parseInt(guiWolfram.getRuleFieldText()));
         field.createCA(rule.getRule());
     }
@@ -56,7 +64,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
         switch (command) {
             case "Enter":
                 field.setLast(1);
-                int ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+                ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
                 if (ruleInt >= 0 && ruleInt <= 255) {
                     rule.setRule(ruleInt);
                     field.createCA(rule.getRule());
@@ -89,7 +97,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
                 }
                 break;
             case "Rule":
-              //  gui.getRule();
+                //  gui.getRule();
                 break;
             case "Load":
                 int gen = 0;
@@ -105,6 +113,14 @@ public class MainWolfram implements ActionListener, ChangeListener {
                     guiWolfram.setStartButtonText("Start");
                 }
                 break;
+            case "Set rule":
+                field.setLast(1);
+                ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+                if (ruleInt >= 0 && ruleInt <= 255) {
+                    rule.setRule(ruleInt);
+                    field.createCA(rule.getRule());
+                }
+                break;
         }
     }
 
@@ -112,8 +128,8 @@ public class MainWolfram implements ActionListener, ChangeListener {
     public void stateChanged(ChangeEvent e) {
         field.setLast(1);
         field.resetField();
-        JSlider source = (JSlider) e.getSource();
-        gen = source.getValue();
+        JSlider slider = (JSlider) e.getSource();
+        gen = slider.getValue();
         field.setGen(gen);
         field.createCA(rule.getRule());
         field.setGridSize();

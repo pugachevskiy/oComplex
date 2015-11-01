@@ -10,7 +10,7 @@ import java.awt.event.FocusListener;
 import java.text.NumberFormat;
 
 /**
- * Created by Admin on 14.07.2015.
+ *  on 14.07.2015.
  */
 public class OptionPanel extends JPanel {
 

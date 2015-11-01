@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 /**
- * Created by Admin on 22.06.2015.
+ *  on 22.06.2015.
  */
 public class Menu extends JMenuBar{
 

@@ -1,7 +1,7 @@
 package com.openComplex.app.CellularAutomat.WolframsUniverse.Model;
 
 /**
- * Created by strange on 14/09/15.
+ *  on 14/09/15.
  */
 public class Rule {
     private boolean[] rule = new boolean[8];

@@ -5,7 +5,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 import java.awt.*;
 
 /**
- * Created by strange on 12/10/15.
+ *  on 12/10/15.
  */
 public class PendulumWithFreeMountingModel extends PendulumsModel {
     private int ax, px, py; //pixelcoordinates

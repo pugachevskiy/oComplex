@@ -4,7 +4,6 @@ import com.openComplex.app.App;
 import com.openComplex.app.CellularAutomat.WolframsUniverse.Controller.MainWolfram;
 import com.openComplex.app.DynamicalSystems.Fractals.Controller.Controller;
 import com.openComplex.app.DynamicalSystems.IteratedMaps.IMController;
-import com.openComplex.app.DynamicalSystems.LogicalPictures.Feigenbaum;
 import com.openComplex.app.DynamicalSystems.LorenzAttractor.Lorenz;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator.AnharmonicOscillator;
 import com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillatorsWithCoupling.AnharmonicOscillatorsWithCoupling;
@@ -28,7 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 29/05/15.
+ *  on 29/05/15.
  */
 
 public class MFrameListener implements ActionListener {
@@ -50,7 +49,7 @@ public class MFrameListener implements ActionListener {
                 new Lorenz();
                 break;
             case "Logical maps with Feigenbaum-diagram":
-                new Feigenbaum();
+                //new Feigenbaum();
                 break;
             case "Markov chain":
                 new Markov();
@@ -88,13 +87,13 @@ public class MFrameListener implements ActionListener {
             case "Vibration-Rotator":
                 new VibrationRotator();
                 break;
-            case "Double Pendulum":
+            case "Double-Pendulum":
                 new DoublePendulum();
                 break;
-            case "Triple Pendulum":
+            case "Triple-Pendulum":
                 new TriplePendulum();
                 break;
-            case "Quad Bar Pendulum":
+            case "Quad-Bar-Pendulum":
                 new QuadBarPendulum();
                 break;
             case "Pendulum with free mounting":
@@ -112,10 +111,10 @@ public class MFrameListener implements ActionListener {
             case "Gas in a 2-dimensional box":
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.GasIn2DimBox.Controller();
                 break;
-            case "Sun-Earth-Sim":
+            case "Sun-Earth-Simulation":
                 new com.openComplex.app.DynamicalSystems.NBodySimulations.SunEarthSim.Controller();
                 break;
-            case "Triple Bar Pendulum":
+            case "Triple-Bar-Pendulum":
                 new TripleBarPendulum();
                 break;
 

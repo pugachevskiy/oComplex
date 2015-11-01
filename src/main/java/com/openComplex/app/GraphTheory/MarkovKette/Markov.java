@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * Created by strange on 27/08/15.
+ *  on 27/08/15.
  */
 public class Markov implements ActionListener {
     private MarkovModel markovModel;

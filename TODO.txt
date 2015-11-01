@@ -1,36 +1,49 @@
-18.10.2015
-11
+29.10.2015
+#### Comments from Shahin ####
+%%%%To be done till November 2, 2015%%%%%%%
+Some abbreviations: @Tobi -> @T; @Sergey -> @S; @Matthias -> @M; @Shahin -> @Sh; @all -> all members
+@all: where ever we've colors to choose: add some default colors and JColorChooser
+@all: use JSlider for time intervals and give the time unit in ms. E.g. if you reduce the time the sleep() method should be increased. 
+@T: please update GUI asap. 
+@M: update the trajectory of the pendulums (better to have two options: fading and not fading)
+@M: update NaSch rules and improve it.
+@S: see tasks below ;)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+##############################
+
 General
 +1. Version control in format 1.00.00
-2. Back Button in focus and hotkey in all Panels
+//2. Back Button in focus and hotkey in all Panels
 3. In all frames must be openCOSY logo
 4. All programm must work in Full Screen mode(Size)
 
 Game of Life
 1. Hexagonal grid
 +2. Draw with Mouse Pressed
-3. CSV delete ""
-4. Menu too small on large screen
++3. CSV delete ""
+4. Menu too small on large screen                               _/
 5. Colorbox
 6. Preview step
-7. Slider for speed change in ms
+7. Slider for speed change in ms                                _/
 
 Wolframm Rule
-1. ActionListener for JTextField(apply Rule by Enter)
-2. Slider for speed change in ms
++1. ActionListener for JTextField(apply Rule by Enter)
++2. Slider for speed change in ms
 
 NaSch
 +1. Nasch -> NaSch
 
 Tobi
 1. Source of Icon for Photoshop
+(Sh-> update GUI - ASAP)
 
 Fractals
 1. Calculate Hausdorf dimension
-2. Dynamical coordinates in center
-3. Too much free space between Slider and Label
+2. Dynamical coordinates in center                              _/
++3. Too much free space between Slider and Label                _/
 4. C Fractal
-5. new Fractals
+5. new Fractals                                                 _/
 6. Draw Fractal by Copy, Factor or Dimension
 
 Feigenbaum
@@ -54,9 +67,9 @@ Oscillators
 5. Export Data in csv and Screenshot
 
 Lorentz
-1. Thread
-2. Slider for a,b,c parameters active, when drawing finished.
-3. New graph for new start
++1. Thread
++2. Slider for a,b,c parameters active, when drawing finished.
++3. New graph for new start
 
 Hegselmann
 1. Just do it. :)

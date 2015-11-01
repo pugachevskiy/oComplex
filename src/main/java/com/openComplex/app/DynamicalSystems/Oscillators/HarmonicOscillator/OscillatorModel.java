@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 public class OscillatorModel extends JPanel {
     private int xPoints1[] = new int[10]; //pixelcoordinates for spring1
@@ -18,7 +18,7 @@ public class OscillatorModel extends JPanel {
     private double amp = -0.8; //amplitude
     private int reib = 0; //friction
     private static final double dt = 0.05; //timestep
-    public static final int W = 400, H = 220;
+    public static int W = 400, H = 220;
 
     public void pixels() {  //method for calculating pixelcoords
 
@@ -120,5 +120,19 @@ public class OscillatorModel extends JPanel {
         if (reib > 0) {
             reib--;
         }
+    }
+
+    public void updateSize(int width, int height) {
+        this.W = width;
+        this.H = height;
+        this.py = H / 2;
+    }
+
+    public void updateFriction(int value) {
+        this.reib = value;
+    }
+
+    public void updateSpring(int value) {
+        this.D = value;
     }
 }

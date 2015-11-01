@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by strange on 27/08/15.
+ *  on 27/08/15.
  */
 public class MarkovView {
     private JFrame frame;

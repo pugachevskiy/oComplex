@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 11/10/15.
+ *  on 11/10/15.
  */
 public class DrivenTriplePendulumYView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --");

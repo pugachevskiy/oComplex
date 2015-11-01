@@ -28,7 +28,7 @@ public class Controller implements ActionListener {
 
     public Controller() {
         field = new Field(36, MEDIUMSIZE, cellColor);
-        gui = new View();
+        gui = new View(this);
         gui.init();
         field.setFigure(0);
         gui.addField(field);
@@ -105,10 +105,10 @@ public class Controller implements ActionListener {
                 gui.frameClose();
                 break;
             //JCombobox
-            case "Cell size":
+            case "Size of cells":
                 getSize();
                 break;
-            case "Init state":
+            case "Initial model":
                 field.setFigure(gui.getFigureBox());
                 counter = 0;
                 gui.setCounter(String.valueOf(counter));
@@ -191,6 +191,10 @@ public class Controller implements ActionListener {
         }
         createField();
         field.setFigure(gui.getFigureBox());
+    }
+
+    public void updateSpeed(int speed) {
+        this.gamespeed = speed;
     }
 
 

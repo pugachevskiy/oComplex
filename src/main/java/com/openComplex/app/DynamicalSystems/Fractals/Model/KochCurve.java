@@ -4,6 +4,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
+
 import java.awt.*;
 
 /**
@@ -11,16 +12,17 @@ import java.awt.*;
  */
 public class KochCurve extends GLJPanel implements Fractal {
     //Start point
-    private static final int AX = 50;
-    private static final int AY = 240;
+    private static int AX = 50;
+    private static int AY = 240;
     //End point
-    private static final int EX = 450;
-    private static final int EY = 240;
+    private static int EX = 450;
+    private static int EY = 240;
 
     private int step = 0;
     public KochCurve(GLCapabilities capabilities, int initStep) {
         super(capabilities);
         this.step = initStep;
+
     }
 
     public static void doDrawing(Graphics g, int ax, int ay, int ex, int ey, int n) {
@@ -45,6 +47,7 @@ public class KochCurve extends GLJPanel implements Fractal {
             doDrawing(g, dx, dy, ex, ey, n - 1);
         }
     }
+
     @Override
     public String getName() {
         return FractalsCollection.KOCH_CURVE.get(0);
@@ -75,6 +78,18 @@ public class KochCurve extends GLJPanel implements Fractal {
         super.paintComponent(g);
         g.setColor(Color.RED);
 
-        doDrawing(g, AX, AY,  EX, EY, step);
+        //Change size dynamically
+        int height = this.getHeight();
+        int maxWidth = this.getWidth();
+        while(height < 11*maxWidth/16) {
+            maxWidth -= 30;
+        }
+
+        AY = 2*height/3;
+        AX = this.getWidth()/2 - maxWidth/2;
+        EX =  this.getWidth()/2 + maxWidth/2;
+        EY = 2*height/3;
+
+        doDrawing(g, AX, AY, EX, EY, step);
     }
 }

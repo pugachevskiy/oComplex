@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 12/10/15.
+ *  on 12/10/15.
  */
 public class PendulumWithFreeMountingView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Phi +", "Phi -",

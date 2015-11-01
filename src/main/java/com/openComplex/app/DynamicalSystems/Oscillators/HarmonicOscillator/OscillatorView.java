@@ -1,17 +1,25 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator;
 
+import com.openComplex.app.App;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
-public class OscillatorView {
-    private JButton buttonGo, buttonDplus, buttonDmin;
-    private JButton buttonReibPlus, buttonReibMin;
-    private JFrame frame;
+public class OscillatorView extends JFrame{
+    private JButton buttonGo;
     public static final int W = 400, H = 220; //graphic window
+    private JPanel setupPanel;
+
+    private static final String lableSpringString = "Spring: ", lableFrictionString = "Friction: ";
+    private JLabel springLabel, frictionLabel;
+    private JSlider springSlider, frictionSlider;
 
     public OscillatorView(){
         init();
@@ -19,54 +27,77 @@ public class OscillatorView {
 
     public void init() {
 
-        frame = new JFrame("Oscillators");
-        frame.setLayout(new BorderLayout());
-        frame.setSize(700, 400);
+        this.setTitle("Oscillators");
+        this.setLayout(new BorderLayout());
+        this.setSize(700, 400);
 
-        JPanel pan = new JPanel();
-
-        pan.setBounds(W + 1, 1, 100, H);
-        pan.setBackground(new Color(0, 200, 100));
-        pan.setFont(new Font("Verdana", Font.PLAIN, 10));
-
-        buttonDplus = new JButton("Spring +");
-        buttonDmin = new JButton("Spring -");
-        buttonReibPlus = new JButton("Friction ++");
-        buttonReibMin = new JButton("Friction --");
         buttonGo = new JButton("Go/Pause");
-
         buttonGo.setActionCommand("Go");
-        buttonReibMin.setActionCommand("Friction --");
-        buttonReibPlus.setActionCommand("Friction ++");
-        buttonDmin.setActionCommand("Spring -");
-        buttonDplus.setActionCommand("Spring +");
 
-        buttonDplus.setBounds(10, 25, 80, 25);
-        buttonDmin.setBounds(10, 55, 80, 25);
-        buttonReibPlus.setBounds(10, 95, 80, 25);
-        buttonReibMin.setBounds(10, 125, 80, 25);
-        buttonGo.setBounds(10, 170, 80, 25);
-
-
-        pan.add(buttonGo);
-        pan.add(buttonDplus);
-        pan.add(buttonDmin);
-        pan.add(buttonReibPlus);
-        pan.add(buttonReibMin);
-        frame.add(pan, BorderLayout.NORTH);
-
-        frame.setVisible(true);
+        App.setFrameCentral(this);
+        this.setVisible(true);
     }
 
+    private JPanel createOptionsPanel() {
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setLayout(new GridLayout(1, 6));
+        optionsPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
+
+        optionsPanel.add(createSliderPanel(springLabel = new JLabel(lableSpringString), springSlider));
+        optionsPanel.add(createSliderPanel(frictionLabel = new JLabel(lableFrictionString), frictionSlider));
+        optionsPanel.add(buttonGo);
+        this.updateFrictionLabel();
+        this.updateSpringLabel();
+
+        return optionsPanel;
+    }
+
+    private JPanel createSliderPanel(JLabel label, JSlider slider) {
+        JPanel sliderPanel = new JPanel();
+        sliderPanel.setLayout(new GridLayout(2, 1));
+        sliderPanel.setBorder(new EmptyBorder(0, 3, 0, 3));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        sliderPanel.add(label);
+        sliderPanel.add(slider);
+
+        return sliderPanel;
+    }
+
+    private JPanel createButtonsPanel(JLabel label, JButton button) {
+        JPanel sliderPanel = new JPanel();
+        sliderPanel.setLayout(new GridLayout(2, 1));
+        sliderPanel.setBorder(new EmptyBorder(0, 3, 0, 3));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        sliderPanel.add(label);
+        sliderPanel.add(button);
+
+        return sliderPanel;
+    }
+
+
     public void addPanel(JPanel panel) {
-        frame.add(panel, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.CENTER);
     }
 
     public void addListener(ActionListener listener) {
-        buttonDplus.addActionListener(listener);
-        buttonDmin.addActionListener(listener);
-        buttonReibPlus.addActionListener(listener);
-        buttonReibMin.addActionListener(listener);
         buttonGo.addActionListener(listener);
+    }
+
+    public int calculatePanelHeight() {
+        return this.getHeight()-setupPanel.getHeight();
+    }
+
+    public void addJSlider(JSlider sliderFriction, JSlider sliderSpring) {
+        this.springSlider = sliderSpring;
+        this.frictionSlider = sliderFriction;
+        this.add(setupPanel = createOptionsPanel(), BorderLayout.NORTH);
+    }
+
+    public void updateFrictionLabel() {
+        frictionLabel.setText("Friction: " + frictionSlider.getValue());
+    }
+
+    public void updateSpringLabel() {
+        springLabel.setText("Spring: " + springSlider.getValue());
     }
 }

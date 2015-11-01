@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 06/10/15.
+ *  on 06/10/15.
  */
 public class DLAModel extends JPanel {
-    private static final int D = 256; //grid dimension, graphic window dimension
+    private static int D = 256; //grid dimension, graphic window dimension
     private boolean grid[][] = new boolean[D + 1][D + 1]; //particle position on grid
     private int CellNum, CellSize; //resize the grid for painting
 
@@ -148,5 +148,9 @@ public class DLAModel extends JPanel {
             }//for i
         }//if
         repaint();
+    }
+
+    public void updateSize(int dim) {
+        //this.D = dim;
     }
 }

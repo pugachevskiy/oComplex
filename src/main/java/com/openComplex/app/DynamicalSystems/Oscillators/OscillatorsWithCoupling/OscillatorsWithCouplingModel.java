@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class OscillatorsWithCouplingModel extends JPanel {
-    private static final int W = 400, H = 200;
+    private static int W = 400, H = 200;
     private int px1, px2; //pixelcoordinates
     private double x1, x1p, x2, x2p; //coordinates and velocities
     private double m = 1.; //mass
@@ -269,5 +269,10 @@ public class OscillatorsWithCouplingModel extends JPanel {
         startwerte();
         pixels();
         repaint();
+    }
+
+    public void updateSize(int width, int height) {
+        this.W = width;
+        this.H = height;
     }
 }

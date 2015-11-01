@@ -1,5 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator;
 
+import com.openComplex.app.App;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -7,14 +9,15 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 07/10/15.
- */public class VibrationRotatorView {
+ *  on 07/10/15.
+ */public class VibrationRotatorView extends JFrame {
     private static final int Lx = 300, Ly = 300; //graphic-window
     private JButton buttonReibPlus, buttonReibMin, buttonGo;
     private Choice Chooser;
     private JScrollBar speed;
     private JLabel descrip;
-    private JFrame frame;
+    private JPanel setupPanel;
+
 
     public VibrationRotatorView(){
         init();
@@ -22,12 +25,12 @@ import java.awt.event.ItemListener;
 
 
     public void init() {
-        frame = new JFrame("2 Oscillators With Coupling");
-        frame.setSize(800, 500);
-        frame.setLayout(new BorderLayout());
+        this.setTitle("2 Oscillators With Coupling");
+        this.setSize(800, 500);
+        this.setLayout(new BorderLayout());
 
-        JPanel pan = new JPanel();
-        pan.setFont(new Font("Verdana", Font.PLAIN, 10));
+        setupPanel = new JPanel();
+        setupPanel.setFont(new Font("Verdana", Font.PLAIN, 10));
         buttonReibPlus = new JButton("Friction ++");
         buttonReibMin = new JButton("Friction --");
         buttonGo = new JButton("Stop/Go");
@@ -41,8 +44,8 @@ import java.awt.event.ItemListener;
         Chooser.add("Values_3");
 
 
-        pan.setBounds(Lx + 101, 1, 100, Ly);
-        pan.setBackground(new Color(0, 200, 100));
+        setupPanel.setBounds(Lx + 101, 1, 100, Ly);
+        setupPanel.setBackground(new Color(0, 200, 100));
 
         Chooser.setBounds(10, 20, 80, 30);
         buttonReibPlus.setBounds(10, 60, 80, 30);
@@ -60,14 +63,15 @@ import java.awt.event.ItemListener;
         descrip.setSize(50, 30);
         descrip.setLocation(35, 268);
 
-        pan.add(speed);
-        pan.add(descrip);
-        pan.add(Chooser);
-        pan.add(buttonReibPlus);
-        pan.add(buttonReibMin);
-        pan.add(buttonGo);
-        frame.add(pan, BorderLayout.NORTH);
-        frame.setVisible(true);
+        setupPanel.add(speed);
+        setupPanel.add(descrip);
+        setupPanel.add(Chooser);
+        setupPanel.add(buttonReibPlus);
+        setupPanel.add(buttonReibMin);
+        setupPanel.add(buttonGo);
+        this.add(setupPanel, BorderLayout.NORTH);
+        App.setFrameCentral(this);
+        this.setVisible(true);
 
 
 
@@ -83,10 +87,14 @@ import java.awt.event.ItemListener;
     }
 
     public void addPanel(JPanel panel) {
-        frame.add(panel, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.CENTER);
     }
 
     public int getSpeed(){
         return speed.getValue();
+    }
+
+    public int calculatePanelHeight() {
+        return this.getHeight()-setupPanel.getHeight();
     }
 }

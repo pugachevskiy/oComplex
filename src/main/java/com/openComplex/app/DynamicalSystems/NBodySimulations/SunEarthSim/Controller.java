@@ -8,7 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 16/10/15.
+ *  on 16/10/15.
  */
 public class Controller implements ActionListener, ItemListener {
     private View gui;

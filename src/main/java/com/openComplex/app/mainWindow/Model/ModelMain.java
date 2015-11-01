@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by strange on 16/06/15.
+ *  on 16/06/15.
  */
 public class ModelMain {
     private List<JButton> buttonList = new ArrayList<>();

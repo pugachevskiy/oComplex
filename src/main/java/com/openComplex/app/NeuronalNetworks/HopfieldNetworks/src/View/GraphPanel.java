@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 /**
- * Created by Admin on 16.06.2015.
+ *  on 16.06.2015.
  */
 public class GraphPanel extends JPanel {
 

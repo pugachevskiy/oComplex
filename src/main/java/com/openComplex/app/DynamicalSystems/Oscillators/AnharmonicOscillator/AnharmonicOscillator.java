@@ -2,9 +2,11 @@ package com.openComplex.app.DynamicalSystems.Oscillators.AnharmonicOscillator;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class AnharmonicOscillator implements ActionListener {
 
@@ -18,6 +20,17 @@ public class AnharmonicOscillator implements ActionListener {
         gui = new AnharmonicOscillatorView();
         model = new AnharmonicOscillatorModel();
         gui.addListener(this);
+
+        gui.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight()-100);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) { }
+            public void componentShown(ComponentEvent e) { }
+            public void componentHidden(ComponentEvent e) {}
+        });
         gui.addPanel(model);
     }
 

@@ -6,7 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- * Created by strange on 11/10/15.
+ *  on 11/10/15.
  */
 public class DrivenPendulumY implements ActionListener, ItemListener {
 

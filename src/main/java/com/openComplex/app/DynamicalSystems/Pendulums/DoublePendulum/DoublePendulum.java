@@ -1,7 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 
 import java.awt.event.*;

@@ -11,9 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * Created by strange on 02/10/15.
- */
 public class CSVFile {
     // Game of life
     public static void saveField(com.openComplex.app.CellularAutomat.GameOfLife.Model.Cell[][] field, JComponent parent) throws IOException {
@@ -25,7 +22,7 @@ public class CSVFile {
         if (fileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             file = new File(file.getParentFile(), FilenameUtils.getBaseName(file.getName()) + ".csv");
-            writer = new CSVWriter(new FileWriter(file), ',');
+            writer = new CSVWriter(new FileWriter(file), ',', CSVWriter.NO_QUOTE_CHARACTER);
             for (int i = 0; i < field.length; i++) {
                 entries[i] = "";
                 for (int j = 0; j < field[0].length; j++) {
@@ -79,7 +76,7 @@ public class CSVFile {
         if (fileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             file = new File(file.getParentFile(), FilenameUtils.getBaseName(file.getName()) + ".csv");
-            writer = new CSVWriter(new FileWriter(file), ',');
+            writer = new CSVWriter(new FileWriter(file), ',', CSVWriter.NO_QUOTE_CHARACTER);
             for (int i = 0; i < field.length; i++) {
                 entries[i] = "";
                 for (int j = 0; j < field[0].length; j++) {

@@ -4,18 +4,19 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
+
 import java.awt.*;
 
 /**
- * Created by strange on 29/06/15.
+ *  on 29/06/15.
  */
 public class MinkowskiCurve extends GLJPanel implements Fractal {
-    //Strat point
-    private static final int DX0 = 50;
-    private static final int DY0 = 250;
+    //Start point
+    private static int DX0 = 50;
+    private static int DY0 = 250;
     //End point
-    private static final int DX = 550;
-    private static final int DY = 250;
+    private static int DX = 550;
+    private static int DY = 250;
 
     private int step = 0;
 
@@ -68,6 +69,21 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
+
+        //Change size dynamically
+        int height = this.getHeight();
+        int maxWidth = this.getWidth();
+        while(height < 11*maxWidth/16) {
+            maxWidth -= 30;
+        }
+
+        DY0 = height/2;
+        DX0 = this.getWidth()/2 - maxWidth/2;
+        DX =  this.getWidth()/2 + maxWidth/2;
+        DY = height/2;
+
+
+
         doDrawing(g, DX0, DY0, DX, DY, step);
     }
 

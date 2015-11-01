@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by strange on 05/10/15.
+ *  on 05/10/15.
  */
 public class PendulumsModel extends JPanel {
     public static final int Lx = 260, Ly = 260;

@@ -5,7 +5,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 import java.awt.*;
 
 /**
- * Created by strange on 09/10/15.
+ *  on 09/10/15.
  */
 public class DrivenPendulumModel extends PendulumsModel {
 

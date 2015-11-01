@@ -4,7 +4,7 @@ package com.openComplex.app.DynamicalSystems.Oscillators.VibrationRotator;
 import java.awt.event.*;
 
 /**
- * Created by strange on 07/10/15.
+ *  on 07/10/15.
  */
 public class VibrationRotator implements ActionListener, ItemListener, AdjustmentListener {
 
@@ -16,6 +16,16 @@ public class VibrationRotator implements ActionListener, ItemListener, Adjustmen
     public VibrationRotator(){
         gui = new VibrationRotatorView();
         model = new VibrationRotatorModel(gui.getSpeed());
+        gui.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e) {
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight());
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) { }
+            public void componentShown(ComponentEvent e) { }
+            public void componentHidden(ComponentEvent e) {}
+        });
         gui.addListener(this, this, this);
         gui.addPanel(model);
     }

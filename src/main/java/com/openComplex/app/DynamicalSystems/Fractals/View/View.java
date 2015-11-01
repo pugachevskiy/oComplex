@@ -16,8 +16,9 @@ import java.util.List;
  */
 public class View {
     private JFrame mainField;
+    private Menubar menuBar;
     private GLJPanel fractalPanel;
-    private JPanel menuPanel;
+    public JPanel menuPanel;
     private JSlider stepSlider;
     public DefaultListModel listModel = new DefaultListModel();
     private JList nameOfFractalsComboBox = new JList(listModel);
@@ -34,10 +35,17 @@ public class View {
     private JLabel iterLabel, dimensionLabel = new JLabel(), factorLabel = new JLabel(), copyLabel = new JLabel(), discriptionLabel = new JLabel();
     private List<JLabel> labels = Arrays.asList(copyLabel, factorLabel, dimensionLabel, discriptionLabel);
 
+    private List<Color> defaultColor = Arrays.asList(Color.BLACK, Color.RED);
+    private List<Color> blue = Arrays.asList(new Color(27,202,250), new Color(29,124,161));
+    private List<Color> green = Arrays.asList(new Color(77, 226, 155), new Color(30, 151, 107));
+    private List<Color> modern = Arrays.asList(new Color(89,100,39), new Color(230,13,12));
+    private List<Color> fancy = Arrays.asList(new Color(56,160,23), new Color(200,200,200));
+
     public void createGui() {
         mainField = new JFrame("openCoSy - Fractals");
-        mainField.setSize(800, 600);
+        mainField.setSize(800, 650);
         mainField.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainField.setJMenuBar(menuBar = new Menubar());
 
         mainField.setLayout(new BorderLayout());
         menuPanel = new JPanel();
@@ -58,7 +66,7 @@ public class View {
 
     private void createSlider() {
         JPanel sliderPanel = new JPanel();
-        sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+        sliderPanel.setLayout(new GridLayout(3, 1));
         stepSlider = new JSlider(MINSTEP, MAXSTEP, STARTSTEP);
         iterLabel = new JLabel(String.valueOf(STARTSTEP));
 
@@ -75,6 +83,7 @@ public class View {
         //buttonPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
         buttonPanel.add(startButton);
 
+        stepLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sliderPanel.add(stepLabel);
         sliderPanel.add(slider);
         sliderPanel.add(buttonPanel);
@@ -167,6 +176,20 @@ public class View {
         menuPanel.add(buttonPanel);
 
 
+    }
+
+    public List<Color> getColorSet() {
+        int colorMode = menuBar.getColorSet();
+
+        switch (colorMode) {
+            case 2: return green;
+            case 1: return blue;
+            case 3: return modern;
+            case 4: return fancy;
+            default: return defaultColor;
+
+
+        }
     }
 
     public JList getComboBox() {
