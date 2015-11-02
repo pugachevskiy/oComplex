@@ -1,7 +1,7 @@
-package com.openComplex.app.CellularAutomat.NaschModel.Controller;
+package com.openComplex.app.CellularAutomat.NaSchModel.Controller;
 
-import com.openComplex.app.CellularAutomat.NaschModel.Model.Field;
-import com.openComplex.app.CellularAutomat.NaschModel.View.GUI;
+import com.openComplex.app.CellularAutomat.NaSchModel.Model.Field;
+import com.openComplex.app.CellularAutomat.NaSchModel.View.GUI;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

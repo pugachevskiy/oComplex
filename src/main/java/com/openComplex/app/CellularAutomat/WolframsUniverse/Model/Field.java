@@ -15,21 +15,22 @@ import java.io.IOException;
  *  on 10/09/15.
  */
 public class Field extends JPanel implements MouseListener {
-    private int size;
+    private int size = 8;
     private Cell[][] field;
     private Color cellColor;
-    private int lastCol = 500;
     private int gen = 1;
     private int last = 1;
     private boolean[] rule;
-    private int offset = 183;
+    private int offset = 0;
     private int height, width;
+    private int fieldSize  = 1000;
     private final int small = 2, middle = 4, big = 8;
 
     public Field(int size, Color color) {
         this.cellColor = color;
         this.size = size;
         init();
+
         this.addMouseListener(this);
         this.addComponentListener(new ComponentListener() {
             @Override
@@ -58,9 +59,9 @@ public class Field extends JPanel implements MouseListener {
 
     public void init() {
 
-        field = new Cell[500][500];
-        for (int i = 0; i < 500; i++) {
-            for (int j = 0; j < 500; j++) {
+        field = new Cell[fieldSize][fieldSize];
+        for (int i = 0; i < fieldSize; i++) {
+            for (int j = 0; j < fieldSize; j++) {
                 field[i][j] = new Cell(false, Color.BLACK);
             }
         }
@@ -69,24 +70,23 @@ public class Field extends JPanel implements MouseListener {
     public void setGridSize() {
         if(checkSize(big)) {
             size = big;
-            offset = 183;
         } else if (checkSize(middle)) {
             size = middle;
-            offset = 125;
         } else {
             size = small;
-            offset = 0;
         }
+        offset = (fieldSize-(width/size))/2;
+        System.out.println("compute: " + offset);
     }
 
     private boolean checkSize(int size) {
         int offset;
         if (size == big) {
-            offset = 183;
+            offset = (fieldSize-(width/size))/2;
         } else if (size == middle) {
-            offset = 125;
+            offset = (fieldSize-(width/size))/2;
         } else {
-            offset = 0;
+            offset = (fieldSize-(width/size))/2;
         }
 
         int rowHt = height / (size);
@@ -122,13 +122,13 @@ public class Field extends JPanel implements MouseListener {
         this.rule = rule;
         boolean a, b, c;
         for (int generation = last; generation < gen; generation++) {
-            for (int i = 0; i < lastCol; i++) {
+            for (int i = 0; i < fieldSize; i++) {
                 b = field[generation - 1][i].getStatus();
                 int neighbourhood = 1;
                 if (i == 0) {
-                    a = field[generation - 1][lastCol - 1].getStatus();
+                    a = field[generation - 1][fieldSize - 1].getStatus();
                     c = field[generation - 1][i + neighbourhood].getStatus();
-                } else if (i == lastCol - 1) {
+                } else if (i == fieldSize - 1) {
                     a = field[generation - 1][i - neighbourhood].getStatus();
                     c = field[generation - 1][0].getStatus();
                 } else {
@@ -193,8 +193,17 @@ public class Field extends JPanel implements MouseListener {
         width = getWidth();
         height = getHeight();
 
+
+
+
         int rowHt = height / (size);
         int rowWid = width / (size);
+
+        System.out.println("RowHt: " + rowHt);
+        System.out.println("RowWid: " + rowWid);
+        System.out.println("Offset: " + offset);
+        System.out.println("Size: " + size);
+        System.out.println("Width: " + width);
 
 
         g.setColor(Color.black);
@@ -215,12 +224,13 @@ public class Field extends JPanel implements MouseListener {
         g.setColor(cellColor);
         for (i = 0; i < rowHt; i++) {
             for (int j = 0; j < rowWid; j++) {
-                if (field[i][j+offset].getStatus()) {
+                if (j+ offset < 1000 && field[i][j+offset].getStatus()) {
                     g.fillRect(j * size, i * size, size, size);
                 }
             }
         }
     }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {

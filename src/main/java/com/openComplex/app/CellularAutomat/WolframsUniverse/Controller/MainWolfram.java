@@ -41,6 +41,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
         });
         rule.setRule(Integer.parseInt(guiWolfram.getRuleFieldText()));
         field.createCA(rule.getRule());
+
     }
 
     private void start() {
