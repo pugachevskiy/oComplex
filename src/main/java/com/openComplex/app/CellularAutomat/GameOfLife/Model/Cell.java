@@ -2,10 +2,6 @@ package com.openComplex.app.CellularAutomat.GameOfLife.Model;
 
 import java.awt.*;
 
-
-/**
- * Created by strange on 10/09/15.
- */
 public class Cell{
     private int row;
     private int col;

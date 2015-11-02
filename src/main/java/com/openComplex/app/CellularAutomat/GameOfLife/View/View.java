@@ -11,9 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-/**
- * Created by strange on 10/09/15.
- */
 public class View {
 
     private Controller controller;
@@ -87,7 +84,7 @@ public class View {
         optionsPanel.setLayout(new GridLayout(1, 6));
         optionsPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
-        for(int i=0; i<labelTitleList.length; i++) {
+        for (int i = 0; i < labelTitleList.length; i++) {
             JLabel tempLabel = new JLabel(labelTitleList[i]);
             tempLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -95,7 +92,7 @@ public class View {
             tempPanel.setLayout(new GridLayout(2, 1));
             tempPanel.add(tempLabel);
             tempPanel.add(componentList.get(i));
-            tempPanel.setBorder(new EmptyBorder(0,3,0,3));
+            tempPanel.setBorder(new EmptyBorder(0, 3, 0, 3));
 
             optionsPanel.add(tempPanel);
         }
@@ -261,7 +258,7 @@ public class View {
         return cellGroeßeBox.getSelectedIndex();
     }
 
-    public void getRule(){
+    public void getRule() {
         JFrame regeln = new JFrame("Regeln");
 
         regeln.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

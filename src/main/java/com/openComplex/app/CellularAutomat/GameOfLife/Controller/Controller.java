@@ -8,9 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/**
- * Created by strange on 10/09/15.
- */
 public class Controller implements ActionListener {
     private Field field;
     private View gui;
