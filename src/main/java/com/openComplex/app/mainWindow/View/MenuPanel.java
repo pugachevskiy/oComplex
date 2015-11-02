@@ -32,7 +32,7 @@ public class MenuPanel extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane();
         list = new JList(test);
-        list.setVisibleRowCount(40);
+        list.setVisibleRowCount(20);
         list.setCellRenderer(new DefaultListCellRenderer() {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 String s = String.valueOf(value);
@@ -60,6 +60,11 @@ public class MenuPanel extends JPanel {
 
                 parent.updateGUI(selectedItem);
 
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
             }
         };
         list.addMouseListener(mouseListener);
