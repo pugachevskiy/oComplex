@@ -45,6 +45,7 @@ public class TriplePendulum implements ActionListener {
             case "New":
                 stop = false;
                 step = 0;
+                model.resetAttractor();
                 model.startwerte(); //set initial values
                 model.treibwerte(step);
                 model.repaint();

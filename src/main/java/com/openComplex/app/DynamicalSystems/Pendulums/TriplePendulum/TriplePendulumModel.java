@@ -3,12 +3,26 @@ package com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 /**
  *  on 13/10/15.
  */
 public class TriplePendulumModel extends PendulumsModel {
     private int step;
+
+    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList2X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList2Y = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList3X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList3Y = new LinkedList<Integer>();
+    private int queueIndex = 0;
+    private static int attractorLength = 1000;
+    private static int attractorSize = 2;
+    private static Color attractor1Color = new Color(200, 200, 200);
+    private static Color attractor2Color = new Color(150, 150, 150);
+    private static Color attractor3Color = new Color(100, 100, 100);
 
     public TriplePendulumModel() {
 
@@ -219,10 +233,56 @@ public class TriplePendulumModel extends PendulumsModel {
         g.drawLine(Lx / 2, Ly / 2, px1, py1);
         g.drawLine(px1, py1, px2, py2);
         g.drawLine(px2, py2, px3, py3);
+
+        int attractor1X =  px1;
+        int attractor1Y =  py1;
+        int attractor2X =  px2;
+        int attractor2Y =  py2;
+        int attractor3X =  px3;
+        int attractor3Y =  py3;
+
+        attractorList1X.add(attractor1X);
+        attractorList1Y.add(attractor1Y);
+        attractorList2X.add(attractor2X);
+        attractorList2Y.add(attractor2Y);
+        attractorList3X.add(attractor3X);
+        attractorList3Y.add(attractor3Y);
+        if(queueIndex <= attractorLength) {
+            queueIndex += 1;
+        }
+        for(int i = 0; i < attractorLength; i++) {
+            if(queueIndex > i) {
+                g.setColor(attractor1Color);
+                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor2Color);
+                g.fillOval(attractorList2X.get(i), attractorList2Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor3Color);
+                g.fillOval(attractorList3X.get(i), attractorList3Y.get(i), attractorSize, attractorSize);
+            }
+        }
+        if(queueIndex >= attractorLength) {
+            attractorList1X.remove(0);
+            attractorList1Y.remove(0);
+            attractorList2X.remove(0);
+            attractorList2Y.remove(0);
+            attractorList3X.remove(0);
+            attractorList3Y.remove(0);
+        }
+
         g.setColor(Color.black);
         g.fillOval(px1 - 5, py1 - 5, 10, 10);
         g.fillOval(px2 - 5, py2 - 5, 10, 10);
         g.fillOval(px3 - 5, py3 - 5, 10, 10);
 
+    }
+
+    public void resetAttractor() {
+        attractorList1X.removeAll(attractorList1X);
+        attractorList1Y.removeAll(attractorList1Y);
+        attractorList2X.removeAll(attractorList2X);
+        attractorList2Y.removeAll(attractorList2Y);
+        attractorList3X.removeAll(attractorList3X);
+        attractorList3Y.removeAll(attractorList3Y);
+        queueIndex = 0;
     }
 }

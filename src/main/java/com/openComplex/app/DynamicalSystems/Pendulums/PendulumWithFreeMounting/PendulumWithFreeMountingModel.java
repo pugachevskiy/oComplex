@@ -3,6 +3,7 @@ package com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 /**
  *  on 12/10/15.
@@ -10,6 +11,13 @@ import java.awt.*;
 public class PendulumWithFreeMountingModel extends PendulumsModel {
     private int ax, px, py; //pixelcoordinates
     private int step;
+
+    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
+    private int queueIndex = 0;
+    private static int attractorLength = 1000;
+    private static int attractorSize = 2;
+    private static Color attractor1Color = new Color(200, 200, 200);
 
     public PendulumWithFreeMountingModel() {
         startwert[0] = Math.PI / 180. * 175.; //phi
@@ -184,10 +192,36 @@ public class PendulumWithFreeMountingModel extends PendulumsModel {
         g.drawString("Step " + step, 20, 10);
         g.setColor(Color.red);
         g.drawLine(ax, Ly / 2, px, py);
+
+
+        int attractor1X = px;
+        int attractor1Y = py;
+        attractorList1X.add(attractor1X);
+        attractorList1Y.add(attractor1Y);
+        if(queueIndex <= attractorLength) {
+            queueIndex += 1;
+        }
+        for(int i = 0; i < attractorLength; i++) {
+            if(queueIndex > i) {
+                g.setColor(attractor1Color);
+                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
+            }
+        }
+        if(queueIndex >= attractorLength) {
+            attractorList1X.remove(0);
+            attractorList1Y.remove(0);
+        }
+
         g.setColor(Color.black);
         g.fillRect(ax - 4, Ly / 2 - 2, 9, 5);
         g.fillOval((int) (px - 5 * Math.pow(mratio, 1 / 3.)), (int) (py - 5 * Math.pow(mratio, 1 / 3.)),
                 (int) (11 * Math.pow(mratio, 1 / 3.)), (int) (11 * Math.pow(mratio, 1 / 3.)));
 
+    }
+
+    public void resetAttractor() {
+        attractorList1X.removeAll(attractorList1X);
+        attractorList1Y.removeAll(attractorList1Y);
+        queueIndex = 0;
     }
 }

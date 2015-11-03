@@ -52,6 +52,7 @@ public class DoublePendulum implements ActionListener {
                 stop = false;
                 model.startwerte(); //set initial values
                 step = 0;
+                model.resetAttractor();
                 model.pixels(); //calculate pixelcoords
                 model.repaint(); //paint initial state
                 break;

@@ -47,6 +47,7 @@ public class DrivenPendulumY implements ActionListener, ItemListener {
             case "New":
                 stop = false;
                 step = 0;
+                model.resetAttractor();
                 model.startwerteDrivenY(); //set initial values
                 model.treibwerte(step);
                 model.repaint();

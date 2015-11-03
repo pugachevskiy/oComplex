@@ -58,6 +58,7 @@ public class Pendulums implements ActionListener {
                 start();
                 break;
             case "New":
+                model.resetAttractor();
                 model.setStatus(false);
                 model.startwerte(); //set initial values
                 step = 0;

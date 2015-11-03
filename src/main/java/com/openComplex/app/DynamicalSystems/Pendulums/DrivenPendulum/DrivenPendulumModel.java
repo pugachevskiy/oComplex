@@ -3,6 +3,8 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 
 import java.awt.*;
+import java.awt.List;
+import java.util.*;
 
 /**
  *  on 09/10/15.
@@ -11,6 +13,14 @@ public class DrivenPendulumModel extends PendulumsModel {
 
     private int px, py, pa; //pixelcoordinates
     private int step = 0;
+
+    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
+    private int queueIndex = 0;
+    private static int attractorLength = 1000;
+    private static int attractorSize = 2;
+    private static Color attractor1Color = new Color(200, 200, 200);
+
 
     public DrivenPendulumModel() {
         startwert[0] = 0.5; //amp
@@ -100,8 +110,33 @@ public class DrivenPendulumModel extends PendulumsModel {
         g.drawString("Step " + step, 20, 10);
         g.setColor(Color.red);
         g.drawLine(pa, Ly / 2, px, py);
+
+        int attractor1X = px;
+        int attractor1Y = py;
+        attractorList1X.add(attractor1X);
+        attractorList1Y.add(attractor1Y);
+        if(queueIndex <= attractorLength) {
+            queueIndex += 1;
+        }
+        for(int i = 0; i < attractorLength; i++) {
+            if(queueIndex > i) {
+                g.setColor(attractor1Color);
+                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
+            }
+        }
+        if(queueIndex >= attractorLength) {
+            attractorList1X.remove(0);
+            attractorList1Y.remove(0);
+        }
+
         g.setColor(Color.black);
         g.fillOval(px - 7, py - 7, 15, 15);
         g.fillRect(pa - 4, Ly / 2 - 1, 9, 3);
+    }
+
+    public void resetAttractor() {
+        attractorList1X.removeAll(attractorList1X);
+        attractorList1Y.removeAll(attractorList1Y);
+        queueIndex = 0;
     }
 }

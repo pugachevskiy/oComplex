@@ -3,6 +3,7 @@ package com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 /**
  *  on 13/10/15.
@@ -12,6 +13,23 @@ public class QuadBarPendulumModel extends PendulumsModel {
     private int step;
     private int xPoints[] = new int[5]; //pixelcoordinates
     private int yPoints[] = new int[5]; //pixelcoordinates
+
+    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList2X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList2Y = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList3X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList3Y = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList4X = new LinkedList<Integer>();
+    private java.util.List<Integer> attractorList4Y = new LinkedList<Integer>();
+    private int queueIndex = 0;
+    private static int attractorLength = 1000;
+    private static int attractorSize = 2;
+    private static Color attractor1Color = new Color(200, 200, 200);
+    private static Color attractor2Color = new Color(150, 150, 150);
+    private static Color attractor3Color = new Color(100, 100, 100);
+    private static Color attractor4Color = new Color(50, 50, 50);
+
 
     public QuadBarPendulumModel() {
         startwert[0] = Math.PI / 180 * 100.; //phi1
@@ -322,8 +340,63 @@ public class QuadBarPendulumModel extends PendulumsModel {
         g.drawString("" + (double) Math.round(10 * phi4 * 180 / Math.PI) / 10 + "o", 420, Ly + 40);
         g.drawLine(0, Ly / 2, Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
+
+        int attractor1X = xPoints[1];
+        int attractor1Y = yPoints[1];
+        int attractor2X = xPoints[2];
+        int attractor2Y = yPoints[2];
+        int attractor3X = xPoints[3];
+        int attractor3Y = yPoints[3];
+        int attractor4X = xPoints[4];
+        int attractor4Y = yPoints[4];
+
+        attractorList1X.add(attractor1X);
+        attractorList1Y.add(attractor1Y);
+        attractorList2X.add(attractor2X);
+        attractorList2Y.add(attractor2Y);
+        attractorList3X.add(attractor3X);
+        attractorList3Y.add(attractor3Y);
+        attractorList4X.add(attractor4X);
+        attractorList4Y.add(attractor4Y);
+        if(queueIndex <= attractorLength) {
+            queueIndex += 1;
+        }
+        for(int i = 0; i < attractorLength; i++) {
+            if(queueIndex > i) {
+                g.setColor(attractor1Color);
+                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor2Color);
+                g.fillOval(attractorList2X.get(i), attractorList2Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor3Color);
+                g.fillOval(attractorList3X.get(i), attractorList3Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor4Color);
+                g.fillOval(attractorList4X.get(i), attractorList4Y.get(i), attractorSize, attractorSize);
+            }
+        }
+        if(queueIndex >= attractorLength) {
+            attractorList1X.remove(0);
+            attractorList1Y.remove(0);
+            attractorList2X.remove(0);
+            attractorList2Y.remove(0);
+            attractorList3X.remove(0);
+            attractorList3Y.remove(0);
+            attractorList4X.remove(0);
+            attractorList4Y.remove(0);
+        }
+
         g.setColor(Color.black);
         g.drawString("Step " + step, 20, 10);
         g.drawPolyline(xPoints, yPoints, 5);
+    }
+    public void resetAttractor() {
+        attractorList1X.removeAll(attractorList1X);
+        attractorList1Y.removeAll(attractorList1Y);
+        attractorList2X.removeAll(attractorList2X);
+        attractorList2Y.removeAll(attractorList2Y);
+        attractorList3X.removeAll(attractorList3X);
+        attractorList3Y.removeAll(attractorList3Y);
+        attractorList4X.removeAll(attractorList4X);
+        attractorList4Y.removeAll(attractorList4Y);
+        queueIndex = 0;
     }
 }

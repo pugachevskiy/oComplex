@@ -1,7 +1,10 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *  on 09/10/15.
@@ -9,7 +12,6 @@ import java.awt.event.ActionListener;
 public class DrivenPendulum implements ActionListener{
     private int step;
     private boolean stop = false;
-
 
     private DrivenPendulumView gui;
     private DrivenPendulumModel model;
@@ -46,6 +48,7 @@ public class DrivenPendulum implements ActionListener{
             case "New":
                 stop = false;
                 step = 0;
+                model.resetAttractor();
                 model.startwerteDriven(); //set initial values
                 model.treibwerte(step);
                 model.repaint();
@@ -74,4 +77,5 @@ public class DrivenPendulum implements ActionListener{
                 break;
         }
     }
+
 }

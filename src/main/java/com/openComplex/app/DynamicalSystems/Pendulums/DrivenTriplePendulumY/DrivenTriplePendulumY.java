@@ -47,6 +47,7 @@ public class DrivenTriplePendulumY implements ActionListener, ItemListener {
             case "New":
                 stop = false;
                 step = 0;
+                model.resetAttractor();
                 model.startwerteDrivenTripleY(); //set initial values
                 model.treibwerte(step);
                 model.repaint();

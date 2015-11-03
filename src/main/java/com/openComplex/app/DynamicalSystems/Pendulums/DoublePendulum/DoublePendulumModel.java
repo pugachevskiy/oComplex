@@ -3,11 +3,22 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 /**
  *  on 08/10/15.
  */
 public class DoublePendulumModel extends PendulumsModel {
+    private List<Integer> attractorList1X = new LinkedList<Integer>();
+    private List<Integer> attractorList1Y = new LinkedList<Integer>();
+    private List<Integer> attractorList2X = new LinkedList<Integer>();
+    private List<Integer> attractorList2Y = new LinkedList<Integer>();
+    private int queueIndex = 0;
+    private static int attractorLength = 1000;
+    private static int attractorSize = 2;
+    private static Color attractor1Color = new Color(200, 200, 200);
+    private static Color attractor2Color = new Color(150, 150, 150);
 
     public DoublePendulumModel() {
         startwert[0] = Math.PI / 180 * 170.; //phi1
@@ -33,7 +44,7 @@ public class DoublePendulumModel extends PendulumsModel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("Verdana", Font.BOLD, 10));
-        g.setColor(Color.orange);
+        g.setColor(Color.white);
         g.fillRect(0, 0, Lx, Ly + 50);
         g.setColor(Color.black);
         g.drawString("Energy:", 30, Ly + 20);
@@ -55,10 +66,45 @@ public class DoublePendulumModel extends PendulumsModel {
         g.setColor(Color.red);
         g.drawLine(Lx / 2, Ly / 2, px1, py1);
         g.drawLine(px1, py1, px2, py2);
+
+        int attractor1X = (int) (px1);
+        int attractor1Y = (int) (py1);
+        int attractor2X = (int) (px2);
+        int attractor2Y = (int) (py2);
+        attractorList1X.add(attractor1X);
+        attractorList1Y.add(attractor1Y);
+        attractorList2X.add(attractor2X);
+        attractorList2Y.add(attractor2Y);
+        if(queueIndex <= attractorLength) {
+            queueIndex += 1;
+        }
+        for(int i = 0; i < attractorLength; i++) {
+            if(queueIndex > i) {
+                g.setColor(attractor1Color);
+                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
+                g.setColor(attractor2Color);
+                g.fillOval(attractorList2X.get(i), attractorList2Y.get(i), attractorSize, attractorSize);
+            }
+        }
+        if(queueIndex >= attractorLength) {
+            attractorList1X.remove(0);
+            attractorList1Y.remove(0);
+            attractorList2X.remove(0);
+            attractorList2Y.remove(0);
+        }
+
         g.setColor(Color.black);
         g.fillOval((int) (px1 - 7 * Math.pow(m1, 1. / 3.)), (int) (py1 - 7 * Math.pow(m1, 1. / 3.)),
                 +(int) (15 * Math.pow(m1, 1. / 3.)), (int) (15 * Math.pow(m1, 1. / 3.)));
         g.fillOval((int) (px2 - 7 * Math.pow(m2, 1. / 3.)), (int) (py2 - 7 * Math.pow(m2, 1. / 3.)),
                 +(int) (15 * Math.pow(m2, 1. / 3.)), (int) (15 * Math.pow(m2, 1. / 3.)));
     } //paint()
+
+    public void resetAttractor() {
+        attractorList1X.removeAll(attractorList1X);
+        attractorList1Y.removeAll(attractorList1Y);
+        attractorList2X.removeAll(attractorList2X);
+        attractorList2Y.removeAll(attractorList2Y);
+        queueIndex = 0;
+    }
 }
