@@ -9,7 +9,18 @@ Some abbreviations: @Tobi -> @T; @Sergey -> @S; @Matthias -> @M; @Shahin -> @Sh;
 @M: update NaSch rules and improve it.
 @S: see tasks below ;)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+30.10.2015
+Change GUI and add JMenuBar
+- Add content to "Bifurcation" - new JFrame + JMenuBar
+- Content of "Iterated maps" -> "Fix Point Calculator"
+- "Iterated Maps" -> "Linear Iterated Maps" and "Nonlinear Iterated Maps" (for the content see the 
+literature folder)
+- "Lorenz Attractor" -> change the animation -  it is too slow and not clear.
+- "DLA" -> to be adjusted
+- "Oscillators" -> still need changes - drag&drop ...
+- "Pendulums" -> Framesize ...
+- "Deterministic Chaos" -> Not available?
+- Add MLP to NN
 ##############################
 
 General

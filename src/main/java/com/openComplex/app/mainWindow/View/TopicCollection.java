@@ -9,7 +9,7 @@ public final class TopicCollection {
             "Main",
 
             "Dynamical Systems",
-                "\tLogical pictures with Feigenbaum-diagram",
+                "\tBifurcation",
                 "\tIterated maps",
                 "\tLorenz attractor",
                 "\tDiffusion Limited Aggregation",
