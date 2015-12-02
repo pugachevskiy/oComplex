@@ -23,6 +23,8 @@ import com.openComplex.app.DynamicalSystems.DLA.DLA;
 import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscillator;
 import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;
 
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -117,8 +119,9 @@ public class MFrameListener implements ActionListener {
             case "Triple-Bar-Pendulum":
                 new TripleBarPendulum();
                 break;
-
-
+            case "Multilayer perceptron":
+                new com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Controller.Controller();
+                break;
         }
 
 

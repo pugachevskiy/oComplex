@@ -1,9 +1,10 @@
 package com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Controller;
 
-import Model.ConfusionMatrix;
-import Model.MLP;
-import Model.SelectData;
-import View.GUI;
+
+import com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Model.ConfusionMatrix;
+import com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Model.MLP;
+import com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Model.SelectData;
+import com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.View.GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
