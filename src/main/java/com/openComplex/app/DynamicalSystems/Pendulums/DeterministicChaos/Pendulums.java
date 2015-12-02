@@ -4,10 +4,8 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.openComplex.app.DynamicalSystems.Pendulums.PendulumsModel;
-
 /**
- *  on 05/10/15.
+ * Created by strange on 05/10/15.
  */
 
 
@@ -60,7 +58,6 @@ public class Pendulums implements ActionListener {
                 start();
                 break;
             case "New":
-                model.resetAttractor();
                 model.setStatus(false);
                 model.startwerte(); //set initial values
                 step = 0;

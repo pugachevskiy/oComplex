@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- *  on 05/10/15.
+ * Created by strange on 05/10/15.
  */
 
 public class PendulumsView extends JPanel {
