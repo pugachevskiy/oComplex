@@ -1,6 +1,6 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller;
 
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.View.*;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View.GraphPanel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

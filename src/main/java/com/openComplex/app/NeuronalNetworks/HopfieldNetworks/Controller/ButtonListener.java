@@ -1,8 +1,8 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller;
 
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.View.*;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View.Menu;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View.SynchroPanel;
 
-import javax.swing.text.html.Option;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InterruptedIOException;

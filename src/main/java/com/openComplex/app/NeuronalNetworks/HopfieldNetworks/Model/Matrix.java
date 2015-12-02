@@ -1,4 +1,4 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Model;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Model;
 /**
  *  on 22.06.2015.
  */

@@ -45,6 +45,7 @@ public final class TopicCollection {
                 "Feedforward networks",
                 "Recurrent networks",*/
                 "\tHopfield networks",
+                "\tMultilayer perceptron",
 
             "Graph theory",
                 "\tMarkov chain"/*,
@@ -335,6 +336,16 @@ public final class TopicCollection {
                 "-The connections are undirected(->weight matrix has to be symmetrical)\n" +
                 "-Alle neurons have to be connected to each other(->weights never 0)");
 
+    public static final List<String> multilayer = Arrays.asList(
+            "Multilayer perceptron",
+            //"resources/flocke.png",
+            "Hopfield nets are a sort of artificial neural networks. Such nets\n" +
+                    "hold only one layer, consisting of a set of nodes. This program\n" +
+                    "creates a graphical representation of the hopfield net based on the weight matrix.\n\n" +
+                    "Rules for the weight matrix: \n" +
+                    "-No neuron is allowed to have a link to itself(->diagonal axis = 0)\n" +
+                    "-The connections are undirected(->weight matrix has to be symmetrical)\n" +
+                    "-Alle neurons have to be connected to each other(->weights never 0)");
     /*
         public static final List<String> feedforward = Arrays.asList(
                 "Hopfield networks",
@@ -412,6 +423,7 @@ public final class TopicCollection {
                     naSCH,
             neuronalMainPanel,
                 hopfield,
+                multilayer,
             graphMainPanel,
                 markov
     );

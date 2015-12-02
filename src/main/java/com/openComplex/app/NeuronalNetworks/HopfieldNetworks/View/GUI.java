@@ -1,7 +1,7 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.View;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View;
 
 
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.*;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller.GraphListener;
 
 import javax.swing.*;
 import java.awt.*;

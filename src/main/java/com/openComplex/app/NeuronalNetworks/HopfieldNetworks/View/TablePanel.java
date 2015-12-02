@@ -1,6 +1,8 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.View;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View;
 
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.*;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller.ButtonListener;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller.GridListener;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller.Main;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;

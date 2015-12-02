@@ -1,4 +1,4 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

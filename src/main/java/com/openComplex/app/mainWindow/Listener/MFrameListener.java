@@ -18,7 +18,7 @@ import com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum.QuadBarPen
 import com.openComplex.app.DynamicalSystems.Pendulums.TripleBarPendulum.TripleBarPendulum;
 import com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum.TriplePendulum;
 import com.openComplex.app.GraphTheory.MarkovKette.Markov;
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.Main;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller.Main;
 import com.openComplex.app.DynamicalSystems.DLA.DLA;
 import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscillator;
 import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;

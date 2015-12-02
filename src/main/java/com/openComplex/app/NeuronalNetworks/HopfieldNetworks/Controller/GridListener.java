@@ -1,8 +1,7 @@
-package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller;
+package com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Controller;
 
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Model.Matrix;
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.View.*;
-import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.src.Controller.*;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.Model.Matrix;
+import com.openComplex.app.NeuronalNetworks.HopfieldNetworks.View.TablePanel;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
