@@ -53,7 +53,7 @@ Fractals
 1. Calculate Hausdorf dimension
 2. Dynamical coordinates in center                              _/
 +3. Too much free space between Slider and Label                _/
-4. C Fractal
+4. C Fractal    
 5. new Fractals                                                 _/
 6. Draw Fractal by Copy, Factor or Dimension
 

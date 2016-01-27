@@ -17,9 +17,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by laptop on 29.06.2015.
- */
 public class Controller {
     FractalsCreator fractalsCreator = new FractalCreator();
     View gui = new View();

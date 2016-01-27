@@ -86,13 +86,13 @@ public class Oscillator implements ActionListener {
     }
 
     private JSlider createSpringSlider (){
-        JSlider springSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 5, 1);
+        JSlider springSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 16, 1);
         springSlider.setPaintLabels(true);
         springSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int value = ((JSlider) e.getSource()).getValue();
-                model.updateSpring(value);
+                model.updateSpring(value/4);
                 gui.updateSpringLabel();
                 stop = false;
                 step = 0;

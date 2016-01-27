@@ -1,16 +1,15 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 29/06/15.
+ * on 29/06/15.
  */
-public class SierpinskiCarpet extends GLJPanel implements Fractal {
+public class SierpinskiCarpet extends JPanel implements Fractal {
     //Start point
     private static int X = 20;
     private static int Y = 20;
@@ -20,9 +19,8 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
 
     private int step = 0;
 
-    public SierpinskiCarpet(GLCapabilities capabilities,int initStep) {
-        super(capabilities);
-        step = initStep;
+    public SierpinskiCarpet(int initStep) {
+        this.step = initStep;
     }
 
     public void doDrawing(Graphics g, int x, int y, int dim, int n) {
@@ -32,11 +30,11 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
         if (n == 0)
             return;
 
-        if (n == 1 ){
+        if (n == 1) {
             g.drawRect(x + w, y + w, w, w);
 
         } else {
-            g.drawRect(x+w, y+w, w, w);
+            g.drawRect(x + w, y + w, w, w);
             for (int i = 0; i < 9; i++) {
                 if (i != 4) {
                     x0 = i / 3;
@@ -56,20 +54,18 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
 
         int maxSize;
         //Change dim dynamically
-        if(this.getWidth() < this.getHeight()) {
+        if (this.getWidth() < this.getHeight()) {
             maxSize = this.getWidth();
-            Y = this.getHeight()/2 - maxSize/2;
-            Y = (Y<20) ? 20 : Y;
+            Y = this.getHeight() / 2 - maxSize / 2;
+            Y = (Y < 20) ? 20 : Y;
             X = 20;
         } else {
             maxSize = this.getHeight();
-            X = this.getWidth()/2 - maxSize/2;
-            X = (X<20) ? 20 : X;
+            X = this.getWidth() / 2 - maxSize / 2;
+            X = (X < 20) ? 20 : X;
             Y = 20;
         }
         DIM = maxSize - 40;
-
-
 
         doDrawing(g, X, Y, DIM, step);
     }
@@ -88,6 +84,7 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
     public String getFactor() {
         return FractalsCollection.SIERPINSKI_CARPET.get(2);
     }
+
     @Override
     public String getDimension() {
         return FractalsCollection.SIERPINSKI_CARPET.get(3);
@@ -97,8 +94,9 @@ public class SierpinskiCarpet extends GLJPanel implements Fractal {
     public String getDicription() {
         return FractalsCollection.SIERPINSKI_CARPET.get(4);
     }
+
     @Override
-    public GLJPanel getPanel() {
+    public JPanel getPanel() {
         return this;
     }
 }

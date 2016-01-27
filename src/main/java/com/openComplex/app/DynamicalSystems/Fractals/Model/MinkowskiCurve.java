@@ -1,16 +1,16 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 29/06/15.
+ * on 29/06/15.
  */
-public class MinkowskiCurve extends GLJPanel implements Fractal {
+
+public class MinkowskiCurve extends JPanel implements Fractal {
     //Start point
     private static int DX0 = 50;
     private static int DY0 = 250;
@@ -21,9 +21,8 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
     private int step = 0;
 
 
-    public MinkowskiCurve(GLCapabilities capabilities,int initStep) {
-        super(capabilities);
-        step = initStep;
+    public MinkowskiCurve(int initStep) {
+        this.step = initStep;
     }
 
     public static void doDrawing(Graphics g, int xa, int ya, int xi, int yi, int n) {
@@ -73,16 +72,14 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
         //Change size dynamically
         int height = this.getHeight();
         int maxWidth = this.getWidth();
-        while(height < 11*maxWidth/16) {
+        while (height < 11 * maxWidth / 16) {
             maxWidth -= 30;
         }
 
-        DY0 = height/2;
-        DX0 = this.getWidth()/2 - maxWidth/2;
-        DX =  this.getWidth()/2 + maxWidth/2;
-        DY = height/2;
-
-
+        DY0 = height / 2;
+        DX0 = this.getWidth() / 2 - maxWidth / 2;
+        DX = this.getWidth() / 2 + maxWidth / 2;
+        DY = height / 2;
 
         doDrawing(g, DX0, DY0, DX, DY, step);
     }
@@ -101,6 +98,7 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
     public String getFactor() {
         return FractalsCollection.MINKOWSKI_CURVE.get(2);
     }
+
     @Override
     public String getDimension() {
 
@@ -113,7 +111,7 @@ public class MinkowskiCurve extends GLJPanel implements Fractal {
     }
 
     @Override
-    public GLJPanel getPanel() {
+    public JPanel getPanel() {
         return this;
     }
 

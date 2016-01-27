@@ -7,15 +7,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
- *  on 22.06.2015.
+ * on 22.06.2015.
  */
-public class Menubar extends JMenuBar implements ActionListener{
+public class Menubar extends JMenuBar implements ActionListener {
 
     private int colorSet = 0;
 
     private static final String COLORS = "Colors", DEFAULT = "Default", BLUE = "Blue-Blue", GREEN = "Green-Green", MODERN = "Modern", FANCY = "Fancy";
     public static final String[] colors = {COLORS, DEFAULT, BLUE, GREEN, MODERN, FANCY};
-    private JMenuItem saveItem=new JMenuItem();
+    private JMenuItem saveItem = new JMenuItem();
     public static final String SAVE = "Save";
 
     public Menubar() {
@@ -28,27 +28,25 @@ public class Menubar extends JMenuBar implements ActionListener{
 
         options.add(saveItem);
         options.setMnemonic(KeyEvent.VK_O);
-
-
         options.add(createMiniMenu(colors, 0));
 
         this.add(options);
     }
 
-    private JMenu createMiniMenu(String[]buttonCaption, int select) {
+    private JMenu createMiniMenu(String[] buttonCaption, int select) {
         JMenu backgroundColorMenu = new JMenu(buttonCaption[0]);
 
         ButtonGroup group = new ButtonGroup();
 
         String buttonText;
-        for (int i=0; i<buttonCaption.length-1; i++) {
+        for (int i = 0; i < buttonCaption.length - 1; i++) {
             JCheckBoxMenuItem item = new JCheckBoxMenuItem();
-            item.setText(buttonCaption[i+1]);
+            item.setText(buttonCaption[i + 1]);
             item.addActionListener(this);
-            item.setActionCommand(buttonCaption[i+1]);
+            item.setActionCommand(buttonCaption[i + 1]);
             group.add(item);
             backgroundColorMenu.add(item);
-            if(select==i)
+            if (select == i)
                 item.setSelected(true);
         }
         return backgroundColorMenu;
@@ -73,9 +71,7 @@ public class Menubar extends JMenuBar implements ActionListener{
             default:
                 colorSet = 0;
                 break;
-
         }
-
     }
 
     public int getColorSet() {

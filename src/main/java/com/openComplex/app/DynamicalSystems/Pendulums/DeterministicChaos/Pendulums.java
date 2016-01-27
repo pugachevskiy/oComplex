@@ -4,11 +4,6 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by strange on 05/10/15.
- */
-
-
 public class Pendulums implements ActionListener {
 
     private PendulumsView gui;
@@ -32,9 +27,9 @@ public class Pendulums implements ActionListener {
                 while (model.getStatus()) {
                     try {
                         sleep(1);
-                        /* pendulum 1 */
+                        // pendulum 1
                         model.solve1();
-                        /* pendulum 2 */
+                        // pendulum 2
                         model.solve2();
                         model.pixels(); //calculate pixelcoords
                         model.repaint(); //paint new frame

@@ -12,7 +12,7 @@ public class Lorenz implements ActionListener {
     LorenzModel lorenz1 = new LorenzModel(0.0, 20.00, 25.0);
     double dt = 0.01;
     private int step = 0;
-    private int stepMax = 5000;
+    private int stepMax = 4000;
     private double[] xArray, yArray, zArray;
 
     public Lorenz() {
@@ -41,9 +41,9 @@ public class Lorenz implements ActionListener {
                         step++;
                         lorenz1.update(dt);
                         draw(lorenz1, step);
-                        if (step % 25 == 0)
+                        if (step % 150 == 0)
                         gui.doPaint(xArray, yArray, zArray);
-                        sleep(10);
+                        sleep(1);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

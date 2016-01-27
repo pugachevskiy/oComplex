@@ -1,16 +1,15 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  *  on 29/06/15.
  */
-public class SierpinskiTriangle extends GLJPanel implements Fractal {
+public class SierpinskiTriangle extends JPanel implements Fractal {
     //First point of Triange
     private static int X1 = 250;
     private static int Y1 = 50;
@@ -24,9 +23,8 @@ public class SierpinskiTriangle extends GLJPanel implements Fractal {
 
     private int step = 0;
 
-    public SierpinskiTriangle(GLCapabilities capabilities, int initStep) {
-        super(capabilities);
-        step = initStep;
+    public SierpinskiTriangle(int initStep) {
+        this.step = initStep;
     }
 
     public static void doDrawing(Graphics g, int x1, int y1, int x2, int y2, int x3, int y3, int step) {
@@ -93,7 +91,7 @@ public class SierpinskiTriangle extends GLJPanel implements Fractal {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(4);
     }
     @Override
-    public GLJPanel getPanel() {
+    public JPanel getPanel() {
         return this;
     }
 

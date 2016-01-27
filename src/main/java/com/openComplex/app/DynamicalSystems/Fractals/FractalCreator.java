@@ -1,7 +1,5 @@
 package com.openComplex.app.DynamicalSystems.Fractals;
 
-
-import com.jogamp.opengl.GLCapabilities;
 import com.openComplex.app.DynamicalSystems.Fractals.Model.*;
 
 
@@ -21,15 +19,14 @@ public class FractalCreator implements FractalsCreator{
 
     @Override
     public Fractal getFractal(String name, int step){
-        GLCapabilities caps = new GLCapabilities(null);
         switch (name){
-            case MINKOVSKICURVE: return new MinkowskiCurve(caps, step);
-            case KOCHCURVE:return new KochCurve(caps, step);
-            case SERPINSKICARPET:return new SierpinskiCarpet(caps, step);
-            case SERPINSKITRIANGE: return new SierpinskiTriangle(caps, step);
-            case CIRCLECURVE: return new CircleCurve(caps, step);
-            case CIRCLESQUARE: return new CircleCurveSquare(caps, step);
-            case FRACTALSTREE: return new FractalTree(caps, step);
+            case MINKOVSKICURVE: return new MinkowskiCurve(step);
+            case KOCHCURVE:return new KochCurve(step);
+            case SERPINSKICARPET:return new SierpinskiCarpet(step);
+            case SERPINSKITRIANGE: return new SierpinskiTriangle(step);
+            case CIRCLECURVE: return new CircleCurve(step);
+            case CIRCLESQUARE: return new CircleCurveSquare(step);
+            case FRACTALSTREE: return new FractalTree(step);
 
            // case MENGERSPONGE: return new MengerSponge(caps, step);
         }

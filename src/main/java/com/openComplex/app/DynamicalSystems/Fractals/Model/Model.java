@@ -1,13 +1,10 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 
 import javax.swing.*;
 
-/**
- * Created by laptop on 29.06.2015.
- */
+
 public class Model {
     public int getSliderValue(JSlider slider) {
         return slider.getValue();
@@ -21,17 +18,17 @@ public class Model {
         return comboBox.getSelectedValue().toString();
     }
 
-    public void addFractal(Fractal fractal, GLJPanel rootPanel) {
+    public void addFractal(Fractal fractal, JPanel rootPanel) {
         rootPanel.add(fractal.getPanel());
     }
 
-    public void updateFractal( GLJPanel rootPanel) {
+    public void updateFractal( JPanel rootPanel) {
         rootPanel.revalidate();
     }
 
-    public void deleteFractal(GLJPanel rootPanel) {
+    public void deleteFractal(JPanel rootPanel) {
         rootPanel.removeAll();
-        rootPanel.revalidate();
+    //    rootPanel.revalidate();
     }
 
     public void setDimension(JLabel label, String dim) {

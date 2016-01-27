@@ -101,26 +101,8 @@ public class OscillatorModel extends JPanel {
         g.setFont(new Font("Verdana", Font.BOLD, 14));
         g.drawString("Drag and drop mass ...", W / 2 - 90, 28);
         g.setFont(new Font("Verdana", Font.BOLD, 10));
-        g.drawString("Spring force:  " + D, 80, H - 40);
-        g.drawString("Friction:  " + reib, 250, H - 40);
 
     }//paint()
-
-    public void plusSpring(){
-        D = D * 2;
-    }
-
-    public void minusSpring(){
-        D = D / 2;
-    }
-    public void plusFriction(){
-       reib++;
-    }
-    public void minusFriction(){
-        if (reib > 0) {
-            reib--;
-        }
-    }
 
     public void updateSize(int width, int height) {
         this.W = width;

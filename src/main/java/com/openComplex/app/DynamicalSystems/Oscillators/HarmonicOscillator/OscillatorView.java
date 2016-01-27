@@ -63,7 +63,7 @@ public class OscillatorView extends JFrame{
         return sliderPanel;
     }
 
-    private JPanel createButtonsPanel(JLabel label, JButton button) {
+   /* private JPanel createButtonsPanel(JLabel label, JButton button) {
         JPanel sliderPanel = new JPanel();
         sliderPanel.setLayout(new GridLayout(2, 1));
         sliderPanel.setBorder(new EmptyBorder(0, 3, 0, 3));
@@ -72,7 +72,7 @@ public class OscillatorView extends JFrame{
         sliderPanel.add(button);
 
         return sliderPanel;
-    }
+    }*/
 
 
     public void addPanel(JPanel panel) {
@@ -98,6 +98,6 @@ public class OscillatorView extends JFrame{
     }
 
     public void updateSpringLabel() {
-        springLabel.setText("Spring: " + springSlider.getValue());
+        springLabel.setText("Spring: " + springSlider.getValue()/4.0);
     }
 }
