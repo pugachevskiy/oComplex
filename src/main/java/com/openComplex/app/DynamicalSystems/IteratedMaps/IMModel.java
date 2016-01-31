@@ -9,21 +9,20 @@ public class IMModel {
     private String[] info;
 
 
-    private double zeroApproach =  0.00000001;
+    private double zeroApproach = 0.00000001;
 
-    public void solve () {
+    public void solve() {
         fix = new double[coeff.length - 1];
 
         coeff[1] = coeff[1] - 1;
         double estimateX = -Double.MAX_VALUE, x;
         for (int i = 0; i < coeff.length - 1; i++) {
             estimateX = searchX(estimateX);
-            if(estimateX < Double.MAX_VALUE) {
-                try{
+            if (estimateX < Double.MAX_VALUE) {
+                try {
                     x = newton(estimateX);
                     fix[i] = x;
-                }
-                catch (StackOverflowError e) {
+                } catch (StackOverflowError e) {
                     fix[i] = Double.MAX_VALUE;
                 }
             } else {
@@ -44,7 +43,7 @@ public class IMModel {
         previous = compute(coeff, -10);
         for (int i = 0; i < 40; i++) {
             temp = compute(coeff, x);
-            if((temp == 0 ||(previous*temp < 0)) &&
+            if ((temp == 0 || (previous * temp < 0)) &&
                     (x > lastEstimateX || lastEstimateX == -Double.MAX_VALUE)) {
                 return x;
             }
@@ -54,12 +53,10 @@ public class IMModel {
         return Double.MAX_VALUE;
     }
 
-    private double newton(double x)
-    {
+    private double newton(double x) {
         if (Math.abs(compute(coeff, x)) <= zeroApproach) {
             return x;
-        }
-        else {
+        } else {
             return newton(x - compute(coeff, x) / compute(derivate(coeff), x));
         }
     }
@@ -67,24 +64,24 @@ public class IMModel {
     private String[] fixpointType(double[] coeff, double[] fix) {
         String[] type = new String[fix.length];
         for (int i = 0; i < fix.length; i++) {
-            if(fix[i] < Double.MAX_VALUE) {
-                double [] firstDerivationCoeff = derivate(coeff);
+            if (fix[i] < Double.MAX_VALUE) {
+                double[] firstDerivationCoeff = derivate(coeff);
                 double firstDerivationSolution = compute(firstDerivationCoeff, fix[i]);
-                if(Math.abs(firstDerivationSolution) < 1) {
+                if (Math.abs(firstDerivationSolution) < 1) {
                     type[i] = "asymptotic stable, hyperbolic";
                 } else if (Math.abs(firstDerivationSolution) > 1) {
                     type[i] = "unstable, hyperbolic";
                 } else {
-                    double [] secondDerivationCoeff = derivate(firstDerivationCoeff);
+                    double[] secondDerivationCoeff = derivate(firstDerivationCoeff);
                     double secondDerivationSolution = compute(secondDerivationCoeff, fix[i]);
-                    if(secondDerivationSolution != 0) {
+                    if (secondDerivationSolution != 0) {
                         type[i] = "semi-asymptotic, not hyperbolic";
                     } else {
-                        double [] thirdDerivationCoeff = derivate(secondDerivationCoeff);
+                        double[] thirdDerivationCoeff = derivate(secondDerivationCoeff);
                         double thirdDerivationSolution = compute(thirdDerivationCoeff, fix[i]);
-                        if(thirdDerivationSolution < 0) {
+                        if (thirdDerivationSolution < 0) {
                             type[i] = "asymptotic stable, not hyperbolic";
-                        } else if(thirdDerivationSolution > 0) {
+                        } else if (thirdDerivationSolution > 0) {
                             type[i] = "unstable, not hyperbolic";
                         }
                     }
@@ -106,10 +103,10 @@ public class IMModel {
     }
 
     private double[] derivate(double[] coeff) {
-        double[] temp = new double[coeff.length-1];
-        for(int i = 0; i < coeff.length; i++) {
-            if(i > 0) {
-                temp[i-1] = coeff[i] * i;
+        double[] temp = new double[coeff.length - 1];
+        for (int i = 0; i < coeff.length; i++) {
+            if (i > 0) {
+                temp[i - 1] = coeff[i] * i;
             }
         }
         return temp;
@@ -122,32 +119,32 @@ public class IMModel {
 
         int degree;
 
-        if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0 && coeff [1] == 0 && coeff[0] == 0) {
-            for(int i = 0; i < coeff.length -1; i++) {
+        if (coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0 && coeff[1] == 0 && coeff[0] == 0) {
+            for (int i = 0; i < coeff.length - 1; i++) {
                 info[i] = "infinite fixpoint";
             }
-        } else if(coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0) {
+        } else if (coeff[4] == 0 && coeff[3] == 0 && coeff[2] == 0) {
             degree = 1;
-            for(int i = 0; i < coeff.length -1; i++) {
-                if(fix[i] != Double.MAX_VALUE) {
-                    degree = degree -1;
+            for (int i = 0; i < coeff.length - 1; i++) {
+                if (fix[i] != Double.MAX_VALUE) {
+                    degree = degree - 1;
                     info[i] = "simple zero";
                 } else {
                     info[i] = "no fixpoint";
                 }
             }
-        } else if(coeff[4] == 0 && coeff[3] == 0) {
+        } else if (coeff[4] == 0 && coeff[3] == 0) {
             degree = 2;
-            for(int i = 0; i < coeff.length -1; i++) {
-                if (fix [i] != Double.MAX_VALUE) {
+            for (int i = 0; i < coeff.length - 1; i++) {
+                if (fix[i] != Double.MAX_VALUE) {
                     if (Math.abs(compute(derivate(coeff), fix[i])) < zeroApproach) {
-                            degree = degree - 2;
-                            info[i] = "double zero";
-                        } else  {
-                            degree = degree - 1;
-                            info[i] = "simple zero";
+                        degree = degree - 2;
+                        info[i] = "double zero";
+                    } else {
+                        degree = degree - 1;
+                        info[i] = "simple zero";
                     }
-                }else {
+                } else {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
@@ -156,21 +153,21 @@ public class IMModel {
                     }
                 }
             }
-        } else if(coeff[4] == 0) {
+        } else if (coeff[4] == 0) {
             degree = 3;
-            for(int i = 0; i < coeff.length -1; i++) {
-                if (fix [i] != Double.MAX_VALUE) {
+            for (int i = 0; i < coeff.length - 1; i++) {
+                if (fix[i] != Double.MAX_VALUE) {
                     if (Math.abs(compute(derivate(coeff), fix[i])) < zeroApproach && Math.abs(compute(derivate(derivate(coeff)), fix[i])) < zeroApproach) {
                         degree = degree - 3;
                         info[i] = "triple zero";
                     } else if (Math.abs(compute(derivate(coeff), fix[i])) < zeroApproach) {
                         degree = degree - 2;
                         info[i] = "double zero";
-                    } else  {
+                    } else {
                         degree = degree - 1;
                         info[i] = "simple zero";
                     }
-                }else {
+                } else {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
@@ -181,9 +178,9 @@ public class IMModel {
             }
         } else {
             degree = 4;
-            for(int i = 0; i < coeff.length -1; i++) {
+            for (int i = 0; i < coeff.length - 1; i++) {
 
-                if (fix [i] != Double.MAX_VALUE) {
+                if (fix[i] != Double.MAX_VALUE) {
                     if (Math.abs(compute(derivate(coeff), fix[i])) < zeroApproach && Math.abs(compute(derivate(derivate(coeff)), fix[i])) < zeroApproach
                             && Math.abs(compute(derivate(derivate(derivate(coeff))), fix[i])) < zeroApproach) {
                         degree = degree - 4;
@@ -195,11 +192,11 @@ public class IMModel {
                     } else if (Math.abs(compute(derivate(coeff), fix[i])) < zeroApproach) {
                         degree = degree - 2;
                         info[i] = "double zero";
-                    } else  {
+                    } else {
                         degree = degree - 1;
                         info[i] = "simple zero";
                     }
-                }else {
+                } else {
                     if (degree <= 0) {
                         info[i] = "no fixpoint";
                     } else {
@@ -209,7 +206,7 @@ public class IMModel {
                 }
             }
         }
-    return info;
+        return info;
     }
 
     public double[] getFix() {

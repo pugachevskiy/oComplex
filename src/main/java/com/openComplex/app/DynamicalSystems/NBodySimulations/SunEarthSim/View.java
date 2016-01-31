@@ -7,8 +7,9 @@ import java.awt.event.ItemListener;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
- * Created by Tobias on 07.10.2015.
+ * Created on 07.10.2015.
  */
 public class View extends JFrame {
     private static final int Lx = 500, Ly = 530; //graphic window
@@ -19,17 +20,12 @@ public class View extends JFrame {
     private Choice Chooser;
     private ItemListener itemListener;
 
-    public View(ActionListener listener, ItemListener itemListener){
+    public View(ActionListener listener, ItemListener itemListener) {
         this.itemListener = itemListener;
         init("Sun-Earth", listener, buttonsName);
-
     }
 
-
-
-
     public void init(String name, ActionListener listener, List<String> list) {
-
         frame = new JFrame(name);
         frame.setSize(1100, 450);
         frame.setLayout(new BorderLayout());
@@ -42,7 +38,6 @@ public class View extends JFrame {
 
         addButtons(listener, list);
 
-
         Chooser = new Choice();
         Chooser.add("Values_1");
         Chooser.add("Values_2");
@@ -50,7 +45,6 @@ public class View extends JFrame {
         Chooser.add("Values_4");
         Chooser.addItemListener(itemListener);
         pan.add(Chooser);
-
 
         frame.add(pan, BorderLayout.NORTH);
         frame.setVisible(true);
@@ -69,8 +63,4 @@ public class View extends JFrame {
     public void addPanel(JPanel panel) {
         frame.add(panel, BorderLayout.CENTER);
     }
-
-
-
-
 }

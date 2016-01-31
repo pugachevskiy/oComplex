@@ -6,9 +6,6 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 
-/**
- * Created by strange on 29/05/15.
- */
 public class mainPanelView extends JPanel {
 
     private JLabel iconLabel;
@@ -17,15 +14,16 @@ public class mainPanelView extends JPanel {
     private ImageIcon icon;
     private final String information =
             "Environment for working with complex systems.\n" +
-            "Chair of Complex and Intelligent Systems\n" +
-            "Univ.-Prof. Dr.-Ing. habil. Bj\u00f6rn Schuller\n" +
-            "Shahin Amiriparian, M.Sc.\n" +
-            "The University of Passau\n" +
-            "Passau, Germany\n" +
-            "Version 0.9\n" +
-            "\u00a9 2015";
+                    "Chair of Complex and Intelligent Systems\n" +
+                    "Univ.-Prof. Dr.-Ing. habil. Bj\u00f6rn Schuller\n" +
+                    "Shahin Amiriparian, M.Sc.\n" +
+                    "The University of Passau\n" +
+                    "Passau, Germany\n" +
+                    "Version 0.9\n" +
+                    "\u00a9 2015";
 
     private final String logoPath = "resources/grau.png";
+
     public mainPanelView() {
         this.setLayout(new BorderLayout());
         this.add(this.createMainPanel(), BorderLayout.CENTER);

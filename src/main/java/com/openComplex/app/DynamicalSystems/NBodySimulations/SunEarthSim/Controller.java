@@ -22,7 +22,6 @@ public class Controller implements ActionListener, ItemListener {
         gui.addPanel(model);
     }
 
-
     public void start() {
         new Thread() {
             public void run() {
@@ -34,9 +33,9 @@ public class Controller implements ActionListener, ItemListener {
                         model.update();
                         step++;
                     } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
-
             }
         }.start();
     }
@@ -46,7 +45,6 @@ public class Controller implements ActionListener, ItemListener {
         // maxstep = (int) Double.valueOf(getText()).doubleValue();
         String command = e.getActionCommand();
         switch (command) {
-
             case "New":
                 model.startwerte();
                 step = 0;
@@ -81,5 +79,4 @@ public class Controller implements ActionListener, ItemListener {
             model.values4();
         }
     } //itemStateChanged(evt)
-
 }

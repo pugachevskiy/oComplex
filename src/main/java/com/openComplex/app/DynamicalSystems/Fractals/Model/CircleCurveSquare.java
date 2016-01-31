@@ -6,11 +6,10 @@ import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class CircleCurveSquare extends JPanel implements Fractal {
     //Start point
-    private static int AX = 50;
-    private static int AY = 240;
+    private int AX = 50;
+    private int AY = 240;
 
     private int step = 0;
 
@@ -18,7 +17,7 @@ public class CircleCurveSquare extends JPanel implements Fractal {
         this.step = initStep;
     }
 
-    public static void doDrawing(Graphics g, int x, int y, int radius, int step) {
+    public void doDrawing(Graphics g, int x, int y, int radius, int step) {
 
         if (step == 0)
             return;
@@ -78,7 +77,6 @@ public class CircleCurveSquare extends JPanel implements Fractal {
 
         AX = this.getWidth() / 2;
         AY = this.getHeight() / 2;
-
 
         int maxRadius = this.getHeight() < this.getWidth() ? this.getHeight() / 2 : this.getWidth() / 2;
 

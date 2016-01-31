@@ -14,7 +14,6 @@ public class IMView {
     private JButton okButton;
     public JFormattedTextField[] coeff;
 
-
     public void view() {
         frame = new JFrame("Iterated Maps");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -36,8 +35,6 @@ public class IMView {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-
-
         okButton = new JButton("OK");
         Font font = okButton.getFont();
         Font newFont = new Font(font.getName(), font.getStyle(), 15);
@@ -50,13 +47,11 @@ public class IMView {
             coeff[i].setPreferredSize(new Dimension(60, 25));
         }
 
-
         coeff[0].setText("5.00");
         coeff[1].setText("4.00");
         coeff[2].setText("-4.00");
         coeff[3].setText("4.00");
         coeff[4].setText("4.00");
-
 
         okButton.setFont(newFont);
         okButton.setBackground(new Color(192, 192, 192));
@@ -87,7 +82,6 @@ public class IMView {
         panel.add(coeff[1]);
         panel.add(coeff1Label);
         panel.add(coeff[0]);
-
 
         for (int i = 0; i < 3; i++) {
             panel.add(new JLabel(" "));
@@ -133,8 +127,8 @@ public class IMView {
     }
 
     private void addFixAndInfo(JPanel panel, Font newFont) {
-        for(int i = 0; i < 4; i++) {
-            JLabel fixLabel = new JLabel("Fixpunkt " + (i+1) + ":");
+        for (int i = 0; i < 4; i++) {
+            JLabel fixLabel = new JLabel("Fixpunkt " + (i + 1) + ":");
             fixLabel.setFont(newFont);
             fixLabel.setForeground(Color.red);
 
@@ -155,7 +149,7 @@ public class IMView {
     }
 
     public void setFixpoint(double[] fixPoint, String[] type, String[] info) {
-        for(int i = 0; i < fix.length; i++) {
+        for (int i = 0; i < fix.length; i++) {
             if (fixPoint[i] != Double.MAX_VALUE) {
                 fix[i].setText(Double.toString(fixPoint[i]));
             } else {
@@ -165,5 +159,4 @@ public class IMView {
             fixInfo[i].setText(info[i]);
         }
     }
-
 }

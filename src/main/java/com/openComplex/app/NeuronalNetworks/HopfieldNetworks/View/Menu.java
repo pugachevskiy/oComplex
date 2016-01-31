@@ -9,15 +9,16 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 /**
- *  on 22.06.2015.
+ * on 22.06.2015.
  */
-public class Menu extends JMenuBar{
+public class Menu extends JMenuBar {
 
-    private JMenuItem newItem=new JMenuItem(), drawItem=new JMenuItem(), loadItem=new JMenuItem(), saveItem=new JMenuItem(), saveAsItem=new JMenuItem(), exitItem=new JMenuItem();
-    private java.util.List<JMenuItem>  menuItems = Arrays.asList(newItem, drawItem, loadItem, saveItem, saveAsItem, exitItem);
+    private JMenuItem newItem = new JMenuItem(), drawItem = new JMenuItem(), loadItem = new JMenuItem(),
+            saveItem = new JMenuItem(), saveAsItem = new JMenuItem(), exitItem = new JMenuItem();
+    private java.util.List<JMenuItem> menuItems = Arrays.asList(newItem, drawItem, loadItem, saveItem, saveAsItem, exitItem);
     public static final String DRAW = "Draw", NEWRANDOM = "Random", LOAD = "Load..", SAVE = "Save",
             SAVEAS = "Save as...  ", EXIT = "Exit", HELP = "Help";
-    private static final String [] menuItemArray = {DRAW, NEWRANDOM, LOAD, SAVE, SAVEAS, EXIT};
+    private static final String[] menuItemArray = {DRAW, NEWRANDOM, LOAD, SAVE, SAVEAS, EXIT};
 
     private ActionListener listener = new ButtonListener();
 
@@ -28,12 +29,12 @@ public class Menu extends JMenuBar{
         JMenu options = new JMenu("Options");
         JMenu faq = new JMenu("?");
 
-        char [] menuAccArray = {'N', 'E', 'L', 'S', 'A', 'Q'};
+        char[] menuAccArray = {'N', 'E', 'L', 'S', 'A', 'Q'};
 
         //Fügt Items zu Menü 'Datei' hinzu
         int i = 0;
-        for(JMenuItem newMenuItem : menuItems) {
-            if(i==2 || i== 5)
+        for (JMenuItem newMenuItem : menuItems) {
+            if (i == 2 || i == 5)
                 file.addSeparator();
             newMenuItem.setText(menuItemArray[i]);
             newMenuItem.setActionCommand(menuItemArray[i]);
@@ -62,20 +63,20 @@ public class Menu extends JMenuBar{
 
     }
 
-    private JMenu createMiniMenu(String[]buttonCaption, int select) {
+    private JMenu createMiniMenu(String[] buttonCaption, int select) {
         JMenu backgroundColorMenu = new JMenu(buttonCaption[0]);
 
         ButtonGroup group = new ButtonGroup();
 
         String buttonText;
-        for (int i=0; i<buttonCaption.length-1; i++) {
+        for (int i = 0; i < buttonCaption.length - 1; i++) {
             JCheckBoxMenuItem item = new JCheckBoxMenuItem();
-            item.setText(buttonCaption[i+1] + "x" + buttonCaption[i+1]);
+            item.setText(buttonCaption[i + 1] + "x" + buttonCaption[i + 1]);
             item.addActionListener(listener);
-            item.setActionCommand(buttonCaption[i+1]);
+            item.setActionCommand(buttonCaption[i + 1]);
             group.add(item);
             backgroundColorMenu.add(item);
-            if(select==i)
+            if (select == i)
                 item.setSelected(true);
         }
         return backgroundColorMenu;

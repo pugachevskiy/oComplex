@@ -61,7 +61,6 @@ public class GUI extends JFrame {
                 "-The connections are undirected(->weight matrix has to be symmetrical)\n" +
                 "-Alle neurons have to be connected to each other(->weights never 0)";
 
-
         JTextArea area = new JTextArea(rules);
         area.setFont(defaultFont);
         area.setBorder(BorderFactory.createEmptyBorder());

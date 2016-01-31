@@ -7,18 +7,18 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 29/06/15.
+ * on 29/06/15.
  */
 public class SierpinskiTriangle extends JPanel implements Fractal {
     //First point of Triange
-    private static int X1 = 250;
-    private static int Y1 = 50;
+    private int X1 = 250;
+    private int Y1 = 50;
     //Second point of Triange
-    private static int X2 = 400;
-    private static int Y2 = 450;
+    private int X2 = 400;
+    private int Y2 = 450;
     //Third point of Triange
-    private static int X3 = 100;
-    private static int Y3 = 450;
+    private int X3 = 100;
+    private int Y3 = 450;
 
 
     private int step = 0;
@@ -27,7 +27,7 @@ public class SierpinskiTriangle extends JPanel implements Fractal {
         this.step = initStep;
     }
 
-    public static void doDrawing(Graphics g, int x1, int y1, int x2, int y2, int x3, int y3, int step) {
+    public void doDrawing(Graphics g, int x1, int y1, int x2, int y2, int x3, int y3, int step) {
         if (step == 0) {
             g.drawLine(x1, y1, x2, y2);
             g.drawLine(x2, y2, x3, y3);
@@ -56,40 +56,45 @@ public class SierpinskiTriangle extends JPanel implements Fractal {
         //Change size dynamically
         int height = this.getHeight();
         int maxWidth = this.getWidth();
-        while(height < maxWidth) {
+        while (height < maxWidth) {
             maxWidth -= 30;
         }
 
-
-        X3 = this.getWidth()/2 - maxWidth/2;
-        Y3 = 9*height/10;
-        X2 =  this.getWidth()/2 + maxWidth/2;
-        Y2 = 9*height/10;
-        X1 = X3 + maxWidth/2;
-        Y1 = Y3 - (int)(0.866*maxWidth);
+        X3 = this.getWidth() / 2 - maxWidth / 2;
+        Y3 = 9 * height / 10;
+        X2 = this.getWidth() / 2 + maxWidth / 2;
+        Y2 = 9 * height / 10;
+        X1 = X3 + maxWidth / 2;
+        Y1 = Y3 - (int) (0.866 * maxWidth);
 
         doDrawing(g, X1, Y1, X2, Y2, X3, Y3, step);
     }
+
     @Override
     public String getName() {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(0);
     }
+
     @Override
     public String getCopy() {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(1);
     }
+
     @Override
     public String getFactor() {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(2);
     }
+
     @Override
     public String getDimension() {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(3);
     }
+
     @Override
     public String getDicription() {
         return FractalsCollection.SIERPINSKI_TRIANGLE.get(4);
     }
+
     @Override
     public JPanel getPanel() {
         return this;

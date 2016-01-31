@@ -9,7 +9,7 @@ public final class TopicCollection {
             "Main",
 
             "Dynamical Systems",
-                "\tBifurcation",
+                "\tLogical pictures with Feigenbaum-diagram",
                 "\tIterated maps",
                 "\tLorenz attractor",
                 "\tDiffusion Limited Aggregation",
@@ -436,8 +436,4 @@ public final class TopicCollection {
             "\t\tDriven pendulum",
             "\t\tDriven pendulum Y",
             "\t\tDriven triple pendulum"};
-
-
-
-
 }

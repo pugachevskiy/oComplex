@@ -4,16 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 06/10/15.
+ * on 06/10/15.
  */
 public class DLAModel extends JPanel {
     private static int D = 256; //grid dimension, graphic window dimension
     private boolean grid[][] = new boolean[D + 1][D + 1]; //particle position on grid
     private int CellNum, CellSize; //resize the grid for painting
 
-    public void reset()  //method for resetting the grid
-    {
-
+    public void reset() { //method for resetting the grid
         CellNum = 32; //start with a graphical field of 32x32 boxes
         CellSize = D / CellNum;
         for (int i = 0; i <= D; i++) {
@@ -24,10 +22,8 @@ public class DLAModel extends JPanel {
         grid[D / 2][D / 2] = true; //set mid-cell to true
     }//reset()
 
-    public int evaluateM()  //method for evaluating cluster mass
-    {
+    public int evaluateM() {  //method for evaluating cluster mass
         int M = 0;
-
         for (int i = 0; i <= D; i++) {
             for (int j = 0; j <= D; j++) {
                 if (grid[i][j]) M++;
@@ -36,11 +32,9 @@ public class DLAModel extends JPanel {
         return M;
     }//evaluateM()
 
-    public int evaluateR()  //method for evaluating cluster radius
-    {
+    public int evaluateR() { //method for evaluating cluster radius
         int R = 0;
         int R_old = 0;
-
         for (int i = 0; i <= D; i++) {
             for (int j = 0; j <= D; j++) {
                 if (grid[i][j]) {
@@ -54,8 +48,7 @@ public class DLAModel extends JPanel {
         return R_old;
     }//evaluateR()
 
-    public double evaluateD()  //method for evaluating fractal dimension
-    {
+    public double evaluateD() {  //method for evaluating fractal dimension
         double D = 0;
         D = Math.round(1000. * Math.log(evaluateM()) / Math.log(evaluateR())) / 1000.;
         return D;
@@ -64,8 +57,7 @@ public class DLAModel extends JPanel {
     /* method for doing a 2-dim random walk with starting coords i, j
        and aggregation */
     public void RandomWalk(int i, int j) {
-        for (int n = 0; n < 32 * CellNum; n++) //duration of the random walk
-        {
+        for (int n = 0; n < 32 * CellNum; n++) { //duration of the random walk
             if (i < 1 || i > D - 1 || j < 1 || j > D - 1) {
                 break;
             } else {

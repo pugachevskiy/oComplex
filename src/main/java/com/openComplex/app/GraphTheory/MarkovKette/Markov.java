@@ -3,10 +3,8 @@ package com.openComplex.app.GraphTheory.MarkovKette;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
 /**
- *  on 27/08/15.
+ * on 27/08/15.
  */
 public class Markov implements ActionListener {
     private MarkovModel markovModel;
@@ -19,7 +17,7 @@ public class Markov implements ActionListener {
         setDefaultMatrix();
     }
 
-    private void createNewTable(){
+    private void createNewTable() {
         markovModel.setN(gui.getLength());
         markovModel.setM(gui.getStart());
         gui.clearPanel();
@@ -28,7 +26,7 @@ public class Markov implements ActionListener {
     }
 
 
-    private void setDefaultMatrix(){
+    private void setDefaultMatrix() {
         markovModel.setN(7);
         markovModel.setM(1);
         gui.setLength(7);
@@ -52,7 +50,7 @@ public class Markov implements ActionListener {
         markovModel.clearStateList();
     }
 
-    private void newLength(){
+    private void newLength() {
         gui.clearPanel();
         markovModel.setN(gui.getLength());
         markovModel.setM(gui.getStart());

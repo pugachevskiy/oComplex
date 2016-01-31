@@ -21,9 +21,9 @@ public class GridListener implements DocumentListener {
         Document temp = e.getDocument();
         int tempX = 0, tempY = 0;
         //Vergleicht das Event-Document solange mit den versch. Textfields, bis eine Übereinstimmung gefunden wurde
-        for(int i=0; i< Matrix.size; i++) {
-            for(int j=0; j<Matrix.size; j++) {
-                if(TablePanel.textfieldArray[i][j].getDocument().equals(temp)) {
+        for (int i = 0; i < Matrix.size; i++) {
+            for (int j = 0; j < Matrix.size; j++) {
+                if (TablePanel.textfieldArray[i][j].getDocument().equals(temp)) {
                     tempX = i;
                     tempY = j;
                     break;
@@ -32,22 +32,23 @@ public class GridListener implements DocumentListener {
             }
         }
         //Koordinate des veränderten Textfields
-        String coord  = tempX + "" + tempY;
+        String coord = tempX + "" + tempY;
 
         //Nur wenn die alte Koordinate gleich der neuen (bei einem Klick wird diese Methode öfter ausgelöst),
         //soll das gegenüberliegende Textfield angeglichen werden.
-        if(oldCoord.equals(coord) && !TablePanel.textfieldArray[tempY][tempX].getText().equals(TablePanel.textfieldArray[tempX][tempY].getText())) {
+        if (oldCoord.equals(coord) && !TablePanel.textfieldArray[tempY][tempX].getText().equals(TablePanel.textfieldArray[tempX][tempY].getText())) {
             TablePanel.textfieldArray[tempY][tempX].setText(TablePanel.textfieldArray[tempX][tempY].getText());
         }
         oldCoord = coord;
     }
 
     /**
-     *Changes the opposite entry for symmetrical reasons in case of deleting
+     * Changes the opposite entry for symmetrical reasons in case of deleting
      */
-    public void removeUpdate(DocumentEvent e)  {
+    public void removeUpdate(DocumentEvent e) {
         insertUpdate(e);
     }
 
-    public void changedUpdate(DocumentEvent e) {   }
+    public void changedUpdate(DocumentEvent e) {
+    }
 }

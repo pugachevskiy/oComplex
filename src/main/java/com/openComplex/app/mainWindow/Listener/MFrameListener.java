@@ -24,12 +24,11 @@ import com.openComplex.app.DynamicalSystems.Oscillators.HarmonicOscillator.Oscil
 import com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos.Pendulums;
 
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *  on 29/05/15.
+ * on 29/05/15.
  */
 
 public class MFrameListener implements ActionListener {
@@ -123,21 +122,5 @@ public class MFrameListener implements ActionListener {
                 new com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Controller.Controller();
                 break;
         }
-
-
-        //System.out.println(Main.gui.buttonStrings.indexOf(command));
-
-        //MainMenu-Buttons <Neuronal Networks, Graph theory, Cellular automata, Dynamic systems> pressed
-
-        //neuronalMenu-Buttons pressed
-
-        //graphMenu-Buttons pressed
-
-        //cellularMenu-Buttons pressed
-
-        //dynamicalMenu-Buttons pressed
-
-        //Back-Button pressed
-
     }
 }

@@ -66,6 +66,7 @@ public class CSVFile {
             }
         }
     }
+
     //Wolframm
     public static void saveField(com.openComplex.app.CellularAutomat.WolframsUniverse.Model.Cell[][] field, JComponent parent) throws IOException {
         CSVWriter writer;

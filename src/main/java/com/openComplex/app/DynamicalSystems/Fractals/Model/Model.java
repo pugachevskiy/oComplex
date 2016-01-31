@@ -4,7 +4,6 @@ import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 
 import javax.swing.*;
 
-
 public class Model {
     public int getSliderValue(JSlider slider) {
         return slider.getValue();
@@ -22,13 +21,13 @@ public class Model {
         rootPanel.add(fractal.getPanel());
     }
 
-    public void updateFractal( JPanel rootPanel) {
+    public void updateFractal(JPanel rootPanel) {
         rootPanel.revalidate();
     }
 
     public void deleteFractal(JPanel rootPanel) {
         rootPanel.removeAll();
-    //    rootPanel.revalidate();
+        //    rootPanel.revalidate();
     }
 
     public void setDimension(JLabel label, String dim) {
@@ -43,7 +42,7 @@ public class Model {
         label.setText(copy);
     }
 
-    public void setDicription (JLabel label, String dicription){
+    public void setDicription(JLabel label, String dicription) {
         label.setText(dicription);
     }
 

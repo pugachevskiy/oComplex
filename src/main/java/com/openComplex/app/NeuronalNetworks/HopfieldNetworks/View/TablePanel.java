@@ -26,7 +26,7 @@ public class TablePanel extends JPanel {
     private ActionListener listener;
 
 
-    public static JFormattedTextField[][] textfieldArray = new JFormattedTextField [15][15];
+    public static JFormattedTextField[][] textfieldArray = new JFormattedTextField[15][15];
 
 
     //Buttons und JMenuItems für den späteren Zugriff(enable, disable)
@@ -82,10 +82,10 @@ public class TablePanel extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 3, 1, 1));
 
-        String [] menuItemArray = {Menu.DRAW, Menu.NEWRANDOM, Menu.LOAD, Menu.SAVE, Menu.SAVEAS, Menu.EXIT};
+        String[] menuItemArray = {Menu.DRAW, Menu.NEWRANDOM, Menu.LOAD, Menu.SAVE, Menu.SAVEAS, Menu.EXIT};
 
         //Passt die Buttons an und fügt sie zum 'panel' hinzu
-        for(int i=0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             JButton tempButton = new JButton();
             tempButton.addActionListener(listener);
             tempButton.setText(menuItemArray[i]);
@@ -107,8 +107,8 @@ public class TablePanel extends JPanel {
 
         panel.add(new JPanel());
         //First line with N1 to N15
-        for(int i=0; i<textfieldArray.length; i++) {
-            JTextField temp = new JTextField("   N" + (i+1) + "   ");
+        for (int i = 0; i < textfieldArray.length; i++) {
+            JTextField temp = new JTextField("   N" + (i + 1) + "   ");
             temp.setFont(new Font(temp.getFont().getFontName(), Font.BOLD, 14));
             temp.setBorder(BorderFactory.createEmptyBorder());
             temp.setHorizontalAlignment(JTextField.CENTER);
@@ -116,14 +116,14 @@ public class TablePanel extends JPanel {
             panel.add(temp);
         }
         //Remaining parts of the matrix
-        for(int i=0; i<textfieldArray.length; i++) {
-            JTextField temp = new JTextField("   N" + (i+1) + "   ");
+        for (int i = 0; i < textfieldArray.length; i++) {
+            JTextField temp = new JTextField("   N" + (i + 1) + "   ");
             temp.setFont(new Font(temp.getFont().getFontName(), Font.BOLD, 14));
             temp.setBorder(BorderFactory.createEmptyBorder());
             temp.setHorizontalAlignment(JTextField.CENTER);
             temp.setEditable(false);
             panel.add(temp);
-            for(int j=0; j<textfieldArray.length; j++) {
+            for (int j = 0; j < textfieldArray.length; j++) {
                 panel.add(textfieldArray[i][j]);
             }
         }
@@ -133,7 +133,7 @@ public class TablePanel extends JPanel {
     }
 
     /**
-     *Iteriert durch das Textfieldarray und passt jedes einzelne Feld an das passande NumberFormat an, bzw. legt
+     * Iteriert durch das Textfieldarray und passt jedes einzelne Feld an das passande NumberFormat an, bzw. legt
      * Grundformatierung fest
      */
     private void initiatetextfieldArray() {
@@ -141,22 +141,23 @@ public class TablePanel extends JPanel {
         FocusListener focusListener = new FocusListener() {
             public void focusLost(FocusEvent e) {
                 //if textfield empty
-                if( ( (JFormattedTextField)e.getSource() ).getText().equals("")) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                if (((JFormattedTextField) e.getSource()).getText().equals("")) {
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
                 int textFieldValue = 1;
-                try{
-                    textFieldValue = Integer.parseInt( ( (JFormattedTextField) e.getSource() ).getText() );
+                try {
+                    textFieldValue = Integer.parseInt(((JFormattedTextField) e.getSource()).getText());
                 } catch (NumberFormatException nfe) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
                 //if there are zeros in the textfield
-                if(textFieldValue == 0 && ( (JFormattedTextField)e.getSource() ).isEditable()) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                if (textFieldValue == 0 && ((JFormattedTextField) e.getSource()).isEditable()) {
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
             }
 
-            public void focusGained(FocusEvent e) {  }
+            public void focusGained(FocusEvent e) {
+            }
         };
 
         //Defines number format
@@ -169,13 +170,13 @@ public class TablePanel extends JPanel {
         formatter.setAllowsInvalid(false);
 
         //Initiates the textfield array with customized texfields (concerning font and content)
-        for(int i=0; i<textfieldArray.length; i++) {
-            for(int j=0; j<textfieldArray.length; j++) {
+        for (int i = 0; i < textfieldArray.length; i++) {
+            for (int j = 0; j < textfieldArray.length; j++) {
                 textfieldArray[i][j] = new JFormattedTextField(formatter);
                 textfieldArray[i][j].setText("1");
                 textfieldArray[i][j].setFont(GUI.font);
                 textfieldArray[i][j].addFocusListener(focusListener);
-                if(i==j) {
+                if (i == j) {
                     textfieldArray[i][j].setText("0");
                     textfieldArray[i][j].setEditable(false);
                 }
@@ -186,22 +187,23 @@ public class TablePanel extends JPanel {
 
     /**
      * Depending on which size is selected, the size of the matrix will be updated
+     *
      * @param size
      */
     public void updateSize(int size) {
         Main.size = size;
         Main.gui.graphPanel.steps = 0;
         Main.gui.graphPanel.selectedNode = -1;
-        for(int i=0; i<textfieldArray.length; i++) {
-            for(int j=0; j<textfieldArray.length; j++) {
-                if(i==j) {
+        for (int i = 0; i < textfieldArray.length; i++) {
+            for (int j = 0; j < textfieldArray.length; j++) {
+                if (i == j) {
                     //do nothing
-                } else if(i>=Main.size || j>=Main.size) {
+                } else if (i >= Main.size || j >= Main.size) {
                     textfieldArray[i][j].setText("0");
                     textfieldArray[j][i].setText("0");
                     textfieldArray[i][j].setEnabled(false);
                 } else {
-                    if(textfieldArray[i][j].getText().equals("0")) {
+                    if (textfieldArray[i][j].getText().equals("0")) {
                         textfieldArray[i][j].setText("1");
                         textfieldArray[j][i].setText("1");
                     }
@@ -211,15 +213,16 @@ public class TablePanel extends JPanel {
         }
 
         new Thread() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 Main.gui.graphPanel.repaint();
                 //Main.gui.tablePanel.getContentPane().removeAll();
                 //Main.gui.tablePanel.getContentPane().add(new JPanel());
 
                 //System.out.println(Main.gui.tablePanel.getComponent(1));
-                            Main.gui.tablePanel.revalidate();
-                            Main.gui.tablePanel.repaint();
-                            Main.gui.tablePanel.removeAll();
+                Main.gui.tablePanel.revalidate();
+                Main.gui.tablePanel.repaint();
+                Main.gui.tablePanel.removeAll();
 
                 Main.gui.tablePanel.add(lowerPanel = createLowerPanel(), BorderLayout.SOUTH);
                 JPanel midPanel = new JPanel();
@@ -242,9 +245,9 @@ public class TablePanel extends JPanel {
      */
     public void shakeTextFieldArray() {
         int rand;
-        for(int i=0;i<Main.size; i++) {
-            for(int j=i+1; j<Main.size; j++) {
-                while((rand=(int)(Math.random()*40-20))==0);
+        for (int i = 0; i < Main.size; i++) {
+            for (int j = i + 1; j < Main.size; j++) {
+                while ((rand = (int) (Math.random() * 40 - 20)) == 0) ;
                 textfieldArray[i][j].setText("" + rand);
                 textfieldArray[j][i].setText("" + rand);
             }
@@ -255,8 +258,8 @@ public class TablePanel extends JPanel {
      * Passt die Textfelder an neu übergebene Werte(z.B. aus einer csv-Datei) an
      */
     public void updateTextFieldArray(String[][] arr) {
-        for(int i=0;i<textfieldArray.length-1; i++) {
-            for(int j=i+1; j<textfieldArray.length-1; j++) {
+        for (int i = 0; i < textfieldArray.length - 1; i++) {
+            for (int j = i + 1; j < textfieldArray.length - 1; j++) {
                 textfieldArray[i][j].setText("" + arr[i][j]);
                 textfieldArray[j][i].setText("" + arr[j][i]);
             }
@@ -268,8 +271,8 @@ public class TablePanel extends JPanel {
      */
     public String[][] getTextfieldValues() {
         String[][] fieldValues = new String[Main.size][Main.size];
-        for(int i=0; i<Main.size; i++) {
-            for(int j=0; j<Main.size; j++) {
+        for (int i = 0; i < Main.size; i++) {
+            for (int j = 0; j < Main.size; j++) {
                 fieldValues[i][j] = textfieldArray[i][j].getText();
             }
         }
@@ -281,8 +284,8 @@ public class TablePanel extends JPanel {
      */
     public int[][] getIntTextfieldValues() {
         int[][] fieldValues = new int[Main.size][Main.size];
-        for(int i=0; i<Main.size; i++) {
-            for(int j=0; j<Main.size; j++) {
+        for (int i = 0; i < Main.size; i++) {
+            for (int j = 0; j < Main.size; j++) {
                 fieldValues[i][j] = Integer.parseInt(textfieldArray[i][j].getText());
             }
         }

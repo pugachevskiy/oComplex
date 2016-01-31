@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 /**
- *  on 10/09/15.
+ * on 10/09/15.
  */
 public class Field extends JPanel implements MouseListener {
     private int size = 8;
@@ -23,7 +23,7 @@ public class Field extends JPanel implements MouseListener {
     private boolean[] rule;
     private int offset = 0;
     private int height, width;
-    private int fieldSize  = 1000;
+    private int fieldSize = 1000;
     private final int small = 2, middle = 4, big = 8;
 
     public Field(int size, Color color) {
@@ -68,25 +68,25 @@ public class Field extends JPanel implements MouseListener {
     }
 
     public void setGridSize() {
-        if(checkSize(big)) {
+        if (checkSize(big)) {
             size = big;
         } else if (checkSize(middle)) {
             size = middle;
         } else {
             size = small;
         }
-        offset = (fieldSize-(width/size))/2;
+        offset = (fieldSize - (width / size)) / 2;
         System.out.println("compute: " + offset);
     }
 
     private boolean checkSize(int size) {
         int offset;
         if (size == big) {
-            offset = (fieldSize-(width/size))/2;
+            offset = (fieldSize - (width / size)) / 2;
         } else if (size == middle) {
-            offset = (fieldSize-(width/size))/2;
+            offset = (fieldSize - (width / size)) / 2;
         } else {
-            offset = (fieldSize-(width/size))/2;
+            offset = (fieldSize - (width / size)) / 2;
         }
 
         int rowHt = height / (size);
@@ -95,18 +95,18 @@ public class Field extends JPanel implements MouseListener {
             return false;
         }
         for (int i = 0; i < rowWid; i++) {
-            if (field[i][0 +offset].getStatus() == true || field[i][rowWid-1+offset].getStatus() == true) {
+            if (field[i][offset].getStatus() || field[i][rowWid - 1 + offset].getStatus()) {
                 return false;
             }
         }
         return true;
     }
 
-    public void setLast(int last){
+    public void setLast(int last) {
         this.last = last;
     }
 
-    public void setGen(int gen){
+    public void setGen(int gen) {
         this.gen = gen;
     }
 
@@ -181,7 +181,6 @@ public class Field extends JPanel implements MouseListener {
     }
 
 
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -192,8 +191,6 @@ public class Field extends JPanel implements MouseListener {
         int i;
         width = getWidth();
         height = getHeight();
-
-
 
 
         int rowHt = height / (size);
@@ -224,7 +221,7 @@ public class Field extends JPanel implements MouseListener {
         g.setColor(cellColor);
         for (i = 0; i < rowHt; i++) {
             for (int j = 0; j < rowWid; j++) {
-                if (j+ offset < 1000 && field[i][j+offset].getStatus()) {
+                if (j + offset < 1000 && field[i][j + offset].getStatus()) {
                     g.fillRect(j * size, i * size, size, size);
                 }
             }
@@ -234,7 +231,7 @@ public class Field extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getY()  < size) {
+        if (e.getY() < size) {
             field[e.getY() / size][(e.getX() / size) + offset].setStatus(!field[e.getY() / size][(e.getX() / size) + offset].getStatus());
             last = 1;
             createCA(rule);

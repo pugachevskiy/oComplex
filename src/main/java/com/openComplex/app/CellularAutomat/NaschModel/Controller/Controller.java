@@ -19,7 +19,7 @@ public class Controller implements ActionListener, ChangeListener {
     private int acc = 1, dec = 1, accDistance, decDistance;
 
 
-    public Controller(){
+    public Controller() {
         gui = new GUI();
         field = new Field(20, Color.BLACK);
         gui.addField(field);
@@ -45,42 +45,42 @@ public class Controller implements ActionListener, ChangeListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String temp = e.getActionCommand();
-        if(temp.equals("start")) {
+        if (temp.equals("start")) {
             start = true;
             start();
             gui.changeStateButtonTo("stop");
             gui.enableControlField(false);
             gui.enableRuleField(false);
-        } else if(temp.equals("stop")) {
+        } else if (temp.equals("stop")) {
             start = false;
             gui.changeStateButtonTo("start");
             gui.enableControlField(true);
-            if(gui.getOptionsBox() == 1) {
+            if (gui.getOptionsBox() == 1) {
                 gui.enableRuleField(true);
             }
         }
-        if(temp.equals("systemSpeed")) {
+        if (temp.equals("systemSpeed")) {
             getSystemSpeed();
         }
-        if(temp.equals("maxSpeed")) {
+        if (temp.equals("maxSpeed")) {
             getMaxSpeed();
         }
-        if(temp.equals("random")) {
+        if (temp.equals("random")) {
             getRandom();
         }
-        if(temp.equals("options")) {
+        if (temp.equals("options")) {
             getOptions();
         }
-        if(temp.equals("acc")) {
+        if (temp.equals("acc")) {
             getAcc();
         }
-        if(temp.equals("dec")) {
+        if (temp.equals("dec")) {
             getDec();
         }
-        if(temp.equals("accDistance")) {
+        if (temp.equals("accDistance")) {
             getAccDistance();
         }
-        if(temp.equals("decDistance")){
+        if (temp.equals("decDistance")) {
             getDecDistance();
         }
     }

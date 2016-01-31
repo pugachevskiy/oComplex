@@ -7,7 +7,7 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
 /**
- *  on 15/10/15.
+ * on 15/10/15.
  */
 public class Controller implements ActionListener, AdjustmentListener {
     private int step = 0;
@@ -17,13 +17,11 @@ public class Controller implements ActionListener, AdjustmentListener {
     private Model model;
     private int speed = 50;
 
-
     public Controller() {
         gui = new View(this, this);
         model = new Model();
         gui.addPanel(model);
     }
-
 
     public void start() {
         new Thread() {
@@ -32,14 +30,14 @@ public class Controller implements ActionListener, AdjustmentListener {
                 step = 0;
                 while (stop) {
                     try {
-                        sleep(100/speed);
+                        sleep(100 / speed);
                         model.update();
                         model.repaint(); //paint new frame
                         step++;
                     } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
-
             }
         }.start();
     }
@@ -47,9 +45,9 @@ public class Controller implements ActionListener, AdjustmentListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       // maxstep = (int) Double.valueOf(getText()).doubleValue();
+        // maxstep = (int) Double.valueOf(getText()).doubleValue();
         String command = e.getActionCommand();
-        switch (command){
+        switch (command) {
             case "Reset":
                 model.reset();
                 step = 0;
@@ -70,7 +68,7 @@ public class Controller implements ActionListener, AdjustmentListener {
     @Override
     public void adjustmentValueChanged(AdjustmentEvent e) {
         JScrollBar scrollBar = (JScrollBar) e.getSource();
-        switch (scrollBar.getName()){
+        switch (scrollBar.getName()) {
             case "Speed":
                 speed = Math.abs(e.getValue() - 1001);
                 model.setSpeed(Math.abs(e.getValue() - 1001));
@@ -78,11 +76,9 @@ public class Controller implements ActionListener, AdjustmentListener {
                 model.repaint();
                 break;
             case "Number":
-                model.setN(Math.abs(e.getValue()-101));
+                model.setN(Math.abs(e.getValue() - 101));
                 model.reset();
                 model.repaint();
-
         }
-
     }
 }

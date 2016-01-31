@@ -19,7 +19,6 @@ public class Menubar extends JMenuBar implements ActionListener {
     public static final String SAVE = "Save";
 
     public Menubar() {
-
         JMenu options = new JMenu("Options");
 
         saveItem.setText(SAVE);
@@ -38,7 +37,6 @@ public class Menubar extends JMenuBar implements ActionListener {
 
         ButtonGroup group = new ButtonGroup();
 
-        String buttonText;
         for (int i = 0; i < buttonCaption.length - 1; i++) {
             JCheckBoxMenuItem item = new JCheckBoxMenuItem();
             item.setText(buttonCaption[i + 1]);

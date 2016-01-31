@@ -1,7 +1,7 @@
 package com.openComplex.app.GraphTheory.MarkovKette;
 
 /**
- *  on 27/08/15.
+ * on 27/08/15.
  */
 
 import java.util.ArrayList;
@@ -49,6 +49,7 @@ public class MarkovModel {
     int steps = 0;
     // Array of steps
     ArrayList stateList = new ArrayList();
+
     //Create transition Matrix
     // true = default Matrix
     // false = clear
@@ -112,10 +113,12 @@ public class MarkovModel {
             return -1;
         }
     }
+
     //Set length
     public void setN(int n) {
         this.N = n;
     }
+
     //Set initial state
     public void setM(int m) {
         if (m >= N) {
@@ -126,6 +129,7 @@ public class MarkovModel {
         }
 
     }
+
     //Get length
     public int getN() {
         return N;
@@ -139,7 +143,7 @@ public class MarkovModel {
         return stateList;
     }
 
-    public void clearStateList(){
+    public void clearStateList() {
         stateList.removeAll(stateList);
     }
 }

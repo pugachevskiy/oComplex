@@ -1,7 +1,7 @@
 package com.openComplex.app.CellularAutomat.WolframsUniverse.Model;
 
 /**
- *  on 14/09/15.
+ * on 14/09/15.
  */
 public class Rule {
     private boolean[] rule = new boolean[8];
@@ -22,13 +22,12 @@ public class Rule {
 
         for (int i = 0; i < charBool.length; i++) {
             rule[i] = charBool[i] == '1';
-       //     System.out.print(rule[i] + " ");
-       //     System.out.println();
+            //     System.out.print(rule[i] + " ");
+            //     System.out.println();
         }
-
     }
 
-    public boolean[] getRule(){
+    public boolean[] getRule() {
         return rule;
     }
 
@@ -37,6 +36,4 @@ public class Rule {
             rule[i] = false;
         }
     }
-
-
 }

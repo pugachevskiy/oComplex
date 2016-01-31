@@ -135,7 +135,6 @@ public class Controller implements ActionListener {
                 counter = 0;
                 gui.setCounter(String.valueOf(counter));
                 break;
-
         }
     }
 
@@ -193,7 +192,4 @@ public class Controller implements ActionListener {
     public void updateSpeed(int speed) {
         this.gamespeed = speed;
     }
-
-
-
 }

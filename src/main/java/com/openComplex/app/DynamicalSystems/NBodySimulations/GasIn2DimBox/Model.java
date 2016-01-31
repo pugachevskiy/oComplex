@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 15/10/15.
+ * on 15/10/15.
  */
 public class Model extends JPanel {
     private static final int D = 256;
@@ -21,7 +21,6 @@ public class Model extends JPanel {
     private int step = 0;
     private int maxstep = 1000000;           //run-time
     private int speed = 50;                  //speed for painting
-
 
     public void update() {
         double force[] = new double[2];
@@ -74,8 +73,7 @@ public class Model extends JPanel {
         repaint();
     }
 
-    public void reset() //method for setting initial values
-    {
+    public void reset() { //method for setting initial values
         step = 0;
         for (int i = 0; i < 50; i++) {
             v_field[i] = 0;

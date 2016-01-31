@@ -11,9 +11,6 @@ import java.util.*;
 
 import static java.awt.Toolkit.getDefaultToolkit;
 
-/**
- * Created by strange on 29/05/15.
- */
 public class MainView extends JFrame {
 
     private JPanel descriptionField;
@@ -45,8 +42,8 @@ public class MainView extends JFrame {
 
         descriptionField.add(new mainPanelView(), TopicCollection.menuItems.get(0));
 
-        for(int i=0; i<TopicCollection.allPanels.size(); i++) {
-            descriptionField.add(new TemplateInfoPanel(TopicCollection.allPanels.get(i)), TopicCollection.menuItems.get(i+1));
+        for (int i = 0; i < TopicCollection.allPanels.size(); i++) {
+            descriptionField.add(new TemplateInfoPanel(TopicCollection.allPanels.get(i)), TopicCollection.menuItems.get(i + 1));
         }
 
         this.updateGUI(TopicCollection.menuItems.get(0));

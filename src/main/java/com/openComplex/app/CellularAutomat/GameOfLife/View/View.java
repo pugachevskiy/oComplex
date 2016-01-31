@@ -42,8 +42,8 @@ public class View {
 
         mainFrame.setJMenuBar(addMenu());
 
-        JPanel menuPanel;
-        mainFrame.add(menuPanel = new JPanel(), BorderLayout.WEST);
+
+        mainFrame.add(new JPanel(), BorderLayout.WEST);
         mainFrame.add(createOptionsPanel(), BorderLayout.NORTH);
 
         mainFrame.add(createButtonsPanel(), BorderLayout.SOUTH);
@@ -283,4 +283,3 @@ public class View {
         speedLabel.setText("Speed " + value + "ms");
     }
 }
-

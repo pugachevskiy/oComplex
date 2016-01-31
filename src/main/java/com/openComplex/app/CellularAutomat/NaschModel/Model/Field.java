@@ -65,7 +65,7 @@ public class Field extends JPanel implements MouseListener {
         double random;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
-                if (field[i][j].getStatus() == true) {
+                if (field[i][j].getStatus()) {
                     random = Math.random();
 
                     distance = countDistance(i, j);
@@ -130,9 +130,9 @@ public class Field extends JPanel implements MouseListener {
 
         int distance = 0;
         for (int k = j + 1; k <= j + 2 * maxSpeed; k++) {
-            if (k < rowWid && field[i][k].getStatus() == false) {
+            if (k < rowWid && !field[i][k].getStatus()) {
                 distance = distance + 1;
-            } else if (k >= rowWid && field[i][k - rowWid].getStatus() == false) {
+            } else if (k >= rowWid && !field[i][k - rowWid].getStatus()) {
                 distance = distance + 1;
             } else {
                 return distance;
@@ -140,10 +140,6 @@ public class Field extends JPanel implements MouseListener {
         }
         return distance;
     }
-
-
-
-
 
     /*public void saveField() throws IOException {
         CSVFile.saveField(field, Field.this);
@@ -163,12 +159,12 @@ public class Field extends JPanel implements MouseListener {
 
         paintGrid(g);
 
-        if (initField == false) {
+        if (!initField) {
             init();
             initField = true;
         }
 
-        if (initField == true) {
+        if (initField) {
             fillGrid(g);
         }
     }

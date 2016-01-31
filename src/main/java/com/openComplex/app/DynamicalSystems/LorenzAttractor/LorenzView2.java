@@ -126,13 +126,13 @@ public class LorenzView2 {
 
     public void doPaint(double[] xArray, double[] yArray, double[] zArray) {
         if (temp > 0)
-        plot.removePlot(0);
+            plot.removePlot(0);
         plot.addLinePlot("Lorenz", xArray, yArray, zArray);
         temp++;
         plot.revalidate();
     }
 
-    public void activateControls(){
+    public void activateControls() {
         startButton.setEnabled(true);
         clearButton.setEnabled(true);
         coeffA.setEnabled(true);
@@ -140,7 +140,7 @@ public class LorenzView2 {
         coeffC.setEnabled(true);
     }
 
-    public void deactivateControls(){
+    public void deactivateControls() {
         startButton.setEnabled(false);
         clearButton.setEnabled(false);
         coeffA.setEnabled(false);

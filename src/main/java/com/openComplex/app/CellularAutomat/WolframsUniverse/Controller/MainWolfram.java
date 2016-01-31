@@ -23,7 +23,6 @@ public class MainWolfram implements ActionListener, ChangeListener {
     private int gen = 1;
     private boolean flag = false;
     private int speed = 150;
-    private int ruleInt;
 
     public MainWolfram() {
         guiWolfram = new GUIWolfram();
@@ -65,7 +64,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
         switch (command) {
             case "Enter":
                 field.setLast(1);
-                ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
+                int ruleInt = Integer.parseInt(guiWolfram.getRuleFieldText());
                 if (ruleInt >= 0 && ruleInt <= 255) {
                     rule.setRule(ruleInt);
                     field.createCA(rule.getRule());
@@ -77,7 +76,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
                 field.resetField();
                 guiWolfram.setGenerationSlider(0);
                 if (flag) {
-                    flag = !flag;
+                    flag = false;
                     guiWolfram.setStartButtonText("Start");
                 }
                 break;
@@ -110,7 +109,7 @@ public class MainWolfram implements ActionListener, ChangeListener {
                 field.setLast(0);
                 guiWolfram.setGenerationSlider(gen);
                 if (flag) {
-                    flag = !flag;
+                    flag = false;
                     guiWolfram.setStartButtonText("Start");
                 }
                 break;
@@ -136,7 +135,3 @@ public class MainWolfram implements ActionListener, ChangeListener {
         field.setGridSize();
     }
 }
-
-
-
-

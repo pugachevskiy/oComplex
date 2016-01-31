@@ -10,13 +10,13 @@ public class GUI {
     private JFrame frame;
     private JButton stateButton;
     private JSlider percentSlider;
-    private JComboBox <String> systemSpeedBox, randomBox, maxSpeedBox, optionBox,
-                                accDistanceBox, decDistanceBox, decBox, accBox;
+    private JComboBox<String> systemSpeedBox, randomBox, maxSpeedBox, optionBox,
+            accDistanceBox, decDistanceBox, decBox, accBox;
 
 
-    private String[] systemSpeed = {"slow", "medium", "fast"}, speed = {"1", "2", "3", "4","5", "6", "7", "8", "9", "10"},
+    private String[] systemSpeed = {"slow", "medium", "fast"}, speed = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"},
             random = {"0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"},
-            option = {"default rules","define own rules"},
+            option = {"default rules", "define own rules"},
             distance = {"distance to next cell", "distance to next cell + 1", "distance to next cell + 2", "distance to next cell + 3"},
             accDec = {"1", "2", "3"};
 
@@ -31,7 +31,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    public JPanel controlPanel () {
+    public JPanel controlPanel() {
         JPanel control = new JPanel();
         control.setLayout(new GridLayout(5, 4));
 
@@ -81,8 +81,6 @@ public class GUI {
         control.add(stateButton);
 
 
-
-
         control.add(new JLabel("Acceleration:"));
         control.add(accBox);
         control.add(new JLabel("Acceleration distance:"));
@@ -127,6 +125,7 @@ public class GUI {
     public int getMaxSpeedBox() {
         return maxSpeedBox.getSelectedIndex();
     }
+
     public int getSystemSpeedBox() {
         return systemSpeedBox.getSelectedIndex();
     }
@@ -151,21 +150,21 @@ public class GUI {
         return decBox.getSelectedIndex();
     }
 
-    public int getDecDistanceBox(){
+    public int getDecDistanceBox() {
         return decDistanceBox.getSelectedIndex();
     }
 
     public void changeStateButtonTo(String state) {
-        if(state.equals("start")) {
+        if (state.equals("start")) {
             stateButton.setText("Start");
             stateButton.setActionCommand("start");
-        } else if(state.equals("stop")) {
+        } else if (state.equals("stop")) {
             stateButton.setText("Stop");
             stateButton.setActionCommand("stop");
         }
     }
 
-    public void enableControlField (boolean state) {
+    public void enableControlField(boolean state) {
         percentSlider.setEnabled(state);
         maxSpeedBox.setEnabled(state);
         randomBox.setEnabled(state);

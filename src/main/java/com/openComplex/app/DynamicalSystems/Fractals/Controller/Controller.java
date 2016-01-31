@@ -133,7 +133,7 @@ public class Controller {
                                              }
                                          } else {
                                              clearComboBox();
-                                             JOptionPane.showMessageDialog(null, "Kein Fractal");
+                                             JOptionPane.showMessageDialog(null, "No fractal");
                                          }
                                          search = false;
                                      }
@@ -157,7 +157,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 flag = !flag;
-                if (flag){
+                if (flag) {
                     gui.getStartButton().setText("Stop");
                 } else {
                     gui.getStartButton().setText("Start");

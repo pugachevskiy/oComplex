@@ -2,7 +2,7 @@ package com.openComplex.app.CellularAutomat.GameOfLife.Model;
 
 import java.awt.*;
 
-public class Cell{
+public class Cell {
     private int row;
     private int col;
     private boolean status;
@@ -60,7 +60,7 @@ public class Cell{
         this.status = status;
     }
 
-    public void addNeighbors(){
+    public void addNeighbors() {
         this.neighbors++;
     }
 }

@@ -24,9 +24,9 @@ public class SynchroPanel extends JFrame {
 
     public SynchroPanel() {
 
-        syncronized  = Main.gui.getSelectedState();
+        syncronized = Main.gui.getSelectedState();
 
-        if(syncronized)
+        if (syncronized)
             this.setTitle("Calculating symetrical.");
         else
             this.setTitle("Calculating asymetrical");
@@ -49,7 +49,7 @@ public class SynchroPanel extends JFrame {
 
         public void paintComponent(Graphics g) {
 
-            if(syncronized)
+            if (syncronized)
                 paintSynchronous(g);
             else
                 paintAsynchronous(g);
@@ -60,8 +60,8 @@ public class SynchroPanel extends JFrame {
         private int calculateMaxLength(ArrayList<String> list) {
             int maxLength = 0;
 
-            for(int i=0; i<list.size(); i++) {
-                if(list.get(i).length()>maxLength)
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).length() > maxLength)
                     maxLength = list.get(i).length();
             }
 
@@ -70,7 +70,7 @@ public class SynchroPanel extends JFrame {
 
         public void paintSynchronous(Graphics g) {
             super.paintComponent(g);
-            Graphics2D g2 = (Graphics2D)g;
+            Graphics2D g2 = (Graphics2D) g;
             //Setup various options
             g2.setStroke(new BasicStroke(2));
             g.setColor(Color.black);
@@ -81,8 +81,8 @@ public class SynchroPanel extends JFrame {
 
             //Calculate dynamic table points
             xValueStep = 70;
-            xValueInput = xValueStep + calculateMaxLength(Main.stepListString)*fontSize + border + 20;
-            xValueNext = xValueInput + calculateMaxLength(Main.nextStepListString)*fontSize + border;
+            xValueInput = xValueStep + calculateMaxLength(Main.stepListString) * fontSize + border + 20;
+            xValueNext = xValueInput + calculateMaxLength(Main.nextStepListString) * fontSize + border;
 
             //System.out.println("Step: " + xValueStep);
             // System.out.println("Input: " + xValueInput);
@@ -92,34 +92,34 @@ public class SynchroPanel extends JFrame {
             //quer
             g2.drawLine(0, columnSize, width, columnSize);
             //hoch
-            g2.drawLine(xValueStep,   5, xValueStep,   height);
+            g2.drawLine(xValueStep, 5, xValueStep, height);
             g2.drawLine(xValueInput, 5, xValueInput, height);
 
             //Draw caption
             g2.drawString(STEP, 13, 25);
-            g2.drawString(NET_INPUT, (xValueInput+xValueStep)/2-NET_INPUT.length()*5, 25);
-            g2.drawString(NEXT_STATE, (xValueNext+xValueInput)/2-NEXT_STATE.length()*5, 25);
+            g2.drawString(NET_INPUT, (xValueInput + xValueStep) / 2 - NET_INPUT.length() * 5, 25);
+            g2.drawString(NEXT_STATE, (xValueNext + xValueInput) / 2 - NEXT_STATE.length() * 5, 25);
 
             //Draw steps
-            for(int i=0; i<steps; i++) {
-                g2.drawString(""+i, 30, 50+i*20);
+            for (int i = 0; i < steps; i++) {
+                g2.drawString("" + i, 30, 50 + i * 20);
             }
 
             g2.setStroke(new BasicStroke(1));
             //Draw vectors
-            for(int i=0; i<steps; i++) {
-                g2.drawString(Main.stepListString.get(i), (xValueInput+xValueStep)/2-Main.stepListString.get(i).length()*5-Main.size, 50+20*i);
-                g2.drawString(Main.nextStepListString.get(i), (xValueNext+xValueInput)/2-Main.nextStepListString.get(i).length()*5-Main.size, 50+20*i);
-                g2.drawLine(0, 55+20*i, width, 55+20*i);
+            for (int i = 0; i < steps; i++) {
+                g2.drawString(Main.stepListString.get(i), (xValueInput + xValueStep) / 2 - Main.stepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
+                g2.drawString(Main.nextStepListString.get(i), (xValueNext + xValueInput) / 2 - Main.nextStepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
+                g2.drawLine(0, 55 + 20 * i, width, 55 + 20 * i);
             }
-            for(int i=0; i<Main.nextStepListString.size(); i++) {
-                g2.drawString(Main.nextStepListString.get(i), (xValueNext+xValueInput)/2-Main.nextStepListString.get(i).length()*5-Main.size, 50+20*i);
+            for (int i = 0; i < Main.nextStepListString.size(); i++) {
+                g2.drawString(Main.nextStepListString.get(i), (xValueNext + xValueInput) / 2 - Main.nextStepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
             }
         }
 
         public void paintAsynchronous(Graphics g) {
             super.paintComponent(g);
-            Graphics2D g2 = (Graphics2D)g;
+            Graphics2D g2 = (Graphics2D) g;
             //Setup various options
             g2.setStroke(new BasicStroke(2));
             g.setColor(Color.black);
@@ -130,13 +130,13 @@ public class SynchroPanel extends JFrame {
 
             //Calculate dynamic table points
             xValueStep = 70;
-            xValueInput = xValueStep + calculateMaxLength(Main.stepListString)*fontSize + border + 20;
+            xValueInput = xValueStep + calculateMaxLength(Main.stepListString) * fontSize + border + 20;
 
             int activeLength = calculateMaxLength(Main.differencesString);
-            activeLength = activeLength>ACTIVE.length() ? activeLength : ACTIVE.length();
+            activeLength = activeLength > ACTIVE.length() ? activeLength : ACTIVE.length();
 
-            xValueActive = xValueInput + activeLength*fontSize + border;
-            xValueNext = xValueActive + calculateMaxLength(Main.nextStepListString)*fontSize + border;
+            xValueActive = xValueInput + activeLength * fontSize + border;
+            xValueNext = xValueActive + calculateMaxLength(Main.nextStepListString) * fontSize + border;
 
             //System.out.println("Step: " + xValueStep);
             // System.out.println("Input: " + xValueInput);
@@ -147,52 +147,52 @@ public class SynchroPanel extends JFrame {
             //quer
             g2.drawLine(0, columnSize, width, columnSize);
             //hoch
-            g2.drawLine(xValueStep,   5, xValueStep,   height);
+            g2.drawLine(xValueStep, 5, xValueStep, height);
             g2.drawLine(xValueInput, 5, xValueInput, height);
             g2.drawLine(xValueActive, 5, xValueActive, height);
             //Draw caption
             g2.drawString(STEP, 13, 25);
-            g2.drawString(NET_INPUT, (xValueInput+xValueStep)/2-NET_INPUT.length()*5, 25);
-            g2.drawString(ACTIVE, (xValueActive+xValueInput)/2-ACTIVE.length()*5, 25);
-            g2.drawString(NEXT_STATE, (xValueNext+xValueActive)/2-NEXT_STATE.length()*5, 25);
+            g2.drawString(NET_INPUT, (xValueInput + xValueStep) / 2 - NET_INPUT.length() * 5, 25);
+            g2.drawString(ACTIVE, (xValueActive + xValueInput) / 2 - ACTIVE.length() * 5, 25);
+            g2.drawString(NEXT_STATE, (xValueNext + xValueActive) / 2 - NEXT_STATE.length() * 5, 25);
 
             //Draw steps
-            for(int i=0; i<steps; i++) {
-                g2.drawString(""+i, 30, 50+i*20);
+            for (int i = 0; i < steps; i++) {
+                g2.drawString("" + i, 30, 50 + i * 20);
             }
 
             g2.setStroke(new BasicStroke(1));
             //Draw vectors
-            for(int i=0; i<steps; i++) {
-                g2.drawString(Main.stepListString.get(i), (xValueInput+xValueStep)/2-Main.stepListString.get(i).length()*5-Main.size, 50+20*i);
-                g2.drawString(Main.differencesString.get(i), (xValueActive+xValueInput)/2-Main.differencesString.get(i).length()*5, 50+20*i);
-                g2.drawString(Main.nextStepListString.get(i), (xValueNext+xValueActive)/2-Main.nextStepListString.get(i).length()*5-Main.size, 50+20*i);
-                g2.drawLine(0, 55+20*i, width, 55+20*i);
+            for (int i = 0; i < steps; i++) {
+                g2.drawString(Main.stepListString.get(i), (xValueInput + xValueStep) / 2 - Main.stepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
+                g2.drawString(Main.differencesString.get(i), (xValueActive + xValueInput) / 2 - Main.differencesString.get(i).length() * 5, 50 + 20 * i);
+                g2.drawString(Main.nextStepListString.get(i), (xValueNext + xValueActive) / 2 - Main.nextStepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
+                g2.drawLine(0, 55 + 20 * i, width, 55 + 20 * i);
             }
-            for(int i=0; i<Main.nextStepListString.size(); i++) {
-                g2.drawString(Main.nextStepListString.get(i), (xValueNext+xValueActive)/2-Main.nextStepListString.get(i).length()*5-Main.size, 50+20*i);
+            for (int i = 0; i < Main.nextStepListString.size(); i++) {
+                g2.drawString(Main.nextStepListString.get(i), (xValueNext + xValueActive) / 2 - Main.nextStepListString.get(i).length() * 5 - Main.size, 50 + 20 * i);
             }
         }
     }
 
-    private int calculateWidth(){
+    private int calculateWidth() {
         int width = 70;
-        width += table.calculateMaxLength(Main.stepListString)*fontSize + border;
+        width += table.calculateMaxLength(Main.stepListString) * fontSize + border;
 
-        if(!syncronized) {
+        if (!syncronized) {
             int activeLength = table.calculateMaxLength(Main.differencesString);
-            activeLength = activeLength>ACTIVE.length() ? activeLength : ACTIVE.length();
+            activeLength = activeLength > ACTIVE.length() ? activeLength : ACTIVE.length();
 
-            width += activeLength*fontSize + border;
+            width += activeLength * fontSize + border;
         }
-        width += table.calculateMaxLength(Main.nextStepListString)*fontSize + border;
+        width += table.calculateMaxLength(Main.nextStepListString) * fontSize + border;
 
         return width;
     }
 
-    private int calculateHeight(){
+    private int calculateHeight() {
 
-        return steps*columnSize + 200;
+        return steps * columnSize + 200;
     }
 
 }

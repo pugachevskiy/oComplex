@@ -1,6 +1,5 @@
 package com.openComplex.app.mainWindow.View.RightPanels;
 
-
 import com.openComplex.app.mainWindow.Listener.MFrameListener;
 
 import javax.swing.*;
@@ -11,9 +10,6 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Tobias on 16.10.2015.
- */
 public class TemplateInfoPanel extends JPanel {
 
     private final Border noFocusBorder = new EmptyBorder(5, 5, 5, 5);
@@ -28,13 +24,13 @@ public class TemplateInfoPanel extends JPanel {
 
         this.add(createFormattedPane(description.get(0), StyleConstants.ALIGN_CENTER, titleFontSize), BorderLayout.NORTH);
 
-        if(description.size() == 3) {
+        if (description.size() == 3) {
             JPanel centerPanel = new JPanel();
             centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
             centerPanel.add(createLogoLabel(description.get(1)));
             centerPanel.add(createFormattedPane(description.get(2), StyleConstants.ALIGN_CENTER, descriptionFontSize));
             this.add(centerPanel, BorderLayout.CENTER);
-        } else if(description.size() == 2) {
+        } else if (description.size() == 2) {
             this.add(createFormattedPane(description.get(1), StyleConstants.ALIGN_CENTER, descriptionFontSize));
             JPanel startPanel = new JPanel();
             startPanel.setLayout(new GridLayout(1, 1));

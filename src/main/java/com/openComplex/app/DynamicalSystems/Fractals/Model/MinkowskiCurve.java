@@ -12,11 +12,11 @@ import java.awt.*;
 
 public class MinkowskiCurve extends JPanel implements Fractal {
     //Start point
-    private static int DX0 = 50;
-    private static int DY0 = 250;
+    private int DX0 = 50;
+    private int DY0 = 250;
     //End point
-    private static int DX = 550;
-    private static int DY = 250;
+    private int DX = 550;
+    private int DY = 250;
 
     private int step = 0;
 
@@ -25,7 +25,7 @@ public class MinkowskiCurve extends JPanel implements Fractal {
         this.step = initStep;
     }
 
-    public static void doDrawing(Graphics g, int xa, int ya, int xi, int yi, int n) {
+    public void doDrawing(Graphics g, int xa, int ya, int xi, int yi, int n) {
         int xb, xc, xd, xe, xf, xg, xh;
         int yb, yc, yd, ye, yf, yg, yh;
         if (n == 0) {

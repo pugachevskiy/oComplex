@@ -1,7 +1,5 @@
 package com.openComplex.app.DynamicalSystems.Fractals.Model;
 
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.awt.GLJPanel;
 import com.openComplex.app.DynamicalSystems.Fractals.Fractal;
 
 import javax.swing.*;
@@ -10,11 +8,11 @@ import java.awt.*;
 public class FractalTree extends JPanel implements Fractal {
 
     //Start point
-    private static int AX = 50;
-    private static int AY = 240;
+    private int AX = 50;
+    private int AY = 240;
 
-    private static final int startStrokeSize = 6;
-    private static final int startAngle = -90;
+    private final int startStrokeSize = 6;
+    private final int startAngle = -90;
 
     private int step = 0;
 
@@ -22,7 +20,7 @@ public class FractalTree extends JPanel implements Fractal {
         this.step = initStep;
     }
 
-    public static void doDrawing(Graphics2D g, int x, int y, int angle, int step) {
+    public void doDrawing(Graphics2D g, int x, int y, int angle, int step) {
 
         if (step == 0) return;
         int x2 = x + (int) (Math.cos(Math.toRadians(angle)) * step * 15);
@@ -31,8 +29,6 @@ public class FractalTree extends JPanel implements Fractal {
         g.drawLine(x, y, x2, y2);
         doDrawing(g, x2, y2, angle - 20, step - 1);
         doDrawing(g, x2, y2, angle + 20, step - 1);
-
-
     }
 
     @Override

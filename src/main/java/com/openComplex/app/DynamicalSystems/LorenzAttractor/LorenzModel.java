@@ -1,7 +1,7 @@
 package com.openComplex.app.DynamicalSystems.LorenzAttractor;
 
 /**
- *  on 26/08/15.
+ * on 26/08/15.
  */
 public class LorenzModel {
     private double x, y, z;
@@ -11,7 +11,6 @@ public class LorenzModel {
         this.x = x;
         this.y = y;
         this.z = z;
-
     }
 
     public void update(double dt) {
@@ -43,7 +42,9 @@ public class LorenzModel {
         return this.z;
     }
 
-    public double getY1() { return  this.y; }
+    public double getY1() {
+        return this.y;
+    }
 
     public double getA() {
         return this.a;

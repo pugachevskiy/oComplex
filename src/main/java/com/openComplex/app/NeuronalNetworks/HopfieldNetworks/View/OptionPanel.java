@@ -11,7 +11,7 @@ import java.awt.event.FocusListener;
 import java.text.NumberFormat;
 
 /**
- *  on 14.07.2015.
+ * on 14.07.2015.
  */
 public class OptionPanel extends JPanel {
 
@@ -19,8 +19,8 @@ public class OptionPanel extends JPanel {
     private static final String START = "Z0 (start state):";
     private int size;
 
-    public static JFormattedTextField[] thresholdArray = new JFormattedTextField [15];
-    public static JFormattedTextField[] startStateArray = new JFormattedTextField [15];
+    public static JFormattedTextField[] thresholdArray = new JFormattedTextField[15];
+    public static JFormattedTextField[] startStateArray = new JFormattedTextField[15];
 
     public OptionPanel() {
 
@@ -47,7 +47,7 @@ public class OptionPanel extends JPanel {
         openBrace.setFont(GUI.fontVectors);
         closeBrace.setFont(GUI.fontVectors);
         thresholdPanel.add(openBrace);
-        for(int i=0; i< Main.size; i++) {
+        for (int i = 0; i < Main.size; i++) {
             thresholdPanel.add(thresholdArray[i]);
         }
         thresholdPanel.add(closeBrace);
@@ -61,7 +61,7 @@ public class OptionPanel extends JPanel {
         openBrace.setFont(GUI.fontVectors);
         closeBrace.setFont(GUI.fontVectors);
         startPanel.add(openBrace);
-        for(int i=0; i<Main.size; i++) {
+        for (int i = 0; i < Main.size; i++) {
             startPanel.add(startStateArray[i]);
         }
         startPanel.add(closeBrace);
@@ -73,22 +73,23 @@ public class OptionPanel extends JPanel {
         FocusListener focusListener = new FocusListener() {
             public void focusLost(FocusEvent e) {
                 //if textfield empty
-                if( ( (JFormattedTextField)e.getSource() ).getText().equals("")) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                if (((JFormattedTextField) e.getSource()).getText().equals("")) {
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
                 int textFieldValue = 1;
-                try{
-                    textFieldValue = Integer.parseInt( ( (JFormattedTextField) e.getSource() ).getText() );
+                try {
+                    textFieldValue = Integer.parseInt(((JFormattedTextField) e.getSource()).getText());
                 } catch (NumberFormatException nfe) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
                 //if there are zeros in the textfield
-                if(textFieldValue == 0 && ( (JFormattedTextField)e.getSource() ).isEditable()) {
-                    ( (JFormattedTextField)e.getSource() ).setText("1");
+                if (textFieldValue == 0 && ((JFormattedTextField) e.getSource()).isEditable()) {
+                    ((JFormattedTextField) e.getSource()).setText("1");
                 }
             }
 
-            public void focusGained(FocusEvent e) {  }
+            public void focusGained(FocusEvent e) {
+            }
         };
 
         //Defines number format
@@ -101,7 +102,7 @@ public class OptionPanel extends JPanel {
         formatter.setAllowsInvalid(false);
 
         //Initiates the textfield array with customized texfields (concerning font and content)
-        for(int i=0; i<thresholdArray.length; i++) {
+        for (int i = 0; i < thresholdArray.length; i++) {
 
             thresholdArray[i] = new JFormattedTextField(formatter);
             thresholdArray[i].setText("-10");
@@ -111,7 +112,7 @@ public class OptionPanel extends JPanel {
 
         }
 
-        for(int i=0; i<startStateArray.length; i++) {
+        for (int i = 0; i < startStateArray.length; i++) {
 
             startStateArray[i] = new JFormattedTextField(formatter);
             startStateArray[i].setText("-10");
@@ -127,12 +128,12 @@ public class OptionPanel extends JPanel {
      */
     public void shakeTextFieldArray() {
         int rand;
-        for(int i=0;i<Main.size; i++) {
-            rand=(int)(Math.random()*40-20);
+        for (int i = 0; i < Main.size; i++) {
+            rand = (int) (Math.random() * 40 - 20);
             thresholdArray[i].setText("" + rand);
         }
-        for(int i=0;i<Main.size; i++) {
-            rand=(int)(Math.random()*40-20);
+        for (int i = 0; i < Main.size; i++) {
+            rand = (int) (Math.random() * 40 - 20);
             startStateArray[i].setText("" + rand);
         }
     }
@@ -141,7 +142,7 @@ public class OptionPanel extends JPanel {
     public int[] getThreshold() {
         int[] thresholdVector = new int[Main.size];
 
-        for(int i=0; i<Main.size; i++) {
+        for (int i = 0; i < Main.size; i++) {
             thresholdVector[i] = Integer.parseInt(thresholdArray[i].getText());
         }
 
@@ -151,7 +152,7 @@ public class OptionPanel extends JPanel {
     public int[] getStartState() {
         int[] startStateVector = new int[Main.size];
 
-        for(int i=0; i<Main.size; i++) {
+        for (int i = 0; i < Main.size; i++) {
             startStateVector[i] = Integer.parseInt(startStateArray[i].getText());
         }
 

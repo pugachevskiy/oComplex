@@ -1,11 +1,10 @@
 package com.openComplex.app.DynamicalSystems.DLA;
 
 /**
- *  on 06/10/15.
+ * on 06/10/15.
  */
 
 import java.awt.event.*;
-
 
 public class DLA implements ActionListener {
 
@@ -22,41 +21,38 @@ public class DLA implements ActionListener {
         gui.addPanel(model);
     }
 
-
     public void start() {
         new Thread() {
             public void run() {
                 model.reset();
 
-                    try {
-                        while (step < maxstep) {
-                            if (flag) { //stop/go
-                                sleep(10);
-                                model.update();
-                                step++;
-                            }
+                try {
+                    while (step < maxstep) {
+                        if (flag) { //stop/go
+                            sleep(10);
+                            model.update();
+                            step++;
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }//run
         }.start();
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-       // maxstep = gui.getTfStep();
+        // maxstep = gui.getTfStep();
         if (e.getActionCommand().equals("Reset")) {
             model.reset();
             flag = false;
             model.repaint();
         }
 
-        if (e.getActionCommand().equals("Start")){
+        if (e.getActionCommand().equals("Start")) {
             flag = !flag;
             start();
         }
-
     }
 }

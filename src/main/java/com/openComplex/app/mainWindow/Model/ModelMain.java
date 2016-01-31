@@ -9,11 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *  on 16/06/15.
+ * on 16/06/15.
  */
 public class ModelMain {
     private List<JButton> buttonList = new ArrayList<>();
     private ActionListener listener = new MFrameListener();
+
     public void createButtons(JPanel pane, List<String> list) {
 
         for (int i = 0; i < list.size(); i++) {

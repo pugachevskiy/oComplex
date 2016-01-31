@@ -6,14 +6,13 @@ import com.openComplex.app.DynamicalSystems.Fractals.FractalsCollection;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class KochCurve extends JPanel implements Fractal {
     //Start point
-    private static int AX = 50;
-    private static int AY = 240;
+    private int AX = 50;
+    private int AY = 240;
     //End point
-    private static int EX = 450;
-    private static int EY = 240;
+    private int EX = 450;
+    private int EY = 240;
 
     private int step = 0;
 
@@ -21,7 +20,7 @@ public class KochCurve extends JPanel implements Fractal {
         this.step = initStep;
     }
 
-    public static void doDrawing(Graphics g, int ax, int ay, int ex, int ey, int n) {
+    public void doDrawing(Graphics g, int ax, int ay, int ex, int ey, int n) {
         double cos = 0.5;
         double sin = -0.866;
 

@@ -10,16 +10,17 @@ import java.text.NumberFormat;
 import java.util.Hashtable;
 
 /**
- *  on 16.06.2015.
+ * on 16.06.2015.
  */
 public class GUIWolfram {
 
     private JFormattedTextField ruleField;
     private JSlider generationSlider, speedSlider;
-    private JButton ruleButton, clearButton,startButton;
+    private JButton ruleButton, clearButton, startButton;
     private JPanel field;
     private JFrame frame;
     private JMenuItem saveItem, exitItem, ruleItem, loadItem;
+
     public GUIWolfram() {
         frame = new JFrame("Wolfram Universe");
         frame.setMinimumSize(new Dimension(1300, 1000));
@@ -110,7 +111,7 @@ public class GUIWolfram {
         clearButton = new JButton("Clear");
         clearButton.setFont(clearButton.getFont().deriveFont(16.0f));
         clearButton.setActionCommand("Clear");
-        startButton= new JButton("Start");
+        startButton = new JButton("Start");
         startButton.setFont(startButton.getFont().deriveFont(16.0f));
         startButton.setActionCommand("Start");
         startButton.setPreferredSize(new Dimension(150, 30));
@@ -148,7 +149,7 @@ public class GUIWolfram {
         generationSlider.setName("Generation");
 
 
-        speedSlider = new JSlider(1,1000,100);
+        speedSlider = new JSlider(1, 1000, 100);
         speedSlider.setPaintTicks(true);
         speedSlider.setMajorTickSpacing(200);
 
@@ -186,14 +187,17 @@ public class GUIWolfram {
 
 
     }
-    public void addChangeListenerSpeed(ChangeListener listener){speedSlider.addChangeListener(listener);}
+
+    public void addChangeListenerSpeed(ChangeListener listener) {
+        speedSlider.addChangeListener(listener);
+    }
 
 
-    public void setGenerationSlider(int value){
+    public void setGenerationSlider(int value) {
         generationSlider.setValue(value);
     }
 
-    public void setStartButtonText(String text){
+    public void setStartButtonText(String text) {
         startButton.setText(text);
         startButton.setActionCommand(text);
     }

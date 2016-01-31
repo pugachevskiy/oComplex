@@ -55,7 +55,7 @@ public class FileLoader {
     /**
      * Methode zum Aufruf eines Frames, in dem man Ort und Namen der zu speichernden Datei festlegen kann
      */
-    public static String getSavePath() throws InterruptedIOException{
+    public static String getSavePath() throws InterruptedIOException {
 
         JFileChooser chooser;
         chooser = new JFileChooser(savePath);
@@ -97,11 +97,9 @@ public class FileLoader {
         //Gibt das Image aus
         try {
             ImageIO.write(img, "jpg", new File(path + ".jpg"));
-        }
-        catch (AccessDeniedException t) {
+        } catch (AccessDeniedException t) {
             System.err.println("Zugriff verweigert");
-        }
-        catch (IOException io) {
+        } catch (IOException io) {
             System.err.println("Fehler beim Schreiben");
         }
 
@@ -109,7 +107,7 @@ public class FileLoader {
         String arr = savePath.replace("\\", "\\\\");
         String[] ar = arr.split("\\\\");
         savePath = "";
-        for(int i=0; i<ar.length-1; i++) {
+        for (int i = 0; i < ar.length - 1; i++) {
             savePath = savePath + ar[i] + "\\";
         }
         System.out.println(savePath);
@@ -119,10 +117,10 @@ public class FileLoader {
     /**
      * Liest eine CSV ein und gibt ein Array mit allen Werten zurück
      */
-    public static String[][] readCSV (String path) {
-        String [][] arr = new String [6][6];
-        for(int i=0; i<Main.size; i++) {
-            for(int j=0; j<Main.size; j++) {
+    public static String[][] readCSV(String path) {
+        String[][] arr = new String[6][6];
+        for (int i = 0; i < Main.size; i++) {
+            for (int j = 0; j < Main.size; j++) {
                 arr[i][j] = "0";
             }
         }
@@ -158,22 +156,22 @@ public class FileLoader {
 
         //Längen der eingelesenen Datei
         int verticLength = 0, horizLength = Main.size;
-        for(String st : lines) {
-            String [] tempArr = st.split(";");
-            horizLength = horizLength<tempArr.length ? horizLength : tempArr.length;
+        for (String st : lines) {
+            String[] tempArr = st.split(";");
+            horizLength = horizLength < tempArr.length ? horizLength : tempArr.length;
             verticLength++;
         }
         //Maximalgröße
-        int newSize = verticLength<horizLength ? verticLength : horizLength;
-        newSize = newSize>Main.size ? Main.size : newSize;
+        int newSize = verticLength < horizLength ? verticLength : horizLength;
+        newSize = newSize > Main.size ? Main.size : newSize;
 
         //Überschreibt die Werte in der Liste in das Array, das zurückgegeben wird
-        for(int i=0; i<newSize; i++) {
-            String [] tempArr = lines.get(i).split(";");
-            for(int j=0;j<newSize; j++) {
-                try{
+        for (int i = 0; i < newSize; i++) {
+            String[] tempArr = lines.get(i).split(";");
+            for (int j = 0; j < newSize; j++) {
+                try {
                     arr[i][j] = tempArr[j];
-                } catch(IndexOutOfBoundsException iob){
+                } catch (IndexOutOfBoundsException iob) {
                     arr[i][j] = "0";
                 }
 

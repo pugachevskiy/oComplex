@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *  on 29/05/15.
+ * on 29/05/15.
  */
 public class MenuController {
     public void showOverview() {
@@ -15,7 +15,7 @@ public class MenuController {
         ImageIcon icon = new ImageIcon(scaledImage);
         JOptionPane.showMessageDialog(App.gui, icon, "Help", JOptionPane.PLAIN_MESSAGE);
     }
- 
+
 
     /**
      * Creates pop-up window containing various information about the program.

@@ -11,10 +11,10 @@ import java.awt.*;
  */
 public class SierpinskiCarpet extends JPanel implements Fractal {
     //Start point
-    private static int X = 20;
-    private static int Y = 20;
+    private int X = 20;
+    private int Y = 20;
     //Length of side of the rectangle
-    private static int DIM = 486;
+    private int DIM = 486;
 
 
     private int step = 0;

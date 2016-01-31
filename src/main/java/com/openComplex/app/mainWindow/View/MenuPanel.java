@@ -9,9 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- * Created by Tobias on 16.10.2015.
- */
 public class MenuPanel extends JPanel {
 
     private final Border noFocusBorder = new EmptyBorder(3, 3, 3, 3);
@@ -28,7 +25,6 @@ public class MenuPanel extends JPanel {
         for (int i = 0; i < TopicCollection.menuItems.size(); i++) {
             test[i] = TopicCollection.menuItems.get(i);
         }
-
 
         JScrollPane scrollPane = new JScrollPane();
         list = new JList(test);
@@ -47,10 +43,8 @@ public class MenuPanel extends JPanel {
 
         list.setSelectedIndex(0);
         scrollPane.setViewportView(list);
-        scrollPane.setSize(this.getWidth()/3, this.getHeight());
+        scrollPane.setSize(this.getWidth() / 3, this.getHeight());
         this.add(scrollPane);
-
-
 
         MouseListener mouseListener = new MouseAdapter() {
             @Override
@@ -68,9 +62,5 @@ public class MenuPanel extends JPanel {
             }
         };
         list.addMouseListener(mouseListener);
-
     }
-
-
-
 }

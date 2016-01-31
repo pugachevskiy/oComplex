@@ -16,7 +16,7 @@ public class Main {
     public static int speed = 1;
     public static int steps = 0;
 
-    public static java.util.List<int[]> stepList= new ArrayList<int[]>();
+    public static java.util.List<int[]> stepList = new ArrayList<int[]>();
     public static boolean[] similiarVectors;
 
     public static java.util.ArrayList<String> stepListString = new ArrayList<String>();
@@ -28,7 +28,8 @@ public class Main {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         if (System.getProperty("os.name").contains("Mac")) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
         }
@@ -38,17 +39,18 @@ public class Main {
 
     public static void paintHopField() {
         new Thread() {
-            @Override public void run() {
-                GraphPanel.steps=0;
+            @Override
+            public void run() {
+                GraphPanel.steps = 0;
                 gui.tablePanel.setEnabled(false);
                 gui.graphPanel.selectedNode = -1;
                 gui.graphPanel.updateValueArray(gui.tablePanel.getTextfieldValues());
-                while(GraphPanel.steps<size) {
+                while (GraphPanel.steps < size) {
                     GraphPanel.steps++;
                     Main.gui.graphPanel.repaint();
-                    if(!(speed==0)){
+                    if (!(speed == 0)) {
                         try {
-                            Thread.sleep(speed*250);
+                            Thread.sleep(speed * 250);
                         } catch (InterruptedException exp) {
                             System.err.println("Error with sleep-function.");
                         }
@@ -70,13 +72,13 @@ public class Main {
 
         boolean asynchron = gui.getSelectedState();
 
-        int [][]matrix = gui.tablePanel.getIntTextfieldValues();
-        int []oldVector = gui.tablePanel.optionPanel.getStartState();
-        int []thresholdVector = gui.tablePanel.optionPanel.getThreshold();
+        int[][] matrix = gui.tablePanel.getIntTextfieldValues();
+        int[] oldVector = gui.tablePanel.optionPanel.getStartState();
+        int[] thresholdVector = gui.tablePanel.optionPanel.getThreshold();
 
         stepList.add(oldVector);
 
-        while(steps++<30) {
+        while (steps++ < 30) {
             //Calculate Net-input:
             int netinput[] = matrixMalVector(matrix, oldVector);
             netinput = vectorAdd(netinput, thresholdVector);
@@ -91,10 +93,10 @@ public class Main {
             }
 
             //If asynchronized, switch one false vector element
-            if(!asynchron)
-                for(int i=0; i<similiarVectors.length; i++) {
-                    if(!similiarVectors[i]) {
-                        nextState[i] = nextState[i]==-1 ? 1 : -1;
+            if (!asynchron)
+                for (int i = 0; i < similiarVectors.length; i++) {
+                    if (!similiarVectors[i]) {
+                        nextState[i] = nextState[i] == -1 ? 1 : -1;
                         break;
                     }
                 }
@@ -102,15 +104,15 @@ public class Main {
 
             //Inserting vectors in history
             stepList.add(new int[size]);
-            for(int i=0; i<size; i++) {
-                stepList.get(stepList.size()-1)[i] = netinput[i];
+            for (int i = 0; i < size; i++) {
+                stepList.get(stepList.size() - 1)[i] = netinput[i];
             }
             appendArray(stepListString, netinput);
             appendArray(nextStepListString, nextState);
             appendArray(differencesString, similiarVectors);
 
             oldVector = nextState;
-            if(terminationCondition(steps)) {
+            if (terminationCondition(steps)) {
                 System.out.println("Break");
                 break;
             }
@@ -122,13 +124,12 @@ public class Main {
     }
 
 
-
     public static int[][] shakeMatrix() {
         int[][] matrix = new int[5][5];
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                matrix[i][j] = (int)(Math.random()*10-5);
+                matrix[i][j] = (int) (Math.random() * 10 - 5);
             }
 
         }
@@ -136,7 +137,7 @@ public class Main {
     }
 
     public static int[] matrixMalVector(int[][] matrix, int[] vector) {
-        int []returnVector = new int[vector.length];
+        int[] returnVector = new int[vector.length];
         int temp;
         //Multiplicating old vector and Matrix
         for (int i = 0; i < matrix.length; i++) {
@@ -154,18 +155,18 @@ public class Main {
         for (int i = 0; i < vector1.length; i++) {
             vector1[i] += vector2[i];
         }
-        return  vector1;
+        return vector1;
     }
 
     public static int[] normalize(int[] vector) {
 
         int[] vectorNormalize = new int[vector.length];
-        for(int i=0; i<vectorNormalize.length; i++) {
+        for (int i = 0; i < vectorNormalize.length; i++) {
             vectorNormalize[i] = vector[i];
         }
 
-        for(int i=0; i<vector.length; i++) {
-            vectorNormalize[i] = (int)Math.signum(vectorNormalize[i]);
+        for (int i = 0; i < vector.length; i++) {
+            vectorNormalize[i] = (int) Math.signum(vectorNormalize[i]);
         }
 
         return vectorNormalize;
@@ -173,8 +174,8 @@ public class Main {
 
     public static void appendArray(java.util.ArrayList<String> updatedList, boolean[] toAppend) {
         String updateString = "";
-        for(int i=0; i<toAppend.length; i++) {
-            if(!toAppend[i])
+        for (int i = 0; i < toAppend.length; i++) {
+            if (!toAppend[i])
                 updateString += i + ", ";
         }
         updatedList.add(updateString);
@@ -182,9 +183,9 @@ public class Main {
 
     public static void appendArray(java.util.ArrayList<String> updatedList, int[] toAppend) {
         String updateString = "(";
-        for(int i=0; i<toAppend.length; i++) {
+        for (int i = 0; i < toAppend.length; i++) {
             updateString += toAppend[i];
-            if(!(i+1==toAppend.length))
+            if (!(i + 1 == toAppend.length))
                 updateString += " ";
         }
         updateString += ")T";
@@ -194,16 +195,16 @@ public class Main {
     private static boolean terminationCondition(int step) {
         boolean terminate = false;
 
-        if(step>1) {
-            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-2))) {
-                nextStepListString.add("stable state: z" + (step-2) + " = z" + (step-1));
+        if (step > 1) {
+            if (nextStepListString.get(step - 1).equals(nextStepListString.get(step - 2))) {
+                nextStepListString.add("stable state: z" + (step - 2) + " = z" + (step - 1));
                 terminate = true;
             }
 
         }
-        if(step>2) {
-            if(nextStepListString.get(step-1).equals(nextStepListString.get(step-3))) {
-                nextStepListString.add("dead lock: z" + (step-1) + " = z" + (step-3));
+        if (step > 2) {
+            if (nextStepListString.get(step - 1).equals(nextStepListString.get(step - 3))) {
+                nextStepListString.add("dead lock: z" + (step - 1) + " = z" + (step - 3));
                 terminate = true;
             }
 

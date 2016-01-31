@@ -17,22 +17,17 @@ public class View {
     public JPanel pan;
     private JTextField textFieldStep;
     private JScrollBar numberofParticles, speedbar;
-    private JLabel descriptionNumberofParticles,descriptionSpeedbar, maxStepLabel;
+    private JLabel descriptionNumberofParticles, descriptionSpeedbar, maxStepLabel;
     private List<JButton> buttons = new LinkedList<>();
     private List<String> buttonsName = Arrays.asList("New", "Start", "Reset");
     private AdjustmentListener adjustment;
 
-    public View(ActionListener listener, AdjustmentListener adjustmentListener){
+    public View(ActionListener listener, AdjustmentListener adjustmentListener) {
         this.adjustment = adjustmentListener;
         init("Gas in 2 Dimensional Box", listener, buttonsName);
-
     }
 
-
-
-
     public void init(String name, ActionListener listener, List<String> list) {
-
         frame = new JFrame(name);
         frame.setSize(1100, 450);
         frame.setLayout(new BorderLayout());
@@ -44,23 +39,22 @@ public class View {
         pan.setFont(new Font("Verdana", Font.PLAIN, 10));
 
         addButtons(listener, list);
-       // textFieldStep = new JTextField();
+        // textFieldStep = new JTextField();
         descriptionNumberofParticles = new JLabel("N");
         descriptionSpeedbar = new JLabel("Speed");
         //maxStepLabel = new JLabel("Run-time");
-        numberofParticles = new JScrollBar(Scrollbar.VERTICAL,71,30,1,130);
+        numberofParticles = new JScrollBar(Scrollbar.VERTICAL, 71, 30, 1, 130);
         numberofParticles.setName("Number");
-        speedbar = new JScrollBar(Scrollbar.VERTICAL,951,300,1,1300);
+        speedbar = new JScrollBar(Scrollbar.VERTICAL, 951, 300, 1, 1300);
         speedbar.setName("Speed");
         speedbar.addAdjustmentListener(adjustment);
         numberofParticles.addAdjustmentListener(adjustment);
 //        pan.add(maxStepLabel);
-       // pan.add(textFieldStep);
+        // pan.add(textFieldStep);
         pan.add(descriptionNumberofParticles);
         pan.add(numberofParticles);
         pan.add(descriptionSpeedbar);
         pan.add(speedbar);
-
 
         frame.add(pan, BorderLayout.NORTH);
         frame.setVisible(true);
@@ -79,8 +73,4 @@ public class View {
     public void addPanel(JPanel panel) {
         frame.add(panel, BorderLayout.CENTER);
     }
-
-
-
-
 }
