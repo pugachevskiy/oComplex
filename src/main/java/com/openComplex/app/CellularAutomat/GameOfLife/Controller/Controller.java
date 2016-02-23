@@ -61,10 +61,15 @@ public class Controller implements ActionListener {
         gui.setCounter(String.valueOf(counter));
     }
 
+
     private void createField() {
         int length;
         int rowHt = field.getHeight() / (size);
         int rowWid = field.getWidth() / (size);
+
+        System.out.println(rowHt);
+        System.out.println(rowWid);
+
         if (rowHt >= rowWid) {
             length = rowHt;
         } else {

@@ -11,7 +11,8 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private static final long serialVersionUID = 1L;
     private int size;
     private Cell[][] field;
-    private int length;
+    private int lengthAbs;
+    private int breadthAbs;
     private Color cellColor;
     private int newX = -1;
     private int newY = -1;
@@ -22,8 +23,8 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     public Field(int length, int size, int form, Color color) {
         this.form = form;
         this.cellColor = color;
+        lengthAbs = breadthAbs = length;
         this.size = size;
-        this.length = length;
         init();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -68,17 +69,26 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public boolean nextStep() {
-        Cell[][] temp = field;
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
-                if (temp[i][j].getStatus()) {
-                    setNeigbors(i, j);
+        System.out.println(lengthAbs);
+        System.out.println(breadthAbs);
+
+        for (int i = 0; i < lengthAbs; i++) {
+            for (int j = 0; j < breadthAbs; j++) {
+                if(form == 0) {
+                    if (field[i][j].getStatus()) {
+                        setNeighborsSquare(i, j);
+                    }
+                } else if (form == 1) {
+                    if (field[i][j].getStatus()) {
+                        setNeighborsHexagon(i, j);
+                    }
                 }
             }
         }
+        Cell[][] temp = field;
         boolean isAlive = false;
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
+        for (int i = 0; i < lengthAbs; i++) {
+            for (int j = 0; j < breadthAbs; j++) {
                 if (temp[i][j].getNeighbors() == 2 && temp[i][j].getStatus()) {
                     field[i][j].setStatus(true);
                     isAlive = true;
@@ -89,7 +99,6 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
                     } else {
                         field[i][j].setStatus(false);
                     }
-
                 }
             }
         }
@@ -99,14 +108,56 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     private void resetNeigbours() {
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[0].length; j++) {
                 field[i][j].setNeighbors(0);
             }
         }
     }
 
-    private void setNeigbors(int row, int col) {
+    private void setNeighborsHexagon(int row, int col) {
+        if(col%2 == 0) {
+            if(row != 0 && col != 0) {
+                field[row-1][col-1].addNeighbors();
+            }
+            if(row != 0) {
+                field[row-1][col].addNeighbors();
+            }
+            if(row != 0 && col != breadthAbs) {
+                field[row-1][col+1].addNeighbors();
+            }
+            if(col != breadthAbs) {
+                field[row][col+1].addNeighbors();
+            }
+            if(row != lengthAbs) {
+                field[row+1][col].addNeighbors();
+            }
+            if(col != 0) {
+                field[row][col-1].addNeighbors();
+            }
+        } else {
+            if(col != 0) {
+                field[row][col-1].addNeighbors();
+            }
+            if(row != 0) {
+                field[row-1][col].addNeighbors();
+            }
+            if(col != breadthAbs) {
+                field[row][col+1].addNeighbors();
+            }
+            if(row != lengthAbs && col != breadthAbs) {
+                field[row+1][col+1].addNeighbors();
+            }
+            if(row != lengthAbs) {
+                field[row+1][col].addNeighbors();
+            }
+            if(row != lengthAbs && col != 0) {
+                field[row+1][col-1].addNeighbors();
+            }
+        }
+    }
+
+    private void setNeighborsSquare(int row, int col) {
         if (row != 0) {
             field[row - 1][col].addNeighbors();
         }
@@ -116,19 +167,19 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         if (col != 0 && row != 0) {
             field[row - 1][col - 1].addNeighbors();
         }
-        if (row != 0 && col != length) {
+        if (row != 0 && col != lengthAbs) {
             field[row - 1][col + 1].addNeighbors();
         }
-        if (row != length && col != length) {
+        if (row != lengthAbs && col != lengthAbs) {
             field[row + 1][col + 1].addNeighbors();
         }
-        if (row != length) {
+        if (row != lengthAbs) {
             field[row + 1][col].addNeighbors();
         }
-        if (col != length) {
+        if (col != lengthAbs) {
             field[row][col + 1].addNeighbors();
         }
-        if (row != length && col != 0) {
+        if (row != lengthAbs && col != 0) {
             field[row + 1][col - 1].addNeighbors();
         }
     }
@@ -155,61 +206,61 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     private void setTaube() {
-        field[length / 2 - 3][length / 2 - 2].setStatus(true);
-        field[length / 2 - 2][length / 2 - 2].setStatus(true);
-        field[length / 2 - 3][length / 2 - 1].setStatus(true);
-        field[length / 2 - 2][length / 2 - 1].setStatus(true);
-        field[length / 2 - 1][length / 2 - 1].setStatus(true);
-        field[length / 2][length / 2 - 1].setStatus(true);
-        field[length / 2 + 1][length / 2 - 1].setStatus(true);
-        field[length / 2 + 2][length / 2 - 2].setStatus(true);
-        field[length / 2 + 2][length / 2 - 3].setStatus(true);
-        field[length / 2 + 1][length / 2 - 3].setStatus(true);
-        field[length / 2][length / 2 - 3].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 1][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 - 3].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 - 3].setStatus(true);
+        field[lengthAbs / 2][lengthAbs / 2 - 3].setStatus(true);
 
-        field[length / 2 - 3][length / 2 + 2].setStatus(true);
-        field[length / 2 - 2][length / 2 + 2].setStatus(true);
-        field[length / 2 - 3][length / 2 + 1].setStatus(true);
-        field[length / 2 - 2][length / 2 + 1].setStatus(true);
-        field[length / 2 - 1][length / 2 + 1].setStatus(true);
-        field[length / 2][length / 2 + 1].setStatus(true);
-        field[length / 2 + 1][length / 2 + 1].setStatus(true);
-        field[length / 2 + 2][length / 2 + 2].setStatus(true);
-        field[length / 2 + 2][length / 2 + 3].setStatus(true);
-        field[length / 2 + 1][length / 2 + 3].setStatus(true);
-        field[length / 2][length / 2 + 3].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 + 3].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 + 3].setStatus(true);
+        field[lengthAbs / 2][lengthAbs / 2 + 3].setStatus(true);
     }
 
     private void setFigure1() {
         //up
-        field[length / 2 - 1][length / 2 - 1].setStatus(true);
-        field[length / 2 - 2][length / 2 - 1].setStatus(true);
-        field[length / 2 - 3][length / 2 - 1].setStatus(true);
-        field[length / 2 - 3][length / 2].setStatus(true);
-        field[length / 2 - 3][length / 2 + 1].setStatus(true);
-        field[length / 2 - 2][length / 2 + 1].setStatus(true);
-        field[length / 2 - 1][length / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 - 3][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 2][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][lengthAbs / 2 + 1].setStatus(true);
         //down
-        field[length / 2 + 1][length / 2 - 1].setStatus(true);
-        field[length / 2 + 2][length / 2 - 1].setStatus(true);
-        field[length / 2 + 3][length / 2 - 1].setStatus(true);
-        field[length / 2 + 3][length / 2].setStatus(true);
-        field[length / 2 + 3][length / 2 + 1].setStatus(true);
-        field[length / 2 + 2][length / 2 + 1].setStatus(true);
-        field[length / 2 + 1][length / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 3][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 3][lengthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 + 3][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 2][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
     }
 
     private void setGliter() {
-        field[length / 2 - 1][length / 2].setStatus(true);
-        field[length / 2][length / 2 + 1].setStatus(true);
-        field[length / 2 + 1][length / 2 + 1].setStatus(true);
-        field[length / 2 + 1][length / 2].setStatus(true);
-        field[length / 2 + 1][length / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 1][lengthAbs / 2].setStatus(true);
+        field[lengthAbs / 2][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
     }
 
     private void setBlank() {
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
+        for (int i = 0; i < lengthAbs; i++) {
+            for (int j = 0; j < breadthAbs; j++) {
                 field[i][j].setStatus(false);
                 field[i][j].setNeighbors(0);
             }
@@ -228,11 +279,6 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
 
     public void setForm(int form) {
         this.form = form;
-        if(form == 1) {
-            t =  (size / 2);			//t = s sin(30)
-            r =  (int) (size * 0.8660254037844);	//r = s cos(30)
-            h=2*r;
-        }
     }
 
     @Override
@@ -259,13 +305,13 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         int rowHt = height / (size);
         int rowWid = width / (size);
         if (rowHt >= rowWid) {
-            length = rowHt;
+            breadthAbs = lengthAbs = rowHt;
             for (i = 0; i < rowHt + 1; i++) {
                 g.drawLine(0, i * size, width, i * size);
                 g.drawLine(i * size, 0, i * size, height);
             }
         } else {
-            length = rowWid;
+            breadthAbs = lengthAbs = rowWid;
             for (i = 0; i < rowWid + 1; i++) {
                 g.drawLine(0, i * size, width, i * size);
                 g.drawLine(i * size, 0, i * size, height);
@@ -286,13 +332,18 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private void paintHexagonGrid(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
+        t =  (size / 2);			//t = s sin(30)
+        r =  (int) (size * 0.8660254037844);	//r = s cos(30)
+        h=2*r;
+
         int width = getWidth();
         int height = getHeight();
         g.setColor(Color.black);
         // draw the rows and cols
         int rowHt = height / (h);
         int rowWid = width / (size + t);
-        length = rowHt;
+        lengthAbs = rowHt;
+        breadthAbs = rowWid;
         for(int i = 0; i < rowHt; i++) {
             for(int j = 0; j < rowWid; j++) {
                 Polygon polygon;
@@ -390,7 +441,6 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
             }
         } else if(form == 1) {
             Point point = mouseHexagon(e.getX(), e.getY());
-            System.out.println("new: " + newPoint.x + " " + newPoint.y + " old: " + point.x + " " + point.y);
             if (!(newPoint.x == point.x) || !(newPoint.y == point.y)) {
                 newPoint = point;
                 field[newPoint.y][newPoint.x].setStatus(!field[newPoint.y][newPoint.x].getStatus());
