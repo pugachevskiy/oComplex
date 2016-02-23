@@ -24,8 +24,8 @@ public class Controller implements ActionListener {
 
 
     public Controller() {
-        field = new Field(36, MEDIUMSIZE, cellColor);
         gui = new View(this);
+        field = new Field(36, MEDIUMSIZE, 0, cellColor);
         gui.init();
         field.setFigure(0);
         gui.addField(field);
@@ -72,7 +72,7 @@ public class Controller implements ActionListener {
         }
         gui.deleteField(field);
         field.remove(field);
-        field = new Field(length, size, cellColor);
+        field = new Field(length, size, gui.getCellForm(), cellColor);
         gui.addField(field);
         field.revalidate();
         field.repaint();
@@ -135,6 +135,11 @@ public class Controller implements ActionListener {
                 counter = 0;
                 gui.setCounter(String.valueOf(counter));
                 break;
+            case "Cell form":
+                field.setForm(gui.getCellForm());
+                field.repaint();
+                break;
+
         }
     }
 

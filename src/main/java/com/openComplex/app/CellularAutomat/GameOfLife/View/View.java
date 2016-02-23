@@ -20,7 +20,7 @@ public class View {
     List<JComboBox<String>> componentList;
     private JLabel speedLabel;
 
-    public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon", "Figure 1", "Gliter", "blank"}, CELLFORMFILL = {"Square"},//, "Hexagon" },
+    public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon", "Figure 1", "Gliter", "blank"}, CELLFORMFILL = {"Square", "Hexagon"},
             CELLGROESSEFILL = {"Small", "Medium", "Large"}, CELLFARBEFILL = {"Black", "Blue", "Green", "Yellow"},
             GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
     private JLabel counter;
@@ -252,6 +252,10 @@ public class View {
 
     public int getSpeedBox() {
         return geschwindigkeitBox.getSelectedIndex();
+    }
+
+    public int getCellForm() {
+        return cellFormBox.getSelectedIndex();
     }
 
     public int getSizeBox() {

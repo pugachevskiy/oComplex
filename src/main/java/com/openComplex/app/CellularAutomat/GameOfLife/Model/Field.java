@@ -13,10 +13,14 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private Cell[][] field;
     private int length;
     private Color cellColor;
-    private int newX = 0;
-    private int newY = 0;
+    private int newX = -1;
+    private int newY = -1;
+    private Point newPoint = new Point(-1, -1);
+    private int form = 0;
+    private int t, r, h;
 
-    public Field(int length, int size, Color color) {
+    public Field(int length, int size, int form, Color color) {
+        this.form = form;
         this.cellColor = color;
         this.size = size;
         this.length = length;
@@ -222,9 +226,27 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         repaint();
     }
 
+    public void setForm(int form) {
+        this.form = form;
+        if(form == 1) {
+            t =  (size / 2);			//t = s sin(30)
+            r =  (int) (size * 0.8660254037844);	//r = s cos(30)
+            h=2*r;
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if(form == 0) {
+            paintSquareGrid(g);
+        } else if(form == 1) {
+            paintHexagonGrid(g);
+        }
+
+    }
+
+    private void paintSquareGrid(Graphics g) {
         // paint Box
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -249,6 +271,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
                 g.drawLine(i * size, 0, i * size, height);
             }
         }
+
         // draw field
         g.setColor(cellColor);
         for (i = 0; i < rowHt + 1; i++) {
@@ -260,6 +283,84 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         }
     }
 
+    private void paintHexagonGrid(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+
+        int width = getWidth();
+        int height = getHeight();
+        g.setColor(Color.black);
+        // draw the rows and cols
+        int rowHt = height / (h);
+        int rowWid = width / (size + t);
+        length = rowHt;
+        for(int i = 0; i < rowHt; i++) {
+            for(int j = 0; j < rowWid; j++) {
+                Polygon polygon;
+                if(j%2 == 0) {
+                    polygon = hex(j*(size + t), i*h, t, r);
+                } else {
+                    polygon = hex(j*(size + t), i*h+r, t, r);
+                }
+                g2.setColor(Color.BLACK);
+                g2.drawPolygon(polygon);
+                if (field[i][j].getStatus()) {
+                    g2.setColor(cellColor);
+                    g2.fillPolygon(polygon);
+                } else {
+                    g2.setColor(Color.WHITE);
+                    g2.fillPolygon(polygon);
+                }
+            }
+        }
+    }
+
+
+    private Polygon hex(int x0, int y0, int t, int r) {
+        int[] cx, cy;
+        cx = new int[] {x0+t,x0+size+t,x0+size+t+t,x0+size+t,x0+t,x0};
+        cy = new int[] {y0,y0,y0+r,y0+r+r,y0+r+r,y0+r};
+        return new Polygon(cx, cy, 6);
+    }
+
+    private Point mouseHexagon(int xPos, int yPos) {
+        Point point = new Point();
+        int x = (xPos / (size+t));
+        int y = (yPos - (x%2)*r)/h;
+
+        int dx = xPos - x*(size+t);
+        int dy = yPos - y*h;
+
+        if (x%2==0) {
+            if (dy > r) {
+                if (dx * r /t < dy - r) {
+                    x--;
+                }
+            }
+            if (dy < r) {
+                if ((t - dx)*r/t > dy ) {
+                    x--;
+                    y--;
+                }
+            }
+        } else {
+            if (dy > h) {
+                if (dx * r/t < dy - h) {
+                    x--;
+                    y++;
+                }
+            }
+            if (dy < h) {
+                if ((t - dx)*r/t > dy - r) {
+                    x--;
+                }
+            }
+        }
+        point.x = x;
+        point.y = y;
+        return point;
+    }
+
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -268,17 +369,33 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mousePressed(MouseEvent e) {
-        field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
-        repaint();
+        if(form == 0) {
+            field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
+            repaint();
+        } else if (form == 1) {
+            Point point = mouseHexagon(e.getX(), e.getY());
+            field[point.y][point.x].setStatus(!field[point.y][point.x].getStatus());
+            repaint();
+        }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (!(newX == e.getX() / size) || !(newY == e.getY() / size)) {
-            field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
-            newX = e.getX() / size;
-            newY = e.getY() / size;
-            repaint();
+        if(form == 0) {
+            if (!(newX == e.getX() / size) || !(newY == e.getY() / size)) {
+                field[e.getY() / size][e.getX() / size].setStatus(!field[e.getY() / size][e.getX() / size].getStatus());
+                newX = e.getX() / size;
+                newY = e.getY() / size;
+                repaint();
+            }
+        } else if(form == 1) {
+            Point point = mouseHexagon(e.getX(), e.getY());
+            System.out.println("new: " + newPoint.x + " " + newPoint.y + " old: " + point.x + " " + point.y);
+            if (!(newPoint.x == point.x) || !(newPoint.y == point.y)) {
+                newPoint = point;
+                field[newPoint.y][newPoint.x].setStatus(!field[newPoint.y][newPoint.x].getStatus());
+                repaint();
+            }
         }
     }
 
