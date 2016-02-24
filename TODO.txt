@@ -30,7 +30,7 @@ General
 4. All programm must work in Full Screen mode(Size)
 
 Game of Life
-1. Hexagonal grid                                               _/
++1. Hexagonal grid                                              
 +2. Draw with Mouse Pressed
 +3. CSV delete ""
 4. Menu too small on large screen                               _/

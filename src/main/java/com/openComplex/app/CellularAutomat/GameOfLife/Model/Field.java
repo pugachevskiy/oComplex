@@ -82,6 +82,16 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         if (storageIndex > 0) {
             System.out.println("Pre: " + storageIndex);
             field = storage.get(storageIndex-1);
+            for(int i = 0; i < 50; i++) {
+                for(int j = 0; j < 50; j++) {
+                    if (storage.get(storageIndex-1)[i][j].getStatus()) {
+                        System.out.print(1);
+                    } else {
+                        System.out.print(0);
+                    }
+                }
+                System.out.println();
+            }
             storageIndex--;
             repaint();
             return true;
@@ -91,7 +101,18 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public boolean nextStep() {
+
         storage.add(storageIndex, field);
+        for(int i = 0; i < 50; i++) {
+            for(int j = 0; j < 50; j++) {
+                if (storage.get(storageIndex)[i][j].getStatus()) {
+                    System.out.print(1);
+                } else {
+                    System.out.print(0);
+                }
+            }
+            System.out.println();
+        }
         if(storageIndex <= storageLength) {
             storageIndex++;
         } else {
@@ -113,6 +134,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
             }
         }
         Cell[][] temp = field;
+
         boolean isAlive = false;
         for (int i = 0; i < lengthAbs; i++) {
             for (int j = 0; j < breadthAbs; j++) {

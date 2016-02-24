@@ -170,8 +170,7 @@ public class Controller implements ActionListener {
                 gui.setCounter(String.valueOf(counter));
                 break;
             case "Cell form":
-                field.setForm(gui.getCellForm());
-                field.repaint();
+                getSize();
                 break;
 
         }
