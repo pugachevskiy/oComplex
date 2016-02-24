@@ -25,7 +25,7 @@ public class Controller implements ActionListener {
 
     public Controller() {
         gui = new View(this);
-        field = new Field(36, MEDIUMSIZE, 0, cellColor);
+        field = new Field(36, 36, MEDIUMSIZE, 0, cellColor);
         gui.init();
         field.setFigure(0);
         gui.addField(field);
@@ -63,21 +63,35 @@ public class Controller implements ActionListener {
 
 
     private void createField() {
-        int length;
-        int rowHt = field.getHeight() / (size);
-        int rowWid = field.getWidth() / (size);
-
-        System.out.println(rowHt);
-        System.out.println(rowWid);
-
-        if (rowHt >= rowWid) {
-            length = rowHt;
-        } else {
-            length = rowWid;
+        int lengthAbs = 0;
+        int breadthAbs = 0;
+        int rowHt;
+        int rowWid;
+        int height = field.getHeight();
+        int width = field.getWidth();
+        if(gui.getCellForm() == 0) {
+            rowHt = height / (size);
+            rowWid = width / (size);
+            if (rowHt >= rowWid) {
+                lengthAbs = breadthAbs = rowHt;
+            } else {
+                lengthAbs = breadthAbs = rowWid;
+            }
+        } else if(gui.getCellForm() == 1) {
+            int t =  (size / 2);			//t = s sin(30)
+            int r =  (int) (size * 0.8660254037844);	//r = s cos(30)
+            int h=2*r;
+            rowHt = height / (h);
+            rowWid = width / (size + t);
+            lengthAbs = rowHt;
+            breadthAbs = rowWid;
         }
+
+
+
         gui.deleteField(field);
         field.remove(field);
-        field = new Field(length, size, gui.getCellForm(), cellColor);
+        field = new Field(lengthAbs, breadthAbs, size, gui.getCellForm(), cellColor);
         gui.addField(field);
         field.revalidate();
         field.repaint();
@@ -142,6 +156,7 @@ public class Controller implements ActionListener {
                 break;
             case "Cell form":
                 field.setForm(gui.getCellForm());
+                field.setFigure(gui.getFigureBox());
                 field.repaint();
                 break;
 

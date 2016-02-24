@@ -20,10 +20,11 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private int form = 0;
     private int t, r, h;
 
-    public Field(int length, int size, int form, Color color) {
+    public Field(int lengthAbs, int breadthAbs, int size, int form, Color color) {
         this.form = form;
         this.cellColor = color;
-        lengthAbs = breadthAbs = length;
+        this.lengthAbs = lengthAbs;
+        this.breadthAbs = breadthAbs;
         this.size = size;
         init();
         this.addMouseListener(this);
@@ -69,8 +70,6 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public boolean nextStep() {
-        System.out.println(lengthAbs);
-        System.out.println(breadthAbs);
 
         for (int i = 0; i < lengthAbs; i++) {
             for (int j = 0; j < breadthAbs; j++) {
@@ -186,6 +185,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
 
     public void setFigure(int index) {
         setBlank();
+
         switch (index) {
             case 0:
                 setTaube();
@@ -206,56 +206,56 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     private void setTaube() {
-        field[lengthAbs / 2 - 3][lengthAbs / 2 - 2].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 - 2].setStatus(true);
-        field[lengthAbs / 2 - 3][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 - 1][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 - 2].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 - 3].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 - 3].setStatus(true);
-        field[lengthAbs / 2][lengthAbs / 2 - 3].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 1][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 - 2].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 - 3].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 - 3].setStatus(true);
+        field[lengthAbs / 2][breadthAbs / 2 - 3].setStatus(true);
 
-        field[lengthAbs / 2 - 3][lengthAbs / 2 + 2].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 + 2].setStatus(true);
-        field[lengthAbs / 2 - 3][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 - 1][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 + 2].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 + 3].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 + 3].setStatus(true);
-        field[lengthAbs / 2][lengthAbs / 2 + 3].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 + 2].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 + 3].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 + 3].setStatus(true);
+        field[lengthAbs / 2][breadthAbs / 2 + 3].setStatus(true);
     }
 
     private void setFigure1() {
         //up
-        field[lengthAbs / 2 - 1][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 - 3][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 - 3][lengthAbs / 2].setStatus(true);
-        field[lengthAbs / 2 - 3][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 - 2][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 - 1][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 - 3][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 2][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 - 1][breadthAbs / 2 + 1].setStatus(true);
         //down
-        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 + 3][lengthAbs / 2 - 1].setStatus(true);
-        field[lengthAbs / 2 + 3][lengthAbs / 2].setStatus(true);
-        field[lengthAbs / 2 + 3][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 2][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 3][breadthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 + 3][breadthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 + 3][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 2][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 + 1].setStatus(true);
     }
 
     private void setGliter() {
-        field[lengthAbs / 2 - 1][lengthAbs / 2].setStatus(true);
-        field[lengthAbs / 2][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 + 1].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2].setStatus(true);
-        field[lengthAbs / 2 + 1][lengthAbs / 2 - 1].setStatus(true);
+        field[lengthAbs / 2 - 1][breadthAbs / 2].setStatus(true);
+        field[lengthAbs / 2][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 + 1].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2].setStatus(true);
+        field[lengthAbs / 2 + 1][breadthAbs / 2 - 1].setStatus(true);
     }
 
     private void setBlank() {
