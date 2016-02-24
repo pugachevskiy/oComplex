@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Field extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;
@@ -19,6 +21,10 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private Point newPoint = new Point(-1, -1);
     private int form = 0;
     private int t, r, h;
+    private int storageLength = 50;
+    private int storageIndex = 0;
+
+    private LinkedList<Cell[][]> storage = new LinkedList<>();
 
     public Field(int lengthAbs, int breadthAbs, int size, int form, Color color) {
         this.form = form;
@@ -54,22 +60,44 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
 
     }
 
-    public void init() {
+    private void init() {
         field = new Cell[200][200];
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
                 field[i][j] = new Cell(i, j, false, Color.BLACK);
             }
         }
+        storage.removeAll(storage);
+        storageIndex = 0;
     }
+
 
     public void setColor(Color color) {
         this.cellColor = color;
         this.repaint();
+    }
 
+    public boolean previousStep() {
+
+        if (storageIndex > 0) {
+            System.out.println("Pre: " + storageIndex);
+            field = storage.get(storageIndex-1);
+            storageIndex--;
+            repaint();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean nextStep() {
+        storage.add(storageIndex, field);
+        if(storageIndex <= storageLength) {
+            storageIndex++;
+        } else {
+            storage.remove(0);
+        }
+        System.out.println("Next: " + storageIndex);
 
         for (int i = 0; i < lengthAbs; i++) {
             for (int j = 0; j < breadthAbs; j++) {
@@ -101,12 +129,15 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
                 }
             }
         }
-        resetNeigbours();
+
+
+
+        resetNeighbours();
         repaint();
         return isAlive;
     }
 
-    private void resetNeigbours() {
+    private void resetNeighbours() {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 field[i][j].setNeighbors(0);

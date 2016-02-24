@@ -53,11 +53,15 @@ public class Controller implements ActionListener {
 
     private void stopThread() {
         lifegoeson = false;
-        gui.activateButtons();
     }
 
     private void updateCounter() {
         counter++;
+        gui.setCounter(String.valueOf(counter));
+    }
+
+    private void lowerCounter() {
+        counter--;
         gui.setCounter(String.valueOf(counter));
     }
 
@@ -105,10 +109,20 @@ public class Controller implements ActionListener {
             case "Start":
                 lifegoeson = true;
                 gui.deactivateButtons();
+                gui.deactivatePreviousButton();
                 start();
                 break;
             case "Stop":
                 stopThread();
+                gui.activateButtons();
+                gui.activatePreviousButton();
+                break;
+            case "Previous":
+                if(field.previousStep()) {
+                    lowerCounter();
+                } else {
+                    gui.deactivatePreviousButton();
+                }
                 break;
             case "Next":
                 if (field.nextStep()) {
@@ -116,6 +130,7 @@ public class Controller implements ActionListener {
                 } else {
                     lifegoeson = false;
                 }
+                gui.activatePreviousButton();
                 break;
             case "Exit":
                 gui.frameClose();
@@ -156,7 +171,6 @@ public class Controller implements ActionListener {
                 break;
             case "Cell form":
                 field.setForm(gui.getCellForm());
-                field.setFigure(gui.getFigureBox());
                 field.repaint();
                 break;
 

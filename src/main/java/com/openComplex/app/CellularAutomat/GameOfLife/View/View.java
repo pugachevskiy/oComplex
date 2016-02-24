@@ -15,7 +15,7 @@ public class View {
 
     private Controller controller;
     private JFrame mainFrame;
-    private JButton stopButton, startButton, nextButton, endButton;
+    private JButton stopButton, startButton, nextButton, endButton, previousButton;
     private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
     List<JComboBox<String>> componentList;
     private JLabel speedLabel;
@@ -134,7 +134,7 @@ public class View {
 
     private JPanel createButtonsPanel() {
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 4));
+        buttonPanel.setLayout(new GridLayout(1, 5));
         buttonPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
         startButton = new JButton("Start");
@@ -146,6 +146,9 @@ public class View {
         stopButton.setEnabled(false);
         stopButton.setActionCommand("Stop");
 
+        previousButton = new JButton("Previous");
+        previousButton.setEnabled(false);
+        previousButton.setActionCommand("Previous");
 
         nextButton = new JButton("Next");
         nextButton.setEnabled(true);
@@ -159,6 +162,7 @@ public class View {
 
         buttonPanel.add(startButton);
         buttonPanel.add(stopButton);
+        buttonPanel.add(previousButton);
         buttonPanel.add(nextButton);
         buttonPanel.add(endButton);
 
@@ -209,6 +213,14 @@ public class View {
         cellGroeßeBox.setEnabled(true);
     }
 
+    public void activatePreviousButton() {
+        previousButton.setEnabled(true);
+    }
+
+    public void deactivatePreviousButton() {
+        previousButton.setEnabled(false);
+    }
+
     // add Field Jpanel to JFrame
     public void addField(JPanel panel) {
         mainFrame.add(panel, BorderLayout.CENTER);
@@ -222,6 +234,7 @@ public class View {
         startButton.addActionListener(listener);
         stopButton.addActionListener(listener);
         endButton.addActionListener(listener);
+        previousButton.addActionListener(listener);
         nextButton.addActionListener(listener);
         cellFarbeBox.addActionListener(listener);
         cellFormBox.addActionListener(listener);
