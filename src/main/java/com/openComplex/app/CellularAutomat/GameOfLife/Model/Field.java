@@ -103,6 +103,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     public boolean nextStep() {
 
         storage.add(storageIndex, field);
+        System.out.println("Next: " + storageIndex);
         for(int i = 0; i < 50; i++) {
             for(int j = 0; j < 50; j++) {
                 if (storage.get(storageIndex)[i][j].getStatus()) {
@@ -118,7 +119,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         } else {
             storage.remove(0);
         }
-        System.out.println("Next: " + storageIndex);
+
 
         for (int i = 0; i < lengthAbs; i++) {
             for (int j = 0; j < breadthAbs; j++) {

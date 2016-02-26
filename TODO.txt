@@ -34,7 +34,7 @@ Game of Life
 +2. Draw with Mouse Pressed
 +3. CSV delete ""
 4. Menu too small on large screen                               _/
-5. Colorbox
++5. Colorbox
 6. Preview step                                                 _/
 7. Slider for speed change in ms                                _/
 
@@ -83,4 +83,4 @@ Lorentz
 +3. New graph for new start
 
 Hegselmann
-1. Just do it. :)
+1. Just do it. :)                                           _/

@@ -15,7 +15,7 @@ public class View {
 
     private Controller controller;
     private JFrame mainFrame;
-    private JButton stopButton, startButton, nextButton, endButton, previousButton;
+    private JButton stopButton, startButton, nextButton, endButton, previousButton, cellColorButton;
     private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
     List<JComboBox<String>> componentList;
     private JLabel speedLabel;
@@ -25,7 +25,7 @@ public class View {
             GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
     private JLabel counter;
 
-    public static final String[] labelTitleList = {"Initial model", "Cell Form", "Size of cells", "Cell color"};
+    public static final String[] labelTitleList = {"Initial model", "Cell Form", "Size of cells"};
     private JMenuItem saveItem, exitItem, ruleItem, loadItem;
 
     public View(Controller controller) {
@@ -84,6 +84,9 @@ public class View {
         optionsPanel.setLayout(new GridLayout(1, 6));
         optionsPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
+        cellColorButton = new JButton("Color");
+        cellColorButton.setActionCommand("Color");
+
         for (int i = 0; i < labelTitleList.length; i++) {
             JLabel tempLabel = new JLabel(labelTitleList[i]);
             tempLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,6 +99,10 @@ public class View {
 
             optionsPanel.add(tempPanel);
         }
+
+        cellColorButton = new JButton("Cell Color");
+        cellColorButton.setActionCommand("Cell color");
+        optionsPanel.add(cellColorButton);
 
         JPanel sliderPanel = new JPanel();
         sliderPanel.setLayout(new GridLayout(2, 1));
@@ -191,7 +198,7 @@ public class View {
         geschwindigkeitBox.setSelectedIndex(1);
         geschwindigkeitBox.setActionCommand("Speed");
 
-        componentList = Arrays.asList(anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox);
+        componentList = Arrays.asList(anfangsBedingungBox, cellFormBox, cellGroeßeBox);
     }
 
     // On/Off buttons on Press start/stop button
@@ -231,6 +238,7 @@ public class View {
     }
 
     public void addListener(ActionListener listener) {
+        cellColorButton.addActionListener(listener);
         startButton.addActionListener(listener);
         stopButton.addActionListener(listener);
         endButton.addActionListener(listener);

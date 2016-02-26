@@ -149,7 +149,7 @@ public class Controller implements ActionListener {
                 getSpeed();
                 break;
             case "Cell color":
-                getColor();
+                colorChooser();
                 break;
             case "Save":
                 try {
