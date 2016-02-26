@@ -3,6 +3,7 @@ package com.openComplex.app.CellularAutomat.GameOfLife.Controller;
 import com.openComplex.app.CellularAutomat.GameOfLife.Model.Field;
 import com.openComplex.app.CellularAutomat.GameOfLife.View.View;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -227,7 +228,14 @@ public class Controller implements ActionListener {
         field.setFigure(gui.getFigureBox());
     }
 
+    private void colorChooser() {
+        cellColor = JColorChooser.showDialog(null,
+                "Farbauswahl", null);
+        field.setColor(cellColor);
+    }
+
     public void updateSpeed(int speed) {
         this.gamespeed = speed;
     }
 }
+
