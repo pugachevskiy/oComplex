@@ -1,5 +1,7 @@
 package testPrjs;
 
+import com.openComplex.app.DynamicalSystems.LorenzAttractor.StdDraw;
+
 import java.awt.Font;
 // import java.awt.Font;
 import java.util.ArrayList;

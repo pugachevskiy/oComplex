@@ -11,6 +11,8 @@ package testPrjs;
  *
  ******************************************************************************/
 
+import com.openComplex.app.DynamicalSystems.LorenzAttractor.StdDraw;
+
 import java.awt.Color;
 
 public class Lorenz { 
