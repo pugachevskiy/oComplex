@@ -1,4 +1,4 @@
-package com.openComplex.app.CellularAutomat.ModelOfHegselmann;
+package com.openComplex.app.CellularAutomat.ModelOfHegselmann.Model;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,6 @@ public class Agent {
         this.agentNumber = agentNumber;
         this.epsilon = epsilon;
         x = initialX;
-
     }
 
     public void setX (double[] x) {
