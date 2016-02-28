@@ -1,5 +1,7 @@
 package testPrjs;
 
+import com.openComplex.app.DynamicalSystems.LorenzAttractor.StdDraw;
+
 /******************************************************************************
  *  Compilation:  javac Butterfly.java
  *  Execution:    java Butterfly

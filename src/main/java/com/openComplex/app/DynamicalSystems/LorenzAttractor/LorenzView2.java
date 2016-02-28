@@ -4,40 +4,42 @@ package com.openComplex.app.DynamicalSystems.LorenzAttractor;
  * on 04/10/15.
  */
 
-import org.math.plot.Plot3DPanel;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class LorenzView2 {
-    private JFrame frame;
     private JSlider coeffA, coeffB, coeffC;
+    private JSlider x, y , points;
     private JButton startButton, clearButton;
-    private Plot3DPanel plot;
-
-    int temp = 0;
 
     public LorenzView2() {
         init();
     }
 
     public void init() {
-        frame = new JFrame("openCoSy - Lorenz Attraktor");
+        JFrame frame = new JFrame("openCoSy - Lorenz Attraktor");
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(700, 700));
-
-        plot = new Plot3DPanel();
-        frame.add(plot, BorderLayout.CENTER);
-
         frame.add(createSliderPanel(), BorderLayout.NORTH);
         frame.add(createStartStopPanel(), BorderLayout.SOUTH);
+        frame.pack();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
         frame.setVisible(true);
 
-    }
+        frame.addWindowListener(new WindowAdapter() {
 
+            public void windowClosing(WindowEvent evt) {
+               StdDraw.closeFrame();
+            }
+        });
+
+    }
 
     private JPanel createStartStopPanel() {
         JPanel startStopPanel = new JPanel();
@@ -57,13 +59,20 @@ public class LorenzView2 {
     private JPanel createSliderPanel() {
         JPanel sliderPanel = new JPanel();
 
-        sliderPanel.setLayout(new GridLayout(1, 3));
+        sliderPanel.setLayout(new GridLayout(2, 3));
         sliderPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
         sliderPanel.add(createSingleSlider(coeffA = new JSlider(-40, 40), "A"));
         sliderPanel.add(createSingleSlider(coeffB = new JSlider(-40, 40), "B"));
         sliderPanel.add(createSingleSlider(coeffC = new JSlider(-40, 40), "C"));
 
+        sliderPanel.add(createSingleSlider(x = new JSlider(-25, 25), "x"));
+        sliderPanel.add(createSingleSlider(y = new JSlider(0, 50), "y"));
+        sliderPanel.add(createSingleSlider(points = new JSlider(1000, 101000), "Points"));
+        points.setPaintLabels(false);
+        points.setMajorTickSpacing(50000);
+        points.setMinorTickSpacing(25000);
+        points.setPaintTicks(true);
         return sliderPanel;
     }
 
@@ -110,6 +119,30 @@ public class LorenzView2 {
         return (double) coeffC.getValue();
     }
 
+    public void setTextx(String a) {
+        x.setValue((int) Double.parseDouble(a));
+    }
+
+    public void setTexty(String b) {
+        y.setValue((int) Double.parseDouble(b));
+    }
+
+    public void setTextPoints(String c) {
+        points.setValue( Integer.parseInt(c));
+    }
+
+    public double getTextx() {
+        return (double) x.getValue();
+    }
+
+    public double getTexty() {
+        return (double) y.getValue();
+    }
+
+    public int getTextPoints() {
+        return points.getValue();
+    }
+
     public void addListener(ActionListener listener) {
         startButton.addActionListener(listener);
         clearButton.addActionListener(listener);
@@ -117,35 +150,33 @@ public class LorenzView2 {
 
 
     public void clear() {
-        plot.removeAll();
-        plot = new Plot3DPanel();
-        frame.add(plot, BorderLayout.CENTER);
-        temp = 0;
-        plot.revalidate();
-    }
-
-    public void doPaint(double[] xArray, double[] yArray, double[] zArray) {
-        if (temp > 0)
-            plot.removePlot(0);
-        plot.addLinePlot("Lorenz", xArray, yArray, zArray);
-        temp++;
-        plot.revalidate();
+        StdDraw.clear(StdDraw.LIGHT_GRAY);
+        StdDraw.setXscale(-25, 25);
+        StdDraw.setYscale(0, 50);
     }
 
     public void activateControls() {
-        startButton.setEnabled(true);
+        startButton.setText("Draw");
+        startButton.setActionCommand("Draw");
         clearButton.setEnabled(true);
         coeffA.setEnabled(true);
         coeffB.setEnabled(true);
         coeffC.setEnabled(true);
+        x.setEnabled(true);
+        y.setEnabled(true);
+        points.setEnabled(true);
     }
 
     public void deactivateControls() {
-        startButton.setEnabled(false);
+        startButton.setText("Stop");
+        startButton.setActionCommand("Stop");
         clearButton.setEnabled(false);
         coeffA.setEnabled(false);
         coeffB.setEnabled(false);
         coeffC.setEnabled(false);
+        x.setEnabled(false);
+        y.setEnabled(false);
+        points.setEnabled(false);
     }
 }
 

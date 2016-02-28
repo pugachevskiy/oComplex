@@ -6,10 +6,9 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 /**
- *  on 07/10/15.
+ * on 07/10/15.
  */
 public class AnharmonicOscillator implements ActionListener {
-
 
     private boolean stop = false; //go/pause
     private int step;
@@ -23,13 +22,18 @@ public class AnharmonicOscillator implements ActionListener {
 
         gui.addComponentListener(new ComponentListener() {
             public void componentResized(ComponentEvent e) {
-                model.updateSize(gui.getWidth(), gui.calculatePanelHeight()-100);
+                model.updateSize(gui.getWidth(), gui.calculatePanelHeight() - 100);
             }
 
             @Override
-            public void componentMoved(ComponentEvent e) { }
-            public void componentShown(ComponentEvent e) { }
-            public void componentHidden(ComponentEvent e) {}
+            public void componentMoved(ComponentEvent e) {
+            }
+
+            public void componentShown(ComponentEvent e) {
+            }
+
+            public void componentHidden(ComponentEvent e) {
+            }
         });
         gui.addPanel(model);
     }
@@ -42,13 +46,11 @@ public class AnharmonicOscillator implements ActionListener {
                 while (stop) {
                     try {
                         sleep(10);
-                            model.update();
-                            step++;
+                        model.update();
+                        step++;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
                 }//while
             }
         }.start();
@@ -96,6 +98,4 @@ public class AnharmonicOscillator implements ActionListener {
                 break;
         }
     }
-
-
 }
