@@ -15,9 +15,12 @@ public class Controller implements ActionListener {
 
     public Controller() {
         gui = new View();
-        field = new Field(10, 1, 0.15, 10);
+        field = new Field(10, 1, 10, 10);
         gui.setActionListener(this);
         gui.addField(field);
+        for(int i = 0; i < 9; i++) {
+            field.nextStep();
+        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {

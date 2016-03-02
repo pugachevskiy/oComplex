@@ -17,7 +17,7 @@ public class Field extends JPanel {
     private int maxStep;
     private double[][][] savedSteps;
     private int step = 0;
-    private int selectedDimension = 1;
+    private int selectedDimension = 0;
 
     public Field(int numberOfAgents, int dimension, double epsilon, int maxStep) {
         this.numberOfAgents = numberOfAgents;
@@ -49,12 +49,13 @@ public class Field extends JPanel {
 
     public void init() {
         step = 0;
-        savedSteps = new double[maxStep][numberOfAgents][];
+        savedSteps = new double[maxStep][numberOfAgents][dimension];
         Agent agent;
         double[] initialX;
         for(int i = 0; i < numberOfAgents; i++) {
-            initialX = initXRandom();
+            initialX = initX(i);
             agent = new Agent(i, initialX, epsilon);
+            savedSteps[step][i] = agent.getX();
             agents.add(agent);
         }
         for(int i = 0; i < numberOfAgents; i++) {
@@ -87,13 +88,19 @@ public class Field extends JPanel {
             agent = agents.get(i);
             agent.calculateX();
             savedSteps[step][i] = agent.getX();
+            for(int j = 0; j < savedSteps[0][0].length; j++) {
+                System.out.print(savedSteps[step][i][j] + " ");
+            }
+            System.out.println();
             agents.set(i, agent);
         }
+        System.out.println();
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
             agent.calculateNeighborhood(agents);
             agents.set(i, agent);
         }
+        repaint();
     }
 
     @Override
@@ -113,10 +120,59 @@ public class Field extends JPanel {
         g.drawLine(xOffset, height-yOffset, xOffset-5, height-yOffset);
         g.drawLine(xOffset, yOffset, xOffset-5, yOffset);
 
-        for(int i = 0; i < numberOfAgents; i++) {
-            for(int j = 0; j < step; j++) {
+        ArrayList<Color> colors = createColorGradient();
+        double value;
+        int xAxisLength = width - 2* xOffset;
+        int yAxisLength = height - 2* yOffset;
+        int xPosStart;
+        int yPosStart;
+        int xPosStop = 0;
+        int yPosStop = 0;
 
+        for(int i = 0; i < numberOfAgents; i++) {
+            g.setColor(colors.get(i));
+            g.drawRect(10*i, 10*i, 5, 5);
+            for(int j = 0; j < step; j++) {
+                value = savedSteps[j][i][selectedDimension];
+                if(j == 0) {
+                    xPosStart = xOffset;
+                    yPosStart = (int) (value * yAxisLength + yOffset);
+                    xPosStop = xOffset;
+                    yPosStop = (int) (value * yAxisLength + yOffset);
+                } else {
+                    xPosStart = xPosStop;
+                    yPosStart = yPosStop;
+                    xPosStop = j/step * xAxisLength + xOffset;
+                    yPosStop = (int) (value * yAxisLength + yOffset);
+                }
+                g.drawLine(xPosStart, yPosStart, xPosStop, yPosStop);
             }
         }
+    }
+
+
+
+    private ArrayList<Color> createColorGradient() {
+        int colorIndex = (int) Math.ceil((double)numberOfAgents/(double)6);
+        ArrayList<Color> colors = new ArrayList<Color>();
+        for (int r=0; r<colorIndex; r++){
+            colors.add(new Color(r*255/colorIndex,       255,         0));
+        }
+        for (int g=colorIndex; g>0; g--) {
+            colors.add(new Color(      255, g*255/colorIndex,         0));
+        }
+        for (int b=0; b<colorIndex; b++) {
+            colors.add(new Color(      255,         0, b*255/colorIndex));
+        }
+        for (int r=colorIndex; r>0; r--) {
+            colors.add(new Color(r*255/colorIndex,         0,       255));
+        }
+        for (int g=0; g<colorIndex; g++) {
+            colors.add(new Color(        0, g*255/colorIndex,       255));
+        }
+        for (int b=colorIndex; b>0; b--) {
+            colors.add(new Color(        0,       255, b*255/colorIndex));
+        }
+        return colors;
     }
 }
