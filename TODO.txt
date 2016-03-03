@@ -35,8 +35,9 @@ Game of Life
 +3. CSV delete ""
 4. Menu too small on large screen                               _/
 +5. Colorbox
-6. Preview step                                                 _/
++6. Preview step
 7. Slider for speed change in ms                                _/
++8. Neumann/Moore-Neighborhood
 
 Wolframm Rule
 +1. ActionListener for JTextField(apply Rule by Enter)

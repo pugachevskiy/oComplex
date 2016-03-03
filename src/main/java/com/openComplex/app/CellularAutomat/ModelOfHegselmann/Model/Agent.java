@@ -31,7 +31,6 @@ public class Agent {
             x[i] = 0.0;
             for(int j = 0; j < numberOfNeighbor; j++) {
                 x[i] = x[i] + neighbors.get(j).getX()[i];
-                System.out.println();
             }
         }
         for(int i = 0; i < x.length; i++) {

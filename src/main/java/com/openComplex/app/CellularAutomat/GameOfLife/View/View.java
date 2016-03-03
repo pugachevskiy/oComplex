@@ -16,16 +16,16 @@ public class View {
     private Controller controller;
     private JFrame mainFrame;
     private JButton stopButton, startButton, nextButton, endButton, previousButton, cellColorButton;
-    private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, cellFarbeBox, geschwindigkeitBox;
+    private JComboBox<String> anfangsBedingungBox, cellFormBox, cellGroeßeBox, geschwindigkeitBox, neighborBox;
     List<JComboBox<String>> componentList;
     private JLabel speedLabel;
 
     public static final String[] ANFANGSBEDINGUNGFILL = {"Pigeon", "Figure 1", "Gliter", "blank"}, CELLFORMFILL = {"Square", "Hexagon"},
-            CELLGROESSEFILL = {"Small", "Medium", "Large"}, CELLFARBEFILL = {"Black", "Blue", "Green", "Yellow"},
-            GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"};
+            CELLGROESSEFILL = {"Small", "Medium", "Large"},
+            GESCHWINDIGKEITFILL = {"Slow", "Normal", "Fast"}, NEIGHBORFILL = {"Moore", "Von-Neumann", "Extended Moore"};
     private JLabel counter;
 
-    public static final String[] labelTitleList = {"Initial model", "Cell Form", "Size of cells"};
+    public static final String[] labelTitleList = {"Initial model", "Cell Form", "Size of cells", "Neighborhood"};
     private JMenuItem saveItem, exitItem, ruleItem, loadItem;
 
     public View(Controller controller) {
@@ -37,7 +37,7 @@ public class View {
 
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        mainFrame.setPreferredSize(new Dimension(600, 600));
+        mainFrame.setPreferredSize(new Dimension(800, 800));
         initComboBoxes();
 
         mainFrame.setJMenuBar(addMenu());
@@ -81,7 +81,7 @@ public class View {
 
     private JPanel createOptionsPanel() {
         JPanel optionsPanel = new JPanel();
-        optionsPanel.setLayout(new GridLayout(1, 6));
+        optionsPanel.setLayout(new GridLayout(1, 7));
         optionsPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
         cellColorButton = new JButton("Color");
@@ -191,14 +191,14 @@ public class View {
         cellGroeßeBox.setActionCommand("Size of cells");
         cellGroeßeBox.setSelectedIndex(1);
 
-        cellFarbeBox = new JComboBox<>(CELLFARBEFILL);
-        cellFarbeBox.setActionCommand("Cell color");
+        neighborBox = new JComboBox<>(NEIGHBORFILL);
+        neighborBox.setActionCommand("Neighborhood");
 
         geschwindigkeitBox = new JComboBox<>(GESCHWINDIGKEITFILL);
         geschwindigkeitBox.setSelectedIndex(1);
         geschwindigkeitBox.setActionCommand("Speed");
 
-        componentList = Arrays.asList(anfangsBedingungBox, cellFormBox, cellGroeßeBox);
+        componentList = Arrays.asList(anfangsBedingungBox, cellFormBox, cellGroeßeBox, neighborBox);
     }
 
     // On/Off buttons on Press start/stop button
@@ -244,7 +244,7 @@ public class View {
         endButton.addActionListener(listener);
         previousButton.addActionListener(listener);
         nextButton.addActionListener(listener);
-        cellFarbeBox.addActionListener(listener);
+        neighborBox.addActionListener(listener);
         cellFormBox.addActionListener(listener);
         cellGroeßeBox.addActionListener(listener);
         anfangsBedingungBox.addActionListener(listener);
@@ -267,9 +267,7 @@ public class View {
         return anfangsBedingungBox.getSelectedIndex();
     }
 
-    public int getColorBox() {
-        return cellFarbeBox.getSelectedIndex();
-    }
+    public int getNeighborHood() {return neighborBox.getSelectedIndex();}
 
     public int getSpeedBox() {
         return geschwindigkeitBox.getSelectedIndex();

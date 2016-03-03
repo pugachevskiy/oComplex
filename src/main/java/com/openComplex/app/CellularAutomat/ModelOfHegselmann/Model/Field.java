@@ -3,6 +3,7 @@ package com.openComplex.app.CellularAutomat.ModelOfHegselmann.Model;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by MatthiasFuchs on 28.02.16.
@@ -15,9 +16,10 @@ public class Field extends JPanel {
     private ArrayList<Agent> agents = new ArrayList<>();
     private double epsilon;
     private int maxStep;
-    private double[][][] savedSteps;
     private int step = 0;
     private int selectedDimension = 0;
+
+
 
     public Field(int numberOfAgents, int dimension, double epsilon, int maxStep) {
         this.numberOfAgents = numberOfAgents;
@@ -49,13 +51,12 @@ public class Field extends JPanel {
 
     public void init() {
         step = 0;
-        savedSteps = new double[maxStep][numberOfAgents][dimension];
         Agent agent;
         double[] initialX;
         for(int i = 0; i < numberOfAgents; i++) {
             initialX = initX(i);
             agent = new Agent(i, initialX, epsilon);
-            savedSteps[step][i] = agent.getX();
+            //System.out.println("step: " + step + " agent: " + i + " value: " + savedSteps[step][i][0]);
             agents.add(agent);
         }
         for(int i = 0; i < numberOfAgents; i++) {
@@ -81,20 +82,17 @@ public class Field extends JPanel {
         return x;
     }
 
+    private void printSavedSteps() {
+    }
+
     public void nextStep() {
         step++;
         Agent agent;
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
             agent.calculateX();
-            savedSteps[step][i] = agent.getX();
-            for(int j = 0; j < savedSteps[0][0].length; j++) {
-                System.out.print(savedSteps[step][i][j] + " ");
-            }
-            System.out.println();
             agents.set(i, agent);
         }
-        System.out.println();
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
             agent.calculateNeighborhood(agents);
@@ -128,12 +126,11 @@ public class Field extends JPanel {
         int yPosStart;
         int xPosStop = 0;
         int yPosStop = 0;
-
         for(int i = 0; i < numberOfAgents; i++) {
             g.setColor(colors.get(i));
-            g.drawRect(10*i, 10*i, 5, 5);
             for(int j = 0; j < step; j++) {
-                value = savedSteps[j][i][selectedDimension];
+                value = 0.0; 
+                //System.out.println("step: " + j + " agent: " + i + " value: " + savedSteps[j][i][selectedDimension]);
                 if(j == 0) {
                     xPosStart = xOffset;
                     yPosStart = (int) (value * yAxisLength + yOffset);
@@ -145,6 +142,7 @@ public class Field extends JPanel {
                     xPosStop = j/step * xAxisLength + xOffset;
                     yPosStop = (int) (value * yAxisLength + yOffset);
                 }
+                //System.out.println(i + " PosStart: " + xPosStart + " " + yPosStart + " PosStop: " + xPosStop + " " + yPosStop);
                 g.drawLine(xPosStart, yPosStart, xPosStop, yPosStop);
             }
         }

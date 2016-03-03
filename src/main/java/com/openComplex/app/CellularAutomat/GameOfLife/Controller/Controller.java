@@ -26,7 +26,7 @@ public class Controller implements ActionListener {
 
     public Controller() {
         gui = new View(this);
-        field = new Field(36, 36, MEDIUMSIZE, 0, cellColor);
+        field = new Field(36, 36, MEDIUMSIZE, 0, 0, cellColor);
         gui.init();
         field.setFigure(0);
         gui.addField(field);
@@ -96,7 +96,7 @@ public class Controller implements ActionListener {
 
         gui.deleteField(field);
         field.remove(field);
-        field = new Field(lengthAbs, breadthAbs, size, gui.getCellForm(), cellColor);
+        field = new Field(lengthAbs, breadthAbs, size, gui.getCellForm(), gui.getNeighborHood(), cellColor);
         gui.addField(field);
         field.revalidate();
         field.repaint();
@@ -148,6 +148,9 @@ public class Controller implements ActionListener {
             case "Speed":
                 getSpeed();
                 break;
+            case "Neighborhood":
+                field.setNeighborhood(gui.getNeighborHood());
+                break;
             case "Cell color":
                 colorChooser();
                 break;
@@ -177,24 +180,7 @@ public class Controller implements ActionListener {
         }
     }
 
-    private void getColor() {
-        int index = gui.getColorBox();
-        switch (index) {
-            case 0:
-                cellColor = Color.BLACK;
-                break;
-            case 1:
-                cellColor = Color.BLUE;
-                break;
-            case 2:
-                cellColor = Color.GREEN;
-                break;
-            case 3:
-                cellColor = Color.YELLOW;
-                break;
-        }
-        field.setColor(cellColor);
-    }
+
 
     private void getSpeed() {
         int index = gui.getSpeedBox();

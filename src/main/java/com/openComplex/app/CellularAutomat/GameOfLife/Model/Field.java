@@ -20,14 +20,17 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     private int newY = -1;
     private Point newPoint = new Point(-1, -1);
     private int form = 0;
+    private int neighborhood = 0;
     private int t, r, h;
     private int storageLength = 50;
     private int storageIndex = 0;
 
-    private LinkedList<Cell[][]> storage = new LinkedList<>();
 
-    public Field(int lengthAbs, int breadthAbs, int size, int form, Color color) {
+    private LinkedList<int[][]> storage = new LinkedList<>();
+
+    public Field(int lengthAbs, int breadthAbs, int size, int form, int neighborhood, Color color) {
         this.form = form;
+        this.neighborhood = neighborhood;
         this.cellColor = color;
         this.lengthAbs = lengthAbs;
         this.breadthAbs = breadthAbs;
@@ -71,6 +74,10 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         storageIndex = 0;
     }
 
+    public void setNeighborhood(int neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
 
     public void setColor(Color color) {
         this.cellColor = color;
@@ -78,19 +85,18 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public boolean previousStep() {
+        int[][] storageField;
 
         if (storageIndex > 0) {
-            System.out.println("Pre: " + storageIndex);
-            field = storage.get(storageIndex-1);
-            for(int i = 0; i < 50; i++) {
-                for(int j = 0; j < 50; j++) {
-                    if (storage.get(storageIndex-1)[i][j].getStatus()) {
-                        System.out.print(1);
+            storageField = storage.get(storageIndex-1);
+            for(int i = 0; i < storageField.length; i++) {
+                for(int j = 0; j < storageField.length; j++) {
+                    if(storageField[i][j] == 1) {
+                        field[i][j].setStatus(true);
                     } else {
-                        System.out.print(0);
+                        field[i][j].setStatus(false);
                     }
                 }
-                System.out.println();
             }
             storageIndex--;
             repaint();
@@ -101,19 +107,17 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public boolean nextStep() {
-
-        storage.add(storageIndex, field);
-        System.out.println("Next: " + storageIndex);
-        for(int i = 0; i < 50; i++) {
-            for(int j = 0; j < 50; j++) {
-                if (storage.get(storageIndex)[i][j].getStatus()) {
-                    System.out.print(1);
+        int[][] storageField = new int[200][200];
+        for(int i = 0; i < storageField.length; i++) {
+            for(int j = 0; j < storageField[0].length; j++) {
+                if(field[i][j].getStatus()) {
+                    storageField[i][j] = 1;
                 } else {
-                    System.out.print(0);
+                    storageField[i][j] = 0;
                 }
             }
-            System.out.println();
         }
+        storage.add(storageIndex, storageField);
         if(storageIndex <= storageLength) {
             storageIndex++;
         } else {
@@ -125,7 +129,13 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
             for (int j = 0; j < breadthAbs; j++) {
                 if(form == 0) {
                     if (field[i][j].getStatus()) {
-                        setNeighborsSquare(i, j);
+                        if(neighborhood == 0) {
+                            setNeighborsSquareMoore(i, j);
+                        } else if(neighborhood == 1) {
+                            setNeighborsSquareNeumann(i, j);
+                        } else if(neighborhood == 2) {
+                            setNeighborsSquareExtendedMoore(i, j);
+                        }
                     }
                 } else if (form == 1) {
                     if (field[i][j].getStatus()) {
@@ -210,7 +220,7 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         }
     }
 
-    private void setNeighborsSquare(int row, int col) {
+    private void setNeighborsSquareMoore(int row, int col) {
         if (row != 0) {
             field[row - 1][col].addNeighbors();
         }
@@ -234,6 +244,97 @@ public class Field extends JPanel implements MouseListener, MouseMotionListener 
         }
         if (row != lengthAbs && col != 0) {
             field[row + 1][col - 1].addNeighbors();
+        }
+    }
+
+    private void setNeighborsSquareExtendedMoore(int row, int col) {
+        if(row > 1) {
+            field[row -2][col].addNeighbors();
+        }
+        if(row > 1 && col < lengthAbs) {
+            field[row -2][col +1].addNeighbors();
+        }
+        if(row > 1 && col < lengthAbs-1) {
+            field[row -2][col +2].addNeighbors();
+        }
+        if(row > 0 && col < lengthAbs-1) {
+            field[row -1][col +2].addNeighbors();
+        }
+        if(col < lengthAbs-1) {
+            field[row][col +2].addNeighbors();
+        }
+        if(row < lengthAbs && col < lengthAbs-1) {
+            field[row +1][col +2].addNeighbors();
+        }
+        if(row < lengthAbs-1 && col < lengthAbs-1) {
+            field[row +2][col +2].addNeighbors();
+        }
+        if(row < lengthAbs-1 && col < lengthAbs) {
+            field[row +2][col +1].addNeighbors();
+        }
+        if(row < lengthAbs-1) {
+            field[row +2][col].addNeighbors();
+        }
+        if(row < lengthAbs-1 && col > 0) {
+            field[row +2][col -1].addNeighbors();
+        }
+        if(row < lengthAbs-1 && col > 1) {
+            field[row +2][col -2].addNeighbors();
+        }
+        if(row < lengthAbs && col > 1) {
+            field[row +1][col -2].addNeighbors();
+        }
+        if(col > 1) {
+            field[row][col -2].addNeighbors();
+        }
+        if(row > 0 && col > 1) {
+            field[row -1][col -2].addNeighbors();
+        }
+        if(row > 1 && col > 1) {
+            field[row -2][col -2].addNeighbors();
+        }
+        if(row > 1 && col > 0) {
+            field[row -2][col -1].addNeighbors();
+        }
+
+        if (row > 0) {
+            field[row - 1][col].addNeighbors();
+        }
+        if (col > 0) {
+            field[row][col - 1].addNeighbors();
+        }
+        if (col > 0 && row > 0) {
+            field[row - 1][col - 1].addNeighbors();
+        }
+        if (row > 0 && col < lengthAbs) {
+            field[row - 1][col + 1].addNeighbors();
+        }
+        if (row < lengthAbs && col < lengthAbs) {
+            field[row + 1][col + 1].addNeighbors();
+        }
+        if (row < lengthAbs) {
+            field[row + 1][col].addNeighbors();
+        }
+        if (col < lengthAbs) {
+            field[row][col + 1].addNeighbors();
+        }
+        if (row < lengthAbs && col > 0) {
+            field[row + 1][col - 1].addNeighbors();
+        }
+    }
+
+    private void setNeighborsSquareNeumann(int row, int col) {
+        if (row != 0) {
+            field[row - 1][col].addNeighbors();
+        }
+        if (col != 0) {
+            field[row][col - 1].addNeighbors();
+        }
+        if (row != lengthAbs) {
+            field[row + 1][col].addNeighbors();
+        }
+        if (col != lengthAbs) {
+            field[row][col + 1].addNeighbors();
         }
     }
 

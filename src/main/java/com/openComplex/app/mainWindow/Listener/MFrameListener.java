@@ -121,6 +121,8 @@ public class MFrameListener implements ActionListener {
             case "Multilayer perceptron":
                 new com.openComplex.app.NeuronalNetworks.MultilayerPerceptron.Controller.Controller();
                 break;
+            case "Model of Hegselmann":
+                new com.openComplex.app.CellularAutomat.ModelOfHegselmann.Controller.Controller();
         }
     }
 }
