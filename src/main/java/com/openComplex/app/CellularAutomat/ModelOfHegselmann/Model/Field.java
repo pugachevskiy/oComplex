@@ -2,6 +2,7 @@ package com.openComplex.app.CellularAutomat.ModelOfHegselmann.Model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -18,14 +19,15 @@ public class Field extends JPanel {
     private int maxStep;
     private int step = 0;
     private int selectedDimension = 0;
-
-
+    private int selectedAgent = 10;
+    private SavedSteps savedSteps;
 
     public Field(int numberOfAgents, int dimension, double epsilon, int maxStep) {
         this.numberOfAgents = numberOfAgents;
         this.dimension = dimension;
         this.epsilon = epsilon;
         this.maxStep = maxStep;
+        savedSteps = new SavedSteps(maxStep);
         init();
     }
 
@@ -50,15 +52,19 @@ public class Field extends JPanel {
     }
 
     public void init() {
+        System.out.println("init");
         step = 0;
+        double[][] savedStep = new double[numberOfAgents][];
         Agent agent;
         double[] initialX;
         for(int i = 0; i < numberOfAgents; i++) {
             initialX = initX(i);
             agent = new Agent(i, initialX, epsilon);
+            savedStep[i] = agent.getX();
             //System.out.println("step: " + step + " agent: " + i + " value: " + savedSteps[step][i][0]);
             agents.add(agent);
         }
+        savedSteps.addStep(step, savedStep);
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
             agent.calculateNeighborhood(agents);
@@ -82,17 +88,20 @@ public class Field extends JPanel {
         return x;
     }
 
-    private void printSavedSteps() {
-    }
+
 
     public void nextStep() {
+        System.out.println("nextStep");
         step++;
+        double[][] savedStep = new double[numberOfAgents][];
         Agent agent;
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
-            agent.calculateX();
+            savedStep[i] = agent.calculateX();
+
             agents.set(i, agent);
         }
+        savedSteps.addStep(step, savedStep);
         for(int i = 0; i < numberOfAgents; i++) {
             agent = agents.get(i);
             agent.calculateNeighborhood(agents);
@@ -104,48 +113,81 @@ public class Field extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
         int xOffset = 30;
         int yOffset = 30;
         int width = getWidth();
         int height = getHeight();
-        // X und Y axis
-        g.drawLine(xOffset, height-yOffset, width-xOffset, height-yOffset);
-        g.drawLine(xOffset, height-yOffset, xOffset, yOffset);
-
-        g.drawLine(xOffset, height-yOffset, xOffset, height-yOffset+5);
-        g.drawLine(width-xOffset, height-yOffset, width-xOffset, height-yOffset+5);
-
-        g.drawLine(xOffset, height-yOffset, xOffset-5, height-yOffset);
-        g.drawLine(xOffset, yOffset, xOffset-5, yOffset);
 
         ArrayList<Color> colors = createColorGradient();
+        double[][] savedStep;
         double value;
         int xAxisLength = width - 2* xOffset;
         int yAxisLength = height - 2* yOffset;
-        int xPosStart;
-        int yPosStart;
-        int xPosStop = 0;
-        int yPosStop = 0;
-        for(int i = 0; i < numberOfAgents; i++) {
-            g.setColor(colors.get(i));
-            for(int j = 0; j < step; j++) {
-                value = 0.0; 
-                //System.out.println("step: " + j + " agent: " + i + " value: " + savedSteps[j][i][selectedDimension]);
-                if(j == 0) {
-                    xPosStart = xOffset;
-                    yPosStart = (int) (value * yAxisLength + yOffset);
-                    xPosStop = xOffset;
-                    yPosStop = (int) (value * yAxisLength + yOffset);
-                } else {
-                    xPosStart = xPosStop;
-                    yPosStart = yPosStop;
-                    xPosStop = j/step * xAxisLength + xOffset;
-                    yPosStop = (int) (value * yAxisLength + yOffset);
+
+        int xPosPreSelectedAgent = 0;
+        int yPosPreSelectedAgent = 0;
+        int[] yPosSelectedAgent = new int[maxStep];
+        int[] xPosPre = new int[numberOfAgents];
+        int[] yPosPre = new int[numberOfAgents];
+        int xPos;
+        int yPos;
+
+        for(int i = 0; i < step; i++) {
+            savedStep = savedSteps.getStep(i);
+            for(int j = 0; j < numberOfAgents; j++) {
+                g2d.setColor(colors.get(j));
+                value = savedStep[j][selectedDimension];
+                //System.out.println("step: " + i + " agent: " + j + " value: " + value);
+                if(j == selectedAgent) {
+                    yPosSelectedAgent[i] = (yOffset + yAxisLength) - (int) (value * yAxisLength);
                 }
-                //System.out.println(i + " PosStart: " + xPosStart + " " + yPosStart + " PosStop: " + xPosStop + " " + yPosStop);
-                g.drawLine(xPosStart, yPosStart, xPosStop, yPosStop);
+                if(i == 0) {
+                    xPosPre[j] = xOffset;
+                    yPosPre[j] = (yOffset + yAxisLength) - (int) (value * yAxisLength);
+                } else {
+                    xPos = (int) ((double)i/ (double)maxStep * xAxisLength + xOffset);
+                    yPos = (yOffset + yAxisLength) - (int) (value * yAxisLength);
+                    g2d.drawLine(xPosPre[j], yPosPre[j], xPos, yPos);
+                    xPosPre[j] = xPos;
+                    yPosPre[j] = yPos;
+                }
             }
         }
+        g2d.setStroke(new BasicStroke(3));
+        g2d.setColor(Color.WHITE);
+        for(int i = 0; i < step; i++) {
+            if(i == 0) {
+                xPosPreSelectedAgent = xOffset;
+                yPosPreSelectedAgent = yPosSelectedAgent[i];
+            } else {
+                xPos = (int) ((double)i/ (double)maxStep * xAxisLength + xOffset);
+                yPos = yPosSelectedAgent[i];
+                g2d.drawLine(xPosPreSelectedAgent, yPosPreSelectedAgent, xPos, yPos);
+                xPosPreSelectedAgent = xPos;
+                yPosPreSelectedAgent = yPos;
+            }
+        }
+
+        // X und Y axis
+        g2d.setStroke(new BasicStroke(2));
+        g2d.setColor(Color.BLACK);
+        g2d.drawLine(xOffset, height - yOffset, width - xOffset, height - yOffset);
+        g2d.drawLine(xOffset, height - yOffset, xOffset, yOffset);
+        g2d.drawLine(xOffset, height-yOffset, xOffset, height-yOffset+3);
+        g2d.drawLine(width-xOffset, height-yOffset, width-xOffset, height-yOffset+3);
+        g2d.drawLine(xOffset, height-yOffset, xOffset-3, height-yOffset);
+        g2d.drawLine(xOffset, yOffset, xOffset - 3, yOffset);
+
+        // Axis caption
+        g2d.drawString("0", 15, height - 15);
+        g2d.drawString(Integer.toString(maxStep), xOffset + xAxisLength - 8, height -15);
+        g2d.drawString("Step", width/2, height - 15);
+        AffineTransform origin = g2d.getTransform();
+        g2d.rotate(-Math.PI / 2);
+        g2d.drawString("Agent", -height / 2, 20);
+        g2d.drawString(Integer.toString(numberOfAgents), -yOffset - 10, 20);
+        g2d.setTransform(origin);
     }
 
 

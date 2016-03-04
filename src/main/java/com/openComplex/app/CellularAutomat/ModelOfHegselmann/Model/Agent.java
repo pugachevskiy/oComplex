@@ -25,17 +25,22 @@ public class Agent {
         return x;
     }
 
-    public void calculateX() {
+    public double[] calculateX() {
         int numberOfNeighbor = neighbors.size();
         for(int i = 0; i < x.length; i++) {
-            x[i] = 0.0;
-            for(int j = 0; j < numberOfNeighbor; j++) {
-                x[i] = x[i] + neighbors.get(j).getX()[i];
+            if(numberOfNeighbor > 0) {
+                x[i] = 0.0;
+                for(int j = 0; j < numberOfNeighbor; j++) {
+                    x[i] = x[i] + neighbors.get(j).getX()[i];
+                }
             }
         }
         for(int i = 0; i < x.length; i++) {
-            x[i] = x[i]/(double) numberOfNeighbor;
+            if(numberOfNeighbor > 0) {
+                x[i] = x[i]/(double) numberOfNeighbor;
+            }
         }
+        return x;
     }
 
     public void setEpsilon(double epsilon) {
@@ -52,11 +57,11 @@ public class Agent {
             if(agentNumber != i) {
                 agent = agents.get(i);
                 euclidean = calculateEuclidean(x, agent.getX());
+
                 if(euclidean <= epsilon) {
                     neighbors.add(agent);
                 }
             }
-
         }
     }
 
