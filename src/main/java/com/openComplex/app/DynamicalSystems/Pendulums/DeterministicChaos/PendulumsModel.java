@@ -2,6 +2,7 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DeterministicChaos;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 /**
  * Created by strange on 05/10/15.
@@ -22,6 +23,78 @@ public class PendulumsModel extends JPanel {
     private int px21, px22, py21, py22; //pixelcoordinates
     private double startwert = Math.PI / 180 * 170.; //phi22; //save initial values
     private boolean stop = false; //go/pause
+
+    private int trajectories;
+    private int limit;
+    private int queueIndex;
+
+    private java.util.List<Integer> attractorList1X;
+    private java.util.List<Integer> attractorList1Y;
+    private java.util.List<Integer> attractorList2X;
+    private java.util.List<Integer> attractorList2Y;
+    private java.util.List<Integer> attractorList3X;
+    private java.util.List<Integer> attractorList3Y;
+    private java.util.List<Integer> attractorList4X;
+    private java.util.List<Integer> attractorList4Y;
+
+    private static int attractorSize = 2;
+
+    private static Color attractor1Color = new Color(200, 200, 200);
+    private static Color attractor2Color = new Color(150, 150, 150);
+    private static Color attractor3Color = new Color(100, 100, 100);
+    private static Color attractor4Color = new Color(50, 50, 50);
+
+    private Color[] colors = {attractor1Color, attractor2Color, attractor3Color, attractor4Color};
+
+    private java.util.List[] attractors = {attractorList1X, attractorList1Y, attractorList2X, attractorList2Y, attractorList3X,
+            attractorList3Y, attractorList4X, attractorList4Y};
+
+    public void setTrajectory(int numberOfTrajectories, int limit) {
+        this.limit = limit;
+        trajectories = numberOfTrajectories;
+        System.out.println(trajectories);
+        for(int i = 0; i < 2*trajectories; i++) {
+            attractors[i] = new LinkedList<Integer>();
+        }
+    }
+
+    public void resetAttractor() {
+        for(int i = 0; i < 2*trajectories; i++) {
+            attractors[i].removeAll(attractors[i]);
+        }
+        queueIndex = 0;
+    }
+
+    private void attractorAdd(int[] xPoints, int[] yPoints) {
+        for(int i = 0; i < trajectories; i++) {
+            attractors[i*2].add(xPoints[i+1]);
+            attractors[i*2+1].add(yPoints[i+1]);
+        }
+        if(queueIndex <= limit) {
+            queueIndex += 1;
+        }
+    }
+    private void attractorPaint(Graphics g) {
+        int x, y;
+        for(int i = 0; i < limit; i++) {
+            if(queueIndex > i) {
+                for(int j = 0; j < trajectories; j++) {
+                    g.setColor(colors[j]);
+                    x = (int) attractors[j*2].get(i);
+                    y = (int) attractors[j*2+1].get(i);
+                    g.fillOval(x, y, attractorSize, attractorSize);
+                }
+            }
+        }
+    }
+
+    public void attractorRemove() {
+        if(queueIndex >= limit) {
+            for(int i = 0; i < 2*trajectories; i++) {
+                attractors[i].remove(0);
+            }
+        }
+    }
 
 
     public void startwerte() {  //method for setting initial values
@@ -148,6 +221,13 @@ public class PendulumsModel extends JPanel {
         g.drawString("Phi_22:", Lx + Lx / 2 - 20, Ly + 20);
         g.drawString("" + Math.round(100 * phi22 * 180 / Math.PI) / 100. + "o", Lx + Lx / 2 - 20, Ly + 40);
 
+        int[] xPoints = {0, px11, px12, px21, px22};
+        int[] yPoints = {0, py11, py12, py21, py22};
+
+        attractorAdd(xPoints, yPoints);
+        attractorPaint(g);
+        attractorRemove();
+
         g.drawLine(0, Ly / 2, 2 * Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
         g.drawLine(Lx + Lx / 2, 0, Lx + Lx / 2, Ly);
@@ -161,6 +241,8 @@ public class PendulumsModel extends JPanel {
         g.fillOval(px12 - 6, py12 - 6, 13, 13);
         g.fillOval(px21 - 6, py21 - 6, 13, 13);
         g.fillOval(px22 - 6, py22 - 6, 13, 13);
+
+
     } //paintFrame(gr)
 
 }

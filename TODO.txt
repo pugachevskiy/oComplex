@@ -63,7 +63,7 @@ Feigenbaum
 2. Axis
 
 Pendulums
-1. trajectory with limit Points
++1. trajectory with limit Points
 2. Name of Axis
 3. Graph for Amplitude and Energy
 4. calculate Potential and Kinetic Energy

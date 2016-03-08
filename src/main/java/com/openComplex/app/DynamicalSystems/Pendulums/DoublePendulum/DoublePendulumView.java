@@ -12,7 +12,7 @@ import java.util.List;
 public class DoublePendulumView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Phi1 +", "Phi1 -", "Phi2 +", "Phi2 -", "Friction ++",
 //	private List<String> buttonsName = Arrays.asList("New", "Start", "\u03D5 1 +", "\u03D5 1 -", "\u03D5 2 +", "\u03D5 2 -", "Friction ++",
-            "Friction --", "m1 +", "m1 -", "m2 +", "m2 -");
+            "Friction --", "m1 +", "m1 -", "m2 +", "m2 -", "Trajectory");
 
 
     private static String NAME = "openCoSy - Double Pendulum";

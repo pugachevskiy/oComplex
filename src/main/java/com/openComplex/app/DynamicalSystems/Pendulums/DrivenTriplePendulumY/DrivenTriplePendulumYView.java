@@ -12,7 +12,7 @@ import java.util.List;
  *  on 11/10/15.
  */
 public class DrivenTriplePendulumYView extends PendulumsView {
-    private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --");
+    private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Trajectory");
     private static String NAME = "Driven Triple Pendulum";
 
     public DrivenTriplePendulumYView(ActionListener listener, ItemListener itemListener) {

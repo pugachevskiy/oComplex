@@ -4,13 +4,17 @@ package com.openComplex.app.DynamicalSystems.Pendulums.DoublePendulum;
  *  on 07/10/15.
  */
 
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulums;
+
+
 import java.awt.event.*;
 
-public class DoublePendulum implements ActionListener {
+public class DoublePendulum extends Pendulums implements ActionListener {
 
 
     private int step;
     private boolean stop = false;
+    private final int numberOfTrajectories = 2;
 
 
     private DoublePendulumView gui;
@@ -19,6 +23,7 @@ public class DoublePendulum implements ActionListener {
     public DoublePendulum() {
         gui = new DoublePendulumView(this);
         model = new DoublePendulumModel();
+        model.setTrajectoryColors(getColors());
         gui.addPanel(model);
     }
 
@@ -95,6 +100,20 @@ public class DoublePendulum implements ActionListener {
             case "m2 -":
                 stop = false;
                 model.m2Minus();
+                break;
+            case "Trajectory":
+                gui.buildTrajectorySettings(numberOfTrajectories, model.getLimit(), this);
+                break;
+            case "Trajectory 1":
+                colorChooser(1);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 2":
+                colorChooser(2);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Limit":
+                model.setTrajectory(numberOfTrajectories, gui.getLimit());
                 break;
         }
     }

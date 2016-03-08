@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class DrivenPendulumView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Amp +", "Amp -", "Freq +", "Freq -", "Friction ++",
-            "Friction --");
+            "Friction --", "Trajectory");
 
 
     private static String NAME = "Driven Pendulum";

@@ -1,5 +1,7 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.DrivenPendulum;
 
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulums;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +11,10 @@ import java.util.List;
 /**
  *  on 09/10/15.
  */
-public class DrivenPendulum implements ActionListener{
+public class DrivenPendulum extends Pendulums implements ActionListener{
     private int step;
     private boolean stop = false;
+    private final int numberOfTrajectories = 1;
 
     private DrivenPendulumView gui;
     private DrivenPendulumModel model;
@@ -19,6 +22,7 @@ public class DrivenPendulum implements ActionListener{
     public DrivenPendulum() {
         gui = new DrivenPendulumView(this);
         model = new DrivenPendulumModel();
+        model.setTrajectoryColors(getColors());
         gui.addPanel(model);
     }
 
@@ -74,6 +78,16 @@ public class DrivenPendulum implements ActionListener{
                 break;
             case "Freq -":
                 model.freqMinus();
+                break;
+            case "Trajectory":
+                gui.buildTrajectorySettings(numberOfTrajectories, model.getLimit(),this);
+                break;
+            case "Trajectory 1":
+                colorChooser(1);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Limit":
+                model.setTrajectory(numberOfTrajectories, gui.getLimit());
                 break;
         }
     }

@@ -1,21 +1,26 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.TriplePendulum;
 
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulums;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  *  on 13/10/15.
  */
-public class TriplePendulum implements ActionListener {
+public class TriplePendulum extends Pendulums implements ActionListener {
 
     private TriplePendulumView gui;
     private TriplePendulumModel model;
     private int step;
     private boolean stop;
+    private final int numberOfTrajectories = 3;
 
     public TriplePendulum() {
         gui = new TriplePendulumView(this);
         model = new TriplePendulumModel();
+        model.setTrajectoryColors(getColors());
         gui.addPanel(model);
     }
 
@@ -77,6 +82,24 @@ public class TriplePendulum implements ActionListener {
                 break;
             case "Phi3 -":
                 model.phi3Minus();
+                break;
+            case "Trajectory":
+                gui.buildTrajectorySettings(numberOfTrajectories, model.getLimit(), this);
+                break;
+            case "Trajectory 1":
+                colorChooser(1);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 2":
+                colorChooser(2);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 3":
+                colorChooser(3);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Limit":
+                model.setTrajectory(numberOfTrajectories, gui.getLimit());
                 break;
         }
     }

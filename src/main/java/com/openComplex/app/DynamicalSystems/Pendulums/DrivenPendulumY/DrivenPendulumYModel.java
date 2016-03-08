@@ -12,17 +12,13 @@ public class DrivenPendulumYModel extends PendulumsModel {
     private int px, py, pa; //pixelcoordinates
     private int step;
 
-    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
-    private int queueIndex = 0;
-    private static int attractorLength = 1000;
-    private static int attractorSize = 2;
-    private static Color attractor1Color = new Color(200, 200, 200);
 
     public DrivenPendulumYModel() {
         startwert[0] = 0.5; //amp
         startwert[1] = 1.; //freq
         startwert[2] = Math.PI / 180. * 178.; //phi
+
+        setTrajectory(1, 1000);
     }
 
     public void setStep(int step) {
@@ -93,6 +89,8 @@ public class DrivenPendulumYModel extends PendulumsModel {
         g.drawString("" + (double) Math.round(100 * amp) / 100, Lx + 20, Ly / 2 + 95);
         g.drawString("Frequency:", Lx + 20, Ly / 2 + 125);
         g.drawString("" + (double) Math.round(100 * freq) / 100, Lx + 20, Ly / 2 + 140);
+        g.drawString("x", Lx - 10, Ly / 2 - 10);
+        g.drawString("y", Lx / 2 -10 , 10);
         g.drawLine(0, Ly / 2, Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
         g.setColor(Color.black);
@@ -100,32 +98,18 @@ public class DrivenPendulumYModel extends PendulumsModel {
         g.setColor(Color.red);
         g.drawLine(Lx / 2, pa, px, py);
 
-        int attractor1X = px;
-        int attractor1Y = py;
-        attractorList1X.add(attractor1X);
-        attractorList1Y.add(attractor1Y);
-        if(queueIndex <= attractorLength) {
-            queueIndex += 1;
-        }
-        for(int i = 0; i < attractorLength; i++) {
-            if(queueIndex > i) {
-                g.setColor(attractor1Color);
-                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
-            }
-        }
-        if(queueIndex >= attractorLength) {
-            attractorList1X.remove(0);
-            attractorList1Y.remove(0);
-        }
+
+        int[] xPoints = {0, px};
+        int[] yPoints = {0, py};
+
+        attractorAdd(xPoints, yPoints);
+        attractorPaint(g);
+        attractorRemove();
+
 
         g.setColor(Color.black);
         g.fillOval(px - 7, py - 7, 15, 15);
         g.fillRect(Lx / 2 - 1, pa - 4, 3, 9);
     } //paintFrame(gr)
 
-    public void resetAttractor() {
-        attractorList1X.removeAll(attractorList1X);
-        attractorList1Y.removeAll(attractorList1Y);
-        queueIndex = 0;
-    }
 }

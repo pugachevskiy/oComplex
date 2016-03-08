@@ -26,6 +26,8 @@ public class DrivenPendulumModel extends PendulumsModel {
         startwert[0] = 0.5; //amp
         startwert[1] = 3.0; //freq
         startwert_reib = 0; //reib
+
+        setTrajectory(1, 1000);
     }
 
     @Override
@@ -104,6 +106,8 @@ public class DrivenPendulumModel extends PendulumsModel {
         g.drawString("" + (double) Math.round(100 * amp) / 100, 265, Ly + 40);
         g.drawString("Frequency:", 355, Ly + 20);
         g.drawString("" + (double) Math.round(100 * freq) / 100, 355, Ly + 40);
+        g.drawString("x", Lx - 10, Ly / 2 - 10);
+        g.drawString("y", Lx / 2 -10 , 10);
         g.drawLine(0, Ly / 2, Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
         g.setColor(Color.black);
@@ -111,32 +115,16 @@ public class DrivenPendulumModel extends PendulumsModel {
         g.setColor(Color.red);
         g.drawLine(pa, Ly / 2, px, py);
 
-        int attractor1X = px;
-        int attractor1Y = py;
-        attractorList1X.add(attractor1X);
-        attractorList1Y.add(attractor1Y);
-        if(queueIndex <= attractorLength) {
-            queueIndex += 1;
-        }
-        for(int i = 0; i < attractorLength; i++) {
-            if(queueIndex > i) {
-                g.setColor(attractor1Color);
-                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
-            }
-        }
-        if(queueIndex >= attractorLength) {
-            attractorList1X.remove(0);
-            attractorList1Y.remove(0);
-        }
+        int[] xPoints = {0, px};
+        int[] yPoints = {0, py};
+
+        attractorAdd(xPoints, yPoints);
+        attractorPaint(g);
+        attractorRemove();
 
         g.setColor(Color.black);
         g.fillOval(px - 7, py - 7, 15, 15);
         g.fillRect(pa - 4, Ly / 2 - 1, 9, 3);
     }
 
-    public void resetAttractor() {
-        attractorList1X.removeAll(attractorList1X);
-        attractorList1Y.removeAll(attractorList1Y);
-        queueIndex = 0;
-    }
 }

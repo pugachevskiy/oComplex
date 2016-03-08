@@ -1,21 +1,25 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.PendulumWithFreeMounting;
 
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulums;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  *  on 12/10/15.
  */
-public class PendulumWithFreeMounting implements ActionListener {
+public class PendulumWithFreeMounting extends Pendulums implements ActionListener {
 
     private PendulumWithFreeMountingModel model;
     private PendulumWithFreeMountingView gui;
     private int step;
     private boolean stop;
+    private final int numberOfTrajectories = 1;
 
     public PendulumWithFreeMounting() {
         gui = new PendulumWithFreeMountingView(this);
         model = new PendulumWithFreeMountingModel();
+        model.setTrajectoryColors(getColors());
         gui.addPanel(model);
     }
 
@@ -83,6 +87,16 @@ public class PendulumWithFreeMounting implements ActionListener {
                 break;
             case "Omega -":
                 model.omegaMinus();
+                break;
+            case "Trajectory":
+                gui.buildTrajectorySettings(numberOfTrajectories, model.getLimit(), this);
+                break;
+            case "Trajectory 1":
+                colorChooser(1);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Limit":
+                model.setTrajectory(numberOfTrajectories, gui.getLimit());
                 break;
 
         }

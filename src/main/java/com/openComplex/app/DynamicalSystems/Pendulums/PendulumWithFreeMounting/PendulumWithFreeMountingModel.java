@@ -12,19 +12,14 @@ public class PendulumWithFreeMountingModel extends PendulumsModel {
     private int ax, px, py; //pixelcoordinates
     private int step;
 
-    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
-    private int queueIndex = 0;
-    private static int attractorLength = 1000;
-    private static int attractorSize = 2;
-    private static Color attractor1Color = new Color(200, 200, 200);
-
     public PendulumWithFreeMountingModel() {
         startwert[0] = Math.PI / 180. * 175.; //phi
         startwert[1] = 0.0; //omega
         startwert[2] = 1.2; //a
         startwert[3] = 10.0; //mratio
         startwert_reib = 1; //reib
+
+        setTrajectory(1, 1000);
     }
 
     public void setStep(int step) {
@@ -186,6 +181,8 @@ public class PendulumWithFreeMountingModel extends PendulumsModel {
         g.drawString("" + (double) Math.round(10 * omega) / 10, 370, Ly + 40);
         g.drawString("a:", 450, Ly + 20);
         g.drawString("" + (double) Math.round(10 * a) / 10, 450, Ly + 40);
+        g.drawString("x", Lx - 10, Ly / 2 - 10);
+        g.drawString("y", Lx / 2 -10 , 10);
         g.drawLine(0, Ly / 2, Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
         g.setColor(Color.black);
@@ -193,24 +190,11 @@ public class PendulumWithFreeMountingModel extends PendulumsModel {
         g.setColor(Color.red);
         g.drawLine(ax, Ly / 2, px, py);
 
-
-        int attractor1X = px;
-        int attractor1Y = py;
-        attractorList1X.add(attractor1X);
-        attractorList1Y.add(attractor1Y);
-        if(queueIndex <= attractorLength) {
-            queueIndex += 1;
-        }
-        for(int i = 0; i < attractorLength; i++) {
-            if(queueIndex > i) {
-                g.setColor(attractor1Color);
-                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
-            }
-        }
-        if(queueIndex >= attractorLength) {
-            attractorList1X.remove(0);
-            attractorList1Y.remove(0);
-        }
+        int[] xPoints = {0, px};
+        int[] yPoints = {0, py};
+        attractorAdd(xPoints, yPoints);
+        attractorPaint(g);
+        attractorRemove();
 
         g.setColor(Color.black);
         g.fillRect(ax - 4, Ly / 2 - 2, 9, 5);
@@ -219,9 +203,4 @@ public class PendulumWithFreeMountingModel extends PendulumsModel {
 
     }
 
-    public void resetAttractor() {
-        attractorList1X.removeAll(attractorList1X);
-        attractorList1Y.removeAll(attractorList1Y);
-        queueIndex = 0;
-    }
 }

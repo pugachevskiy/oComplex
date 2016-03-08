@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PendulumWithFreeMountingView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Phi +", "Phi -",
-            "Omega +", "Omega -", "m1/m2 +", "m1/m2 -", "a +", "a -");
+            "Omega +", "Omega -", "m1/m2 +", "m1/m2 -", "a +", "a -", "Trajectory");
     private static String NAME = "Pendulum with free mounting";
 
     public PendulumWithFreeMountingView(ActionListener listener) {

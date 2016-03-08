@@ -1,21 +1,25 @@
 package com.openComplex.app.DynamicalSystems.Pendulums.QuadBarPendulum;
 
+import com.openComplex.app.DynamicalSystems.Pendulums.Pendulums;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  *  on 13/10/15.
  */
-public class QuadBarPendulum implements ActionListener {
+public class QuadBarPendulum extends Pendulums implements ActionListener {
 
     private QuadBarPendulumView gui;
     private QuadBarPendulumModel model;
     private int step;
     private boolean stop;
+    private final int numberOfTrajectories = 4;
 
     public QuadBarPendulum() {
         gui = new QuadBarPendulumView(this);
         model = new QuadBarPendulumModel();
+        model.setTrajectoryColors(getColors());
         gui.addPanel(model);
     }
 
@@ -83,6 +87,27 @@ public class QuadBarPendulum implements ActionListener {
                 break;
             case "Phi4 -":
                 model.phi4Minus();
+                break;
+            case "Trajectory":
+                gui.buildTrajectorySettings(numberOfTrajectories, model.getLimit(), this);
+                break;
+            case "Trajectory 1":
+                colorChooser(1);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 2":
+                colorChooser(2);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 3":
+                colorChooser(3);
+                model.setTrajectoryColors(getColors());
+                break;
+            case "Trajectory 4":
+                colorChooser(4);
+                model.setTrajectoryColors(getColors());
+            case "Limit":
+                model.setTrajectory(numberOfTrajectories, gui.getLimit());
                 break;
         }
     }

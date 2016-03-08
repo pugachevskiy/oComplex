@@ -13,6 +13,7 @@ public class Pendulums implements ActionListener {
     public Pendulums() {
         gui = new PendulumsView();
         model = new PendulumsModel();
+        model.setTrajectory(4, 1000);
         gui.init();
         gui.addListener(this);
         gui.addPanel(model);
@@ -56,6 +57,7 @@ public class Pendulums implements ActionListener {
                 model.setStatus(false);
                 model.startwerte(); //set initial values
                 step = 0;
+                model.resetAttractor();
                 model.pixels(); //calculate pixelcoords
                 model.repaint(); //paint initial state
                 break;

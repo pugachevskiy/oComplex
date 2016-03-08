@@ -14,25 +14,14 @@ public class DrivenTriplePendulumYModel extends PendulumsModel {
     private int step;
     private int px1, px2, px3, py1, py2, py3, pa; //pixelcoordinates
 
-    private java.util.List<Integer> attractorList1X = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList1Y = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList2X = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList2Y = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList3X = new LinkedList<Integer>();
-    private java.util.List<Integer> attractorList3Y = new LinkedList<Integer>();
-    private int queueIndex = 0;
-    private static int attractorLength = 100;
-    private static int attractorSize = 2;
-    private static Color attractor1Color = new Color(200, 200, 200);
-    private static Color attractor2Color = new Color(150, 150, 150);
-    private static Color attractor3Color = new Color(100, 100, 100);
-
     public DrivenTriplePendulumYModel() {
         startwert[0] = 0.05; //amp
         startwert[1] = 250.; //freq
         phi1 = Math.PI / 180. * 165.;
         phi2 = Math.PI / 180. * 165.;
         phi3 = Math.PI / 180. * 165.;
+
+        setTrajectory(3, 1000);
     }
 
     public void setStep(int step) {
@@ -82,6 +71,8 @@ public class DrivenTriplePendulumYModel extends PendulumsModel {
         g.drawString("" + (double) Math.round(100 * amp) / 100, Lx + 20, Ly / 2 + 110);
         g.drawString("Frequency:", Lx + 20, Ly / 2 + 135);
         g.drawString("" + (double) Math.round(100 * freq) / 100, Lx + 20, Ly / 2 + 150);
+        g.drawString("x", Lx - 10, Ly / 2 - 10);
+        g.drawString("y", Lx / 2 -10 , 10);
         g.drawLine(0, Ly / 2, Lx, Ly / 2);
         g.drawLine(Lx / 2, 0, Lx / 2, Ly);
         g.setColor(Color.black);
@@ -91,40 +82,12 @@ public class DrivenTriplePendulumYModel extends PendulumsModel {
         g.drawLine(px1, py1, px2, py2);
         g.drawLine(px2, py2, px3, py3);
 
-        int attractor1X =  px1;
-        int attractor1Y =  py1;
-        int attractor2X =  px2;
-        int attractor2Y =  py2;
-        int attractor3X =  px3;
-        int attractor3Y =  py3;
+        int[] xPoints = {0, px1, px2, px3};
+        int[] yPoints = {0, py1, py2, py3};
 
-        attractorList1X.add(attractor1X);
-        attractorList1Y.add(attractor1Y);
-        attractorList2X.add(attractor2X);
-        attractorList2Y.add(attractor2Y);
-        attractorList3X.add(attractor3X);
-        attractorList3Y.add(attractor3Y);
-        if(queueIndex <= attractorLength) {
-            queueIndex += 1;
-        }
-        for(int i = 0; i < attractorLength; i++) {
-            if(queueIndex > i) {
-                g.setColor(attractor1Color);
-                g.fillOval(attractorList1X.get(i), attractorList1Y.get(i), attractorSize, attractorSize);
-                g.setColor(attractor2Color);
-                g.fillOval(attractorList2X.get(i), attractorList2Y.get(i), attractorSize, attractorSize);
-                g.setColor(attractor3Color);
-                g.fillOval(attractorList3X.get(i), attractorList3Y.get(i), attractorSize, attractorSize);
-            }
-        }
-        if(queueIndex >= attractorLength) {
-            attractorList1X.remove(0);
-            attractorList1Y.remove(0);
-            attractorList2X.remove(0);
-            attractorList2Y.remove(0);
-            attractorList3X.remove(0);
-            attractorList3Y.remove(0);
-        }
+        attractorAdd(xPoints, yPoints);
+        attractorPaint(g);
+        attractorRemove();
 
         g.setColor(Color.black);
         g.fillOval(px1 - 5, py1 - 5, 10, 10);
@@ -274,16 +237,6 @@ public class DrivenTriplePendulumYModel extends PendulumsModel {
         treibwerte(step);
         pixels();
         repaint();
-    }
-
-    public void resetAttractor() {
-        attractorList1X.removeAll(attractorList1X);
-        attractorList1Y.removeAll(attractorList1Y);
-        attractorList2X.removeAll(attractorList2X);
-        attractorList2Y.removeAll(attractorList2Y);
-        attractorList3X.removeAll(attractorList3X);
-        attractorList3Y.removeAll(attractorList3Y);
-        queueIndex = 0;
     }
 
 }

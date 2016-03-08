@@ -13,7 +13,7 @@ import java.util.List;
 public class TriplePendulumView extends PendulumsView {
 
     private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Phi1 +", "Phi1 -",
-            "Phi2 +", "Phi2 -", "Phi3 +", "Phi3 -");
+            "Phi2 +", "Phi2 -", "Phi3 +", "Phi3 -", "Trajectory");
     private static String NAME = "Triple Pendulum";
 
     public TriplePendulumView(ActionListener listener) {

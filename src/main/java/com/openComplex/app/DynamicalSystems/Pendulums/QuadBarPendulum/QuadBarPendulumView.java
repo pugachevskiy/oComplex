@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class QuadBarPendulumView extends PendulumsView {
     private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Phi1 +", "Phi1 -",
-            "Phi2 +", "Phi2 -", "Phi3 +", "Phi3 -", "Phi4 +", "Phi4 -");
+            "Phi2 +", "Phi2 -", "Phi3 +", "Phi3 -", "Phi4 +", "Phi4 -", "Trajectory");
     private static String NAME = "Quad Bar Pendulum";
 
     public QuadBarPendulumView(ActionListener listener) {

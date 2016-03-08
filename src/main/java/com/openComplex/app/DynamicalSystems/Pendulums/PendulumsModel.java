@@ -1,6 +1,9 @@
 package com.openComplex.app.DynamicalSystems.Pendulums;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *  on 09/10/15.
@@ -32,6 +35,80 @@ public abstract class PendulumsModel extends JPanel {
     public double a, ap, aforce; //coordinates and velocities
     public double freq, amp; //frequency and amplitude
     public double mratio; //mass-ratio
+
+    private int trajectories;
+    private int limit;
+    private int queueIndex;
+
+    private java.util.List<Integer> attractorList1X;
+    private java.util.List<Integer> attractorList1Y;
+    private java.util.List<Integer> attractorList2X;
+    private java.util.List<Integer> attractorList2Y;
+    private java.util.List<Integer> attractorList3X;
+    private java.util.List<Integer> attractorList3Y;
+    private java.util.List<Integer> attractorList4X;
+    private java.util.List<Integer> attractorList4Y;
+
+    private static int attractorSize = 2;
+
+    private Color[] colors;
+
+    private List[] attractors = {attractorList1X, attractorList1Y, attractorList2X, attractorList2Y, attractorList3X,
+                                    attractorList3Y, attractorList4X, attractorList4Y};
+
+    public void setTrajectory(int numberOfTrajectories, int limit) {
+        queueIndex = 0;
+        this.limit = limit;
+        trajectories = numberOfTrajectories;
+        for(int i = 0; i < 2*trajectories; i++) {
+            attractors[i] = new LinkedList<Integer>();
+        }
+    }
+
+    public void resetAttractor() {
+        for(int i = 0; i < 2*trajectories; i++) {
+            attractors[i].removeAll(attractors[i]);
+        }
+        queueIndex = 0;
+    }
+
+    public void attractorAdd(int[] xPoints, int[] yPoints) {
+        for(int i = 0; i < trajectories; i++) {
+            attractors[i*2].add(xPoints[i+1]);
+            attractors[i*2+1].add(yPoints[i + 1]);
+        }
+        if(queueIndex <= limit) {
+            queueIndex += 1;
+        }
+    }
+    public void attractorPaint(Graphics g) {
+        int x, y;
+        for(int i = 0; i < limit; i++) {
+            if(queueIndex > i) {
+                for(int j = 0; j < trajectories; j++) {
+                    g.setColor(colors[j]);
+                    x = (int) attractors[j*2].get(i);
+                    y = (int) attractors[j*2+1].get(i);
+                    g.fillOval(x, y, attractorSize, attractorSize);
+                }
+            }
+        }
+    }
+
+    public void attractorRemove() {
+        if(queueIndex >= limit) {
+            for(int i = 0; i < 2*trajectories; i++) {
+                attractors[i].remove(0);
+            }
+        }
+    }
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setTrajectoryColors(Color[] colors) {
+        this.colors = colors;
+    }
 
     public void startwerte() //initial values
     {

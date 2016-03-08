@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DrivenPendulumYView extends PendulumsView {
 
-    private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --");
+    private List<String> buttonsName = Arrays.asList("New", "Start", "Friction ++", "Friction --", "Trajectory");
     private static String NAME = "Driven Pendulum Y";
 
     public DrivenPendulumYView(ActionListener listener, ItemListener itemListener) {
